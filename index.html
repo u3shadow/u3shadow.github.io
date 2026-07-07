@@ -9,22 +9,26 @@
   <style>
 
     :root {
-      --bg:#f3f5f7;
+      --bg:#f5f7f9;
       --paper:#ffffff;
-      --ink:#23272f;
-      --muted:#7b8494;
-      --line:#e5e9ef;
-      --accent:#19a58c;
-      --accent-dark:#10836f;
-      --soft:#f7faf9;
+      --ink:#20242c;
+      --muted:#6b7280;
+      --soft-muted:#8b95a7;
+      --line:#e6ebf1;
+      --accent:#16a085;
+      --accent-dark:#0d7767;
+      --accent-soft:#e8f7f3;
       --code:#101821;
-      --shadow:0 12px 34px rgba(25,35,50,.08);
+      --shadow:0 16px 42px rgba(25,35,50,.08);
+      --shadow-soft:0 8px 24px rgba(25,35,50,.06);
     }
     * { box-sizing:border-box; }
     html { scroll-behavior:smooth; }
     body {
       margin:0;
-      background:var(--bg);
+      background:
+        radial-gradient(circle at top left, rgba(22,160,133,.08), transparent 30%),
+        linear-gradient(180deg,#f9fbfc 0%,var(--bg) 42%,#f4f6f8 100%);
       color:var(--ink);
       font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Microsoft YaHei",sans-serif;
       line-height:1.78;
@@ -34,14 +38,14 @@
       position:sticky;
       top:0;
       z-index:20;
-      background:rgba(255,255,255,.94);
-      border-bottom:1px solid rgba(229,233,239,.9);
-      backdrop-filter:blur(14px);
-      box-shadow:0 6px 18px rgba(31,41,55,.04);
+      background:rgba(255,255,255,.86);
+      border-bottom:1px solid rgba(230,235,241,.92);
+      backdrop-filter:blur(18px);
+      box-shadow:0 8px 26px rgba(31,41,55,.04);
     }
     .bar {
       max-width:1180px;
-      min-height:68px;
+      min-height:70px;
       margin:0 auto;
       padding:0 24px;
       display:flex;
@@ -50,56 +54,79 @@
       gap:22px;
     }
     .brand {
-      min-width:132px;
-      min-height:40px;
       display:inline-flex;
       align-items:center;
-      color:transparent;
+      gap:10px;
+      color:#17202a;
       text-decoration:none;
-      background:url("/assets/site/logo.png") left center / contain no-repeat;
+      font-size:22px;
+      font-weight:860;
+      letter-spacing:0;
     }
-    nav { display:flex; gap:4px; flex-wrap:wrap; justify-content:flex-end; }
+    .brand::before {
+      content:"";
+      width:34px;
+      height:34px;
+      border-radius:8px;
+      background:
+        linear-gradient(135deg,#16a085 0%,#38bdf8 100%);
+      box-shadow:0 10px 24px rgba(22,160,133,.25);
+    }
+    nav { display:flex; gap:6px; flex-wrap:wrap; justify-content:flex-end; }
     nav a {
-      min-height:36px;
+      min-height:38px;
       display:inline-flex;
       align-items:center;
-      padding:0 12px;
-      border-radius:6px;
-      color:#4b5563;
+      padding:0 13px;
+      border-radius:8px;
+      color:#475569;
       text-decoration:none;
       font-size:14px;
-      font-weight:650;
+      font-weight:700;
     }
-    nav a:hover { background:#eef8f5; color:var(--accent-dark); }
+    nav a:hover { background:var(--accent-soft); color:var(--accent-dark); }
     main { max-width:1180px; margin:0 auto; padding:34px 24px 72px; }
     .site-hero {
-      min-height:330px;
+      min-height:390px;
       margin:0 0 34px;
       display:flex;
       align-items:center;
       background:
-        linear-gradient(90deg, rgba(5,18,28,.72), rgba(5,18,28,.25)),
-        url("/assets/site/banner.png") center / cover no-repeat;
+        linear-gradient(90deg, rgba(9,18,28,.74) 0%, rgba(9,18,28,.48) 39%, rgba(9,18,28,.08) 78%),
+        url("/assets/site/hero-modern.png") center / cover no-repeat;
       color:#fff;
+      border-bottom:1px solid rgba(255,255,255,.18);
     }
     .site-hero .inner { max-width:1180px; width:100%; margin:0 auto; padding:0 24px; }
-    .site-hero h1 { max-width:720px; margin:0; font-size:clamp(38px,6vw,72px); line-height:1.05; letter-spacing:0; }
-    .site-hero p { max-width:680px; margin:18px 0 0; color:rgba(255,255,255,.86); font-size:18px; }
+    .site-hero h1 {
+      max-width:720px;
+      margin:0;
+      font-size:clamp(42px,7vw,76px);
+      line-height:1.04;
+      letter-spacing:0;
+      text-shadow:0 12px 32px rgba(0,0,0,.22);
+    }
+    .site-hero p {
+      max-width:660px;
+      margin:18px 0 0;
+      color:rgba(255,255,255,.9);
+      font-size:18px;
+    }
     .layout { display:grid; grid-template-columns:minmax(0,1fr) 300px; gap:28px; align-items:start; }
     .content-column { min-width:0; }
-    .sidebar { display:grid; gap:18px; position:sticky; top:88px; }
+    .sidebar { display:grid; gap:18px; position:sticky; top:90px; }
     .sidebox {
-      background:var(--paper);
+      background:rgba(255,255,255,.92);
       border:1px solid var(--line);
       border-radius:8px;
       padding:20px;
-      box-shadow:var(--shadow);
+      box-shadow:var(--shadow-soft);
     }
     .sidebox h2 { margin:0 0 12px; font-size:16px; line-height:1.35; }
     .sidebox ul { margin:0; padding:0; list-style:none; display:grid; gap:10px; }
     .sidebox a { color:#475569; text-decoration:none; }
     .sidebox a:hover { color:var(--accent-dark); }
-    .eyebrow { margin:0 0 12px; color:var(--accent-dark); font-size:14px; font-weight:760; }
+    .eyebrow { margin:0 0 12px; color:var(--accent-dark); font-size:14px; font-weight:780; }
     h1.title { margin:0; font-size:clamp(34px,5vw,56px); line-height:1.13; letter-spacing:0; }
     .meta { margin:14px 0 28px; color:var(--muted); font-size:14px; }
     .hero {
@@ -112,7 +139,7 @@
     }
     .hero img { display:block; width:100%; max-height:560px; object-fit:contain; }
     article, .panel {
-      background:var(--paper);
+      background:rgba(255,255,255,.96);
       border:1px solid var(--line);
       border-radius:8px;
       padding:clamp(22px,4vw,44px);
@@ -133,14 +160,20 @@
     .post-list { display:grid; gap:18px; }
     .post-card {
       display:grid;
-      grid-template-columns:220px minmax(0,1fr);
+      grid-template-columns:224px minmax(0,1fr);
       gap:22px;
-      min-height:158px;
+      min-height:160px;
       padding:18px;
-      background:var(--paper);
+      background:rgba(255,255,255,.96);
       border:1px solid var(--line);
       border-radius:8px;
-      box-shadow:var(--shadow);
+      box-shadow:var(--shadow-soft);
+      transition:transform .18s ease, box-shadow .18s ease, border-color .18s ease;
+    }
+    .post-card:hover {
+      transform:translateY(-2px);
+      border-color:#d8efe9;
+      box-shadow:0 18px 44px rgba(25,35,50,.11);
     }
     .post-thumb {
       display:block;
@@ -151,12 +184,13 @@
       background:#e9eef3;
       border:1px solid var(--line);
     }
-    .post-thumb img { width:100%; height:100%; object-fit:cover; display:block; }
+    .post-thumb img { width:100%; height:100%; object-fit:cover; display:block; transition:transform .25s ease; }
+    .post-card:hover .post-thumb img { transform:scale(1.035); }
     .post-card h2 { margin:0 0 8px; font-size:22px; line-height:1.36; }
     .post-card a { color:var(--ink); text-decoration:none; }
     .post-card a:hover { color:var(--accent-dark); }
     .post-card p { margin:8px 0 0; color:#566273; display:-webkit-box; -webkit-line-clamp:3; -webkit-box-orient:vertical; overflow:hidden; }
-    .readmore { display:inline-flex; margin-top:12px; font-size:14px; color:var(--accent-dark); font-weight:700; }
+    .readmore { display:inline-flex; margin-top:12px; font-size:14px; color:var(--accent-dark); font-weight:760; }
     .image-missing { margin:22px 0; padding:18px; border:1px dashed #cbd5e1; border-radius:8px; background:#f8fafc; color:#475569; }
     .image-missing strong { display:block; color:#334155; margin-bottom:6px; }
     .image-missing a { overflow-wrap:anywhere; font-size:13px; }
@@ -176,9 +210,10 @@
     }
     @media (max-width:640px) {
       .bar { min-height:62px; padding:0 16px; }
-      .brand { min-width:118px; }
+      .brand { font-size:20px; }
+      .brand::before { width:30px; height:30px; }
       nav a { padding:0 8px; }
-      .site-hero { min-height:260px; margin-bottom:22px; }
+      .site-hero { min-height:300px; margin-bottom:22px; }
       main { padding:24px 16px 54px; }
       article,.panel { padding:20px 16px; }
       h1.title { font-size:31px; }
@@ -193,7 +228,7 @@
 <main>
   <div class="layout">
     <section class="content-column post-list"><article class="post-card">
-  <a class="post-thumb" href="/posts/2026/04/711-从手动配置到自然语言生成规则-一个-android-ai-工具的重构实录/"><img src="/assets/site/banner.png" alt="从手动配置到自然语言生成规则：一个 Android AI 工具的重构实录"></a>
+  <a class="post-thumb" href="/posts/2026/04/711-从手动配置到自然语言生成规则-一个-android-ai-工具的重构实录/"><img src="/assets/site/hero-modern.png" alt="从手动配置到自然语言生成规则：一个 Android AI 工具的重构实录"></a>
   <div>
     <h2><a href="/posts/2026/04/711-从手动配置到自然语言生成规则-一个-android-ai-工具的重构实录/">从手动配置到自然语言生成规则：一个 Android AI 工具的重构实录</a></h2>
     <div class="meta">2026-04-22 · u3blog</div>
@@ -283,7 +318,7 @@
   </div>
 </article>
 <article class="post-card">
-  <a class="post-thumb" href="/posts/2022/10/696-自己实现一个android网络图片加载器/"><img src="/assets/site/banner.png" alt="自己实现一个Android网络图片加载器"></a>
+  <a class="post-thumb" href="/posts/2022/10/696-自己实现一个android网络图片加载器/"><img src="/assets/site/hero-modern.png" alt="自己实现一个Android网络图片加载器"></a>
   <div>
     <h2><a href="/posts/2022/10/696-自己实现一个android网络图片加载器/">自己实现一个Android网络图片加载器</a></h2>
     <div class="meta">2022-10-08 · u3blog</div>
@@ -292,7 +327,7 @@
   </div>
 </article>
 <article class="post-card">
-  <a class="post-thumb" href="/posts/2022/10/695-使用databinding为recyclerview使用同一个viewholder加载不同item/"><img src="/assets/site/banner.png" alt="使用Databinding为Recyclerview使用同一个ViewHolder加载不同Item"></a>
+  <a class="post-thumb" href="/posts/2022/10/695-使用databinding为recyclerview使用同一个viewholder加载不同item/"><img src="/assets/site/hero-modern.png" alt="使用Databinding为Recyclerview使用同一个ViewHolder加载不同Item"></a>
   <div>
     <h2><a href="/posts/2022/10/695-使用databinding为recyclerview使用同一个viewholder加载不同item/">使用Databinding为Recyclerview使用同一个ViewHolder加载不同Item</a></h2>
     <div class="meta">2022-10-08 · u3blog</div>
@@ -301,7 +336,7 @@
   </div>
 </article>
 <article class="post-card">
-  <a class="post-thumb" href="/posts/2022/10/694-android测试体系-在mvvm架构中如何测试model层与viewmodel层/"><img src="/assets/site/banner.png" alt="Android测试体系-在MVVM架构中如何测试Model层与ViewModel层"></a>
+  <a class="post-thumb" href="/posts/2022/10/694-android测试体系-在mvvm架构中如何测试model层与viewmodel层/"><img src="/assets/site/hero-modern.png" alt="Android测试体系-在MVVM架构中如何测试Model层与ViewModel层"></a>
   <div>
     <h2><a href="/posts/2022/10/694-android测试体系-在mvvm架构中如何测试model层与viewmodel层/">Android测试体系-在MVVM架构中如何测试Model层与ViewModel层</a></h2>
     <div class="meta">2022-10-08 · u3blog</div>
@@ -337,7 +372,7 @@
   </div>
 </article>
 <article class="post-card">
-  <a class="post-thumb" href="/posts/2017/08/683-e5bc80e6ba90e695b0e68daee5ba93postgresqle5ae89e8a385e58db8e8bdbde680bbe7bb93/"><img src="/assets/site/banner.png" alt="开源数据库Postgresql安装/卸载总结"></a>
+  <a class="post-thumb" href="/posts/2017/08/683-e5bc80e6ba90e695b0e68daee5ba93postgresqle5ae89e8a385e58db8e8bdbde680bbe7bb93/"><img src="/assets/site/hero-modern.png" alt="开源数据库Postgresql安装/卸载总结"></a>
   <div>
     <h2><a href="/posts/2017/08/683-e5bc80e6ba90e695b0e68daee5ba93postgresqle5ae89e8a385e58db8e8bdbde680bbe7bb93/">开源数据库Postgresql安装/卸载总结</a></h2>
     <div class="meta">2017-08-27 · u3blog</div>
@@ -346,7 +381,7 @@
   </div>
 </article>
 <article class="post-card">
-  <a class="post-thumb" href="/posts/2017/08/680-python中关于模块之间互相调用的总结/"><img src="/assets/site/banner.png" alt="Python中关于模块之间互相调用的总结"></a>
+  <a class="post-thumb" href="/posts/2017/08/680-python中关于模块之间互相调用的总结/"><img src="/assets/site/hero-modern.png" alt="Python中关于模块之间互相调用的总结"></a>
   <div>
     <h2><a href="/posts/2017/08/680-python中关于模块之间互相调用的总结/">Python中关于模块之间互相调用的总结</a></h2>
     <div class="meta">2017-08-27 · u3blog</div>
@@ -355,7 +390,7 @@
   </div>
 </article>
 <article class="post-card">
-  <a class="post-thumb" href="/posts/2017/06/674-kotlin学习小节/"><img src="/assets/site/banner.png" alt="Kotlin学习小节"></a>
+  <a class="post-thumb" href="/posts/2017/06/674-kotlin学习小节/"><img src="/assets/site/hero-modern.png" alt="Kotlin学习小节"></a>
   <div>
     <h2><a href="/posts/2017/06/674-kotlin学习小节/">Kotlin学习小节</a></h2>
     <div class="meta">2017-06-08 · u3blog</div>
@@ -364,7 +399,7 @@
   </div>
 </article>
 <article class="post-card">
-  <a class="post-thumb" href="/posts/2017/04/664-android自定义view的实现方式总结/"><img src="/assets/site/banner.png" alt="Android自定义View的实现方式总结"></a>
+  <a class="post-thumb" href="/posts/2017/04/664-android自定义view的实现方式总结/"><img src="/assets/site/hero-modern.png" alt="Android自定义View的实现方式总结"></a>
   <div>
     <h2><a href="/posts/2017/04/664-android自定义view的实现方式总结/">Android自定义View的实现方式总结</a></h2>
     <div class="meta">2017-04-25 · u3blog</div>
@@ -382,7 +417,7 @@
   </div>
 </article>
 <article class="post-card">
-  <a class="post-thumb" href="/posts/2017/03/650-android性能优化-内存优化/"><img src="/assets/site/banner.png" alt="Android性能优化——内存优化"></a>
+  <a class="post-thumb" href="/posts/2017/03/650-android性能优化-内存优化/"><img src="/assets/site/hero-modern.png" alt="Android性能优化——内存优化"></a>
   <div>
     <h2><a href="/posts/2017/03/650-android性能优化-内存优化/">Android性能优化——内存优化</a></h2>
     <div class="meta">2017-03-31 · u3blog</div>
@@ -391,7 +426,7 @@
   </div>
 </article>
 <article class="post-card">
-  <a class="post-thumb" href="/posts/2017/03/646-android性能优化-图像绘制与布局/"><img src="/assets/site/banner.png" alt="Android性能优化——图像绘制与布局"></a>
+  <a class="post-thumb" href="/posts/2017/03/646-android性能优化-图像绘制与布局/"><img src="/assets/site/hero-modern.png" alt="Android性能优化——图像绘制与布局"></a>
   <div>
     <h2><a href="/posts/2017/03/646-android性能优化-图像绘制与布局/">Android性能优化——图像绘制与布局</a></h2>
     <div class="meta">2017-03-24 · u3blog</div>
