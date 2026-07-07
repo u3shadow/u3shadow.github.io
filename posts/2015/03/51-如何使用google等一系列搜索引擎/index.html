@@ -9,247 +9,381 @@
   <style>
 
     :root {
-      --bg:#f5f7f9;
-      --paper:#ffffff;
-      --ink:#20242c;
-      --muted:#6b7280;
-      --soft-muted:#8b95a7;
-      --line:#e6ebf1;
-      --accent:#16a085;
-      --accent-dark:#0d7767;
-      --accent-soft:#e8f7f3;
-      --code:#101821;
-      --shadow:0 16px 42px rgba(25,35,50,.08);
-      --shadow-soft:0 8px 24px rgba(25,35,50,.06);
+      --bg:#1f1f1f;
+      --bg-deep:#171717;
+      --paper:#f2f2f2;
+      --paper-soft:#e7e7e7;
+      --ink:#3a3a3a;
+      --muted:#888888;
+      --line:#d8d8d8;
+      --white:#ffffff;
+      --accent:#3f3f3f;
+      --code:#121820;
     }
     * { box-sizing:border-box; }
     html { scroll-behavior:smooth; }
     body {
       margin:0;
-      background:
-        radial-gradient(circle at top left, rgba(22,160,133,.08), transparent 30%),
-        linear-gradient(180deg,#f9fbfc 0%,var(--bg) 42%,#f4f6f8 100%);
+      background:var(--bg);
       color:var(--ink);
       font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Microsoft YaHei",sans-serif;
-      line-height:1.78;
+      line-height:1.72;
       letter-spacing:0;
     }
     header {
-      position:sticky;
-      top:0;
-      z-index:20;
-      background:rgba(255,255,255,.86);
-      border-bottom:1px solid rgba(230,235,241,.92);
-      backdrop-filter:blur(18px);
-      box-shadow:0 8px 26px rgba(31,41,55,.04);
+      background:var(--bg-deep);
+      color:var(--white);
+      border-bottom:1px solid #292929;
     }
     .bar {
-      max-width:1180px;
-      min-height:70px;
+      max-width:1120px;
+      min-height:104px;
       margin:0 auto;
-      padding:0 24px;
-      display:flex;
-      align-items:center;
-      justify-content:space-between;
+      padding:22px 24px;
+      display:grid;
+      grid-template-columns:1fr auto;
+      align-items:end;
       gap:22px;
     }
     .brand {
-      display:inline-flex;
-      align-items:center;
-      gap:10px;
-      color:#17202a;
+      color:var(--white);
       text-decoration:none;
-      font-size:22px;
-      font-weight:860;
-      letter-spacing:0;
+      font-size:30px;
+      line-height:1;
+      font-weight:800;
+      text-transform:uppercase;
+      letter-spacing:1px;
     }
-    .brand::before {
-      content:"";
-      width:34px;
-      height:34px;
-      border-radius:8px;
-      background:
-        linear-gradient(135deg,#16a085 0%,#38bdf8 100%);
-      box-shadow:0 10px 24px rgba(22,160,133,.25);
-    }
-    nav { display:flex; gap:6px; flex-wrap:wrap; justify-content:flex-end; }
-    nav a {
-      min-height:38px;
-      display:inline-flex;
-      align-items:center;
-      padding:0 13px;
-      border-radius:8px;
-      color:#475569;
-      text-decoration:none;
+    .brand::after {
+      content:"A bold & beautiful archive";
+      display:block;
+      margin-top:8px;
+      color:#a9a9a9;
       font-size:14px;
-      font-weight:700;
-    }
-    nav a:hover { background:var(--accent-soft); color:var(--accent-dark); }
-    main { max-width:1180px; margin:0 auto; padding:34px 24px 72px; }
-    .site-hero {
-      min-height:390px;
-      margin:0 0 34px;
-      display:flex;
-      align-items:center;
-      background:
-        linear-gradient(90deg, rgba(9,18,28,.74) 0%, rgba(9,18,28,.48) 39%, rgba(9,18,28,.08) 78%),
-        url("/assets/site/hero-modern.png") center / cover no-repeat;
-      color:#fff;
-      border-bottom:1px solid rgba(255,255,255,.18);
-    }
-    .site-hero .inner { max-width:1180px; width:100%; margin:0 auto; padding:0 24px; }
-    .site-hero h1 {
-      max-width:720px;
-      margin:0;
-      font-size:clamp(42px,7vw,76px);
-      line-height:1.04;
+      line-height:1.2;
+      font-weight:500;
+      text-transform:none;
       letter-spacing:0;
-      text-shadow:0 12px 32px rgba(0,0,0,.22);
     }
-    .site-hero p {
-      max-width:660px;
-      margin:18px 0 0;
-      color:rgba(255,255,255,.9);
-      font-size:18px;
+    nav {
+      display:flex;
+      flex-wrap:wrap;
+      justify-content:flex-end;
+      gap:18px;
+      padding-bottom:6px;
     }
-    .layout { display:grid; grid-template-columns:minmax(0,1fr) 300px; gap:28px; align-items:start; }
-    .content-column { min-width:0; }
-    .sidebar { display:grid; gap:18px; position:sticky; top:90px; }
-    .sidebox {
-      background:rgba(255,255,255,.92);
-      border:1px solid var(--line);
-      border-radius:8px;
-      padding:20px;
-      box-shadow:var(--shadow-soft);
+    nav a {
+      color:#c7c7c7;
+      text-decoration:none;
+      font-size:13px;
+      font-weight:800;
+      text-transform:uppercase;
+      letter-spacing:.8px;
     }
-    .sidebox h2 { margin:0 0 12px; font-size:16px; line-height:1.35; }
-    .sidebox ul { margin:0; padding:0; list-style:none; display:grid; gap:10px; }
-    .sidebox a { color:#475569; text-decoration:none; }
-    .sidebox a:hover { color:var(--accent-dark); }
-    .eyebrow { margin:0 0 12px; color:var(--accent-dark); font-size:14px; font-weight:780; }
-    h1.title { margin:0; font-size:clamp(34px,5vw,56px); line-height:1.13; letter-spacing:0; }
-    .meta { margin:14px 0 28px; color:var(--muted); font-size:14px; }
-    .hero {
-      margin:0 0 26px;
-      border:1px solid var(--line);
-      border-radius:8px;
-      overflow:hidden;
-      background:#eef2f5;
-      box-shadow:var(--shadow);
+    nav a::before { content:"// "; color:#686868; }
+    nav a:hover { color:#fff; }
+    main {
+      max-width:1120px;
+      margin:0 auto;
+      padding:34px 24px 72px;
     }
-    .hero img { display:block; width:100%; max-height:560px; object-fit:contain; }
-    article, .panel {
-      background:rgba(255,255,255,.96);
-      border:1px solid var(--line);
-      border-radius:8px;
-      padding:clamp(22px,4vw,44px);
-      box-shadow:var(--shadow);
+    .tracks-intro {
+      padding:24px 0 34px;
+      color:#d0d0d0;
+      text-align:left;
     }
-    article h1, article h2, article h3 { line-height:1.34; margin:1.9em 0 .75em; letter-spacing:0; }
-    article h1 { font-size:28px; }
-    article h2 { font-size:24px; padding-left:14px; border-left:4px solid var(--accent); }
-    article h3 { font-size:20px; }
-    article p { margin:0 0 1.08em; }
-    article img { display:block; max-width:100%; height:auto; margin:18px auto 8px; border:1px solid var(--line); border-radius:6px; background:#eef2f5; }
-    article figure { margin:24px 0; }
-    article figcaption { text-align:center; color:var(--muted); font-size:14px; margin-top:8px; }
-    article pre { margin:20px 0; overflow:auto; padding:16px; border-radius:8px; background:var(--code); color:#e6edf3; line-height:1.62; }
-    article code { font-family:"Cascadia Code",Consolas,"SFMono-Regular",monospace; font-size:.92em; }
-    article :not(pre) > code { color:#9a3412; background:#fff7ed; padding:.12em .34em; border-radius:4px; }
-    article blockquote { margin:20px 0; padding:10px 18px; border-left:4px solid var(--accent); background:#f5fbfa; color:#374151; }
-    .post-list { display:grid; gap:18px; }
-    .post-card {
+    .tracks-intro h1 {
+      margin:0 0 8px;
+      color:#fff;
+      font-size:34px;
+      line-height:1.15;
+      text-transform:uppercase;
+      letter-spacing:1px;
+    }
+    .tracks-intro p {
+      margin:0;
+      max-width:640px;
+      color:#aaa;
+    }
+    .post-list {
       display:grid;
-      grid-template-columns:224px minmax(0,1fr);
-      gap:22px;
-      min-height:160px;
-      padding:18px;
-      background:rgba(255,255,255,.96);
-      border:1px solid var(--line);
-      border-radius:8px;
-      box-shadow:var(--shadow-soft);
-      transition:transform .18s ease, box-shadow .18s ease, border-color .18s ease;
+      grid-template-columns:1fr 1fr;
+      gap:0;
+      border:1px solid #2b2b2b;
+      background:#2a2a2a;
     }
-    .post-card:hover {
-      transform:translateY(-2px);
-      border-color:#d8efe9;
-      box-shadow:0 18px 44px rgba(25,35,50,.11);
+    .post-card {
+      min-height:318px;
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      background:var(--paper);
+      border:10px solid var(--bg);
+      overflow:hidden;
+    }
+    .post-card:nth-child(even) .post-thumb { order:2; }
+    .post-card:nth-child(even) .post-summary { order:1; }
+    .post-card.full-card {
+      grid-template-columns:1fr;
     }
     .post-thumb {
       display:block;
       width:100%;
-      aspect-ratio:16/10;
-      border-radius:6px;
+      min-height:298px;
+      background:#303030;
       overflow:hidden;
-      background:#e9eef3;
-      border:1px solid var(--line);
     }
-    .post-thumb img { width:100%; height:100%; object-fit:cover; display:block; transition:transform .25s ease; }
-    .post-card:hover .post-thumb img { transform:scale(1.035); }
-    .post-card h2 { margin:0 0 8px; font-size:22px; line-height:1.36; }
-    .post-card a { color:var(--ink); text-decoration:none; }
-    .post-card a:hover { color:var(--accent-dark); }
-    .post-card p { margin:8px 0 0; color:#566273; display:-webkit-box; -webkit-line-clamp:3; -webkit-box-orient:vertical; overflow:hidden; }
-    .readmore { display:inline-flex; margin-top:12px; font-size:14px; color:var(--accent-dark); font-weight:760; }
-    .image-missing { margin:22px 0; padding:18px; border:1px dashed #cbd5e1; border-radius:8px; background:#f8fafc; color:#475569; }
-    .image-missing strong { display:block; color:#334155; margin-bottom:6px; }
-    .image-missing a { overflow-wrap:anywhere; font-size:13px; }
-    .mermaid-wrap { margin:22px 0; overflow-x:auto; border:1px solid var(--line); border-radius:8px; background:#fbfcfd; padding:18px; }
-    .mermaid { min-width:640px; text-align:center; }
-    a { color:var(--accent-dark); }
-    footer {
-      max-width:1180px;
+    .post-thumb img {
+      display:block;
+      width:100%;
+      height:100%;
+      min-height:298px;
+      object-fit:cover;
+      filter:saturate(.82) contrast(.96);
+      transition:transform .22s ease, filter .22s ease;
+    }
+    .post-card:hover .post-thumb img {
+      transform:scale(1.035);
+      filter:saturate(1) contrast(1);
+    }
+    .post-summary {
+      min-height:298px;
+      padding:34px 28px;
+      display:flex;
+      flex-direction:column;
+      align-items:center;
+      justify-content:center;
+      text-align:center;
+      background:var(--paper);
+    }
+    .post-card h2 {
+      margin:0;
+      font-size:25px;
+      line-height:1.26;
+      text-transform:uppercase;
+      letter-spacing:1px;
+    }
+    .post-card h2 a {
+      color:#444;
+      text-decoration:none;
+    }
+    .post-card h2 a:hover { color:#111; }
+    .meta {
+      margin:0 0 14px;
+      color:#999;
+      font-size:12px;
+      font-weight:800;
+      text-transform:uppercase;
+      letter-spacing:.8px;
+    }
+    .post-card .rule {
+      width:54px;
+      height:5px;
+      margin:20px auto;
+      background:#444;
+    }
+    .post-card p {
+      margin:0;
+      color:#686868;
+      font-size:15px;
+      display:-webkit-box;
+      -webkit-line-clamp:4;
+      -webkit-box-orient:vertical;
+      overflow:hidden;
+    }
+    .readmore {
+      display:inline-flex;
+      margin-top:20px;
+      color:#444;
+      text-decoration:none;
+      font-size:12px;
+      font-weight:900;
+      text-transform:uppercase;
+      letter-spacing:1px;
+    }
+    .readmore:hover { color:#000; }
+    .single-wrap {
+      max-width:920px;
       margin:0 auto;
-      padding:0 24px 44px;
-      color:var(--muted);
-      font-size:14px;
     }
-    @media (max-width:900px) {
-      .layout { grid-template-columns:1fr; }
-      .sidebar { position:static; grid-template-columns:repeat(2,minmax(0,1fr)); }
+    .single-head {
+      margin:0 0 28px;
+      padding:42px 34px;
+      background:var(--paper);
+      text-align:center;
     }
-    @media (max-width:640px) {
-      .bar { min-height:62px; padding:0 16px; }
-      .brand { font-size:20px; }
-      .brand::before { width:30px; height:30px; }
-      nav a { padding:0 8px; }
-      .site-hero { min-height:300px; margin-bottom:22px; }
-      main { padding:24px 16px 54px; }
-      article,.panel { padding:20px 16px; }
-      h1.title { font-size:31px; }
-      .post-card { grid-template-columns:1fr; gap:14px; padding:14px; }
-      .sidebar { grid-template-columns:1fr; }
+    .eyebrow {
+      margin:0 0 14px;
+      color:#999;
+      font-size:12px;
+      font-weight:900;
+      text-transform:uppercase;
+      letter-spacing:.9px;
+    }
+    h1.title {
+      margin:0;
+      color:#3f3f3f;
+      font-size:34px;
+      line-height:1.18;
+      text-transform:uppercase;
+      letter-spacing:1px;
+    }
+    .title-rule {
+      width:58px;
+      height:5px;
+      margin:24px auto 0;
+      background:#444;
+    }
+    .hero {
+      margin:0;
+      background:#111;
+      overflow:hidden;
+    }
+    .hero img {
+      display:block;
+      width:100%;
+      max-height:620px;
+      object-fit:cover;
+    }
+    article, .panel {
+      background:var(--paper);
+      padding:48px;
+    }
+    article h1, article h2, article h3 {
+      line-height:1.32;
+      margin:1.9em 0 .75em;
+      color:#333;
+      text-transform:uppercase;
+      letter-spacing:.8px;
+    }
+    article h1 { font-size:28px; }
+    article h2 { font-size:24px; }
+    article h3 { font-size:20px; }
+    article p { margin:0 0 1.12em; }
+    article img {
+      display:block;
+      max-width:100%;
+      height:auto;
+      margin:20px auto 8px;
+      background:#ddd;
+    }
+    article figure { margin:28px 0; }
+    article figcaption {
+      text-align:center;
+      color:#888;
+      font-size:13px;
+      margin-top:8px;
+    }
+    article pre {
+      margin:22px 0;
+      overflow:auto;
+      padding:16px;
+      background:var(--code);
+      color:#e6edf3;
+      line-height:1.62;
+    }
+    article code {
+      font-family:"Cascadia Code",Consolas,"SFMono-Regular",monospace;
+      font-size:.92em;
+    }
+    article :not(pre) > code {
+      color:#222;
+      background:#dedede;
+      padding:.12em .34em;
+    }
+    article blockquote {
+      margin:22px 0;
+      padding:12px 20px;
+      border-left:5px solid #444;
+      background:#e8e8e8;
+      color:#444;
+    }
+    .archive-list h2 {
+      margin:34px 0 12px;
+      color:#444;
+      font-size:25px;
+      text-transform:uppercase;
+      letter-spacing:1px;
+    }
+    .archive-list ul { margin:0; padding:0; list-style:none; }
+    .archive-list li {
+      padding:12px 0;
+      border-bottom:1px solid #d4d4d4;
+    }
+    .archive-list a { color:#444; text-decoration:none; font-weight:700; }
+    .archive-list a:hover { color:#000; }
+    .archive-list time {
+      display:inline-block;
+      min-width:54px;
+      color:#888;
+      font-size:12px;
+      font-weight:800;
+    }
+    .image-missing {
+      margin:22px 0;
+      padding:18px;
+      border:1px dashed #aaa;
+      background:#e6e6e6;
+      color:#555;
+    }
+    .image-missing strong {
+      display:block;
+      color:#333;
+      margin-bottom:6px;
+    }
+    .image-missing a { overflow-wrap:anywhere; font-size:13px; color:#333; }
+    .mermaid-wrap {
+      margin:22px 0;
+      overflow-x:auto;
+      border:1px solid #d0d0d0;
+      background:#eee;
+      padding:18px;
+    }
+    .mermaid { min-width:640px; text-align:center; }
+    a { color:#333; }
+    footer {
+      max-width:1120px;
+      margin:0 auto;
+      padding:24px;
+      color:#8f8f8f;
+      font-size:13px;
+      text-align:center;
+    }
+    @media (max-width:980px) {
+      .post-list { grid-template-columns:1fr; }
+    }
+    @media (max-width:720px) {
+      .bar {
+        min-height:94px;
+        grid-template-columns:1fr;
+        align-items:start;
+      }
+      nav {
+        justify-content:flex-start;
+        padding-bottom:0;
+      }
+      main { padding:24px 14px 52px; }
+      .post-card,
+      .post-card:nth-child(even) {
+        grid-template-columns:1fr;
+      }
+      .post-card:nth-child(even) .post-thumb,
+      .post-card:nth-child(even) .post-summary {
+        order:initial;
+      }
+      .post-summary { min-height:260px; padding:30px 22px; }
+      .post-thumb, .post-thumb img { min-height:230px; }
+      h1.title { font-size:27px; }
+      .tracks-intro h1 { font-size:28px; }
+      article, .panel, .single-head { padding:30px 22px; }
     }
   </style>
 </head>
 <body>
-<header><div class="bar"><a class="brand" href="/">u3coding</a><nav><a href="/">首页</a><a href="/archive/">归档</a><a href="/feed.xml">RSS</a></nav></div></header>
+<header><div class="bar"><a class="brand" href="/">u3coding</a><nav><a href="/">Home</a><a href="/archive/">Archive</a><a href="/feed.xml">RSS</a></nav></div></header>
 
-<main><div class="layout"><section class="content-column">
-  <p class="eyebrow">未分类 · 文章 ID 51</p>
-  <h1 class="title">如何使用google等一系列搜索引擎？</h1>
-  <div class="meta">发布于 2015-03-24 15:27 · 已迁移为静态页面</div>
-  
-  <article><p>对于我们经常使用的搜索引擎大家都都不陌生，但是，如何高效的利用呢？大家都知道空格是搜索多个关键词，那么有没有其他的快捷键呢？答案是肯定的，以下内容转自知乎</p>
-<p>1、双引号<br /><br />把搜索词放在双引号中，代表完全匹配搜索，也就是说搜索结果返回的页面包含双引号中出现的所有的词，连顺序也必须完全匹配。bd和Google 都支持这个指令。例如搜索： &ldquo;seo方法图片&rdquo;<br /><br />2、减号<br /><br />减号代表搜索不包含减号后面的词的页面。使用这个指令时减号前面必须是空格，减号后面没有空格，紧跟着需要排除的词。Google 和bd都支持这个指令。<br />例如：搜索 -引擎<br />返回的则是包含&ldquo;搜索&rdquo;这个词，却不包含&ldquo;引擎&rdquo;这个词的结果<br /><br />3、星号<br />星号*是常用的通配符，也可以用在搜索中。百度不支持*号搜索指令。<br />比如在Google 中搜索：搜索*擎<br />其中的*号代表任何文字。返回的结果就不仅包含&ldquo;搜索引擎&rdquo;，还包含了&ldquo;搜索收擎&rdquo;，&ldquo;搜索巨擎&rdquo;等内容。<br /><br />4、inurl<br />inurl: 指令用于搜索查询词出现在url 中的页面。bd和Google 都支持inurl 指令。inurl 指令支持中文和英文。<br />比如搜索：inurl:搜索引擎优化<br /><br />返回的结果都是网址url 中包含&ldquo;搜索引擎优化&rdquo;的页面。由于关键词出现在url 中对排名有一定影响，使用inurl:搜索可以更准确地找到竞争对手。<br /><br />5、inanchor<br />inanchor:指令返回的结果是导入链接锚文字中包含搜索词的页面。百度不支持inanchor。<br />比如在Google 搜索 ：inanchor:点击这里<br />返回的结果页面本身并不一定包含&ldquo;点击这里&rdquo;这四个字，而是指向这些页面的链接锚文字中出现了&ldquo;点击这里&rdquo;这四个字。<br />可以用来找到某个关键词的竞争对收，而且这些竞争对手往往是做过SEO 的。研究竞争对手页面有哪些外部链接，就可以找到很多链接资源。<br /><br />6、intitle<br />intitle: 指令返回的是页面title 中包含关键词的页面。Google 和bd都支持intitle 指令。<br />使用intitle 指令找到的文件是更准确的竞争页面。如果关键词只出现在页面可见文字中，而没有出现在title 中，大部分情况是并没有针对关键词进行优化，所以也不是有力的竞争对手。<br /><br />7、allintitle<br />allintitle:搜索返回的是页面标题中包含多组关键词的文件。<br />例如 ：allintitle:SEO 搜索引擎优化<br />就相当于：intitle:SEO intitle:搜索引擎优化<br />返回的是标题中中既包含&ldquo;SEO&rdquo;，也包含&ldquo;搜索引擎优化&rdquo;的页面<br /><br />8、allinurl<br />与allintitle: 类似。<br />allinurl:SEO 搜索引擎优化<br />就相当于 ：inurl:SEO inurl:搜索引擎优化<br /><br />9、filetype<br />用于搜索特定文件格式。Google 和bd都支持filetype 指令。<br />比如搜索filetype:pdf SEO<br />返回的就是包含SEO 这个关键词的所有pdf 文件。<br /><br />10、site<br />site:是SEO 最熟悉的高级搜索指令，用来搜索某个域名下的所有文件。<br /><br />11、linkdomain<br />linkdomain:指令只适用于雅虎，返回的是某个域名的反向链接。雅虎的反向链接数据还比较准<br />确，是SEO 人员研究竞争对手外部链接情况的重要工具之一。<br />比如搜索<br /><br />linkdomain:<a class=" external" href="http://cnseotool.com/" rel="nofollow noreferrer" target="_blank"><span class="invisible">http://<span class="visible">cnseotool.com</span></span></a>&nbsp;-site:<a class=" external" href="http://cnseotool.com/" rel="nofollow noreferrer" target="_blank"><span class="invisible">http://<span class="visible">cnseotool.com</span></span></a><br /><br />得到的就是点石网站的外部链接，因为-site:<a class=" external" href="http://cnseotool.com/" rel="nofollow noreferrer" target="_blank"><span class="invisible">http://<span class="visible">cnseotool.com</span></span></a>&nbsp;已经排除了点石本身的页面，也就是内部<br />链接，剩下的就都是外部链接了。<br /><br />12、related<br />related:指令只适用于Google，返回的结果是与某个网站有关联的页面。比如搜索<br /><br />related:<a class=" external" href="http://cnseotool.com/" rel="nofollow noreferrer" target="_blank"><span class="invisible">http://<span class="visible">cnseotool.com</span></span></a><br /><br />我们就可以得到Google 所认为的与点石网站有关联的其他页面。 这种关联到底指的是什么，Google 并没有明确说明，一般认为指的是有共同外部链接的网站。<br /><br />上面介绍的这几个高级搜索指令，单独使用可以找到不少资源，或者可以更精确地定位竞争对<br />手。把这些指令混合起来使用则更强大。<br /><br />inurl:gov 减肥<br /><br />返回的就是url 中包含gov，页面中有&ldquo;减肥&rdquo;这个词的页面。很多SEO 人员认为GVM和学校网<br />站有比较高的权重，找到相关的GVM和学校网站，就找到了最好的链接资源。<br /><br />下面这个指令返回的是来自.<a class=" wrap external" href="http://edu.cn/" rel="nofollow noreferrer" target="_blank">中国教育和科研计算机网CERNET</a>，也就是学校域名上的包含&ldquo;交换链接&rdquo;这个词的页面：<br /><br />inurl:.<a class=" wrap external" href="http://edu.cn/" rel="nofollow noreferrer" target="_blank">中国教育和科研计算机网CERNET</a>&nbsp;交换链接<br /><br />从中SEO 人员可以找到愿意交换链接的学校网站。<br /><br />或者使用一个更精确的搜索：<br /><br />inurl:.<a class=" wrap external" href="http://edu.cn/" rel="nofollow noreferrer" target="_blank">中国教育和科研计算机网CERNET</a>&nbsp;intitle:交换链接<br /><br />返回的则是来自<a class=" wrap external" href="http://edu.cn/" rel="nofollow noreferrer" target="_blank">中国教育和科研计算机网CERNET</a>&nbsp;域名，标题中包含&ldquo;交换链接&rdquo;这四个字的页面，返回的结果大部分应<br />该是愿意交换链接的学校网站。<br /><br />再比如下面这个指令：<br /><br />inurl:<a class=" wrap external" href="http://edu.cn/forum/" rel="nofollow noreferrer" target="_blank">中国教育和科研计算机网CERNET</a>*register<br /><br />返回的结果是在.<a class=" wrap external" href="http://edu.cn/" rel="nofollow noreferrer" target="_blank">中国教育和科研计算机网CERNET</a>&nbsp;域名上，url 中包含&ldquo;forum&rdquo;以及&ldquo;register&rdquo;这两个单词的页面，也就是<br />学校论坛的注册页面。找到这些论坛，也就找到了能在高权重域名上留下签名的很多机会。<br /><br />下面这个指令返回的是页面与减肥有关，url 中包含links 这个单词的页面：<br /><br />减肥 inurl:links<br /><br />很多站长把交换链接页面命名为links.html 等，所以这个指令返回的就是与减肥主题相关的交换<br />链接页面。<br /><br />下面这个指令返回的是url 中包含<a class=" external" href="http://gov.cn/" rel="nofollow noreferrer" target="_blank"><span class="invisible">http://<span class="visible">gov.cn</span></span></a>&nbsp;以及links 的页面，也就是GVM域名上的交换链接页面：<br /><br />allinurl:gov.cn+links<br /><br />最后一个例子，在雅虎搜索这个指令：<br /><br />linkdomain:<a class=" external" href="http://cnseotool.com/" rel="nofollow noreferrer" target="_blank"><span class="invisible">http://<span class="visible">cnseotool.com</span></span></a>&nbsp;-linkdomain:<a class=" external" href="http://cnseotool.com/" rel="nofollow noreferrer" target="_blank"><span class="invisible">http://<span class="visible">cnseotool.com</span></span></a><br />返回的是链接到点石网站，却没有链接到我的博客的网站。使用这个指令可以找到很多连向你<br />的竞争对手或其他同行业网站，却没连向你的网站的页面，这些网站是最好的链接资源。<br />高级搜索指令组合使用变化多端，功能强大。一个合格的SEO必须熟练掌握这几个常用指令的<br />意义及组合方法，才能更有效率地找到更多竞争对手和链接资源。<br /><br />找外链的时候你可以用这几种命令组合，例如site:.com inurl:blog &ldquo;post a comment&rdquo; -&rdquo;comments closed&rdquo; -&rdquo;you must be logged in&rdquo; &ldquo;输入你的关键词&ldquo;，<br />site:.com 是 指， 只显示.com的网站。 如果你想要 org的链接，就换成 site:.org，inurl:blog 是指博客。<br />&ldquo;post a comment&rdquo; -&rdquo;comments closed&rdquo; -&rdquo;you must be logged in&rdquo; 是指， &ldquo;能够写评论的&rdquo; 减去&ldquo; 关闭评论的&rdquo; 再减去&ldquo; 必须要登录才能写评论的&rdquo;</p></article>
-</section><aside class="sidebar">
-  <section class="sidebox"><h2>最近发表</h2><ul><li><a href="/posts/2026/04/711-从手动配置到自然语言生成规则-一个-android-ai-工具的重构实录/">从手动配置到自然语言生成规则：一个 Android AI 工具的重构实录</a></li>
-<li><a href="/posts/2025/08/707-学习版游戏自制云存档同步的方法探索以及总结/">学习版游戏自制云存档同步的方法探索以及总结</a></li>
-<li><a href="/posts/2024/08/706-鸿蒙next中web组件和navigation的一个bug以及处理方案/">鸿蒙next中web组件和navigation的一个bug以及处理方案</a></li>
-<li><a href="/posts/2024/02/705-chatgpt是怎么帮我写ios代码的/">ChatGPT是怎么帮我写ios代码的</a></li>
-<li><a href="/posts/2023/04/702-android项目cicd流程总结-使用jenkins/">Android项目cicd流程总结（使用jenkins）</a></li>
-<li><a href="/posts/2022/10/701-android使用logger开发app本地日志记录功能/">Android使用Logger开发App本地日志记录功能</a></li>
-<li><a href="/posts/2022/10/700-一张启动图引发的思考-探索-9图原理和应用场景/">一张启动图引发的思考--探索.9图原理和应用场景</a></li>
-<li><a href="/posts/2022/10/699-跟我一起玩paging3/">跟我一起玩Paging3</a></li></ul></section>
-  <section class="sidebox"><h2>网站分类</h2><ul><li><a href="/archive/">技术文章</a></li></ul></section>
-  <section class="sidebox"><h2>文章归档</h2><ul><li><a href="/archive/">2026 年 · 1 篇</a></li>
-<li><a href="/archive/">2025 年 · 1 篇</a></li>
-<li><a href="/archive/">2024 年 · 2 篇</a></li>
-<li><a href="/archive/">2023 年 · 1 篇</a></li>
-<li><a href="/archive/">2022 年 · 11 篇</a></li>
-<li><a href="/archive/">2017 年 · 7 篇</a></li>
-<li><a href="/archive/">2016 年 · 7 篇</a></li></ul></section>
-</aside></div></main>
+<main><div class="single-wrap"><section class="single-head"><p class="eyebrow">未分类 · 文章 ID 51</p><h1 class="title">如何使用google等一系列搜索引擎？</h1><div class="title-rule"></div><div class="meta">发布于 2015-03-24 15:27 · 已迁移为静态页面</div></section><article><p>对于我们经常使用的搜索引擎大家都都不陌生，但是，如何高效的利用呢？大家都知道空格是搜索多个关键词，那么有没有其他的快捷键呢？答案是肯定的，以下内容转自知乎</p>
+<p>1、双引号<br /><br />把搜索词放在双引号中，代表完全匹配搜索，也就是说搜索结果返回的页面包含双引号中出现的所有的词，连顺序也必须完全匹配。bd和Google 都支持这个指令。例如搜索： &ldquo;seo方法图片&rdquo;<br /><br />2、减号<br /><br />减号代表搜索不包含减号后面的词的页面。使用这个指令时减号前面必须是空格，减号后面没有空格，紧跟着需要排除的词。Google 和bd都支持这个指令。<br />例如：搜索 -引擎<br />返回的则是包含&ldquo;搜索&rdquo;这个词，却不包含&ldquo;引擎&rdquo;这个词的结果<br /><br />3、星号<br />星号*是常用的通配符，也可以用在搜索中。百度不支持*号搜索指令。<br />比如在Google 中搜索：搜索*擎<br />其中的*号代表任何文字。返回的结果就不仅包含&ldquo;搜索引擎&rdquo;，还包含了&ldquo;搜索收擎&rdquo;，&ldquo;搜索巨擎&rdquo;等内容。<br /><br />4、inurl<br />inurl: 指令用于搜索查询词出现在url 中的页面。bd和Google 都支持inurl 指令。inurl 指令支持中文和英文。<br />比如搜索：inurl:搜索引擎优化<br /><br />返回的结果都是网址url 中包含&ldquo;搜索引擎优化&rdquo;的页面。由于关键词出现在url 中对排名有一定影响，使用inurl:搜索可以更准确地找到竞争对手。<br /><br />5、inanchor<br />inanchor:指令返回的结果是导入链接锚文字中包含搜索词的页面。百度不支持inanchor。<br />比如在Google 搜索 ：inanchor:点击这里<br />返回的结果页面本身并不一定包含&ldquo;点击这里&rdquo;这四个字，而是指向这些页面的链接锚文字中出现了&ldquo;点击这里&rdquo;这四个字。<br />可以用来找到某个关键词的竞争对收，而且这些竞争对手往往是做过SEO 的。研究竞争对手页面有哪些外部链接，就可以找到很多链接资源。<br /><br />6、intitle<br />intitle: 指令返回的是页面title 中包含关键词的页面。Google 和bd都支持intitle 指令。<br />使用intitle 指令找到的文件是更准确的竞争页面。如果关键词只出现在页面可见文字中，而没有出现在title 中，大部分情况是并没有针对关键词进行优化，所以也不是有力的竞争对手。<br /><br />7、allintitle<br />allintitle:搜索返回的是页面标题中包含多组关键词的文件。<br />例如 ：allintitle:SEO 搜索引擎优化<br />就相当于：intitle:SEO intitle:搜索引擎优化<br />返回的是标题中中既包含&ldquo;SEO&rdquo;，也包含&ldquo;搜索引擎优化&rdquo;的页面<br /><br />8、allinurl<br />与allintitle: 类似。<br />allinurl:SEO 搜索引擎优化<br />就相当于 ：inurl:SEO inurl:搜索引擎优化<br /><br />9、filetype<br />用于搜索特定文件格式。Google 和bd都支持filetype 指令。<br />比如搜索filetype:pdf SEO<br />返回的就是包含SEO 这个关键词的所有pdf 文件。<br /><br />10、site<br />site:是SEO 最熟悉的高级搜索指令，用来搜索某个域名下的所有文件。<br /><br />11、linkdomain<br />linkdomain:指令只适用于雅虎，返回的是某个域名的反向链接。雅虎的反向链接数据还比较准<br />确，是SEO 人员研究竞争对手外部链接情况的重要工具之一。<br />比如搜索<br /><br />linkdomain:<a class=" external" href="http://cnseotool.com/" rel="nofollow noreferrer" target="_blank"><span class="invisible">http://<span class="visible">cnseotool.com</span></span></a>&nbsp;-site:<a class=" external" href="http://cnseotool.com/" rel="nofollow noreferrer" target="_blank"><span class="invisible">http://<span class="visible">cnseotool.com</span></span></a><br /><br />得到的就是点石网站的外部链接，因为-site:<a class=" external" href="http://cnseotool.com/" rel="nofollow noreferrer" target="_blank"><span class="invisible">http://<span class="visible">cnseotool.com</span></span></a>&nbsp;已经排除了点石本身的页面，也就是内部<br />链接，剩下的就都是外部链接了。<br /><br />12、related<br />related:指令只适用于Google，返回的结果是与某个网站有关联的页面。比如搜索<br /><br />related:<a class=" external" href="http://cnseotool.com/" rel="nofollow noreferrer" target="_blank"><span class="invisible">http://<span class="visible">cnseotool.com</span></span></a><br /><br />我们就可以得到Google 所认为的与点石网站有关联的其他页面。 这种关联到底指的是什么，Google 并没有明确说明，一般认为指的是有共同外部链接的网站。<br /><br />上面介绍的这几个高级搜索指令，单独使用可以找到不少资源，或者可以更精确地定位竞争对<br />手。把这些指令混合起来使用则更强大。<br /><br />inurl:gov 减肥<br /><br />返回的就是url 中包含gov，页面中有&ldquo;减肥&rdquo;这个词的页面。很多SEO 人员认为GVM和学校网<br />站有比较高的权重，找到相关的GVM和学校网站，就找到了最好的链接资源。<br /><br />下面这个指令返回的是来自.<a class=" wrap external" href="http://edu.cn/" rel="nofollow noreferrer" target="_blank">中国教育和科研计算机网CERNET</a>，也就是学校域名上的包含&ldquo;交换链接&rdquo;这个词的页面：<br /><br />inurl:.<a class=" wrap external" href="http://edu.cn/" rel="nofollow noreferrer" target="_blank">中国教育和科研计算机网CERNET</a>&nbsp;交换链接<br /><br />从中SEO 人员可以找到愿意交换链接的学校网站。<br /><br />或者使用一个更精确的搜索：<br /><br />inurl:.<a class=" wrap external" href="http://edu.cn/" rel="nofollow noreferrer" target="_blank">中国教育和科研计算机网CERNET</a>&nbsp;intitle:交换链接<br /><br />返回的则是来自<a class=" wrap external" href="http://edu.cn/" rel="nofollow noreferrer" target="_blank">中国教育和科研计算机网CERNET</a>&nbsp;域名，标题中包含&ldquo;交换链接&rdquo;这四个字的页面，返回的结果大部分应<br />该是愿意交换链接的学校网站。<br /><br />再比如下面这个指令：<br /><br />inurl:<a class=" wrap external" href="http://edu.cn/forum/" rel="nofollow noreferrer" target="_blank">中国教育和科研计算机网CERNET</a>*register<br /><br />返回的结果是在.<a class=" wrap external" href="http://edu.cn/" rel="nofollow noreferrer" target="_blank">中国教育和科研计算机网CERNET</a>&nbsp;域名上，url 中包含&ldquo;forum&rdquo;以及&ldquo;register&rdquo;这两个单词的页面，也就是<br />学校论坛的注册页面。找到这些论坛，也就找到了能在高权重域名上留下签名的很多机会。<br /><br />下面这个指令返回的是页面与减肥有关，url 中包含links 这个单词的页面：<br /><br />减肥 inurl:links<br /><br />很多站长把交换链接页面命名为links.html 等，所以这个指令返回的就是与减肥主题相关的交换<br />链接页面。<br /><br />下面这个指令返回的是url 中包含<a class=" external" href="http://gov.cn/" rel="nofollow noreferrer" target="_blank"><span class="invisible">http://<span class="visible">gov.cn</span></span></a>&nbsp;以及links 的页面，也就是GVM域名上的交换链接页面：<br /><br />allinurl:gov.cn+links<br /><br />最后一个例子，在雅虎搜索这个指令：<br /><br />linkdomain:<a class=" external" href="http://cnseotool.com/" rel="nofollow noreferrer" target="_blank"><span class="invisible">http://<span class="visible">cnseotool.com</span></span></a>&nbsp;-linkdomain:<a class=" external" href="http://cnseotool.com/" rel="nofollow noreferrer" target="_blank"><span class="invisible">http://<span class="visible">cnseotool.com</span></span></a><br />返回的是链接到点石网站，却没有链接到我的博客的网站。使用这个指令可以找到很多连向你<br />的竞争对手或其他同行业网站，却没连向你的网站的页面，这些网站是最好的链接资源。<br />高级搜索指令组合使用变化多端，功能强大。一个合格的SEO必须熟练掌握这几个常用指令的<br />意义及组合方法，才能更有效率地找到更多竞争对手和链接资源。<br /><br />找外链的时候你可以用这几种命令组合，例如site:.com inurl:blog &ldquo;post a comment&rdquo; -&rdquo;comments closed&rdquo; -&rdquo;you must be logged in&rdquo; &ldquo;输入你的关键词&ldquo;，<br />site:.com 是 指， 只显示.com的网站。 如果你想要 org的链接，就换成 site:.org，inurl:blog 是指博客。<br />&ldquo;post a comment&rdquo; -&rdquo;comments closed&rdquo; -&rdquo;you must be logged in&rdquo; 是指， &ldquo;能够写评论的&rdquo; 减去&ldquo; 关闭评论的&rdquo; 再减去&ldquo; 必须要登录才能写评论的&rdquo;</p></article></div>
+</main>
 
 <footer>Generated from local Z-Blog backup for GitHub Pages.</footer>
 <script>
