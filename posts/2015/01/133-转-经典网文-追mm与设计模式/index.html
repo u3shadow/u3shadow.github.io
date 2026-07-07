@@ -7,23 +7,121 @@
   <title>【转】经典网文：追MM与设计模式 - u3coding</title>
   <link rel="canonical" href="https://u3.github.io/posts/2015/01/133-转-经典网文-追mm与设计模式/">
   <style>
-    :root { --bg:#f6f7f8; --paper:#fff; --ink:#1f2937; --muted:#667085; --line:#d7dde3; --accent:#0f766e; --code:#0b1720; }
+
+    :root {
+      --bg:#f3f5f7;
+      --paper:#ffffff;
+      --ink:#23272f;
+      --muted:#7b8494;
+      --line:#e5e9ef;
+      --accent:#19a58c;
+      --accent-dark:#10836f;
+      --soft:#f7faf9;
+      --code:#101821;
+      --shadow:0 12px 34px rgba(25,35,50,.08);
+    }
     * { box-sizing:border-box; }
-    body { margin:0; background:var(--bg); color:var(--ink); font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Microsoft YaHei",sans-serif; line-height:1.76; }
-    header { border-bottom:1px solid var(--line); background:rgba(255,255,255,.9); backdrop-filter:blur(12px); position:sticky; top:0; z-index:10; }
-    .bar { max-width:1080px; margin:0 auto; padding:15px 24px; display:flex; align-items:center; justify-content:space-between; gap:16px; }
-    .brand { color:#111827; text-decoration:none; font-weight:760; }
-    nav { display:flex; gap:14px; flex-wrap:wrap; justify-content:flex-end; }
-    nav a { color:var(--muted); text-decoration:none; font-size:14px; }
-    main { max-width:920px; margin:0 auto; padding:46px 24px 72px; }
-    .eyebrow { margin:0 0 12px; color:var(--accent); font-size:14px; font-weight:750; }
-    h1.title { margin:0; font-size:clamp(34px,5.8vw,56px); line-height:1.14; letter-spacing:0; }
-    .meta { margin:18px 0 32px; color:var(--muted); font-size:15px; }
-    .hero { margin:0 0 30px; border:1px solid var(--line); border-radius:8px; overflow:hidden; background:#eef2f5; }
+    html { scroll-behavior:smooth; }
+    body {
+      margin:0;
+      background:var(--bg);
+      color:var(--ink);
+      font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Microsoft YaHei",sans-serif;
+      line-height:1.78;
+      letter-spacing:0;
+    }
+    header {
+      position:sticky;
+      top:0;
+      z-index:20;
+      background:rgba(255,255,255,.94);
+      border-bottom:1px solid rgba(229,233,239,.9);
+      backdrop-filter:blur(14px);
+      box-shadow:0 6px 18px rgba(31,41,55,.04);
+    }
+    .bar {
+      max-width:1180px;
+      min-height:68px;
+      margin:0 auto;
+      padding:0 24px;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:22px;
+    }
+    .brand {
+      min-width:132px;
+      min-height:40px;
+      display:inline-flex;
+      align-items:center;
+      color:transparent;
+      text-decoration:none;
+      background:url("/assets/site/logo.png") left center / contain no-repeat;
+    }
+    nav { display:flex; gap:4px; flex-wrap:wrap; justify-content:flex-end; }
+    nav a {
+      min-height:36px;
+      display:inline-flex;
+      align-items:center;
+      padding:0 12px;
+      border-radius:6px;
+      color:#4b5563;
+      text-decoration:none;
+      font-size:14px;
+      font-weight:650;
+    }
+    nav a:hover { background:#eef8f5; color:var(--accent-dark); }
+    main { max-width:1180px; margin:0 auto; padding:34px 24px 72px; }
+    .site-hero {
+      min-height:330px;
+      margin:0 0 34px;
+      display:flex;
+      align-items:center;
+      background:
+        linear-gradient(90deg, rgba(5,18,28,.72), rgba(5,18,28,.25)),
+        url("/assets/site/banner.png") center / cover no-repeat;
+      color:#fff;
+    }
+    .site-hero .inner { max-width:1180px; width:100%; margin:0 auto; padding:0 24px; }
+    .site-hero h1 { max-width:720px; margin:0; font-size:clamp(38px,6vw,72px); line-height:1.05; letter-spacing:0; }
+    .site-hero p { max-width:680px; margin:18px 0 0; color:rgba(255,255,255,.86); font-size:18px; }
+    .layout { display:grid; grid-template-columns:minmax(0,1fr) 300px; gap:28px; align-items:start; }
+    .content-column { min-width:0; }
+    .sidebar { display:grid; gap:18px; position:sticky; top:88px; }
+    .sidebox {
+      background:var(--paper);
+      border:1px solid var(--line);
+      border-radius:8px;
+      padding:20px;
+      box-shadow:var(--shadow);
+    }
+    .sidebox h2 { margin:0 0 12px; font-size:16px; line-height:1.35; }
+    .sidebox ul { margin:0; padding:0; list-style:none; display:grid; gap:10px; }
+    .sidebox a { color:#475569; text-decoration:none; }
+    .sidebox a:hover { color:var(--accent-dark); }
+    .eyebrow { margin:0 0 12px; color:var(--accent-dark); font-size:14px; font-weight:760; }
+    h1.title { margin:0; font-size:clamp(34px,5vw,56px); line-height:1.13; letter-spacing:0; }
+    .meta { margin:14px 0 28px; color:var(--muted); font-size:14px; }
+    .hero {
+      margin:0 0 26px;
+      border:1px solid var(--line);
+      border-radius:8px;
+      overflow:hidden;
+      background:#eef2f5;
+      box-shadow:var(--shadow);
+    }
     .hero img { display:block; width:100%; max-height:560px; object-fit:contain; }
-    article, .panel { background:var(--paper); border:1px solid var(--line); border-radius:8px; padding:clamp(22px,4vw,44px); box-shadow:0 18px 45px rgba(31,41,55,.06); }
+    article, .panel {
+      background:var(--paper);
+      border:1px solid var(--line);
+      border-radius:8px;
+      padding:clamp(22px,4vw,44px);
+      box-shadow:var(--shadow);
+    }
     article h1, article h2, article h3 { line-height:1.34; margin:1.9em 0 .75em; letter-spacing:0; }
-    article h1 { font-size:28px; } article h2 { font-size:24px; } article h3 { font-size:20px; }
+    article h1 { font-size:28px; }
+    article h2 { font-size:24px; padding-left:14px; border-left:4px solid var(--accent); }
+    article h3 { font-size:20px; }
     article p { margin:0 0 1.08em; }
     article img { display:block; max-width:100%; height:auto; margin:18px auto 8px; border:1px solid var(--line); border-radius:6px; background:#eef2f5; }
     article figure { margin:24px 0; }
@@ -33,25 +131,66 @@
     article :not(pre) > code { color:#9a3412; background:#fff7ed; padding:.12em .34em; border-radius:4px; }
     article blockquote { margin:20px 0; padding:10px 18px; border-left:4px solid var(--accent); background:#f5fbfa; color:#374151; }
     .post-list { display:grid; gap:18px; }
-    .post-card { padding:0 0 18px; border-bottom:1px solid var(--line); }
-    .post-card:last-child { border-bottom:0; padding-bottom:0; }
-    .post-card h2 { margin:0 0 6px; font-size:22px; line-height:1.36; }
+    .post-card {
+      display:grid;
+      grid-template-columns:220px minmax(0,1fr);
+      gap:22px;
+      min-height:158px;
+      padding:18px;
+      background:var(--paper);
+      border:1px solid var(--line);
+      border-radius:8px;
+      box-shadow:var(--shadow);
+    }
+    .post-thumb {
+      display:block;
+      width:100%;
+      aspect-ratio:16/10;
+      border-radius:6px;
+      overflow:hidden;
+      background:#e9eef3;
+      border:1px solid var(--line);
+    }
+    .post-thumb img { width:100%; height:100%; object-fit:cover; display:block; }
+    .post-card h2 { margin:0 0 8px; font-size:22px; line-height:1.36; }
     .post-card a { color:var(--ink); text-decoration:none; }
-    .post-card a:hover { color:var(--accent); }
-    .post-card p { margin:8px 0 0; color:#475569; }
+    .post-card a:hover { color:var(--accent-dark); }
+    .post-card p { margin:8px 0 0; color:#566273; display:-webkit-box; -webkit-line-clamp:3; -webkit-box-orient:vertical; overflow:hidden; }
+    .readmore { display:inline-flex; margin-top:12px; font-size:14px; color:var(--accent-dark); font-weight:700; }
     .image-missing { margin:22px 0; padding:18px; border:1px dashed #cbd5e1; border-radius:8px; background:#f8fafc; color:#475569; }
     .image-missing strong { display:block; color:#334155; margin-bottom:6px; }
     .image-missing a { overflow-wrap:anywhere; font-size:13px; }
-
-    a { color:var(--accent); }
-    footer { max-width:920px; margin:0 auto; padding:0 24px 44px; color:var(--muted); font-size:14px; }
-    @media (max-width:640px) { .bar { padding:13px 16px; } main { padding:32px 16px 54px; } article,.panel { padding:20px 16px; } h1.title { font-size:31px; } }
+    .mermaid-wrap { margin:22px 0; overflow-x:auto; border:1px solid var(--line); border-radius:8px; background:#fbfcfd; padding:18px; }
+    .mermaid { min-width:640px; text-align:center; }
+    a { color:var(--accent-dark); }
+    footer {
+      max-width:1180px;
+      margin:0 auto;
+      padding:0 24px 44px;
+      color:var(--muted);
+      font-size:14px;
+    }
+    @media (max-width:900px) {
+      .layout { grid-template-columns:1fr; }
+      .sidebar { position:static; grid-template-columns:repeat(2,minmax(0,1fr)); }
+    }
+    @media (max-width:640px) {
+      .bar { min-height:62px; padding:0 16px; }
+      .brand { min-width:118px; }
+      nav a { padding:0 8px; }
+      .site-hero { min-height:260px; margin-bottom:22px; }
+      main { padding:24px 16px 54px; }
+      article,.panel { padding:20px 16px; }
+      h1.title { font-size:31px; }
+      .post-card { grid-template-columns:1fr; gap:14px; padding:14px; }
+      .sidebar { grid-template-columns:1fr; }
+    }
   </style>
 </head>
 <body>
 <header><div class="bar"><a class="brand" href="/">u3coding</a><nav><a href="/">首页</a><a href="/archive/">归档</a><a href="/feed.xml">RSS</a></nav></div></header>
 
-<main>
+<main><div class="layout"><section class="content-column">
   <p class="eyebrow">未分类 · 文章 ID 133</p>
   <h1 class="title">【转】经典网文：追MM与设计模式</h1>
   <div class="meta">发布于 2015-01-20 04:59 · 已迁移为静态页面</div>
@@ -59,7 +198,24 @@
   <article><p>设计模式做为程序员的&ldquo;内功心法&rdquo;，越来越受到.net 社区的重视，这种变化是很可喜的，Java社区走在了我们的前面，但这种状况也许有一天会发生改变。</p>
 <p>从追MM谈Java的23种设计模式<br />1、FACTORY&mdash;追MM少不了请吃饭了，麦当劳的鸡翅和肯德基的鸡翅都是MM爱吃的东西，虽然口味有所不同，但不管你带MM去麦当劳或肯德基，只管向服务员说&ldquo;来四个鸡翅&rdquo;就行了。麦当劳和肯德基就是生产鸡翅的Factory.&nbsp;<br /><br />　　工厂模式：客户类和工厂类分开。消费者任何时候需要某种产品，只需向工厂请求即可。消费者无须修改就可以接纳新产品。缺点是当产品修改时，工厂类也要做相应的修改。如：如何创建及如何向客户端提供。<br />　　</p>
 <p>&nbsp;程序代码<br />　　public class Factory{<br />　　　　public String Boy = "boy" ;<br />　　　　public String Girl = "girl" ;<br />　　　　public People getPeople(String people){<br />　　　　　　if (people.equals("boy")){<br />　　　　　　　　return new Boy();<br />　　　　　　}else if(people.equals("girl")){<br />　　　　　　　　return new Girl();<br />　　　　　　}<br />　　　　}<br />　　}<br /><br />　　2、BUILDER&mdash;MM最爱听的就是&ldquo;我爱你&rdquo;这句话了，见到不同地方的MM,要能够用她们的方言跟她说这句话哦，我有一个多种语言翻译机，上面每种语言都有一个按键，见到MM我只要按对应的键，它就能够用相应的语言说出&ldquo;我爱你&rdquo;这句话了，国外的MM也可以轻松搞掂，这就是我的&ldquo;我爱你&rdquo;builder。（这一定比美军在伊拉克用的翻译机好卖）&nbsp;<br /><br />　　建造模式：将产品的内部表象和产品的生成过程分割开来，从而使一个建造过程生成具有不同的内部表象的产品对象。建造模式使得产品内部表象可以独立的变化，客户不必知道产品内部组成的细节。建造模式可以强制实行一种分步骤进行的建造过程。&nbsp;<br /><br />　　3、FACTORY METHOD&mdash;请MM去麦当劳吃汉堡，不同的MM有不同的口味，要每个都记住是一件烦人的事情，我一般采用Factory Method模式，带着MM到服务员那儿，说&ldquo;要一个汉堡&rdquo;，具体要什么样的汉堡呢，让MM直接跟服务员说就行了。&nbsp;<br /><br />　　工厂方法模式：核心工厂类不再负责所有产品的创建，而是将具体创建的工作交给子类去做，成为一个抽象工厂角色，仅负责给出具体工厂类必须实现的接口，而不接触哪一个产品类应当被实例化这种细节。&nbsp;<br /><br />　　4、PROTOTYPE&mdash;跟MM用QQ聊天，一定要说些深情的话语了，我搜集了好多肉麻的情话，需要时只要copy出来放到QQ里面就行了，这就是我的情话prototype了。（100块钱一份，你要不要）&nbsp;<br /><br />　　原始模型模式：通过给出一个原型对象来指明所要创建的对象的类型，然后用复制这个原型对象的方法创建出更多同类型的对象。原始模型模式允许动态的增加或减少产品类，产品类不需要非得有任何事先确定的等级结构，原始模型模式适用于任何的等级结构。缺点是每一个类都必须配备一个克隆方法。&nbsp;<br /><br />　　5、SINGLETON&mdash;俺有6个漂亮的老婆，她们的老公都是我，我就是我们家里的老公Sigleton，她们只要说道&ldquo;老公&rdquo;，都是指的同一个人，那就是我(刚才做了个梦啦，哪有这么好的事)&nbsp;<br /><br />　　单例模式：单例模式确保某一个类只有一个实例，而且自行实例化并向整个系统提供这个实例单例模式。单例模式只应在有真正的&ldquo;单一实例&rdquo;的需求时才可使用。&nbsp;<br /><br />　　public　class SingLeton{<br />　　　　private static SingLeton instance = new SingLeton();<br />　　　　public static SingLeton getInstance(){<br />　　　　　　return instance;<br />　　　　}<br />　　}　<br /><br />　　6、ADAPTER&mdash;在朋友聚会上碰到了一个美女Sarah，从香港来的，可我不会说粤语，她不会说普通话，只好求助于我的朋友kent了，他作为我和Sarah之间的Adapter，让我和Sarah可以相互交谈了(也不知道他会不会耍我)&nbsp;<br /><br />　　适配器（变压器）模式：把一个类的接口变换成客户端所期待的另一种接口，从而使原本因接口原因不匹配而无法一起工作的两个类能够一起工作。适配类可以根据参数返还一个合适的实例给客户端。&nbsp;<br /><br />　　7、BRIDGE&mdash;早上碰到MM，要说早上好，晚上碰到MM，要说晚上好；碰到MM穿了件新衣服，要说你的衣服好漂亮哦，碰到MM新做的发型，要说你的头发好漂亮哦。不要问我&ldquo;早上碰到MM新做了个发型怎么说&rdquo;这种问题，自己用BRIDGE组合一下不就行了&nbsp;<br /><br />　　桥梁模式：将抽象化与实现化脱耦，使得二者可以独立的变化，也就是说将他们之间的强关联变成弱关联，也就是指在一个软件系统的抽象化和实现化之间使用组合/聚合关系而不是继承关系，从而使两者可以独立的变化。&nbsp;<br /><br />　　8、COMPOSITE&mdash;Mary今天过生日。&ldquo;我过生日，你要送我一件礼物。&rdquo;&ldquo;嗯，好吧，去商店，你自己挑。&rdquo;&ldquo;这件T恤挺漂亮，买，这条裙子好看，买，这个包也不错，买。&rdquo;&ldquo;喂，买了三件了呀，我只答应送一件礼物的哦。&rdquo;&ldquo;什么呀，T恤加裙子加包包，正好配成一套呀，小姐，麻烦你包起来。&rdquo;&ldquo;&hellip;&hellip;&rdquo;，MM都会用Composite模式了，你会了没有？&nbsp;<br /><br />　　合成模式：合成模式将对象组织到树结构中，可以用来描述整体与部分的关系。合成模式就是一个处理对象的树结构的模式。合成模式把部分与整体的关系用树结构表示出来。合成模式使得客户端把一个个单独的成分对象和由他们复合而成的合成对象同等看待。&nbsp;<br /><br />　　9、DECORATOR&mdash;Mary过完轮到Sarly过生日，还是不要叫她自己挑了，不然这个月伙食费肯定玩完，拿出我去年在华山顶上照的照片，在背面写上&ldquo;最好的的礼物，就是爱你的Fita&rdquo;，再到街上礼品店买了个像框（卖礼品的MM也很漂亮哦），再找隔壁搞美术设计的Mike设计了一个漂亮的盒子装起来&hellip;&hellip;，我们都是Decorator，最终都在修饰我这个人呀，怎么样，看懂了吗？&nbsp;<br /><br />　　装饰模式：装饰模式以对客户端透明的方式扩展对象的功能，是继承关系的一个替代方案，提供比继承更多的灵活性。动态给一个对象增加功能，这些功能可以再动态的撤消。增加由一些基本功能的排列组合而产生的非常大量的功能。&nbsp;<br /><br />　　10、FA&Ccedil;ADE&mdash;我有一个专业的Nikon相机，我就喜欢自己手动调光圈、快门，这样照出来的照片才专业，但MM可不懂这些，教了半天也不会。幸好相机有Fa&ccedil;ade设计模式，把相机调整到自动档，只要对准目标按快门就行了，一切由相机自动调整，这样MM也可以用这个相机给我拍张照片了。&nbsp;<br /><br />　　门面模式：外部与一个子系统的通信必须通过一个统一的门面对象进行。门面模式提供一个高层次的接口，使得子系统更易于使用。每一个子系统只有一个门面类，而且此门面类只有一个实例，也就是说它是一个单例模式。但整个系统可以有多个门面类。&nbsp;<br /><br />　　11、FLYWEIGHT&mdash;每天跟MM发短信，手指都累死了，最近买了个新手机，可以把一些常用的句子存在手机里，要用的时候，直接拿出来，在前面加上MM的名字就可以发送了，再不用一个字一个字敲了。共享的句子就是Flyweight，MM的名字就是提取出来的外部特征，根据上下文情况使用。&nbsp;<br /><br />　　享元模式：FLYWEIGHT在拳击比赛中指最轻量级。享元模式以共享的方式高效的支持大量的细粒度对象。享元模式能做到共享的关键是区分内蕴状态和外蕴状态。内蕴状态存储在享元内部，不会随环境的改变而有所不同。外蕴状态是随环境的改变而改变的。外蕴状态不能影响内蕴状态，它们是相互独立的。将可以共享的状态和不可以共享的状态从常规类中区分开来，将不可以共享的状态从类里剔除出去。客户端不可以直接创建被共享的对象，而应当使用一个工厂对象负责创建被共享的对象。享元模式大幅度的降低内存中对象的数量。&nbsp;<br /><br />　　12、PROXY&mdash;跟MM在网上聊天，一开头总是&ldquo;hi,你好&rdquo;,&ldquo;你从哪儿来呀？&rdquo;&ldquo;你多大了？&rdquo;&ldquo;身高多少呀？&rdquo;这些话，真烦人，写个程序做为我的Proxy吧，凡是接收到这些话都设置好了自动的回答，接收到其他的话时再通知我回答，怎么样，酷吧。&nbsp;<br /><br />　　代理模式：代理模式给某一个对象提供一个代理对象，并由代理对象控制对源对象的引用。代理就是一个人或一个机构代表另一个人或者一个机构采取行动。某些情况下，客户不想或者不能够直接引用一个对象，代理对象可以在客户和目标对象直接起到中介的作用。客户端分辨不出代理主题对象与真实主题对象。代理模式可以并不知道真正的被代理对象，而仅仅持有一个被代理对象的接口，这时候代理对象不能够创建被代理对象，被代理对象必须有系统的其他角色代为创建并传入。&nbsp;<br />　　<br />　　public interface FactoryProxy{<br />　　　　public People createBoy();<br />　　　　public People creteGirl();<br />　　}<br /><br />　　13、CHAIN OF RESPONSIBLEITY&mdash;晚上去上英语课，为了好开溜坐到了最后一排，哇，前面坐了好几个漂亮的MM哎，找张纸条，写上&ldquo;Hi,可以做我的女朋友吗？如果不愿意请向前传&rdquo;，纸条就一个接一个的传上去了，糟糕，传到第一排的MM把纸条传给老师了，听说是个老处女呀，快跑!&nbsp;<br /><br />　　责任链模式：在责任链模式中，很多对象由每一个对象对其下家的引用而接&nbsp;<br /><br />　　起来形成一条链。请求在这个链上传递，直到链上的某一个对象决定处理此请求。客户并不知道链上的哪一个对象最终处理这个请求，系统可以在不影响客户端的情况下动态的重新组织链和分配责任。处理者有两个选择：承担责任或者把责任推给下家。一个请求可以最终不被任何接收端对象所接受。&nbsp;<br /><br />　　14、COMMAND&mdash;俺有一个MM家里管得特别严，没法见面，只好借助于她弟弟在我们俩之间传送信息，她对我有什么指示，就写一张纸条让她弟弟带给我。这不，她弟弟又传送过来一个COMMAND，为了感谢他，我请他吃了碗杂酱面，哪知道他说：&ldquo;我同时给我姐姐三个男朋友送COMMAND，就数你最小气，才请我吃面。&rdquo;，&nbsp;<br /><br />　　命令模式：命令模式把一个请求或者操作封装到一个对象中。命令模式把发出命令的责任和执行命令的责任分割开，委派给不同的对象。命令模式允许请求的一方和发送的一方独立开来，使得请求的一方不必知道接收请求的一方的接口，更不必知道请求是怎么被接收，以及操作是否执行，何时被执行以及是怎么被执行的。系统支持命令的撤消。&nbsp;<br /><br />　　15、INTERPRETER&mdash;俺有一个《泡MM真经》，上面有各种泡MM的攻略，比如说去吃西餐的步骤、去看电影的方法等等，跟MM约会时，只要做一个Interpreter，照着上面的脚本执行就可以了。&nbsp;<br /><br />　　解释器模式：给定一个语言后，解释器模式可以定义出其文法的一种表示，并同时提供一个解释器。客户端可以使用这个解释器来解释这个语言中的句子。解释器模式将描述怎样在有了一个简单的文法后，使用模式设计解释这些语句。在解释器模式里面提到的语言是指任何解释器对象能够解释的任何组合。在解释器模式中需要定义一个代表文法的命令类的等级结构，也就是一系列的组合规则。每一个命令对象都有一个解释方法，代表对命令对象的解释。命令对象的等级结构中的对象的任何排列组合都是一个语言。&nbsp;<br /><br />　　16、ITERATOR&mdash;我爱上了Mary，不顾一切的向她求婚。&nbsp;<br /><br />　　Mary：&ldquo;想要我跟你结婚，得答应我的条件&rdquo;&nbsp;<br /><br />　　我：&ldquo;什么条件我都答应，你说吧&rdquo;&nbsp;<br /><br />　　Mary：&ldquo;我看上了那个一克拉的钻石&rdquo;&nbsp;<br /><br />　　我：&ldquo;我买，我买，还有吗？&rdquo;&nbsp;<br /><br />　　Mary：&ldquo;我看上了湖边的那栋别墅&rdquo;&nbsp;<br /><br />　　我：&ldquo;我买，我买，还有吗？&rdquo;&nbsp;<br /><br />　　Mary：&ldquo;我看上那辆法拉利跑车&rdquo;&nbsp;<br /><br />　　我脑袋嗡的一声，坐在椅子上，一咬牙：&ldquo;我买，我买，还有吗？&rdquo;&nbsp;<br /><br />　　&hellip;&hellip;&nbsp;<br /><br />　　迭代子模式：迭代子模式可以顺序访问一个聚集中的元素而不必暴露聚集的内部表象。多个对象聚在一起形成的总体称之为聚集，聚集对象是能够包容一组对象的容器对象。迭代子模式将迭代逻辑封装到一个独立的子对象中，从而与聚集本身隔开。迭代子模式简化了聚集的界面。每一个聚集对象都可以有一个或一个以上的迭代子对象，每一个迭代子的迭代状态可以是彼此独立的。迭代算法可以独立于聚集角色变化。&nbsp;<br /><br />　　17、MEDIATOR&mdash;四个MM打麻将，相互之间谁应该给谁多少钱算不清楚了，幸亏当时我在旁边，按照各自的筹码数算钱，赚了钱的从我这里拿，赔了钱的也付给我，一切就OK啦，俺得到了四个MM的电话。&nbsp;<br /><br />　　调停者模式：调停者模式包装了一系列对象相互作用的方式，使得这些对象不必相互明显作用。从而使他们可以松散偶合。当某些对象之间的作用发生改变时，不会立即影响其他的一些对象之间的作用。保证这些作用可以彼此独立的变化。调停者模式将多对多的相互作用转化为一对多的相互作用。调停者模式将对象的行为和协作抽象化，把对象在小尺度的行为上与其他对象的相互作用分开处理。&nbsp;<br /><br />　　18、MEMENTO&mdash;同时跟几个MM聊天时，一定要记清楚刚才跟MM说了些什么话，不然MM发现了会不高兴的哦，幸亏我有个备忘录，刚才与哪个MM说了什么话我都拷贝一份放到备忘录里面保存，这样可以随时察看以前的记录啦。&nbsp;<br /><br />　　备忘录模式：备忘录对象是一个用来存储另外一个对象内部状态的快照的对象。备忘录模式的用意是在不破坏封装的条件下，将一个对象的状态捉住，并外部化，存储起来，从而可以在将来合适的时候把这个对象还原到存储起来的状态。&nbsp;<br /><br />　　19、OBSERVER&mdash;想知道咱们公司最新MM情报吗？加入公司的MM情报邮件组就行了，tom负责搜集情报，他发现的新情报不用一个一个通知我们，直接发布给邮件组，我们作为订阅者（观察者）就可以及时收到情报啦&nbsp;<br /><br />　　观察者模式：观察者模式定义了一种一队多的依赖关系，让多个观察者对象同时监听某一个主题对象。这个主题对象在状态上发生变化时，会通知所有观察者对象，使他们能够自动更新自己。&nbsp;<br /><br />　　20、STATE&mdash;跟MM交往时，一定要注意她的状态哦，在不同的状态时她的行为会有不同，比如你约她今天晚上去看电影，对你没兴趣的MM就会说&ldquo;有事情啦&rdquo;，对你不讨厌但还没喜欢上的MM就会说&ldquo;好啊，不过可以带上我同事么？&rdquo;，已经喜欢上你的MM就会说&ldquo;几点钟？看完电影再去泡吧怎么样？&rdquo;，当然你看电影过程中表现良好的话，也可以把MM的状态从不讨厌不喜欢变成喜欢哦。&nbsp;<br /><br />　　状态模式：状态模式允许一个对象在其内部状态改变的时候改变行为。这个对象看上去象是改变了它的类一样。状态模式把所研究的对象的行为包装在不同的状态对象里，每一个状态对象都属于一个抽象状态类的一个子类。状态模式的意图是让一个对象在其内部状态改变的时候，其行为也随之改变。状态模式需要对每一个系统可能取得的状态创立一个状态类的子类。当系统的状态变化时，系统便改变所选的子类。&nbsp;<br /><br />　　21、STRATEGY&mdash;跟不同类型的MM约会，要用不同的策略，有的请电影比较好，有的则去吃小吃效果不错，有的去海边浪漫最合适，单目的都是为了得到MM的芳心，我的追MM锦囊中有好多Strategy哦。&nbsp;<br /><br />　　策略模式：策略模式针对一组算法，将每一个算法封装到具有共同接口的独立的类中，从而使得它们可以相互替换。策略模式使得算法可以在不影响到客户端的情况下发生变化。策略模式把行为和环境分开。环境类负责维持和查询行为类，各种算法在具体的策略类中提供。由于算法和环境独立开来，算法的增减，修改都不会影响到环境和客户端。&nbsp;<br /><br />　　22、TEMPLATE METHOD&mdash;&mdash;看过《如何说服女生上床》这部经典文章吗？女生从认识到上床的不变的步骤分为巧遇、打破僵局、展开追求、接吻、前戏、动手、爱抚、进去八大步骤(Template method)，但每个步骤针对不同的情况，都有不一样的做法，这就要看你随机应变啦(具体实现)；&nbsp;<br /><br />　　模板方法模式：模板方法模式准备一个抽象类，将部分逻辑以具体方法以及具体构造子的形式实现，然后声明一些抽象方法来迫使子类实现剩余的逻辑。不同的子类可以以不同的方式实现这些抽象方法，从而对剩余的逻辑有不同的实现。先制定一个顶级逻辑框架，而将逻辑的细节留给具体的子类去实现。&nbsp;<br /><br />　　23、VISITOR&mdash;情人节到了，要给每个MM送一束鲜花和一张卡片，可是每个MM送的花都要针对她个人的特点，每张卡片也要根据个人的特点来挑，我一个人哪搞得清楚，还是找花店老板和礼品店老板做一下Visitor，让花店老板根据MM的特点选一束花，让礼品店老板也根据每个人特点选一张卡，这样就轻松多了；&nbsp;<br /><br />　　访问者模式：访问者模式的目的是封装一些施加于某种数据结构元素之上的操作。一旦这些操作需要修改的话，接受这个操作的数据结构可以保持不变。访问者模式适用于数据结构相对未定的系统，它把数据结构和作用于结构上的操作之间的耦合解脱开，使得操作集合可以相对自由的演化。访问者模式使得增加新的操作变的很容易，就是增加一个新的访问者类。访问者模式将有关的行为集中到一个访问者对象中，而不是分散到一个个的节点类中。当使用访问者模式时，要将尽可能多的对象浏览逻辑放在访问者类中，而不是放到它的子类中。访问者模式可以跨过几个类的等级结构访问属于不同的等级结构的成员类。&nbsp;</p></article>
-</main>
+</section><aside class="sidebar">
+  <section class="sidebox"><h2>最近发表</h2><ul><li><a href="/posts/2026/04/711-从手动配置到自然语言生成规则-一个-android-ai-工具的重构实录/">从手动配置到自然语言生成规则：一个 Android AI 工具的重构实录</a></li>
+<li><a href="/posts/2025/08/707-学习版游戏自制云存档同步的方法探索以及总结/">学习版游戏自制云存档同步的方法探索以及总结</a></li>
+<li><a href="/posts/2024/08/706-鸿蒙next中web组件和navigation的一个bug以及处理方案/">鸿蒙next中web组件和navigation的一个bug以及处理方案</a></li>
+<li><a href="/posts/2024/02/705-chatgpt是怎么帮我写ios代码的/">ChatGPT是怎么帮我写ios代码的</a></li>
+<li><a href="/posts/2023/04/702-android项目cicd流程总结-使用jenkins/">Android项目cicd流程总结（使用jenkins）</a></li>
+<li><a href="/posts/2022/10/701-android使用logger开发app本地日志记录功能/">Android使用Logger开发App本地日志记录功能</a></li>
+<li><a href="/posts/2022/10/700-一张启动图引发的思考-探索-9图原理和应用场景/">一张启动图引发的思考--探索.9图原理和应用场景</a></li>
+<li><a href="/posts/2022/10/699-跟我一起玩paging3/">跟我一起玩Paging3</a></li></ul></section>
+  <section class="sidebox"><h2>网站分类</h2><ul><li><a href="/archive/">技术文章</a></li></ul></section>
+  <section class="sidebox"><h2>文章归档</h2><ul><li><a href="/archive/">2026 年 · 1 篇</a></li>
+<li><a href="/archive/">2025 年 · 1 篇</a></li>
+<li><a href="/archive/">2024 年 · 2 篇</a></li>
+<li><a href="/archive/">2023 年 · 1 篇</a></li>
+<li><a href="/archive/">2022 年 · 11 篇</a></li>
+<li><a href="/archive/">2017 年 · 7 篇</a></li>
+<li><a href="/archive/">2016 年 · 7 篇</a></li></ul></section>
+</aside></div></main>
 
 <footer>Generated from local Z-Blog backup for GitHub Pages.</footer>
 <script>
