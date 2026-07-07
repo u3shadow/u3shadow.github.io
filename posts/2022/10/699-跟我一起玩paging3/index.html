@@ -1,0 +1,91 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="什么是Paging3 Paging 库可帮助您加载和显示来自本地存储或网络中更大的数据集中的数据页面。此方法可让您的应用更高效地利用网络带宽和系统资源。Paging 库的组件旨在契合推荐的 Android 应用架构，流畅集成其他 Jetpack 组件，并提供一流的 Kotlin 支持。 以上来自安卓官网，简单点来说，就是帮你处理列表分页加载工作的一个官方框架...">
+  <title>跟我一起玩Paging3 - u3coding</title>
+  <link rel="canonical" href="https://u3.github.io/posts/2022/10/699-跟我一起玩paging3/">
+  <style>
+    :root { --bg:#f6f7f8; --paper:#fff; --ink:#1f2937; --muted:#667085; --line:#d7dde3; --accent:#0f766e; --code:#0b1720; }
+    * { box-sizing:border-box; }
+    body { margin:0; background:var(--bg); color:var(--ink); font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Microsoft YaHei",sans-serif; line-height:1.76; }
+    header { border-bottom:1px solid var(--line); background:rgba(255,255,255,.9); backdrop-filter:blur(12px); position:sticky; top:0; z-index:10; }
+    .bar { max-width:1080px; margin:0 auto; padding:15px 24px; display:flex; align-items:center; justify-content:space-between; gap:16px; }
+    .brand { color:#111827; text-decoration:none; font-weight:760; }
+    nav { display:flex; gap:14px; flex-wrap:wrap; justify-content:flex-end; }
+    nav a { color:var(--muted); text-decoration:none; font-size:14px; }
+    main { max-width:920px; margin:0 auto; padding:46px 24px 72px; }
+    .eyebrow { margin:0 0 12px; color:var(--accent); font-size:14px; font-weight:750; }
+    h1.title { margin:0; font-size:clamp(34px,5.8vw,56px); line-height:1.14; letter-spacing:0; }
+    .meta { margin:18px 0 32px; color:var(--muted); font-size:15px; }
+    .hero { margin:0 0 30px; border:1px solid var(--line); border-radius:8px; overflow:hidden; background:#eef2f5; }
+    .hero img { display:block; width:100%; max-height:560px; object-fit:contain; }
+    article, .panel { background:var(--paper); border:1px solid var(--line); border-radius:8px; padding:clamp(22px,4vw,44px); box-shadow:0 18px 45px rgba(31,41,55,.06); }
+    article h1, article h2, article h3 { line-height:1.34; margin:1.9em 0 .75em; letter-spacing:0; }
+    article h1 { font-size:28px; } article h2 { font-size:24px; } article h3 { font-size:20px; }
+    article p { margin:0 0 1.08em; }
+    article img { display:block; max-width:100%; height:auto; margin:18px auto 8px; border:1px solid var(--line); border-radius:6px; background:#eef2f5; }
+    article figure { margin:24px 0; }
+    article figcaption { text-align:center; color:var(--muted); font-size:14px; margin-top:8px; }
+    article pre { margin:20px 0; overflow:auto; padding:16px; border-radius:8px; background:var(--code); color:#e6edf3; line-height:1.62; }
+    article code { font-family:"Cascadia Code",Consolas,"SFMono-Regular",monospace; font-size:.92em; }
+    article :not(pre) > code { color:#9a3412; background:#fff7ed; padding:.12em .34em; border-radius:4px; }
+    article blockquote { margin:20px 0; padding:10px 18px; border-left:4px solid var(--accent); background:#f5fbfa; color:#374151; }
+    .post-list { display:grid; gap:18px; }
+    .post-card { padding:0 0 18px; border-bottom:1px solid var(--line); }
+    .post-card:last-child { border-bottom:0; padding-bottom:0; }
+    .post-card h2 { margin:0 0 6px; font-size:22px; line-height:1.36; }
+    .post-card a { color:var(--ink); text-decoration:none; }
+    .post-card a:hover { color:var(--accent); }
+    .post-card p { margin:8px 0 0; color:#475569; }
+    .image-missing { margin:22px 0; padding:18px; border:1px dashed #cbd5e1; border-radius:8px; background:#f8fafc; color:#475569; }
+    .image-missing strong { display:block; color:#334155; margin-bottom:6px; }
+    .image-missing a { overflow-wrap:anywhere; font-size:13px; }
+
+    a { color:var(--accent); }
+    footer { max-width:920px; margin:0 auto; padding:0 24px 44px; color:var(--muted); font-size:14px; }
+    @media (max-width:640px) { .bar { padding:13px 16px; } main { padding:32px 16px 54px; } article,.panel { padding:20px 16px; } h1.title { font-size:31px; } }
+  </style>
+</head>
+<body>
+<header><div class="bar"><a class="brand" href="/">u3coding</a><nav><a href="/">首页</a><a href="/archive/">归档</a><a href="/feed.xml">RSS</a></nav></div></header>
+
+<main>
+  <p class="eyebrow">技术文章 · 文章 ID 699</p>
+  <h1 class="title">跟我一起玩Paging3</h1>
+  <div class="meta">发布于 2022-10-08 15:02 · 已迁移为静态页面</div>
+  <figure class="hero"><img src="/assets/images/13ed647123e1.png" alt="跟我一起玩Paging3"></figure>
+  <article><h2 id="h2--paging3">什么是Paging3</h2><blockquote>
+<p>Paging 库可帮助您加载和显示来自本地存储或网络中更大的数据集中的数据页面。此方法可让您的应用更高效地利用网络带宽和系统资源。Paging 库的组件旨在契合推荐的 Android 应用架构，流畅集成其他 Jetpack 组件，并提供一流的 Kotlin 支持。<br>以上来自安卓官网，简单点来说，就是帮你处理列表分页加载工作的一个官方框架，从名字也能看出来。而且已经到达了第三个版本，paging3。</p>
+</blockquote>
+<h2 id="h2--paging3">如何使用Paging3</h2><p>使用paging3总共有以下几个步骤</p>
+<ol>
+<li>定义PagingSource – 需要在这里处理如何获取数据和如何处理页面的号码</li><li>设置 PagingData 流 – 需要把pagingsource的实例和一些其他参数传递给构造器，比如每次加载的条目数量等等</li><li>定义 RecyclerView 适配器 – 需要继承PagingDataAdapter并提供DiffUtil.ItemCallback的实例</li><li>在界面中显示分页数据 – 在页面中绑定adapter<br>通过以上几个步骤我们就可以使用paging3了，如果想看具体的步骤，可以移步<a href="https://developer.android.com/topic/libraries/architecture/paging/v3-paged-data">官网</a>，我们今天不用沉溺于具体的细节当中<h2 id="h2-paging3-">Paging3有哪些方便的地方</h2>毫无疑问，使用paging3会带给我们一些开发效率上的收益，回想一下我们以前是如何处理分页列表的，检测列表是否到达底部，使用自己持有的页数去做网络请求，把数据添加到原有的集合，更新列表。</li></ol>
+<p>是不是简单的回想一下就感觉到不少坑了呢，没错，我们自己做列表分页加载不仅繁琐无趣，还容易出问题。</p>
+<p>这些工作交给paging3之后，我们只需要关注逻辑部分就可以了，如何获取数据，想以怎样的形式展示数据，这才是我们需要关注的焦点。</p>
+<p>总结一下paging3的优点，替代了大量的琐碎分页加载代码，让逻辑和页面的耦合度降低，由官方的工程师保证了加载的正确性和效率。</p>
+<h2 id="h2-paging3-">Paging3有哪些不方便的地方</h2><p>相信看了上面的优点之后大家都迫不及待的想去把以前的老代码干掉，换成这种看起来方便又省事的工具了。</p>
+<p>但是在换之前，我这里先提几条使用paging3容易遇到的坑，帮助大家综合考量是不是真的要去使用这个工具框架。</p>
+<ol>
+<li>对数据源有一定要求，有时候会提示indexoutofbounds，这种情况需要检查你提供的数据源，而不是adapter</li><li>使用paging3官方教程上需要继承PagingDataAdapter，这个问题可以通过装饰模式来解决，具体可以参考<a href="https://juejin.cn/post/6936889079393058847">这篇文章</a></li><li>paging3的pagingdataadapter虽然提供了refresh方法，但是调用之后数据源并没有获得通知，需要手动调用一次notifyDataSetChanged再去调用refresh才能让列表刷新之后继续触发分页加载，这是一个已知的bug，希望后期得到解决</li><li>paging3的列表中由于写法的原因，对于多种不同item的展示存在一定困难性，如果现在已经有多item逻辑的话，修改起来比较麻烦<h2 id="h2-paging3-">Paging3的原理分析</h2>关于paging3的原理，网上的文章已经很多了，相信大家也不想看到我再重复长篇大论，这里放一张官方架构图给大家</li></ol>
+<p><img loading="lazy"  src="/assets/images/13ed647123e1.png" alt=""><br>简单的总结一下原理就是，数据源把数据放入pager，pager使用flow（kotlin协程提供的对标rxjava的工具）将数据传递到adapter并处理和维护页数，adapter里面再使用DiffUtil.ItemCallback结合上自身的一些api对新来的数据做比对，再进行数据的处理，最后反应到页面上。</p></article>
+</main>
+
+<footer>Generated from local Z-Blog backup for GitHub Pages.</footer>
+<script>
+  document.querySelectorAll("img").forEach((img) => {
+    const replaceMissingImage = () => {
+      const box = document.createElement("div");
+      box.className = "image-missing";
+      const src = img.currentSrc || img.src || img.getAttribute("src") || "";
+      box.innerHTML = `<strong>Image unavailable</strong><span>This image could not be loaded from the static backup.</span><br><a href="${src}" target="_blank" rel="noreferrer">Open original image URL</a>`;
+      img.replaceWith(box);
+    };
+    img.addEventListener("error", replaceMissingImage, { once: true });
+    if (img.complete && img.naturalWidth === 0) replaceMissingImage();
+  });
+</script>
+
+</body>
+</html>

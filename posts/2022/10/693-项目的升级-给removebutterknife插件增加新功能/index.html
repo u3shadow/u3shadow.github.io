@@ -1,0 +1,152 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="前言 经过项目的初步编写和进一步改造，RemoveButterKnife插件终于也有模有样了，但是，功能上仅仅支持Activity/Fragment的BindView注解。 关于编写和优化的过程可以看下面两篇文章 项目构造RemoveButterKnife 项目改进-重构RemoveButterKnife 当然，这里也附上这个项目的 github地址 为了让...">
+  <title>项目的升级-给RemoveButterKnife插件增加新功能 - u3coding</title>
+  <link rel="canonical" href="https://u3.github.io/posts/2022/10/693-项目的升级-给removebutterknife插件增加新功能/">
+  <style>
+    :root { --bg:#f6f7f8; --paper:#fff; --ink:#1f2937; --muted:#667085; --line:#d7dde3; --accent:#0f766e; --code:#0b1720; }
+    * { box-sizing:border-box; }
+    body { margin:0; background:var(--bg); color:var(--ink); font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Microsoft YaHei",sans-serif; line-height:1.76; }
+    header { border-bottom:1px solid var(--line); background:rgba(255,255,255,.9); backdrop-filter:blur(12px); position:sticky; top:0; z-index:10; }
+    .bar { max-width:1080px; margin:0 auto; padding:15px 24px; display:flex; align-items:center; justify-content:space-between; gap:16px; }
+    .brand { color:#111827; text-decoration:none; font-weight:760; }
+    nav { display:flex; gap:14px; flex-wrap:wrap; justify-content:flex-end; }
+    nav a { color:var(--muted); text-decoration:none; font-size:14px; }
+    main { max-width:920px; margin:0 auto; padding:46px 24px 72px; }
+    .eyebrow { margin:0 0 12px; color:var(--accent); font-size:14px; font-weight:750; }
+    h1.title { margin:0; font-size:clamp(34px,5.8vw,56px); line-height:1.14; letter-spacing:0; }
+    .meta { margin:18px 0 32px; color:var(--muted); font-size:15px; }
+    .hero { margin:0 0 30px; border:1px solid var(--line); border-radius:8px; overflow:hidden; background:#eef2f5; }
+    .hero img { display:block; width:100%; max-height:560px; object-fit:contain; }
+    article, .panel { background:var(--paper); border:1px solid var(--line); border-radius:8px; padding:clamp(22px,4vw,44px); box-shadow:0 18px 45px rgba(31,41,55,.06); }
+    article h1, article h2, article h3 { line-height:1.34; margin:1.9em 0 .75em; letter-spacing:0; }
+    article h1 { font-size:28px; } article h2 { font-size:24px; } article h3 { font-size:20px; }
+    article p { margin:0 0 1.08em; }
+    article img { display:block; max-width:100%; height:auto; margin:18px auto 8px; border:1px solid var(--line); border-radius:6px; background:#eef2f5; }
+    article figure { margin:24px 0; }
+    article figcaption { text-align:center; color:var(--muted); font-size:14px; margin-top:8px; }
+    article pre { margin:20px 0; overflow:auto; padding:16px; border-radius:8px; background:var(--code); color:#e6edf3; line-height:1.62; }
+    article code { font-family:"Cascadia Code",Consolas,"SFMono-Regular",monospace; font-size:.92em; }
+    article :not(pre) > code { color:#9a3412; background:#fff7ed; padding:.12em .34em; border-radius:4px; }
+    article blockquote { margin:20px 0; padding:10px 18px; border-left:4px solid var(--accent); background:#f5fbfa; color:#374151; }
+    .post-list { display:grid; gap:18px; }
+    .post-card { padding:0 0 18px; border-bottom:1px solid var(--line); }
+    .post-card:last-child { border-bottom:0; padding-bottom:0; }
+    .post-card h2 { margin:0 0 6px; font-size:22px; line-height:1.36; }
+    .post-card a { color:var(--ink); text-decoration:none; }
+    .post-card a:hover { color:var(--accent); }
+    .post-card p { margin:8px 0 0; color:#475569; }
+    .image-missing { margin:22px 0; padding:18px; border:1px dashed #cbd5e1; border-radius:8px; background:#f8fafc; color:#475569; }
+    .image-missing strong { display:block; color:#334155; margin-bottom:6px; }
+    .image-missing a { overflow-wrap:anywhere; font-size:13px; }
+
+    a { color:var(--accent); }
+    footer { max-width:920px; margin:0 auto; padding:0 24px 44px; color:var(--muted); font-size:14px; }
+    @media (max-width:640px) { .bar { padding:13px 16px; } main { padding:32px 16px 54px; } article,.panel { padding:20px 16px; } h1.title { font-size:31px; } }
+  </style>
+</head>
+<body>
+<header><div class="bar"><a class="brand" href="/">u3coding</a><nav><a href="/">首页</a><a href="/archive/">归档</a><a href="/feed.xml">RSS</a></nav></div></header>
+
+<main>
+  <p class="eyebrow">技术文章 · 文章 ID 693</p>
+  <h1 class="title">项目的升级-给RemoveButterKnife插件增加新功能</h1>
+  <div class="meta">发布于 2022-10-08 14:57 · 已迁移为静态页面</div>
+  <figure class="hero"><img src="/assets/images/1dc8b8628d79.png" alt="项目的升级-给RemoveButterKnife插件增加新功能"></figure>
+  <article><h2 id="h2-u524Du8A00">前言</h2><p>经过项目的初步编写和进一步改造，RemoveButterKnife插件终于也有模有样了，但是，功能上仅仅支持Activity/Fragment的BindView注解。</p>
+<p>关于编写和优化的过程可以看下面两篇文章<br><a href="http://www.u3coding.com/2016/06/24/androidstudio-plugin-removebutterknife-di/">项目构造RemoveButterKnife</a></p>
+<p><a href="http://www.u3coding.com/2018/12/20/rebuild-removebutterknife/">项目改进-重构RemoveButterKnife</a></p>
+<p>当然，这里也附上这个项目的<a href="https://github.com/u3shadow/RemoveButterKnife">github地址</a></p>
+<p>为了让插件支持更加彻底，我们还要支持组合自定义view以及viewholder中使用butterknife的情况，当然，我们也要支持OnClick注解以及一些其他的使用场景。</p>
+<h2 id="h2--">要增加哪些功能？</h2><p>首先要确定需要增加哪些功能点，功能点的更新如下</p>
+<ol>
+<li>增加对多moudle时的R2.id.xxx的支持</li><li>增加对OnClick注解的支持</li><li>增加对viewholder和自定义组合view的支持<h2 id="h2-u786Eu5B9Au589Eu52A0u529Fu80FDu7684u5148u540Eu987Au5E8F">确定增加功能的先后顺序</h2>审阅我们的功能，发现1号功能是比较容易的，所以我们把1号定为优先<br>再次思考发现，2，3号功能之间存在关联性，即，3号功能提及的支持种类中也要支持Onclick注解的形式。<br>所以确定开发顺序为1-&gt;3-&gt;2<h2 id="h2-u529Fu80FDu62C6u5206">功能拆分</h2>在这里我们使用github提供的project功能，具体分解如下<br><img loading="lazy"  src="/assets/images/1dc8b8628d79.png" alt="undefined" title="undefined"><br>可以看到，我们分为了todo,doing,done三个部分，而且把每个任务都细分为了几个步骤，这样我们就可以在开发某一功能时保持专注，而不需要东写一点西写一点了<h2 id="h2-u5177u4F53u529Fu80FDu5F00u53D1">具体功能开发</h2><h3 id="h3-1-r2-id-xxxx-">1.对R2.id.xxxx的支持</h3>由于我们原来的代码中寻找匹配使用的是正则表达式，如下<pre><code>String pattern = &quot;^@(BindView|InjectView|Bind)\\((R.id.*)|(R2.id.*)\\)$&quot;;
+Pattern r = Pattern.compile(pattern);</code></pre>可以看到，我们的代码已经添加了对R2.id.xxx的支持，只需要给正则表达式增加一个条件。<br>最后，我们给这个功能添加上unit test，就可以完成对功能1的开发<h3 id="h3-2-view-viewholder-">2.对自定义view和viewholder的支持</h3>首先，我们要判别一个类到底是自定义view还是viewholder,对于activity和fragment很简单，因为初始函数是不同的，一个是oncreate,一个是oncreateview，但是由于增加了支持种类，老办法就行不通了，这时我们需要使用idea的sdk来进行判断，代码如下<pre><code>GenCodeContext codeContext = new GenCodeContext(mClass, mFactory);
+     String type = mClass.getSuperClassType().toString();
+         if (type.contains(&quot;Activity&quot;)){
+             codeContext.setStrategy(new ActivityStrategy(code,clickMap));
+         }else if (type.contains(&quot;Fragment&quot;)) {
+             codeContext.setStrategy(new FragmentStrategy(code,clickMap));
+         }else if (type.contains(&quot;ViewHolder&quot;)||type.contains(&quot;Adapter&lt;ViewHolder&gt;&quot;)) {
+             codeContext.setStrategy(new AdapterStrategy(code,clickMap));
+         }else {
+             codeContext.setStrategy(new CustomViewStrategy(code,clickMap));
+         }
+         codeContext.executeStrategy();</code></pre>对于原来的代码，我们已经能够找到activity/fragment的特定位置插入代码，但是对于自定义view和viewholder，又该用什么特征来定位该在哪里插入呢？<br>对于这个问题我们分情况讨论</li><li>自定义view<br>我们这里讨论的自定义view仅仅针对组合view，自绘和扩展方式不做讨论，因为这两种方式一般不会使用ButterKnife.<br>组合自定义view的特征<br>对于这种自定view,最大的特征就是在构造的时候会使用inflate方法将xml文件进行压入，那么，找到inflate或者R.layout.xxx的语句，这里就是我们插入生成后代码的位置<br>代码<pre><code>private PsiStatement findInflateStatement(PsiClass mClass){
+     PsiStatement result = null;
+     PsiMethod[] methods = mClass.getAllMethods();
+     for (PsiMethod method:methods) {
+         for (PsiStatement statement : method.getBody().getStatements()) {
+             String returnValue = statement.getText();
+             if (returnValue.contains(&quot;R.layout&quot;) || returnValue.contains(&quot;LayoutInflater.from(context).inflate&quot;)) {
+                 result = statement;
+                 break;
+             }
+         }
+     }
+     return result;
+ }</code></pre></li><li>viewholder<br>这里说的viewholder特指recyclerview.viewholder.<br>这种viewholder都有一个构造函数，参数为(View xxx)第一句是super(xxx);<br>我们可以基于这两个特征进行定位。<pre><code>private PsiStatement findSuperStatement(PsiMethod method,String viewName){
+     PsiStatement result = null;
+     for (PsiStatement statement : method.getBody().getStatements()) {
+         String returnValue = statement.getText();
+         if (returnValue.contains(&quot;super(&quot; + viewName + &quot;)&quot;)) {
+             result = statement;
+             break;
+         }
+     }
+     return result;
+ }</code></pre>那么，既然能够识别和找到哪里插入代码了，我们的类型支持也就水到渠成了。<br>在类型支持的时候，我们使用了策略模式，这样根据类型不同，设置不同的策略就可以方便的进行处理。<br>目录结构如下<br><img loading="lazy"  src="/assets/images/8d69c88294ef.png" alt="undefined" title="undefined"><h3 id="h3-3-onclick-">3.对onclick注解的支持</h3>我们对onclick的处理分以下几步</li><li>寻找注解</li><li>分析注解信息并保持</li><li>根据保存信息生成代码并插入<h4 id="h4-1-">1.寻找注解</h4>使用正则表达式很容易找到，这里不再重复贴代码<h4 id="h4-2-">2.分析注解信息并保存</h4>onclick注解有几种情况</li><li>单id/多id的绑定</li><li>点击函数是否有参数的情况<br>我们要获取的信息有以下几个</li><li>绑定的id列表</li><li>点击函数的名称，是否有参数，参数的类型<br>针对第二点，我们使用一个对象将其封装起来<br>保存获取信息我们使用一个Map&lt;&gt;来进行<br>代码：<pre><code><a href="https://github.com/Override" title="&#64;Override" class="at-link">@Override</a>
+ public void process() {
+     String pattern = &quot;^<a href="https://github.com/OnClick" title="&#64;OnClick" class="at-link">@OnClick</a>\\(\\{*(R.id.*,|R.id.*|R2.id.*|R2.id.*,)+\\}*\\)$&quot;;
+     Pattern r = Pattern.compile(pattern);
+     for (int i = 0;i &lt; currentDoc.length;i++){
+         Matcher m = r.matcher(currentDoc[i].trim());
+         currentDoc[i] = currentDoc[i].trim();
+         if (m.find()) {
+             method = detectMethod(currentDoc[i+1]);
+             ids = detectID(currentDoc[i], method);
+             methodAndIDMap.put(method,ids);
+             deleteLineNumbers.add(i);
+         }
+     }
+ }</code></pre><h4 id="h4-3-">3.根据保存信息生成代码并插入</h4>这步我们需要根据保存的信息进行代码生成和插入，我们主要讨论生成，插入部分和findviewbyid代码大同小异<br>我们已经知道了注解的id和点击对应的方法，那么我们复原的结果就应该是<br>findViewById(R.id.xxx).setOnclickListener(new OnclickListener(….<br>我们需要注意的地方就是点击函数是否有参数，这会影响到我们生成的代码<br>看具体代码：<pre><code>protected StringBuilder getMethodInvokeString(ClickMehtod method) {
+     StringBuilder methodString = new StringBuilder();
+     if (method.isHaveArg()){
+         methodString.append(method.getName()+&quot;((&quot;+method.getArgType()+&quot;)&quot;+&quot;v);&quot;);
+     }else{
+         methodString.append(method.getName()+&quot;();&quot;);
+     }
+     return methodString;
+ }
+protected String getOnClickCode(StringBuilder methodString, String id) {
+     return &quot;findViewById(&quot;+id+&quot;).setOnClickListener(new View.OnClickListener() {\n&quot; +
+             &quot; <a href="https://github.com/Override" title="&#64;Override" class="at-link">@Override</a>\n&quot; +
+             &quot; public void onClick(View v){\n&quot;+
+             methodString.toString()+
+             &quot;}&quot;+
+             &quot;});&quot;;
+ }</code></pre>到了这里，我们的Onclick注解支持也完成了。<h2 id="h2-u603Bu7ED3">总结</h2>通过对这个小小的插件的开发和重构以及功能添加，虽然项目很小，但是工程和面向对象的思想的重要性已经体现了出来，在一个拥有良好项目结构的工程下增加新功能是非常简答而明快的，如果像最初版本那样把所有的代码写在一个文件中而没有进行逻辑拆分的话，新增功能基本等于重写项目，这肯定是痛苦的。</li></ol>
+<p>还有一点值得一提，在做项目的时候第一步永远是总体构思，第二部是具体拆分，写代码这件事的优先级并没有那么高，容易犯的一个问题就是一提到某个功能马上就开始写具体代码，这样的结果往往费力不讨好，有一个明确的功能拆分和行进步骤会极大的增强开发体验。</p>
+<p>至此，RemoveButterKnife系列文章就告一段落了，这几篇文章的目的不仅仅是记录开发RemoveButterKnife插件中的思路和遇到的问题，更重要的是总结了作者我开发软件项目的一个历程，而把这些写下来的过程，也是巩固这段历程的重要步骤。</p></article>
+</main>
+
+<footer>Generated from local Z-Blog backup for GitHub Pages.</footer>
+<script>
+  document.querySelectorAll("img").forEach((img) => {
+    const replaceMissingImage = () => {
+      const box = document.createElement("div");
+      box.className = "image-missing";
+      const src = img.currentSrc || img.src || img.getAttribute("src") || "";
+      box.innerHTML = `<strong>Image unavailable</strong><span>This image could not be loaded from the static backup.</span><br><a href="${src}" target="_blank" rel="noreferrer">Open original image URL</a>`;
+      img.replaceWith(box);
+    };
+    img.addEventListener("error", replaceMissingImage, { once: true });
+    if (img.complete && img.naturalWidth === 0) replaceMissingImage();
+  });
+</script>
+
+</body>
+</html>

@@ -1,0 +1,184 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="前排提示 本文中所描述工具只在ROOT过的设备上有效，如果不感兴趣的朋友可以点赞后退出了，也可以去github给我点个星星，源码地址在 这里 写在开始前 每次重启测试机都要连接usb才能开始远程adb调试，真麻烦，能不能弄一个软件点一下就能开始远程调试呢？ 如果对什么是adb远程调试不熟悉的朋友，可以搜索下adb tcpip 5555这条命令 为了解决每次重...">
+  <title>彻底摆脱数据线——远程ADB调试小工具开发过程记录 - u3coding</title>
+  <link rel="canonical" href="https://u3.github.io/posts/2022/10/697-彻底摆脱数据线-远程adb调试小工具开发过程记录/">
+  <style>
+    :root { --bg:#f6f7f8; --paper:#fff; --ink:#1f2937; --muted:#667085; --line:#d7dde3; --accent:#0f766e; --code:#0b1720; }
+    * { box-sizing:border-box; }
+    body { margin:0; background:var(--bg); color:var(--ink); font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Microsoft YaHei",sans-serif; line-height:1.76; }
+    header { border-bottom:1px solid var(--line); background:rgba(255,255,255,.9); backdrop-filter:blur(12px); position:sticky; top:0; z-index:10; }
+    .bar { max-width:1080px; margin:0 auto; padding:15px 24px; display:flex; align-items:center; justify-content:space-between; gap:16px; }
+    .brand { color:#111827; text-decoration:none; font-weight:760; }
+    nav { display:flex; gap:14px; flex-wrap:wrap; justify-content:flex-end; }
+    nav a { color:var(--muted); text-decoration:none; font-size:14px; }
+    main { max-width:920px; margin:0 auto; padding:46px 24px 72px; }
+    .eyebrow { margin:0 0 12px; color:var(--accent); font-size:14px; font-weight:750; }
+    h1.title { margin:0; font-size:clamp(34px,5.8vw,56px); line-height:1.14; letter-spacing:0; }
+    .meta { margin:18px 0 32px; color:var(--muted); font-size:15px; }
+    .hero { margin:0 0 30px; border:1px solid var(--line); border-radius:8px; overflow:hidden; background:#eef2f5; }
+    .hero img { display:block; width:100%; max-height:560px; object-fit:contain; }
+    article, .panel { background:var(--paper); border:1px solid var(--line); border-radius:8px; padding:clamp(22px,4vw,44px); box-shadow:0 18px 45px rgba(31,41,55,.06); }
+    article h1, article h2, article h3 { line-height:1.34; margin:1.9em 0 .75em; letter-spacing:0; }
+    article h1 { font-size:28px; } article h2 { font-size:24px; } article h3 { font-size:20px; }
+    article p { margin:0 0 1.08em; }
+    article img { display:block; max-width:100%; height:auto; margin:18px auto 8px; border:1px solid var(--line); border-radius:6px; background:#eef2f5; }
+    article figure { margin:24px 0; }
+    article figcaption { text-align:center; color:var(--muted); font-size:14px; margin-top:8px; }
+    article pre { margin:20px 0; overflow:auto; padding:16px; border-radius:8px; background:var(--code); color:#e6edf3; line-height:1.62; }
+    article code { font-family:"Cascadia Code",Consolas,"SFMono-Regular",monospace; font-size:.92em; }
+    article :not(pre) > code { color:#9a3412; background:#fff7ed; padding:.12em .34em; border-radius:4px; }
+    article blockquote { margin:20px 0; padding:10px 18px; border-left:4px solid var(--accent); background:#f5fbfa; color:#374151; }
+    .post-list { display:grid; gap:18px; }
+    .post-card { padding:0 0 18px; border-bottom:1px solid var(--line); }
+    .post-card:last-child { border-bottom:0; padding-bottom:0; }
+    .post-card h2 { margin:0 0 6px; font-size:22px; line-height:1.36; }
+    .post-card a { color:var(--ink); text-decoration:none; }
+    .post-card a:hover { color:var(--accent); }
+    .post-card p { margin:8px 0 0; color:#475569; }
+    .image-missing { margin:22px 0; padding:18px; border:1px dashed #cbd5e1; border-radius:8px; background:#f8fafc; color:#475569; }
+    .image-missing strong { display:block; color:#334155; margin-bottom:6px; }
+    .image-missing a { overflow-wrap:anywhere; font-size:13px; }
+
+    a { color:var(--accent); }
+    footer { max-width:920px; margin:0 auto; padding:0 24px 44px; color:var(--muted); font-size:14px; }
+    @media (max-width:640px) { .bar { padding:13px 16px; } main { padding:32px 16px 54px; } article,.panel { padding:20px 16px; } h1.title { font-size:31px; } }
+  </style>
+</head>
+<body>
+<header><div class="bar"><a class="brand" href="/">u3coding</a><nav><a href="/">首页</a><a href="/archive/">归档</a><a href="/feed.xml">RSS</a></nav></div></header>
+
+<main>
+  <p class="eyebrow">技术文章 · 文章 ID 697</p>
+  <h1 class="title">彻底摆脱数据线——远程ADB调试小工具开发过程记录</h1>
+  <div class="meta">发布于 2022-10-08 14:59 · 已迁移为静态页面</div>
+  <figure class="hero"><img src="/assets/images/f2b294edff22.png" alt="彻底摆脱数据线——远程ADB调试小工具开发过程记录"></figure>
+  <article><h2 id="h2-u524Du6392u63D0u793A">前排提示</h2><p>本文中所描述工具只在ROOT过的设备上有效，如果不感兴趣的朋友可以点赞后退出了，也可以去github给我点个星星，源码地址在<a href="https://github.com/u3shadow/RemoteADB">这里</a></p>
+<h2 id="h2-u5199u5728u5F00u59CBu524D">写在开始前</h2><p>每次重启测试机都要连接usb才能开始远程adb调试，真麻烦，能不能弄一个软件点一下就能开始远程调试呢？</p>
+<p>如果对什么是adb远程调试不熟悉的朋友，可以搜索下adb tcpip 5555这条命令</p>
+<p>为了解决每次重启都要连接一次电脑的问题，经过了大量的网络搜索，终于解决了这个问题。</p>
+<p>本文记录了从提出问题到解决问题的全过程。</p>
+<h2 id="h2-u63D0u95EEu73AFu8282">提问环节</h2><ul>
+<li><p>1.为什么要做这个工具？</p>
+<p>  adb提供的远程调试工具不香吗，为什么还要没事找事折腾半天来做这个工具</p>
+</li><li><p>2.怎么实现不连接Usb启动adb的远程连接模式？</p>
+<p>  通过往常的经验来看，各种实现远程调试的插件都需要连接一次usb，看起来不用usb好像不太现实，但是经过调研，确实是可以的</p>
+</li><li><p>3.找到方法了之后，执行哪些命令才能达到我们的目的？</p>
+<p>  看似简单的几行命令，到了Android手机上怎么就老跑不通呢</p>
+<p> ** 带着上面这几个问题，我们开始今天的探索吧**</p>
+<h2 id="h2-u4E3Au4EC0u4E48">为什么</h2><p>博主有一台很棒的测试机，它叫小6，小6有很多优点，速度快，体积小，操作简单。<br>既然小6如此优秀，为什么还会有这篇博客呢，其实小6有一个致命问题，<strong>电池不耐用</strong>，毕竟已经退役成测试机了嘛。</p>
+<p>每次博主要远程调试的时候，小6都需要重新连一次电脑，对于一个电脑只有两个usb口的博主来说，这个过程非常的痛苦，特别是小6的电池又不耐用，每天晚上都会自动关机睡一觉。</p>
+<p>所以博主我想，能不能把连电脑这一个步骤转移到手机上执行呢，看着命令也挺简单的，只有一行</p>
+<p>感觉我上我也行嘛，说做就做，马上来试试</p>
+<pre><code>adb tcpip 5555</code></pre><h2 id="h2-adb-tcpip-5555-">adb tcpip 5555 做了些什么</h2><p>这是一条神奇的命令，手机开启调试模式，连上电脑之后，运行它，我们就可以用ip连接手机，不用数据线调试程序了</p>
+</li></ul>
+<p>经过一番查找，我们发现，这条命令发送了几条命令给手机</p>
+<ul>
+<li>1.设置service.adb.tcp.port为5555</li><li>2.重启手机上的adb</li></ul>
+<p>搜到这里，博主激动了起来，看起来好像很简单啊，我在手机上也这么操作不就行了，马上去找找怎么在手机上执行命令行</p>
+<h2 id="h2--">在手机上运行它们！</h2><p>Android上有很多命令行工具，博主随便找了一个，叫做Termux，运行了上面两条命令</p>
+<figure><img loading="lazy"  src="/assets/images/f2b294edff22.png" alt=""></figure>
+<p> 报错了，not found 是什么鬼？经过一番搜索，原来是没有root权限</p>
+<p>** 那我们只有去root手机了**</p>
+<p>我们来看看root之后再运行怎么样</p>
+<figure><img loading="lazy"  src="/assets/images/53e5d514b262.png" alt=""></figure>
+<p>在获取root权限之后，报错消失了，太好了！</p>
+<p>我们继续运行接下来两个命令</p>
+<figure><img loading="lazy"  src="/assets/images/7251466a5e88.png" alt=""></figure>
+<p>运行成功了，我们现在就可以在电脑上用下面的命令来连接手机了</p>
+<pre><code>adb connect 手机的ip:5555 </code></pre><h2 id="h2-u5728u81EAu5DF1u7684u4EE3u7801u91CCu8FD0u884Cu547Du4EE4">在自己的代码里运行命令</h2><p>目前为止，一切都很顺利，我们不想用第三方的app，自己写一个程序，点一下，玩一年，不用数据线一整年</p>
+<p>怎么在代码里运行shell命令呢？</p>
+<p>经过又一番搜索，博主找到了几种方法，最终选定了下面这种，su可以替换成其他命令</p>
+<pre><code> Runtime.getRuntime().exec(&quot;su&quot;)</code></pre><p>让我们行动起来，运行三行命令吧<br><img loading="lazy"  src="/assets/images/e0aa4bf25f4a.png" alt=""></p>
+<p>好像没有作用，尴尬</p>
+<h2 id="h2-u5BF9u6BD4u4E09u65B9u5E94u7528u548Cu81EAu5DF1u7684u547Du4EE4">对比三方应用和自己的命令</h2><p>通过对比，我们发现第三方的客户端的用户好像不太一样啊，经过搜索，我们发现是它调用了一下/system/bin/sh</p>
+<figure><img loading="lazy"  src="/assets/images/8ba7f3cc494c.png" alt=""></figure>
+<p>我们也得给自己的代码加上才行</p>
+<p>我们看看改完之后的命令</p>
+<figure><img loading="lazy"  src="/assets/images/876d007418a3.png" alt=""></figure>
+<p>运行检测一下，成功啦！</p>
+<h2 id="h2-u4F18u5316u4E00u4E0Bu4F7Fu7528u4F53u9A8C">优化一下使用体验</h2><p>现在我们实现了基本的功能，但是不太友好，对于没有root的用户我们要提醒他，你不能用这个玩意，对于已经root的用户，操作成功了我们要提示他现在的ip是什么，用什么命令连接</p>
+<p>这个很简单，弄完就像下面这样，其中的ip我们要去获取手机现在的ip地址</p>
+<p><img loading="lazy"  src="/assets/images/36e2c297ad4f.png" alt=""><img loading="lazy"  src="/assets/images/3c4d77151a5c.png" alt=""></p>
+<h2 id="h2-u653Eu51FAu4EE3u7801">放出代码</h2><p>前面比比了那么多，代码拿出来看看啊，别急，下面就是完整的代码</p>
+<pre><code>class MainActivity : AppCompatActivity() {
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+            val wm = applicationContext.getSystemService(WIFI_SERVICE) as WifiManager
+            val ip: String = Formatter.formatIpAddress(wm.connectionInfo.ipAddress)
+            AlertDialog.Builder(this).setMessage(&quot;该程序仅工作在拥有root权限设备上，如果没有root，请连接usb并使用下列命令进行远程调试\nadb tcpip 5555\nadb connect $ip:5555&quot;).setPositiveButton(
+                &quot;确认&quot;
+            ) { _, _ -&gt;
+                val commands = arrayListOf(
+                    &quot;/system/bin/sh&quot;,
+                    &quot;setprop service.adb.tcp.port 5555&quot;,
+                    &quot;stop adbd&quot;,
+                    &quot;start adbd&quot;
+                )
+                try {
+                    RunAsRoot(commands)
+                } catch (e: IOException) {
+                    e.printStackTrace()
+                }
+            }.setCancelable(false).show()
+
+    }
+
+    private fun RunAsRoot(cmds: ArrayList&lt;String&gt;) {
+        val p = Runtime.getRuntime().exec(&quot;su&quot;)
+        val os = DataOutputStream(p.outputStream)
+        for (tmpCmd in cmds) {
+            os.writeBytes(
+                &quot;&quot;&quot;
+                $tmpCmd
+
+                &quot;&quot;&quot;.trimIndent()
+            )
+        }
+        os.writeBytes(&quot;exit\n&quot;)
+        os.flush()
+        val wm = applicationContext.getSystemService(WIFI_SERVICE) as WifiManager
+        val ip: String = Formatter.formatIpAddress(wm.connectionInfo.ipAddress)
+        AlertDialog.Builder(this).setMessage(&quot;设置完成，请在同一局域网下使用以下命令连接设备\nadb connect $ip:5555&quot;).setPositiveButton(
+            &quot;确认&quot;
+        ) { _, _ -&gt; finish() }.setCancelable(false).show()
+    }
+
+}</code></pre><p><strong>相信看完上面的介绍，代码应该不难看懂,如果不想自己写，可以去<a href="https://github.com/u3shadow/RemoteADB">这里</a>找到源码，直接复制粘贴一把梭</strong></p>
+<h2 id="h2-u95EEu9898u56DEu987E">问题回顾</h2><p>让我们来看看最开始的几个问题，总结一下</p>
+<ul>
+<li><p>1.为什么要做这个工具？</p>
+<p>  我们的测试机可以重启后不连接usb启动远程调试模式啦！</p>
+</li><li><p>2.怎么实现不连接Usb启动adb的远程连接模式？</p>
+<p>  在代码里运行命令就可以了，用Runtime.getRuntime().exec(你的命令)</p>
+</li><li><p>3.找到方法了之后，执行哪些命令才能达到我们的目的？</p>
+<p>  下面这些</p>
+<pre><code>     su
+     /system/bin/sh
+     setprop service.adb.tcp.port 5555
+     stop adbd
+     start adbd</code></pre></li></ul>
+<h2 id="h2-u5199u5728u6700u540E">写在最后</h2><p>终极问题，能不能不用root实现这套操作？不能，即使设置端口成功了，重启手机上adb的操作也需要su权限，所以不root是不行的，遗憾</p>
+<p>那么大家下次再见</p></article>
+</main>
+
+<footer>Generated from local Z-Blog backup for GitHub Pages.</footer>
+<script>
+  document.querySelectorAll("img").forEach((img) => {
+    const replaceMissingImage = () => {
+      const box = document.createElement("div");
+      box.className = "image-missing";
+      const src = img.currentSrc || img.src || img.getAttribute("src") || "";
+      box.innerHTML = `<strong>Image unavailable</strong><span>This image could not be loaded from the static backup.</span><br><a href="${src}" target="_blank" rel="noreferrer">Open original image URL</a>`;
+      img.replaceWith(box);
+    };
+    img.addEventListener("error", replaceMissingImage, { once: true });
+    if (img.complete && img.naturalWidth === 0) replaceMissingImage();
+  });
+</script>
+
+</body>
+</html>

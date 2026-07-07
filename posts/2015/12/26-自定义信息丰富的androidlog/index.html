@@ -1,0 +1,195 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="【问题背景】 最近在项目上需要用LOG来查看和定位一些信息，但是系统原生的LOG实在太乱，信息也不太多，比如调用行数，所在方法，所在类名，线程名称都没有。 【初步想法】 本着开源的精神，首先去GitHub上面搜寻了一番，果然发现了不少优秀的项目，经过对比，选定了，Logger和Timber 【遇到的问题】 毫无疑问，Logger和Timber都是非常优秀的项...">
+  <title>自定义信息丰富的Android Log - u3coding</title>
+  <link rel="canonical" href="https://u3.github.io/posts/2015/12/26-自定义信息丰富的androidlog/">
+  <style>
+    :root { --bg:#f6f7f8; --paper:#fff; --ink:#1f2937; --muted:#667085; --line:#d7dde3; --accent:#0f766e; --code:#0b1720; }
+    * { box-sizing:border-box; }
+    body { margin:0; background:var(--bg); color:var(--ink); font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Microsoft YaHei",sans-serif; line-height:1.76; }
+    header { border-bottom:1px solid var(--line); background:rgba(255,255,255,.9); backdrop-filter:blur(12px); position:sticky; top:0; z-index:10; }
+    .bar { max-width:1080px; margin:0 auto; padding:15px 24px; display:flex; align-items:center; justify-content:space-between; gap:16px; }
+    .brand { color:#111827; text-decoration:none; font-weight:760; }
+    nav { display:flex; gap:14px; flex-wrap:wrap; justify-content:flex-end; }
+    nav a { color:var(--muted); text-decoration:none; font-size:14px; }
+    main { max-width:920px; margin:0 auto; padding:46px 24px 72px; }
+    .eyebrow { margin:0 0 12px; color:var(--accent); font-size:14px; font-weight:750; }
+    h1.title { margin:0; font-size:clamp(34px,5.8vw,56px); line-height:1.14; letter-spacing:0; }
+    .meta { margin:18px 0 32px; color:var(--muted); font-size:15px; }
+    .hero { margin:0 0 30px; border:1px solid var(--line); border-radius:8px; overflow:hidden; background:#eef2f5; }
+    .hero img { display:block; width:100%; max-height:560px; object-fit:contain; }
+    article, .panel { background:var(--paper); border:1px solid var(--line); border-radius:8px; padding:clamp(22px,4vw,44px); box-shadow:0 18px 45px rgba(31,41,55,.06); }
+    article h1, article h2, article h3 { line-height:1.34; margin:1.9em 0 .75em; letter-spacing:0; }
+    article h1 { font-size:28px; } article h2 { font-size:24px; } article h3 { font-size:20px; }
+    article p { margin:0 0 1.08em; }
+    article img { display:block; max-width:100%; height:auto; margin:18px auto 8px; border:1px solid var(--line); border-radius:6px; background:#eef2f5; }
+    article figure { margin:24px 0; }
+    article figcaption { text-align:center; color:var(--muted); font-size:14px; margin-top:8px; }
+    article pre { margin:20px 0; overflow:auto; padding:16px; border-radius:8px; background:var(--code); color:#e6edf3; line-height:1.62; }
+    article code { font-family:"Cascadia Code",Consolas,"SFMono-Regular",monospace; font-size:.92em; }
+    article :not(pre) > code { color:#9a3412; background:#fff7ed; padding:.12em .34em; border-radius:4px; }
+    article blockquote { margin:20px 0; padding:10px 18px; border-left:4px solid var(--accent); background:#f5fbfa; color:#374151; }
+    .post-list { display:grid; gap:18px; }
+    .post-card { padding:0 0 18px; border-bottom:1px solid var(--line); }
+    .post-card:last-child { border-bottom:0; padding-bottom:0; }
+    .post-card h2 { margin:0 0 6px; font-size:22px; line-height:1.36; }
+    .post-card a { color:var(--ink); text-decoration:none; }
+    .post-card a:hover { color:var(--accent); }
+    .post-card p { margin:8px 0 0; color:#475569; }
+    .image-missing { margin:22px 0; padding:18px; border:1px dashed #cbd5e1; border-radius:8px; background:#f8fafc; color:#475569; }
+    .image-missing strong { display:block; color:#334155; margin-bottom:6px; }
+    .image-missing a { overflow-wrap:anywhere; font-size:13px; }
+
+    a { color:var(--accent); }
+    footer { max-width:920px; margin:0 auto; padding:0 24px 44px; color:var(--muted); font-size:14px; }
+    @media (max-width:640px) { .bar { padding:13px 16px; } main { padding:32px 16px 54px; } article,.panel { padding:20px 16px; } h1.title { font-size:31px; } }
+  </style>
+</head>
+<body>
+<header><div class="bar"><a class="brand" href="/">u3coding</a><nav><a href="/">首页</a><a href="/archive/">归档</a><a href="/feed.xml">RSS</a></nav></div></header>
+
+<main>
+  <p class="eyebrow">未分类 · 文章 ID 26</p>
+  <h1 class="title">自定义信息丰富的Android Log</h1>
+  <div class="meta">发布于 2015-12-02 07:01 · 已迁移为静态页面</div>
+  <figure class="hero"><img src="/assets/images/00df1043d727.jpg" alt="自定义信息丰富的Android Log"></figure>
+  <article>【问题背景】</p>
+
+&nbsp;
+
+最近在项目上需要用LOG来查看和定位一些信息，但是系统原生的LOG实在太乱，信息也不太多，比如调用行数，所在方法，所在类名，线程名称都没有。
+
+&nbsp;
+
+【初步想法】
+
+&nbsp;
+
+本着开源的精神，首先去GitHub上面搜寻了一番，果然发现了不少优秀的项目，经过对比，选定了，Logger和Timber
+
+&nbsp;
+
+【遇到的问题】
+
+&nbsp;
+
+毫无疑问，Logger和Timber都是非常优秀的项目，但是我们在使用过程中还是遇到了一些问题。
+
+1.Logger在进行日志搜索的时候只会显示搜索行，其他信息丢失了
+
+&nbsp;
+
+举个例子，下面是Logger的正常输出，但是当我们搜索关键字test3的时候，就只会显示一行||test3,其他可爱的信息就丢失掉了
+
+<div class="image-missing"><strong>Image unavailable</strong><span>这张图片来自已经无法下载的外部链接，静态备份中没有原图。</span><br><a href="https://github.com/orhanobut/logger/raw/master/images/description.png" target="_blank" rel="noreferrer">查看原始链接</a></div>
+
+2.Timber的其他信息过少。
+
+【解决】
+
+&nbsp;
+
+既然都不符合我们的要求，那么我们就自己写吧，首先观察Logger是如何做到打印方法名和行数等信息的
+
+&nbsp;
+
+通过查看源码，我们发现看似复杂的流程其实一点都不复杂，JAVA的设计者们早就为我们准备好了相关的类和信息。
+
+&nbsp;
+
+最关键的代码就是这一行
+
+<div class="cnblogs_code">
+<pre>StackTraceElement[] trace = Thread.currentThread().getStackTrace();</pre>
+</div>
+
+那么，这个getStackTrace里面发生了什么？返回的StackTraceElement里面又包含了什么信息呢？
+
+&nbsp;
+
+通过查找官方的文档，我们找到了这么一句，Provides programmatic access to the stack trace information printed by printStackTrace();<a href="http://docs.oracle.com/javase/7/docs/api/java/lang/Throwable.html#printStackTrace()"><code><br /></code></a>
+
+翻译过来就是，提供程序性的对printStackTrace()所打印信息的访问。
+
+&nbsp;
+
+printStackTrace()看起来是不是有点眼熟，对了，就是在我们处理异常的时候在catch里面的最常用处理方式，e.printStackTrace();
+
+&nbsp;
+
+这个函数会打印出异常的详细信息，例如线程，方法名，行数等等，这些信息正是我们需要的！
+
+&nbsp;
+
+那么返回的StackTraceElement数组里面又是装的什么东西呢？
+
+官方文档也给了我们答案
+
+An element in a stack trace, as returned by Throwable.getStackTrace(). Each element represents a single stack frame. All stack frames except for the one at the top of the stack represent a method invocation. The frame at the top of the stack represents the execution point at which the stack trace was generated. Typically, this is the point at which the throwable corresponding to the stack trace was created.
+
+&nbsp;
+
+简单的说里面每个元素都代表了一个栈帧。
+
+&nbsp;
+
+有了以上的信息，我们就可以开始动手了。
+
+&nbsp;
+
+下面是代码
+
+<pre class="theme:github lang:java decode:true " >private static String getInfo()
+    {
+            Throwable stack = new Throwable().fillInStackTrace();//获得栈
+            StackTraceElement[] trace = stack.getStackTrace();
+            return  " |***ThreadName:"+Thread.currentThread().getName()+"  |***MethodName:"+ trace[2].getMethodName() + "  |***LineAt:" + trace[2].getLineNumber();//获得想要的信息
+    }
+    private  static String getTag(){
+            Throwable stack = new Throwable().fillInStackTrace();
+            StackTraceElement[] trace = stack.getStackTrace();
+            return  trace[2].getClassName();
+        }
+    public static  void v(String msg)
+    {
+        msg = "|***Message:" + msg;
+        msg += getInfo();
+        Timber.tag(getTag());
+        Timber.v(msg);
+    }</pre>
+
+有了代码，让我们看看最终的效果
+
+<img loading="lazy"  src="/assets/images/00df1043d727.jpg" alt="" />
+
+可以看到，我们所需要的信息都被打印出来了，而且在同一行，虽然简答，但是却非常的实用，这样在我们搜索的时候，就可以看到更多的信息啦。
+
+&nbsp;
+
+【总结】
+
+JAVA其实所包含的内容非常多，我平时对JAVA的了解还稍显浅薄，很多看似神奇的开源项目就其本身的实现来说是比较简单的，不能光会用，而且要根据自己的需求来进行合理的改造，虚心学习，勤于总结。
+
+&nbsp;</article>
+</main>
+
+<footer>Generated from local Z-Blog backup for GitHub Pages.</footer>
+<script>
+  document.querySelectorAll("img").forEach((img) => {
+    const replaceMissingImage = () => {
+      const box = document.createElement("div");
+      box.className = "image-missing";
+      const src = img.currentSrc || img.src || img.getAttribute("src") || "";
+      box.innerHTML = `<strong>Image unavailable</strong><span>This image could not be loaded from the static backup.</span><br><a href="${src}" target="_blank" rel="noreferrer">Open original image URL</a>`;
+      img.replaceWith(box);
+    };
+    img.addEventListener("error", replaceMissingImage, { once: true });
+    if (img.complete && img.naturalWidth === 0) replaceMissingImage();
+  });
+</script>
+
+</body>
+</html>

@@ -1,0 +1,305 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0"><channel>
+<title>u3coding</title><link>https://u3.github.io/</link><description>u3coding static archive</description>
+<item>
+  <title>从手动配置到自然语言生成规则：一个 Android AI 工具的重构实录</title>
+  <link>https://u3.github.io/posts/2026/04/711-从手动配置到自然语言生成规则-一个-android-ai-工具的重构实录/</link>
+  <guid>https://u3.github.io/posts/2026/04/711-从手动配置到自然语言生成规则-一个-android-ai-工具的重构实录/</guid>
+  <pubDate>Wed, 22 Apr 2026 13:43:50 +0800</pubDate>
+  <description>先说结论，使用AI 驱动的 Wi-Fi 场景规则生成与执行系统，大幅简化了工具类App的配置使用门槛 原版配置 AI化后的配置 值得重点讲的 5 个问题 规则输入方式怎么从表单升级成自然语言 模型怎么从“会回答”变成“会产出结构化规则” 普通聊天和规则生成为什么必须分流 规则运行为什么要独立成 RuleEngine 规则为什么必须持久化，而不能只存在内存里...</description>
+</item><item>
+  <title>学习版游戏自制云存档同步的方法探索以及总结</title>
+  <link>https://u3.github.io/posts/2025/08/707-学习版游戏自制云存档同步的方法探索以及总结/</link>
+  <guid>https://u3.github.io/posts/2025/08/707-学习版游戏自制云存档同步的方法探索以及总结/</guid>
+  <pubDate>Tue, 19 Aug 2025 16:38:40 +0800</pubDate>
+  <description>作为一名资深足球游戏玩家，最近重燃对《实况足球2021》的热情，搞了个带大补的版本，确实爽，却在多设备存档同步问题上掉进了坑。通过两天&quot;痛并快乐着&quot;的折腾，最终找到完美解决方案，现整理给喝油们参考。 ■ 硬件环境 ROG Ally掌机（外出便携）+ MSI gp76笔记本（家用主力）构成了我的双屏足球战场。这两个Win11平台都装载了打了大补的PES2021...</description>
+</item><item>
+  <title>鸿蒙next中web组件和navigation的一个bug以及处理方案</title>
+  <link>https://u3.github.io/posts/2024/08/706-鸿蒙next中web组件和navigation的一个bug以及处理方案/</link>
+  <guid>https://u3.github.io/posts/2024/08/706-鸿蒙next中web组件和navigation的一个bug以及处理方案/</guid>
+  <pubDate>Fri, 30 Aug 2024 16:10:22 +0800</pubDate>
+  <description>问题现象 在这种情况下，把controller从上层传递到最底层的web页面，用它来打开网页 刚开始一切正常，但是需要执行一些js的时候，就会出现controller未绑定的提示 特别是在连续打开好几个页面之后，从最顶部页面返回，在中间的页面就会出现该问题 例如a-b-c-d,此时从d返回c,再在c页面使用controller执行js方法，就会出现contr...</description>
+</item><item>
+  <title>ChatGPT是怎么帮我写ios代码的</title>
+  <link>https://u3.github.io/posts/2024/02/705-chatgpt是怎么帮我写ios代码的/</link>
+  <guid>https://u3.github.io/posts/2024/02/705-chatgpt是怎么帮我写ios代码的/</guid>
+  <pubDate>Fri, 02 Feb 2024 16:28:14 +0800</pubDate>
+  <description>背景 博主只会安卓开发，最近使用chatGPT3.5把一个安卓项目转换成了ios项目并成功运行实现功能 应用的主要功能 这个安卓应用主要是拿来看比赛回放的，有时候太迟的足球比赛不想熬夜，但是又不想被剧透看全场回放，就写了个这个应用，这次讨论的重点并不是应用本身，如果大家有兴趣可以评论区留言，我把应用发出来 应用的主要页面有下面几个，1.登录爱奇艺账号页面，2...</description>
+</item><item>
+  <title>Android项目cicd流程总结（使用jenkins）</title>
+  <link>https://u3.github.io/posts/2023/04/702-android项目cicd流程总结-使用jenkins/</link>
+  <guid>https://u3.github.io/posts/2023/04/702-android项目cicd流程总结-使用jenkins/</guid>
+  <pubDate>Fri, 21 Apr 2023 16:59:28 +0800</pubDate>
+  <description>没有cicd之前我们都是怎么做的 相信做安卓开发的都做过这些事 手动运行单元测试，根据报错改代码 检查代码风格，根据报错改代码 构建apk包，发给测试，有时候还得打很多个 接收测试的反馈，改bug， 重复之前的步骤 把apk放到ftp或者其他地方去发布 是不是想到这一套流程，头都大了，虽然每一步都不难，但是连起来都手工操作就很繁琐 像这些手动流程固定的事，我...</description>
+</item><item>
+  <title>Android使用Logger开发App本地日志记录功能</title>
+  <link>https://u3.github.io/posts/2022/10/701-android使用logger开发app本地日志记录功能/</link>
+  <guid>https://u3.github.io/posts/2022/10/701-android使用logger开发app本地日志记录功能/</guid>
+  <pubDate>Wed, 12 Oct 2022 19:51:34 +0800</pubDate>
+  <description>前言 记录日志是一个App常用的功能，很多软件都会有，它能帮助开发者快速确定问题位置，可以说是App维护的基础。 项目现状 之前我们的项目没有记录日志到本地的功能，每次排查问题都非常的费劲，需要本地能复现才能解决问题，但是有些问题并不是我们本地能复现的，比如客户环境在内网，无法访问，或者只有特定手机出现问题，这时候我们就束手无策了。 开发目的 为了更好的手机...</description>
+</item><item>
+  <title>一张启动图引发的思考--探索.9图原理和应用场景</title>
+  <link>https://u3.github.io/posts/2022/10/700-一张启动图引发的思考-探索-9图原理和应用场景/</link>
+  <guid>https://u3.github.io/posts/2022/10/700-一张启动图引发的思考-探索-9图原理和应用场景/</guid>
+  <pubDate>Sat, 08 Oct 2022 15:02:19 +0800</pubDate>
+  <description>highlight: vs theme: juejin 引子 小u啊，我们应用启动的时候有一段白屏，不雅观，你给整个启动图上去，给，这里是资源图片 换好了 嗯，不错不错，咦，这个小米fold怎么显示了两个logo？ 啊？这。。。我来看看 是这样的，activity启动图和启动背景图标一起显示了，但是启动图片又不适配fold这种狭长的屏幕，而且下半部分由于没有...</description>
+</item><item>
+  <title>跟我一起玩Paging3</title>
+  <link>https://u3.github.io/posts/2022/10/699-跟我一起玩paging3/</link>
+  <guid>https://u3.github.io/posts/2022/10/699-跟我一起玩paging3/</guid>
+  <pubDate>Sat, 08 Oct 2022 15:02:06 +0800</pubDate>
+  <description>什么是Paging3 Paging 库可帮助您加载和显示来自本地存储或网络中更大的数据集中的数据页面。此方法可让您的应用更高效地利用网络带宽和系统资源。Paging 库的组件旨在契合推荐的 Android 应用架构，流畅集成其他 Jetpack 组件，并提供一流的 Kotlin 支持。 以上来自安卓官网，简单点来说，就是帮你处理列表分页加载工作的一个官方框架...</description>
+</item><item>
+  <title>Android中使用ASPECTJ进行用户操作路径跟踪与日志搜集</title>
+  <link>https://u3.github.io/posts/2022/10/698-android中使用aspectj进行用户操作路径跟踪与日志搜集/</link>
+  <guid>https://u3.github.io/posts/2022/10/698-android中使用aspectj进行用户操作路径跟踪与日志搜集/</guid>
+  <pubDate>Sat, 08 Oct 2022 15:01:15 +0800</pubDate>
+  <description>编写初衷 在Android App开发中，出现了bug和崩溃测试们就会提着手机上门，然后开发一顿操作，bug消失了，测试们又只有进行大量的操作来复现。 这样的情况想必大家都遇到过，更极端的是线上出现了bug，虽然可以设置崩溃日志上传来收集崩溃日志，但是用户是怎么操作的，我们也只能靠猜 为什么不能有一个工具，记录下最近打开了什么界面，点击了哪些按钮，并且记录到...</description>
+</item><item>
+  <title>彻底摆脱数据线——远程ADB调试小工具开发过程记录</title>
+  <link>https://u3.github.io/posts/2022/10/697-彻底摆脱数据线-远程adb调试小工具开发过程记录/</link>
+  <guid>https://u3.github.io/posts/2022/10/697-彻底摆脱数据线-远程adb调试小工具开发过程记录/</guid>
+  <pubDate>Sat, 08 Oct 2022 14:59:59 +0800</pubDate>
+  <description>前排提示 本文中所描述工具只在ROOT过的设备上有效，如果不感兴趣的朋友可以点赞后退出了，也可以去github给我点个星星，源码地址在 这里 写在开始前 每次重启测试机都要连接usb才能开始远程adb调试，真麻烦，能不能弄一个软件点一下就能开始远程调试呢？ 如果对什么是adb远程调试不熟悉的朋友，可以搜索下adb tcpip 5555这条命令 为了解决每次重...</description>
+</item><item>
+  <title>自己实现一个Android网络图片加载器</title>
+  <link>https://u3.github.io/posts/2022/10/696-自己实现一个android网络图片加载器/</link>
+  <guid>https://u3.github.io/posts/2022/10/696-自己实现一个android网络图片加载器/</guid>
+  <pubDate>Sat, 08 Oct 2022 14:59:31 +0800</pubDate>
+  <description>在Android开发中，我们经常会用到各种各样的图片加载框架来帮助我们加载网络图片，那有没有想过自己实现一个呢 本文记录了实现一个图片框架的整个流程，以及对代码的优化整理过程，文章比较长，如果只对其中的一部分感兴趣直接跳转到相应部分即可 提问环节 把大象装进冰箱分几步?是不是感觉在这初秋时节更加凉爽了呢 好吧，下面开始提问 大多数图片都是网络获取的，如何加载...</description>
+</item><item>
+  <title>使用Databinding为Recyclerview使用同一个ViewHolder加载不同Item</title>
+  <link>https://u3.github.io/posts/2022/10/695-使用databinding为recyclerview使用同一个viewholder加载不同item/</link>
+  <guid>https://u3.github.io/posts/2022/10/695-使用databinding为recyclerview使用同一个viewholder加载不同item/</guid>
+  <pubDate>Sat, 08 Oct 2022 14:59:08 +0800</pubDate>
+  <description>提示：在阅读本篇文章前，你最好对android databinding有一定了解，本文使用的代码均为kotlin，但是不用担心，都很简单 最近在写项目的时候使用了databinding技术，突发奇想，databinding是不是也能应用于recyclerview中，让加载多个不同的item更简单呢。在网上搜索过后读到了</description>
+</item><item>
+  <title>Android测试体系-在MVVM架构中如何测试Model层与ViewModel层</title>
+  <link>https://u3.github.io/posts/2022/10/694-android测试体系-在mvvm架构中如何测试model层与viewmodel层/</link>
+  <guid>https://u3.github.io/posts/2022/10/694-android测试体系-在mvvm架构中如何测试model层与viewmodel层/</guid>
+  <pubDate>Sat, 08 Oct 2022 14:58:32 +0800</pubDate>
+  <description>背景 此文章是对于google code lab中《Introduction to Test Double and Dependence injection》 与 《Testing Basics》的总结，本篇主要讲述如何在mvvm架构的android项目中对Model层以及ViewModel层进行测试 Model层 为什么要测它 model层作为数据获取层，...</description>
+</item><item>
+  <title>项目的升级-给RemoveButterKnife插件增加新功能</title>
+  <link>https://u3.github.io/posts/2022/10/693-项目的升级-给removebutterknife插件增加新功能/</link>
+  <guid>https://u3.github.io/posts/2022/10/693-项目的升级-给removebutterknife插件增加新功能/</guid>
+  <pubDate>Sat, 08 Oct 2022 14:57:43 +0800</pubDate>
+  <description>前言 经过项目的初步编写和进一步改造，RemoveButterKnife插件终于也有模有样了，但是，功能上仅仅支持Activity/Fragment的BindView注解。 关于编写和优化的过程可以看下面两篇文章 项目构造RemoveButterKnife 项目改进-重构RemoveButterKnife 当然，这里也附上这个项目的 github地址 为了让...</description>
+</item><item>
+  <title>项目的改造——RemoveButterKnife插件代码的重构</title>
+  <link>https://u3.github.io/posts/2022/10/692-项目的改造-removebutterknife插件代码的重构/</link>
+  <guid>https://u3.github.io/posts/2022/10/692-项目的改造-removebutterknife插件代码的重构/</guid>
+  <pubDate>Sat, 08 Oct 2022 14:57:11 +0800</pubDate>
+  <description>前言 这篇文章记述了我的插件RemoveButterKnife的代码改进过程以及思路，关于插件，各位可以看 RemoveButterKnife代码库 ，关于文章，可以看 构思到实现RemoveButterKnife 原因 近期想给原来的插件RemoveButterKnife加入一些新的功能，发现以前的代码没有使用任何的设计模式，全部功能都写在一起，对于新功能...</description>
+</item><item>
+  <title>AndroidStudio插件开发——RemoveButterKnife从构思到实现</title>
+  <link>https://u3.github.io/posts/2022/10/691-androidstudio插件开发-removebutterknife从构思到实现/</link>
+  <guid>https://u3.github.io/posts/2022/10/691-androidstudio插件开发-removebutterknife从构思到实现/</guid>
+  <pubDate>Sat, 08 Oct 2022 14:56:09 +0800</pubDate>
+  <description>ReomveButterKnife插件 这是一个用于移除代码中对ButterKnife使用的AS插件，接下来我们将从头开始讲讲AS插件开发和这个插件的开发过程 地址是&lt;a href=&quot;https://github.com/u3shadow/RemoveButterKnife&quot; target=&quot;_blank&quot;&gt;RemoveButterKnife&lt;/a&gt; &lt;a...</description>
+</item><item>
+  <title>开源数据库Postgresql安装/卸载总结</title>
+  <link>https://u3.github.io/posts/2017/08/683-e5bc80e6ba90e695b0e68daee5ba93postgresqle5ae89e8a385e58db8e8bdbde680bbe7bb93/</link>
+  <guid>https://u3.github.io/posts/2017/08/683-e5bc80e6ba90e695b0e68daee5ba93postgresqle5ae89e8a385e58db8e8bdbde680bbe7bb93/</guid>
+  <pubDate>Sun, 27 Aug 2017 18:24:12 +0800</pubDate>
+  <description>What Postgresql 一个开源数据库，类似mysql,由于mysql被收购了，这个数据库正被越来越多的使用 怎么安装？ 安装非常简单，但是安装过后的初始化还是有点麻烦，具体可以看 这篇文章 为什么要卸载？ 安装好之后，如果你很倒霉的话，会遇到postgresql服务怎么都启动不了，输入psql指令显示没有服务的情况。 这时候，我们首先会使用apt-...</description>
+</item><item>
+  <title>Python中关于模块之间互相调用的总结</title>
+  <link>https://u3.github.io/posts/2017/08/680-python中关于模块之间互相调用的总结/</link>
+  <guid>https://u3.github.io/posts/2017/08/680-python中关于模块之间互相调用的总结/</guid>
+  <pubDate>Sun, 27 Aug 2017 18:11:56 +0800</pubDate>
+  <description>问题 在python里，假设我们有两个模块，A，B，在模块a中有文件a1,模块b中有文件b1. 结构如下 --a ---a1 --b ---b1 那么，在b1文件中调用a1里的方法，就会出现import error，告诉我们找不到这个模块 解决方法 对于这类问题解决方法很简单，由于他们的父级目录都是相同的，我们只需要在模块a中加入一个空的文件 init .p...</description>
+</item><item>
+  <title>Kotlin学习小节</title>
+  <link>https://u3.github.io/posts/2017/06/674-kotlin学习小节/</link>
+  <guid>https://u3.github.io/posts/2017/06/674-kotlin学习小节/</guid>
+  <pubDate>Thu, 08 Jun 2017 15:48:33 +0800</pubDate>
+  <description>Kotlin作为</description>
+</item><item>
+  <title>Android自定义View的实现方式总结</title>
+  <link>https://u3.github.io/posts/2017/04/664-android自定义view的实现方式总结/</link>
+  <guid>https://u3.github.io/posts/2017/04/664-android自定义view的实现方式总结/</guid>
+  <pubDate>Tue, 25 Apr 2017 16:48:51 +0800</pubDate>
+  <description>Android自定义view是什么 在我们的日常开发中，很多时候系统提供的view是无法满足我们的需求的，例如，我们想给一个edittext加上清除按钮，等等。 这时候我们就需要对系统的view进行扩展或者组合，这就是所谓的自定义view。 Android自定义view的种类 自定义view大概可以分为四个大类，主要是通过实现方式来区分 1.自绘控件，继承v...</description>
+</item><item>
+  <title>Android性能优化——电池使用优化</title>
+  <link>https://u3.github.io/posts/2017/04/655-android性能优化-电池使用优化/</link>
+  <guid>https://u3.github.io/posts/2017/04/655-android性能优化-电池使用优化/</guid>
+  <pubDate>Tue, 25 Apr 2017 10:31:51 +0800</pubDate>
+  <description>为什么要做电量优化 Android应用开发中，需要考虑的情况是，如何优化电量使用，让我们的app不会因为电量消耗过高被用户排斥，或者被其他安全应用报告。 什么样的行为会导致电量损耗过高 对于移动设备而言，有以下几种行为会导致设备电量的消耗增加 1.屏幕保持开启状态 2.蜂窝网络的频繁启动与关闭 如何观测我们的应用电量使用情况 可以先使用以下adb命令，生成我...</description>
+</item><item>
+  <title>Android性能优化——内存优化</title>
+  <link>https://u3.github.io/posts/2017/03/650-android性能优化-内存优化/</link>
+  <guid>https://u3.github.io/posts/2017/03/650-android性能优化-内存优化/</guid>
+  <pubDate>Fri, 31 Mar 2017 11:28:11 +0800</pubDate>
+  <description>Android内存分配机制的问题 Java提供了完善的垃圾回收机制，让程序员不用关心回收内存问题，但是在实际使用中，还是会出现内存回收不完全的问题。这时候android系统看到了内存使用居高不下，就会不断的增加分配内存，最后导致整个应用卡顿或者死掉。 产生这类问题的原因 由于java拥有gc机制，按道理来说，这样的内存泄露是不会发生的，但是为什么还是会产生这...</description>
+</item><item>
+  <title>Android性能优化——图像绘制与布局</title>
+  <link>https://u3.github.io/posts/2017/03/646-android性能优化-图像绘制与布局/</link>
+  <guid>https://u3.github.io/posts/2017/03/646-android性能优化-图像绘制与布局/</guid>
+  <pubDate>Fri, 24 Mar 2017 15:31:26 +0800</pubDate>
+  <description>Android的图像绘制 在Android中，呈现界面的重要方式就是图像，而绘制图像的工作更是非常重要，这个重要的工作是谁在处理呢？那就是我们的GPU。但是GPU的资源是有限的，当我们的绘制任务过多的时候，就会使系统的图像绘制变慢，用户的体验就会是应用很卡，或者感觉到丢帧。 图像绘制过度的原因 图像绘制过度的原因主要有几种 1.绘制的东西太多了 2.反复绘制...</description>
+</item><item>
+  <title>[W10]大数据学习</title>
+  <link>https://u3.github.io/posts/2016/12/623-w10learning-with-large-datasets/</link>
+  <guid>https://u3.github.io/posts/2016/12/623-w10learning-with-large-datasets/</guid>
+  <pubDate>Mon, 12 Dec 2016 14:54:01 +0800</pubDate>
+  <description>大数据学习 我的学习算法有时候会面对大数据的考验，我们需要做一些优化才能保证速度 随机梯度下降 传统的梯度下降法每次会遍历整个集合，效率较低，随机梯度下降不必每次都遍历，效率较高 首先引入几个公式 算法步骤 1.随机排序数据集合 2.遍历随机的数据，使用如下公式进行学习 迷你梯度下降法 迷你梯度下降是一个折中的办法，不像梯度下降每次使用全部，也不是只使用一个...</description>
+</item><item>
+  <title>[W9]异常检测</title>
+  <link>https://u3.github.io/posts/2016/12/606-w9anomaly-detection/</link>
+  <guid>https://u3.github.io/posts/2016/12/606-w9anomaly-detection/</guid>
+  <pubDate>Tue, 06 Dec 2016 15:34:27 +0800</pubDate>
+  <description>异常检测动机 当我们有新的数据样本的时候，我们希望通过一个模型p(x)以及一个门槛值ϵ来判定这个样本是否是异常的。 高斯分布 高斯分布是一种可以被描述为 的类钟型线。 具体公式是 其中几个参数的计算如下 普遍公式 只有公式部分不同，其余部分均与高斯分布相同 异常检测vs监督学习 何时使用异常检测 正样本较少，负样本多，正样本不够训练，且种类太多 何时使用监督...</description>
+</item><item>
+  <title>[W8]聚集</title>
+  <link>https://u3.github.io/posts/2016/12/599-w8-mlclustering/</link>
+  <guid>https://u3.github.io/posts/2016/12/599-w8-mlclustering/</guid>
+  <pubDate>Fri, 02 Dec 2016 14:56:47 +0800</pubDate>
+  <description>非监督学习：介绍 非监督学习和监督学习相反，是一种无标签学习。 换而言之，我们不知道y的具体分类。 非监督学习适用于： 1.市场分割 2.社交网络分析 3.组织电脑集群 4.天文数据分析 K-Means算法 K-Means算法是最广泛应用的自动分类算法。 具体过程如下 1.随机在数据集合中初始化两个点，叫做聚类中心 2.将整个集合分为两个子集，一个是对于中心...</description>
+</item><item>
+  <title>[W7]优化目标</title>
+  <link>https://u3.github.io/posts/2016/11/587-w7optimization-objective/</link>
+  <guid>https://u3.github.io/posts/2016/11/587-w7optimization-objective/</guid>
+  <pubDate>Tue, 29 Nov 2016 15:49:42 +0800</pubDate>
+  <description>SVM支持向量机 支持向量机是一种监督学习算法，有时比现有算法更加简洁高效。 回顾一下逻辑回归的代价函数 注意展开后的第一项 当 θTx远远大于1的时候，此项接近于0 当 θTx远远小于1的时候，我们可以用一条直线来替代sigmoid曲线，最终图形如下 对于第二项，我们的标尺是-1 小于等于-1的时候是0，大于等于-1的时候是一条直线，如下图 Kernels...</description>
+</item><item>
+  <title>[W6]机器学习应用建议</title>
+  <link>https://u3.github.io/posts/2016/11/571-w6advice-for-applying-machine-learning/</link>
+  <guid>https://u3.github.io/posts/2016/11/571-w6advice-for-applying-machine-learning/</guid>
+  <pubDate>Wed, 23 Nov 2016 15:19:38 +0800</pubDate>
+  <description>采取什么措施来进一步优化 主要有五种措施 1.获取更多训练样本 2.尝试使用更小规模的特称 3.尝试增加特征 4.尝试使用多项式特征 5.增加或者减小正则参数λ 评估假设 我们如何评估一个已经做出的假设是否合理呢？也许我们的假设在训练集合上面有较好的表现，但是对于其他的数据却表现得不好。 这时候我们需要使用一些方法来评估我们的假设是否合理。 首先，我们需要把...</description>
+</item><item>
+  <title>[W5]神经网络的学习</title>
+  <link>https://u3.github.io/posts/2016/11/557-w5神经网络的学习/</link>
+  <guid>https://u3.github.io/posts/2016/11/557-w5神经网络的学习/</guid>
+  <pubDate>Tue, 22 Nov 2016 15:24:35 +0800</pubDate>
+  <description>代价函数 首先需要定义几个变量 L = 这个神经网络的总层数 sl= 第L层的单元数量 K = 输出层的单元数量 在神经网络中，我们的输出节点不止一个，我们用hΘ(x)k 来表示第k个输出 还记得逻辑回归的代价函数吗？ 对于神经网络来说，代价函数更加复杂一些 反向传播算法 反向传播算法是一种用于最小化代价函数的算法，正如我们在逻辑回归问题中使用的梯度下降算法...</description>
+</item><item>
+  <title>[W4]神经网络的表示</title>
+  <link>https://u3.github.io/posts/2016/11/550-w4-neural-network-representation/</link>
+  <guid>https://u3.github.io/posts/2016/11/550-w4-neural-network-representation/</guid>
+  <pubDate>Mon, 21 Nov 2016 11:02:00 +0800</pubDate>
+  <description>非线性假设 前面我们提到过线性假设，我们可以理解为在这种情况下，我们的函数在平面上的图形是一条直线 而非线性假设的函数表达，并非直线，其中一个例子如下 我们大脑中的神经元 在我们大脑中，有许多叫做神经元的神奇的小东西，它有多个输入，多个输出，一个个的联结起来，构成了我们的神经系统。 神经网络算法为什么叫这个名字也是收到了这个东西的启发。 神经网络的表示 神经...</description>
+</item><item>
+  <title>[W3]逻辑回归以及正则化</title>
+  <link>https://u3.github.io/posts/2016/11/537-w3-logic-regression-and-regularized/</link>
+  <guid>https://u3.github.io/posts/2016/11/537-w3-logic-regression-and-regularized/</guid>
+  <pubDate>Fri, 18 Nov 2016 17:34:33 +0800</pubDate>
+  <description>布尔分类 在这样的分类种，只有两种情况，0或者1，类似于计算机中常用的布尔变量 逻辑回归 前面已经提到过线性回归，那么什么是逻辑回归呢，其实是一个关于自然底数e的函数，其定义和图像如下图 决策边界 有了上面两个部分的介绍，我们可以引出一个新的概念——决策边界 当一个数大于我们的决策边界的时候，其结果就是1，否则为0，具体可以参看下图 在这里我们取决策边界为0...</description>
+</item><item>
+  <title>[W2]多参数线性回归相关问题</title>
+  <link>https://u3.github.io/posts/2016/11/523-w2-multiple-linear-reg/</link>
+  <guid>https://u3.github.io/posts/2016/11/523-w2-multiple-linear-reg/</guid>
+  <pubDate>Thu, 17 Nov 2016 09:42:23 +0800</pubDate>
+  <description>多参数线性回归 通过第一周的学习，我们知道了什么是单参数线性回归，那么多参数线性回归也就不难理解了， 就是一个含多个参数的一阶函数 ，定义公式如下图 这个公式又可以表示为两个矩阵的乘积，如下图 代价函数 类似单变量的代价函数，同样是测量值与实际值之差的平方和的平均值 特征值的规范化 在课程原话中关于特征值的规范化是这样说的 We can speed up g...</description>
+</item><item>
+  <title>[W1]机器学习的概念以及最简单的算法</title>
+  <link>https://u3.github.io/posts/2016/11/512-w1base-about-ml/</link>
+  <guid>https://u3.github.io/posts/2016/11/512-w1base-about-ml/</guid>
+  <pubDate>Tue, 15 Nov 2016 16:15:05 +0800</pubDate>
+  <description>什么是机器学习 Tom Mitchell provides a more modern definition: &quot;A computer program is said to learn from experience E with respect to some class of tasks T and performance measure P, if i...</description>
+</item><item>
+  <title>工厂模式和抽象工厂概述以及二者的区别</title>
+  <link>https://u3.github.io/posts/2016/11/509-factory-and-abstract-factory/</link>
+  <guid>https://u3.github.io/posts/2016/11/509-factory-and-abstract-factory/</guid>
+  <pubDate>Thu, 10 Nov 2016 16:30:29 +0800</pubDate>
+  <description>工厂模式 什么是工厂模式 顾名思义，工厂模式就是一种生产产品的模式，我们这里的产品就是各种各样的对象 工厂模式的类图 如图所示： 1.我们有一个抽象类，工厂，两个具体实现，NYstore和Bstore，实现了抽象工厂的几个方法 2.我们有一种产品，pizza，并且对于它我们有很多实现，分为ny系和b系，不过他们都是pizza 当我们需要pizza的时候，我们...</description>
+</item><item>
+  <title>AndroidStudio Plugin Dev——RemoveButterKnife design to implement[pw1]</title>
+  <link>https://u3.github.io/posts/2016/06/475-androidstudio-plugin-dev-removebutterknife-design-to-implement/</link>
+  <guid>https://u3.github.io/posts/2016/06/475-androidstudio-plugin-dev-removebutterknife-design-to-implement/</guid>
+  <pubDate>Sun, 26 Jun 2016 17:08:34 +0800</pubDate>
+  <description>ReomveButterKnife Plugin This is an Android Studio plugin to help remove use of ButterKnife, we will talk about how to dev it. GitHub address RemoveButterKnife What AndroidStudio P...</description>
+</item><item>
+  <title>AndroidStudio插件开发——RemoveButterKnife从构思到实现</title>
+  <link>https://u3.github.io/posts/2016/06/452-androidstudio-plugin-removebutterknife-di/</link>
+  <guid>https://u3.github.io/posts/2016/06/452-androidstudio-plugin-removebutterknife-di/</guid>
+  <pubDate>Fri, 24 Jun 2016 16:21:51 +0800</pubDate>
+  <description>ReomveButterKnife插件 这是一个用于移除代码中对ButterKnife使用的AS插件，接下来我们将从头开始讲讲AS插件开发和这个插件的开发过程 地址是 RemoveButterKnife 什么是AndroidStudio插件 相信能开始阅读这篇文章的朋友都是从事，或者有兴趣从事Android开发的，那么，我们现在最常用的开发工具无疑就是And...</description>
+</item><item>
+  <title>【解题报告】【lintcode28】Search a 2D Matrix</title>
+  <link>https://u3.github.io/posts/2016/06/446-解题报告-lintcode28-search-a-2d-matrix/</link>
+  <guid>https://u3.github.io/posts/2016/06/446-解题报告-lintcode28-search-a-2d-matrix/</guid>
+  <pubDate>Mon, 06 Jun 2016 16:27:53 +0800</pubDate>
+  <description>题意 写出一个高效的算法来搜索 m × n矩阵中的值。 这个矩阵具有以下特性： 每行中的整数从左到右是排序的。 每行的第一个数大于上一行的最后一个整数。 性能要求，时间复杂度O（logm+logn） 解答 两次二分，第一次确定所在行，第二次确定所在列 代码 public boolean searchMatrix(int[][] matrix, int tar...</description>
+</item><item>
+  <title>【解题报告】【lintcode111】Climbing Stairs</title>
+  <link>https://u3.github.io/posts/2016/06/433-解题报告-lintcode111-climbing-stairs/</link>
+  <guid>https://u3.github.io/posts/2016/06/433-解题报告-lintcode111-climbing-stairs/</guid>
+  <pubDate>Thu, 02 Jun 2016 16:12:21 +0800</pubDate>
+  <description>题意 假设你正在爬楼梯，需要n步你才能到达顶部。但每次你只能爬一步或者两步，你能有多少种不同的方法爬到楼顶部？ 解答 由于一次只能走一步或者两步，所以我们可以直接获得递归的公式，但是当楼梯太多的时候，递归层次太深，会超时。 我们又想到dp，由于一次走一步或者两步，所以可以从上一个状态或者上两个状态到达当前状态，所以可以得到公式 dp[n] = dp[n-1]...</description>
+</item><item>
+  <title>【解题报告】【lintcode103】Linked List Cycle II</title>
+  <link>https://u3.github.io/posts/2016/05/428-解题报告-lintcode103-linked-list-cycle-ii/</link>
+  <guid>https://u3.github.io/posts/2016/05/428-解题报告-lintcode103-linked-list-cycle-ii/</guid>
+  <pubDate>Fri, 20 May 2016 14:03:22 +0800</pubDate>
+  <description>题意 给出一个链表，可能会有环（从某一点开始，经过一段之后又回到这个点），找出这个环的开始点 使用O(n)的复杂度解决 解答 我们可以设置两个指针，一个每次前进一步，一个每次前进两步 那么，如果有环，这两个指针必定在环里某一个点相遇，这时候 假设环外到环开始点的路程为a 假设慢指针在环内走了b 环剩下的部分距离为c 那么，我们可以得到 (a+(b+c)+b)...</description>
+</item><item>
+  <title>【解题报告】【lintcode362】Sliding Window Maximum</title>
+  <link>https://u3.github.io/posts/2016/05/426-解题报告-lintcode362-sliding-window-maximum/</link>
+  <guid>https://u3.github.io/posts/2016/05/426-解题报告-lintcode362-sliding-window-maximum/</guid>
+  <pubDate>Thu, 19 May 2016 15:39:45 +0800</pubDate>
+  <description>题意 给出一组数字，一个滑动窗口的大小，窗口从开始滑动到数字结束，返回每次窗口中的最大值 解答 由于时间复杂度的要求，我们不能暴力求解，因为这样的复杂度是n*n级别，而题目要求n级别 我们可以通过记录数组下标来解答这个题目 每次新的数字进入时，把小于它的数字下标全部移除，形成递减的结果数组，每次取这个数组的第一个就是当前窗口最大的数了 由于每一个数字只会被操...</description>
+</item><item>
+  <title>【解题报告】【lintcode81】Data Stream Median</title>
+  <link>https://u3.github.io/posts/2016/05/424-解题报告-lintcode81-data-stream-median/</link>
+  <guid>https://u3.github.io/posts/2016/05/424-解题报告-lintcode81-data-stream-median/</guid>
+  <pubDate>Thu, 19 May 2016 11:05:01 +0800</pubDate>
+  <description>题意 给出一组数字，逐一输入，每输入一个数字，就输出已经输入数字排序后的中位数，即中间那个数字 解答 直接暴力很简单，但是时间复杂度很高，不符合性能要求。 时间复杂度要求是nlogn，可以想到的是快速排序和堆排序两种排序，再结合题目，我们选择堆 维护两个堆，一个堆比中位数小，一个比中位数大，我们称之为大堆，小堆 大堆是一个比中位数大的小根堆，堆顶是刚刚比中位...</description>
+</item><item>
+  <title>【解题报告】【lintcode192】Wildcard Matching</title>
+  <link>https://u3.github.io/posts/2016/05/421-解题报告-lintcode192-wildcard-matching/</link>
+  <guid>https://u3.github.io/posts/2016/05/421-解题报告-lintcode192-wildcard-matching/</guid>
+  <pubDate>Wed, 18 May 2016 11:06:35 +0800</pubDate>
+  <description>题意 判断两个可能包含通配符“？”和“ ”的字符串是否匹配。匹配规则如下： &#x27;?&#x27; 可以匹配任何单个字符。 &#x27; &#x27; 可以匹配任意字符串（包括空字符串）。 两个串完全匹配才算匹配成功。 一些例子： isMatch(&quot;aa&quot;,&quot;a&quot;) → false isMatch(&quot;aa&quot;,&quot;aa&quot;) → true isMatch(&quot;aaa&quot;,&quot;aa&quot;) → false is...</description>
+</item><item>
+  <title>【解题报告】【lintcode54】String to Integer II</title>
+  <link>https://u3.github.io/posts/2016/05/418-解题报告-lintcode54-string-to-integer-ii/</link>
+  <guid>https://u3.github.io/posts/2016/05/418-解题报告-lintcode54-string-to-integer-ii/</guid>
+  <pubDate>Wed, 18 May 2016 10:33:21 +0800</pubDate>
+  <description>题意 一个字符串中间含有一个整数数字，找出他，并转为数字返回 解答 主要分为三步来求解 1.使用正则表达式匹配字符串，看是否有符合条件的子串 2.根据匹配结果，再根据符号，小数点的位置确定执行操作串的长度和开始位置 3.对于每一个操作子串的字符进行处理，并加到结果上，最后处理边界和符号 代码 public class Solution { /** * @pa...</description>
+</item><item>
+  <title>【解题报告】【lintcode88】Lowest Common Ancestor</title>
+  <link>https://u3.github.io/posts/2016/05/416-解题报告-lintcode88-lowest-common-ancestor/</link>
+  <guid>https://u3.github.io/posts/2016/05/416-解题报告-lintcode88-lowest-common-ancestor/</guid>
+  <pubDate>Tue, 17 May 2016 15:03:14 +0800</pubDate>
+  <description>题意 给出一颗二叉树中的两个节点，寻找它们的最小公共祖先 解法 分为两个部分 1.寻找给出节点的路径 2.比较这两个路径，寻找最小公共祖先 代码 public class Solution { /** * @param root: The root of the binary search tree. * @param A and B: two nodes...</description>
+</item><item>
+  <title>【解题报告】【lintcode1】A + B Problem</title>
+  <link>https://u3.github.io/posts/2016/05/414-解题报告-lintcode1-a-b-problem/</link>
+  <guid>https://u3.github.io/posts/2016/05/414-解题报告-lintcode1-a-b-problem/</guid>
+  <pubDate>Tue, 17 May 2016 11:40:58 +0800</pubDate>
+  <description>题意 不适用任何数学运算实现A+B 解答 使用位运算 异或运算可以当作加法，但是无法处理进位 需要使用按位与和左移来进行进位处理 代码 class Solution { /* * param a: The first integer * param b: The second integer * return: The sum of a and b */ p...</description>
+</item><item>
+  <title>【解题报告】【lintcode61】 Search for a Range</title>
+  <link>https://u3.github.io/posts/2016/05/412-解题报告-lintcode61-search-for-a-range/</link>
+  <guid>https://u3.github.io/posts/2016/05/412-解题报告-lintcode61-search-for-a-range/</guid>
+  <pubDate>Tue, 17 May 2016 10:29:47 +0800</pubDate>
+  <description>题意 在一个有序数组中，找到给出的范围值的开始和结束点下标 nlogn的复杂度 解答 看到nlogn和有序数组，那么就能想象到二分查找，但是需要对二分查找做一些改动 当找到目标时不停止，而是继续对左右区间进行二分，并维护找到区间边缘的最小/最大下标 那么，一次二分进行完毕之后，我们就可以得到最大最小的范围了。 代码 public class Solution...</description>
+</item><item>
+  <title>【解题报告】lintcode82落单的数</title>
+  <link>https://u3.github.io/posts/2016/05/408-解题报告-lintcode82落单的数/</link>
+  <guid>https://u3.github.io/posts/2016/05/408-解题报告-lintcode82落单的数/</guid>
+  <pubDate>Mon, 16 May 2016 14:51:44 +0800</pubDate>
+  <description>题意 数组里所有数都出现了两次，但是其中有一个只出现了一次，找出它 时间复杂度O(n) 解答 使用位运算，异或运算 由于其结合律 结合律：A^(B^C)=(A^B)^C 且如果两个数字相同，异或结果为0，0与仍和数字的异或为这个数字本身 我们把所有数字异或起来，就是我们要找的结果了 代码 public class Solution { /** *@param...</description>
+</item><item>
+  <title>【解题报告】lintcode4求第n个丑数</title>
+  <link>https://u3.github.io/posts/2016/05/406-解题报告-lintcode4求第n个丑数/</link>
+  <guid>https://u3.github.io/posts/2016/05/406-解题报告-lintcode4求第n个丑数/</guid>
+  <pubDate>Mon, 16 May 2016 14:26:22 +0800</pubDate>
+  <description>题意 设计一个算法，找出只含素因子2，3，5 的第 n 大的数。 符合条件的数如：1, 2, 3, 4, 5, 6, 8, 9, 10, 12... 解答 既然只有素数因子2，3，5，那么我们可以得知，第n个丑数肯定是前面某一个丑数乘以2，3，5的结果 那么，我们可以以此生成一个丑数表 但是，第n个丑数是多少呢，可以得知，是比前一个数大的最小丑数 我们设置三...</description>
+</item><item>
+  <title>【解题报告】lintcode3统计数字</title>
+  <link>https://u3.github.io/posts/2016/05/404-解题报告-lintcode3统计数字/</link>
+  <guid>https://u3.github.io/posts/2016/05/404-解题报告-lintcode3统计数字/</guid>
+  <pubDate>Mon, 16 May 2016 14:12:50 +0800</pubDate>
+  <description>题意 给出一个n和k,统计0-n的数字中，k出现了多少次 解题 首先通过log运算来得出n有多少位，创建数组，每次给数组最低位加1 然后计算进位 在计算过程中，计算数字出现次数 代码 class Solution { /* * param k : As description. * param n : As description. * return: An...</description>
+</item><item>
+  <title>【解题报告】lintcode5寻找第k大数</title>
+  <link>https://u3.github.io/posts/2016/05/402-解题报告-lintcode5寻找第k大数/</link>
+  <guid>https://u3.github.io/posts/2016/05/402-解题报告-lintcode5寻找第k大数/</guid>
+  <pubDate>Mon, 16 May 2016 11:18:33 +0800</pubDate>
+  <description>题意 寻找给定无序数组中第k大的数 解法 设置一个标记数组，扫描给出的数组，在标记数组对应下标的数字上加一 然后遍历标记数组，当综合等于给出数组长度-k时，就找到了第k大数（此时标记数组的下标就是这个数字） 代码 class Solution { /* * @param k : description of k * @param nums : array o...</description>
+</item>
+</channel></rss>

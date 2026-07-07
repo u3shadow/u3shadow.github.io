@@ -1,0 +1,136 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="【如何开发一个锁屏应用】 想要开发一个锁屏应用，似乎很难，其实并没有想象中那么难。 从本质上来说，锁屏界面也只是一个Activity而已，只是这个界面比较特殊，在我们点亮屏幕的时候，这个界面就会出现。 而且在此界面中，我们可以用一些行为来退出，比如点击按钮等。 还有一个特征是在这个界面的时候，我们通常是不能使用底部的三个按钮的 关于如果屏蔽底部的三个按钮，我...">
+  <title>Android4.0+锁屏程序开发——设置锁屏页面篇 - u3coding</title>
+  <link rel="canonical" href="https://u3.github.io/posts/2015/07/34-android4-0锁屏程序开发-设置锁屏页面篇/">
+  <style>
+    :root { --bg:#f6f7f8; --paper:#fff; --ink:#1f2937; --muted:#667085; --line:#d7dde3; --accent:#0f766e; --code:#0b1720; }
+    * { box-sizing:border-box; }
+    body { margin:0; background:var(--bg); color:var(--ink); font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Microsoft YaHei",sans-serif; line-height:1.76; }
+    header { border-bottom:1px solid var(--line); background:rgba(255,255,255,.9); backdrop-filter:blur(12px); position:sticky; top:0; z-index:10; }
+    .bar { max-width:1080px; margin:0 auto; padding:15px 24px; display:flex; align-items:center; justify-content:space-between; gap:16px; }
+    .brand { color:#111827; text-decoration:none; font-weight:760; }
+    nav { display:flex; gap:14px; flex-wrap:wrap; justify-content:flex-end; }
+    nav a { color:var(--muted); text-decoration:none; font-size:14px; }
+    main { max-width:920px; margin:0 auto; padding:46px 24px 72px; }
+    .eyebrow { margin:0 0 12px; color:var(--accent); font-size:14px; font-weight:750; }
+    h1.title { margin:0; font-size:clamp(34px,5.8vw,56px); line-height:1.14; letter-spacing:0; }
+    .meta { margin:18px 0 32px; color:var(--muted); font-size:15px; }
+    .hero { margin:0 0 30px; border:1px solid var(--line); border-radius:8px; overflow:hidden; background:#eef2f5; }
+    .hero img { display:block; width:100%; max-height:560px; object-fit:contain; }
+    article, .panel { background:var(--paper); border:1px solid var(--line); border-radius:8px; padding:clamp(22px,4vw,44px); box-shadow:0 18px 45px rgba(31,41,55,.06); }
+    article h1, article h2, article h3 { line-height:1.34; margin:1.9em 0 .75em; letter-spacing:0; }
+    article h1 { font-size:28px; } article h2 { font-size:24px; } article h3 { font-size:20px; }
+    article p { margin:0 0 1.08em; }
+    article img { display:block; max-width:100%; height:auto; margin:18px auto 8px; border:1px solid var(--line); border-radius:6px; background:#eef2f5; }
+    article figure { margin:24px 0; }
+    article figcaption { text-align:center; color:var(--muted); font-size:14px; margin-top:8px; }
+    article pre { margin:20px 0; overflow:auto; padding:16px; border-radius:8px; background:var(--code); color:#e6edf3; line-height:1.62; }
+    article code { font-family:"Cascadia Code",Consolas,"SFMono-Regular",monospace; font-size:.92em; }
+    article :not(pre) > code { color:#9a3412; background:#fff7ed; padding:.12em .34em; border-radius:4px; }
+    article blockquote { margin:20px 0; padding:10px 18px; border-left:4px solid var(--accent); background:#f5fbfa; color:#374151; }
+    .post-list { display:grid; gap:18px; }
+    .post-card { padding:0 0 18px; border-bottom:1px solid var(--line); }
+    .post-card:last-child { border-bottom:0; padding-bottom:0; }
+    .post-card h2 { margin:0 0 6px; font-size:22px; line-height:1.36; }
+    .post-card a { color:var(--ink); text-decoration:none; }
+    .post-card a:hover { color:var(--accent); }
+    .post-card p { margin:8px 0 0; color:#475569; }
+    .image-missing { margin:22px 0; padding:18px; border:1px dashed #cbd5e1; border-radius:8px; background:#f8fafc; color:#475569; }
+    .image-missing strong { display:block; color:#334155; margin-bottom:6px; }
+    .image-missing a { overflow-wrap:anywhere; font-size:13px; }
+
+    a { color:var(--accent); }
+    footer { max-width:920px; margin:0 auto; padding:0 24px 44px; color:var(--muted); font-size:14px; }
+    @media (max-width:640px) { .bar { padding:13px 16px; } main { padding:32px 16px 54px; } article,.panel { padding:20px 16px; } h1.title { font-size:31px; } }
+  </style>
+</head>
+<body>
+<header><div class="bar"><a class="brand" href="/">u3coding</a><nav><a href="/">首页</a><a href="/archive/">归档</a><a href="/feed.xml">RSS</a></nav></div></header>
+
+<main>
+  <p class="eyebrow">未分类 · 文章 ID 34</p>
+  <h1 class="title">Android4.0+锁屏程序开发——设置锁屏页面篇</h1>
+  <div class="meta">发布于 2015-07-11 16:01 · 已迁移为静态页面</div>
+  
+  <article>【如何开发一个锁屏应用】</p>
+
+想要开发一个锁屏应用，似乎很难，其实并没有想象中那么难。
+
+从本质上来说，锁屏界面也只是一个Activity而已，只是这个界面比较特殊，在我们点亮屏幕的时候，这个界面就会出现。
+
+而且在此界面中，我们可以用一些行为来退出，比如点击按钮等。
+
+还有一个特征是在这个界面的时候，我们通常是不能使用底部的三个按钮的
+
+关于如果屏蔽底部的三个按钮，我已经在另一篇博客<a id="cb_post_title_url" class="postTitle2" href="http://www.cnblogs.com/u3shadow/p/4639648.html">Android4.0+锁屏程序开发&mdash;&mdash;按键屏蔽篇</a>进行了总结，有需要的朋友可以参看。
+
+这篇博客我们主要讨论如何让一个Activity在屏幕点亮的时候出现，并且不触发系统的锁屏。
+
+&nbsp;
+
+【设置自己的锁屏页面】
+
+首先，点亮屏幕的时候，系统会发出一个广播，ACTION_SCREEN_ON，我们可以通过一个BroadcastReceiver来监听这个广播，并启动我们自己的Activity
+
+例如下面的代码：
+
+<pre class="lang:default decode:true " >private BroadcastReceiver screenReceiver = new BroadcastReceiver() {
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            String action = intent.getAction();
+            if (action.equals("android.intent.action.SCREEN_ON") || action.equals("android.intent.action.SCREEN_OFF")) {
+                startActivity(toMainIntent);
+            }
+        }
+    };</pre>
+
+但是，光启动我们的Activity还不够，因为仅仅是启动的话，系统的锁屏还是会出现在界面上，那么效果就变成了，我们解锁了系统的锁屏看到了自定义的界面。
+
+这显然不是我们想看到的，我们想的是当屏幕一点亮就看到我们的界面。
+
+我们可以通过对自定义界面的设置中关闭系统的锁屏来实现这个需求。
+
+代码如下：
+
+<pre class="lang:default decode:true " >protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        final Window win = getWindow();
+        win.addFlags(
+                WindowManager.LayoutParams.FLAG_DISMISS_KEYGUARD |
+                        WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);//解除系统锁屏
+        setContentView(R.layout.main_layout);
+        setView();//设置关闭按钮
+    }</pre>
+
+通过上面的设置，我们就可以在点亮屏幕的时候看到自己的界面了。
+
+一个完整的锁屏例子我已经上传到了GitHub上面，地址是：https://github.com/u3shadow/ScreenLocker
+
+有需要的朋友可以进行参考。
+
+通过这两篇博客，我们就可以基本实现一个锁屏应用了，在此基础上，我们可以对自定义界面做更进一步的优化，美化，做出自己理想的锁屏。
+
+此系列就到这里，希望能帮助到大家，谢谢</article>
+</main>
+
+<footer>Generated from local Z-Blog backup for GitHub Pages.</footer>
+<script>
+  document.querySelectorAll("img").forEach((img) => {
+    const replaceMissingImage = () => {
+      const box = document.createElement("div");
+      box.className = "image-missing";
+      const src = img.currentSrc || img.src || img.getAttribute("src") || "";
+      box.innerHTML = `<strong>Image unavailable</strong><span>This image could not be loaded from the static backup.</span><br><a href="${src}" target="_blank" rel="noreferrer">Open original image URL</a>`;
+      img.replaceWith(box);
+    };
+    img.addEventListener("error", replaceMissingImage, { once: true });
+    if (img.complete && img.naturalWidth === 0) replaceMissingImage();
+  });
+</script>
+
+</body>
+</html>

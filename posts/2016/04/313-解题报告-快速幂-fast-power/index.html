@@ -1,0 +1,129 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="题目地址 http://www.lintcode.com/en/problem/fast-power/ 题目大意 计算a^n%b 思路 关于数值范围的优化 看起来很简单的题目，但是如果直接去求解的话，当n足够大的时候，a^n会很大，超出了表达范围 这适合我们需要深入的研究取模运算的规律了 这里我们主要使用了模运算的一个性质 (a b)%c = (a%c) (...">
+  <title>【解题报告】快速幂 Fast Power - u3coding</title>
+  <link rel="canonical" href="https://u3.github.io/posts/2016/04/313-解题报告-快速幂-fast-power/">
+  <style>
+    :root { --bg:#f6f7f8; --paper:#fff; --ink:#1f2937; --muted:#667085; --line:#d7dde3; --accent:#0f766e; --code:#0b1720; }
+    * { box-sizing:border-box; }
+    body { margin:0; background:var(--bg); color:var(--ink); font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Microsoft YaHei",sans-serif; line-height:1.76; }
+    header { border-bottom:1px solid var(--line); background:rgba(255,255,255,.9); backdrop-filter:blur(12px); position:sticky; top:0; z-index:10; }
+    .bar { max-width:1080px; margin:0 auto; padding:15px 24px; display:flex; align-items:center; justify-content:space-between; gap:16px; }
+    .brand { color:#111827; text-decoration:none; font-weight:760; }
+    nav { display:flex; gap:14px; flex-wrap:wrap; justify-content:flex-end; }
+    nav a { color:var(--muted); text-decoration:none; font-size:14px; }
+    main { max-width:920px; margin:0 auto; padding:46px 24px 72px; }
+    .eyebrow { margin:0 0 12px; color:var(--accent); font-size:14px; font-weight:750; }
+    h1.title { margin:0; font-size:clamp(34px,5.8vw,56px); line-height:1.14; letter-spacing:0; }
+    .meta { margin:18px 0 32px; color:var(--muted); font-size:15px; }
+    .hero { margin:0 0 30px; border:1px solid var(--line); border-radius:8px; overflow:hidden; background:#eef2f5; }
+    .hero img { display:block; width:100%; max-height:560px; object-fit:contain; }
+    article, .panel { background:var(--paper); border:1px solid var(--line); border-radius:8px; padding:clamp(22px,4vw,44px); box-shadow:0 18px 45px rgba(31,41,55,.06); }
+    article h1, article h2, article h3 { line-height:1.34; margin:1.9em 0 .75em; letter-spacing:0; }
+    article h1 { font-size:28px; } article h2 { font-size:24px; } article h3 { font-size:20px; }
+    article p { margin:0 0 1.08em; }
+    article img { display:block; max-width:100%; height:auto; margin:18px auto 8px; border:1px solid var(--line); border-radius:6px; background:#eef2f5; }
+    article figure { margin:24px 0; }
+    article figcaption { text-align:center; color:var(--muted); font-size:14px; margin-top:8px; }
+    article pre { margin:20px 0; overflow:auto; padding:16px; border-radius:8px; background:var(--code); color:#e6edf3; line-height:1.62; }
+    article code { font-family:"Cascadia Code",Consolas,"SFMono-Regular",monospace; font-size:.92em; }
+    article :not(pre) > code { color:#9a3412; background:#fff7ed; padding:.12em .34em; border-radius:4px; }
+    article blockquote { margin:20px 0; padding:10px 18px; border-left:4px solid var(--accent); background:#f5fbfa; color:#374151; }
+    .post-list { display:grid; gap:18px; }
+    .post-card { padding:0 0 18px; border-bottom:1px solid var(--line); }
+    .post-card:last-child { border-bottom:0; padding-bottom:0; }
+    .post-card h2 { margin:0 0 6px; font-size:22px; line-height:1.36; }
+    .post-card a { color:var(--ink); text-decoration:none; }
+    .post-card a:hover { color:var(--accent); }
+    .post-card p { margin:8px 0 0; color:#475569; }
+    .image-missing { margin:22px 0; padding:18px; border:1px dashed #cbd5e1; border-radius:8px; background:#f8fafc; color:#475569; }
+    .image-missing strong { display:block; color:#334155; margin-bottom:6px; }
+    .image-missing a { overflow-wrap:anywhere; font-size:13px; }
+
+    a { color:var(--accent); }
+    footer { max-width:920px; margin:0 auto; padding:0 24px 44px; color:var(--muted); font-size:14px; }
+    @media (max-width:640px) { .bar { padding:13px 16px; } main { padding:32px 16px 54px; } article,.panel { padding:20px 16px; } h1.title { font-size:31px; } }
+  </style>
+</head>
+<body>
+<header><div class="bar"><a class="brand" href="/">u3coding</a><nav><a href="/">首页</a><a href="/archive/">归档</a><a href="/feed.xml">RSS</a></nav></div></header>
+
+<main>
+  <p class="eyebrow">未分类 · 文章 ID 313</p>
+  <h1 class="title">【解题报告】快速幂 Fast Power</h1>
+  <div class="meta">发布于 2016-04-10 16:43 · 已迁移为静态页面</div>
+  
+  <article><h2>题目地址</h2>
+
+http://www.lintcode.com/en/problem/fast-power/
+
+<h2>题目大意</h2>
+
+计算a^n%b
+
+<h2>思路</h2>
+
+<h3>关于数值范围的优化</h3>
+
+看起来很简单的题目，但是如果直接去求解的话，当n足够大的时候，a^n会很大，超出了表达范围
+这适合我们需要深入的研究取模运算的规律了
+这里我们主要使用了模运算的一个性质
+(a<em>b)%c = (a%c)</em>(b%c)%c
+通过这样的分解我们就可以避免由于中间数值过大而造成无法表达的情况了
+
+<h3>关于时间性能的优化</h3>
+
+优化完了表达范围的问题，我们还面临另一个问题，那就是，当n很大的适合，如果我们每次都去执行的话，复杂度是O(n)
+这是可以进一步优化的
+考虑分解n，可以表示为二进制，而通过二进制我们就可以表示为0或者1的2的次幂。
+例如，5，二进制表达为101，即，1的2^2次幂+0的2^1次幂+1的2^1次幂
+对于0为底数的情况,我们可以忽略,因为任何数的0次方为1,1乘以任何数还是本身,不会对取模运算造成影响
+所以,当该位为1的时候,我们就可以进行一次运算
+我们知道,当一个数的二进制最低位为1,那么它就是个奇数,所以我们每次操作后对n右移一位,判断是不是奇数
+这样,我们需要执行的操作数量就是logn了,大大优化了时间复杂度从O(n)到了O(logn)
+
+<h2>代码</h2>
+
+<pre class="theme:github lang:default decode:true " >public int fastPower(int a, int b, int n) {
+        // write your code here
+           if(n == 0)return 1%b;
+      long ret=1;
+        long tmp=a;
+        while(n &gt; 0)
+        {
+            if(n%2 == 1)//判断是否为奇数,确定末位是不是为1
+                ret=ret*tmp%b;//运算余数
+
+            tmp = tmp*tmp%b;//累乘
+
+            n>>=1;//右移一位,相当于除以2
+        }
+        return (int)ret;
+    }</pre>
+
+<h2>总结</h2>
+
+在做这道题的时候,当时以为很简单,但是其中用到的公式和规律,没有一定的了解自己去研究还是需要很久的,以前做题总是觉得自己想出来才算厉害,但是并不是这样,当面对能力外的题目的时候,不妨先看看别人如何解.
+当看过之后,深入理解别人的解法,分析为什么这样做,然后在自己解的过程中,充分理解,这样,做了这道题就算有所收获.</article>
+</main>
+
+<footer>Generated from local Z-Blog backup for GitHub Pages.</footer>
+<script>
+  document.querySelectorAll("img").forEach((img) => {
+    const replaceMissingImage = () => {
+      const box = document.createElement("div");
+      box.className = "image-missing";
+      const src = img.currentSrc || img.src || img.getAttribute("src") || "";
+      box.innerHTML = `<strong>Image unavailable</strong><span>This image could not be loaded from the static backup.</span><br><a href="${src}" target="_blank" rel="noreferrer">Open original image URL</a>`;
+      img.replaceWith(box);
+    };
+    img.addEventListener("error", replaceMissingImage, { once: true });
+    if (img.complete && img.naturalWidth === 0) replaceMissingImage();
+  });
+</script>
+
+</body>
+</html>

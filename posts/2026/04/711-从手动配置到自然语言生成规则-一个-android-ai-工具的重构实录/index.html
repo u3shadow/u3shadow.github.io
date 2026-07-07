@@ -1,0 +1,282 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="先说结论，使用AI 驱动的 Wi-Fi 场景规则生成与执行系统，大幅简化了工具类App的配置使用门槛 原版配置 AI化后的配置 值得重点讲的 5 个问题 规则输入方式怎么从表单升级成自然语言 模型怎么从“会回答”变成“会产出结构化规则” 普通聊天和规则生成为什么必须分流 规则运行为什么要独立成 RuleEngine 规则为什么必须持久化，而不能只存在内存里...">
+  <title>从手动配置到自然语言生成规则：一个 Android AI 工具的重构实录 - u3coding</title>
+  <link rel="canonical" href="https://u3.github.io/posts/2026/04/711-从手动配置到自然语言生成规则-一个-android-ai-工具的重构实录/">
+  <style>
+    :root { --bg:#f6f7f8; --paper:#fff; --ink:#1f2937; --muted:#667085; --line:#d7dde3; --accent:#0f766e; --code:#0b1720; }
+    * { box-sizing:border-box; }
+    body { margin:0; background:var(--bg); color:var(--ink); font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Microsoft YaHei",sans-serif; line-height:1.76; }
+    header { border-bottom:1px solid var(--line); background:rgba(255,255,255,.9); backdrop-filter:blur(12px); position:sticky; top:0; z-index:10; }
+    .bar { max-width:1080px; margin:0 auto; padding:15px 24px; display:flex; align-items:center; justify-content:space-between; gap:16px; }
+    .brand { color:#111827; text-decoration:none; font-weight:760; }
+    nav { display:flex; gap:14px; flex-wrap:wrap; justify-content:flex-end; }
+    nav a { color:var(--muted); text-decoration:none; font-size:14px; }
+    main { max-width:920px; margin:0 auto; padding:46px 24px 72px; }
+    .eyebrow { margin:0 0 12px; color:var(--accent); font-size:14px; font-weight:750; }
+    h1.title { margin:0; font-size:clamp(34px,5.8vw,56px); line-height:1.14; letter-spacing:0; }
+    .meta { margin:18px 0 32px; color:var(--muted); font-size:15px; }
+    .hero { margin:0 0 30px; border:1px solid var(--line); border-radius:8px; overflow:hidden; background:#eef2f5; }
+    .hero img { display:block; width:100%; max-height:560px; object-fit:contain; }
+    article, .panel { background:var(--paper); border:1px solid var(--line); border-radius:8px; padding:clamp(22px,4vw,44px); box-shadow:0 18px 45px rgba(31,41,55,.06); }
+    article h1, article h2, article h3 { line-height:1.34; margin:1.9em 0 .75em; letter-spacing:0; }
+    article h1 { font-size:28px; } article h2 { font-size:24px; } article h3 { font-size:20px; }
+    article p { margin:0 0 1.08em; }
+    article img { display:block; max-width:100%; height:auto; margin:18px auto 8px; border:1px solid var(--line); border-radius:6px; background:#eef2f5; }
+    article figure { margin:24px 0; }
+    article figcaption { text-align:center; color:var(--muted); font-size:14px; margin-top:8px; }
+    article pre { margin:20px 0; overflow:auto; padding:16px; border-radius:8px; background:var(--code); color:#e6edf3; line-height:1.62; }
+    article code { font-family:"Cascadia Code",Consolas,"SFMono-Regular",monospace; font-size:.92em; }
+    article :not(pre) > code { color:#9a3412; background:#fff7ed; padding:.12em .34em; border-radius:4px; }
+    article blockquote { margin:20px 0; padding:10px 18px; border-left:4px solid var(--accent); background:#f5fbfa; color:#374151; }
+    .post-list { display:grid; gap:18px; }
+    .post-card { padding:0 0 18px; border-bottom:1px solid var(--line); }
+    .post-card:last-child { border-bottom:0; padding-bottom:0; }
+    .post-card h2 { margin:0 0 6px; font-size:22px; line-height:1.36; }
+    .post-card a { color:var(--ink); text-decoration:none; }
+    .post-card a:hover { color:var(--accent); }
+    .post-card p { margin:8px 0 0; color:#475569; }
+    .image-missing { margin:22px 0; padding:18px; border:1px dashed #cbd5e1; border-radius:8px; background:#f8fafc; color:#475569; }
+    .image-missing strong { display:block; color:#334155; margin-bottom:6px; }
+    .image-missing a { overflow-wrap:anywhere; font-size:13px; }
+
+    .mermaid-wrap { margin:22px 0; overflow-x:auto; border:1px solid var(--line); border-radius:8px; background:#fbfcfd; padding:18px; }
+    .mermaid { min-width:640px; text-align:center; }
+
+    a { color:var(--accent); }
+    footer { max-width:920px; margin:0 auto; padding:0 24px 44px; color:var(--muted); font-size:14px; }
+    @media (max-width:640px) { .bar { padding:13px 16px; } main { padding:32px 16px 54px; } article,.panel { padding:20px 16px; } h1.title { font-size:31px; } }
+  </style>
+</head>
+<body>
+<header><div class="bar"><a class="brand" href="/">u3coding</a><nav><a href="/">首页</a><a href="/archive/">归档</a><a href="/feed.xml">RSS</a></nav></div></header>
+
+<main>
+  <p class="eyebrow">技术文章 · 文章 ID 711</p>
+  <h1 class="title">从手动配置到自然语言生成规则：一个 Android AI 工具的重构实录</h1>
+  <div class="meta">发布于 2026-04-22 13:43 · 已迁移为静态页面</div>
+  
+  <article><p><div class="image-missing"><strong>Image unavailable</strong><span>这张图片来自已经无法下载的外部链接，静态备份中没有原图。</span><br><a href="https://p0-xtjj-private.juejin.cn/tos-cn-i-73owjymdk6/71b95ea83dfc4b1695bf05eb549ea226~tplv-73owjymdk6-jj-mark-v1:0:0:0:0:5o6Y6YeR5oqA5pyv56S-5Yy6IEAgdTNzaGFkb3c=:q75.awebp?policy=eyJ2bSI6MywidWlkIjoiMjQzNjE3MzQ5NjU5MzI3MiJ9&amp;rk3s=f64ab15b&amp;x-orig-authkey=f32326d3454f2ac7e96d3d06cdbb035152127018&amp;x-orig-expires=1777441461&amp;x-orig-sign=4BpOCiTgsvMGLIgMUyjsHxqmdOA%3D" target="_blank" rel="noreferrer">查看原始链接</a></div></p>
+<h1 id="h1--ai-wi-fi-app-">先说结论，使用AI 驱动的 Wi-Fi 场景规则生成与执行系统，大幅简化了工具类App的配置使用门槛</h1><p>原版配置<br><div class="image-missing"><strong>Image unavailable</strong><span>这张图片来自已经无法下载的外部链接，静态备份中没有原图。</span><br><a href="https://p0-xtjj-private.juejin.cn/tos-cn-i-73owjymdk6/7876fa55f9b345cda50af9b161742123~tplv-73owjymdk6-jj-mark-v1:0:0:0:0:5o6Y6YeR5oqA5pyv56S-5Yy6IEAgdTNzaGFkb3c=:q75.awebp?policy=eyJ2bSI6MywidWlkIjoiMjQzNjE3MzQ5NjU5MzI3MiJ9&amp;rk3s=f64ab15b&amp;x-orig-authkey=f32326d3454f2ac7e96d3d06cdbb035152127018&amp;x-orig-expires=1777441461&amp;x-orig-sign=0vD4mK4IXg6dpiuDNC%2BxidkEXVU%3D" target="_blank" rel="noreferrer">查看原始链接</a></div></p>
+<p>AI化后的配置<br><div class="image-missing"><strong>Image unavailable</strong><span>这张图片来自已经无法下载的外部链接，静态备份中没有原图。</span><br><a href="https://p0-xtjj-private.juejin.cn/tos-cn-i-73owjymdk6/b96c85c5ed9f4602817aadb04d892484~tplv-73owjymdk6-jj-mark-v1:0:0:0:0:5o6Y6YeR5oqA5pyv56S-5Yy6IEAgdTNzaGFkb3c=:q75.awebp?policy=eyJ2bSI6MywidWlkIjoiMjQzNjE3MzQ5NjU5MzI3MiJ9&amp;rk3s=f64ab15b&amp;x-orig-authkey=f32326d3454f2ac7e96d3d06cdbb035152127018&amp;x-orig-expires=1777441461&amp;x-orig-sign=x5EiuH5neVX6H2vtsokMB%2FYSdMI%3D" target="_blank" rel="noreferrer">查看原始链接</a></div></p>
+<h3 id="h3--5-">值得重点讲的 5 个问题</h3><ol>
+<li><strong>规则输入方式怎么从表单升级成自然语言</strong></li><li><strong>模型怎么从“会回答”变成“会产出结构化规则”</strong></li><li><strong>普通聊天和规则生成为什么必须分流</strong></li><li><strong>规则运行为什么要独立成 <code>RuleEngine</code></strong></li><li><strong>规则为什么必须持久化，而不能只存在内存里</strong></li></ol>
+<p>这 5 个问题决定了项目的系统价值。</p>
+<h3 id="h3-u53EFu4EE5u5E26u8FC7u7684u95EEu9898">可以带过的问题</h3><ul>
+<li>页面细节和视觉优化</li><li>状态文案怎么命名</li><li>某些小范围重构</li><li>某次 prompt 的措辞细节调整</li></ul>
+<hr>
+<h2 id="h2--">先说结果：项目最后长成了什么样</h2><p>项目最终不是一个单纯的 AI 聊天壳子，而是一个有完整主链路的端侧规则系统。当前代码里已经有：</p>
+<ul>
+<li><code>ChatViewModel</code>：负责输入分流、上下文组织、流式请求和结果落地</li><li><code>PromptBuilder</code>：负责规则生成 prompt 和普通聊天能力 prompt</li><li><code>InputClassifier</code>：把输入分成普通聊天和指令聊天</li><li><code>NormalChatContextManager</code> / <code>CommandChatContextManager</code>：分别维护两类上下文</li><li><code>RuleRepo</code>：用 Room 持久化规则</li><li><code>RuleEngine</code>：根据 Wi-Fi 变化读取规则、去重并执行</li><li><code>MainActivity</code>：作为事件入口，负责把用户输入和 Wi-Fi 变化接入系统。</li></ul>
+<p>从提交历史看，项目在这 7 天里经历了几个明显阶段：先接入 prompt、上下文和 action 解析；再补输入分类、上下文管理类和 RuleEngine；最后补持久化配置、页面优化、代码清理和聊天能力 prompt。</p>
+<hr>
+<h2 id="h2--1-">问题 1：手工配置规则门槛太高，输入方式必须升级</h2><p>最初的工具思路很直白：用户进入页面，手工选择 Wi-Fi、再手工配置音量、亮度、蓝牙之类的动作。<br>这种方式能用，但门槛很高，尤其是在“我只想说一句：以后在公司 Wi-Fi 下静音”这种场景里，表单输入的体验并不自然。</p>
+<h3 id="h3-u89E3u51B3u601Du8DEF">解决思路</h3><p>把“规则配置入口”从表单升级成自然语言：</p>
+<ul>
+<li>用户负责表达意图</li><li>AI 负责把意图翻译成结构化规则</li><li>本地系统负责保存和执行</li></ul>
+<p>这一步不是简单多了一个聊天窗口，而是把输入方式从“手工配置”改成了“意图配置”。</p>
+<h3 id="h3-u5173u952Eu5B9Eu73B0">关键实现</h3><p>项目里专门做了一个 <code>PromptBuilder.build(...)</code>，它会把：</p>
+<ul>
+<li>当前 Wi-Fi</li><li>最近 4 条相关消息</li><li>当前输入</li><li>固定 JSON 输出格式</li><li>示例</li></ul>
+<p>拼成一条规则生成专用 prompt，让模型只返回类似下面这种结果：</p>
+<pre><code>{
+  &quot;trigger&quot;: &quot;公司WiFi&quot;,
+  &quot;operation&quot;: &quot;set_volume&quot;,
+  &quot;params&quot;: {
+    &quot;value&quot;: 0
+  }
+}</code></pre><p><code>PromptBuilder</code> 里可以直接看到这套结构：<code>buildRecentHistory()</code> 只取最近 4 条用户/AI 消息；规则 prompt 要求模型返回 <code>trigger / operation / params.value</code> 这样的固定结构。</p>
+<hr>
+<h2 id="h2--2-ai-">问题 2：只有“聊天”不够，必须让 AI 产出可执行的结构化结果</h2><p>很多 AI Demo 到这里就停了：模型能回一句“好的，我已经理解你的需求”。<br>但这对工具系统没有意义。真正的问题是：</p>
+<blockquote>
+<p><strong>模型怎么把一句自然语言，稳定变成可以落到本地执行链路里的结构化结果？</strong></p>
+</blockquote>
+<h3 id="h3-u89E3u51B3u601Du8DEF">解决思路</h3><p>把模型输出目标从“文本回答”改成“JSON 结果”。</p>
+<h3 id="h3-u5173u952Eu5B9Eu73B0">关键实现</h3><p><code>ChatViewModel</code> 的流式请求结束后，不是简单把回复展示到 UI 就结束，而是：</p>
+<ol>
+<li>继续持有完整的 <code>currentText</code></li><li>如果这次输入属于 <code>CommandChat</code></li><li>就进入 <code>ActionParser().parseActionDTO(currentText)</code></li><li>校验 DTO</li><li>再转成本地 <code>Action</code></li><li>交给 <code>RuleRepo</code> 保存并执行。</li></ol>
+<p>这一段很关键，因为它让模型输出真正接入了本地系统，而不是停留在“AI 说了一句正确的话”。</p>
+<h3 id="h3-u8FD9u4E00u6B65u89E3u51B3u4E86u4EC0u4E48">这一步解决了什么</h3><p>它把项目从：</p>
+<ul>
+<li><strong>AI 会聊天</strong></li></ul>
+<p>推进到了：</p>
+<ul>
+<li><strong>AI 能生成规则，并让规则落地</strong></li></ul>
+<hr>
+<h2 id="h2--3-prompt-">问题 3：普通聊天和规则生成混在一起，prompt 很容易被污染</h2><p>项目接入 AI 后，很快遇到一个很典型的问题：</p>
+<ul>
+<li>有些输入是普通聊天，比如“你能做什么？”</li><li>有些输入是规则指令，比如“以后在这里把音量调成 0”</li></ul>
+<p>如果所有输入都走一条链路、吃同一套上下文，结果会很糟：</p>
+<ul>
+<li>普通聊天会误触发规则生成</li><li>规则生成会被闲聊历史污染</li><li>prompt 变得越来越不稳定</li></ul>
+<h3 id="h3-u89E3u51B3u601Du8DEF">解决思路</h3><p>先做输入分流，再做上下文分离。</p>
+<h3 id="h3--1-">关键实现 1：输入分流</h3><p><code>InputClassifier</code> 用一组简单规则把输入分成两类：</p>
+<ul>
+<li><code>NormalChat</code></li><li><code>CommandChat</code></li></ul>
+<p>当前规则是关键词匹配，例如“帮我、自动、连上、设置、音量、打开、关闭、静音、亮度”等会被判成指令输入。</p>
+<p>在 <code>ChatViewModel</code> 里，所有输入都会先进入统一入口：</p>
+<pre><code>fun handleUserInput(input: String, wifiSsid: String?) {
+    when (InputClassifier.classify(input)) {
+        InputType.NormalChat -&gt; handleNormalChatInput(input, wifiSsid)
+        InputType.CommandChat -&gt; handleCommandInput(input, wifiSsid)
+    }
+}</code></pre><p>这一点在当前代码里已经明确落地。</p>
+<h3 id="h3--2-">关键实现 2：上下文分离</h3><p>项目没有继续沿用“一个消息列表管所有场景”的方案，而是拆成了两个上下文管理器：</p>
+<ul>
+<li><code>NormalChatContextManager</code>：保留最近 10 条普通消息</li><li><code>CommandChatContextManager</code>：保留最近 6 条指令相关消息。</li></ul>
+<p>更重要的是，AI 回复在流式结束后，也会根据输入类型写回对应上下文，而不是只写到界面消息列表里。<code>appendAssistantToContext(...)</code> 就是在做这件事。</p>
+<h3 id="h3-u8FD9u4E00u7EC4u6539u52A8u89E3u51B3u4E86u4EC0u4E48">这一组改动解决了什么</h3><p>它把系统从“一个大聊天框”变成了两条清晰的业务链：</p>
+<ul>
+<li>普通聊天链</li><li>规则生成链</li></ul>
+<p>这是这个项目工程感开始明显提升的分水岭。</p>
+<hr>
+<h2 id="h2--4-">问题 4：规则不能只在“发送消息时顺手执行”，必须有独立运行引擎</h2><p>如果规则只是保存在内存里，并且只有用户按下发送按钮时才顺手跑一下，那它本质上还是个半成品。<br>真正需要解决的问题是：</p>
+<blockquote>
+<p><strong>当 Wi-Fi 环境变化时，系统能不能独立地读取规则、去重、执行，并把结果反馈回来？</strong></p>
+</blockquote>
+<h3 id="h3-u89E3u51B3u601Du8DEF">解决思路</h3><p>抽出 <code>RuleEngine</code>，让“规则运行”变成一条独立链路，而不是附着在聊天链路上。</p>
+<h3 id="h3-u5173u952Eu5B9Eu73B0">关键实现</h3><p><code>RuleEngine.run(ssid)</code> 做了几件事：</p>
+<ol>
+<li>根据 <code>ssid</code> 从 <code>RuleRepo</code> 读取规则</li><li>和上次执行的 <code>lastActions</code> 比较</li><li>如果 Wi-Fi 和动作都没变化，返回 <code>SkippedDuplicate</code></li><li>如果没匹配规则，返回 <code>NoRule</code></li><li>否则批量执行动作，并返回 <code>Success(actions)</code>。</li></ol>
+<p>同时，<code>MainActivity</code> 里已经有了独立的环境入口 <code>onWifiMaybeChanged()</code>：</p>
+<ul>
+<li>获取当前 <code>ssid</code></li><li>更新界面上的 Wi-Fi 状态</li><li>调用 <code>ruleEngine.run(ssid)</code></li><li>用 <code>updateEnvFromRuleResult(result)</code> 更新环境展示</li><li>再把结果同步给 <code>viewModel.onRuleRunResult(result)</code>。</li></ul>
+<p>另外，这个入口并不是只在发送消息时调用，它会在页面初始化、<code>onResume()</code>、Wi-Fi 权限回调后都触发。</p>
+<h3 id="h3-u8FD9u4E00u6B65u7684u610Fu4E49">这一步的意义</h3><p>项目真正拥有了第二条独立主线：</p>
+<ul>
+<li><strong>环境变化 → 规则运行 → 执行反馈</strong></li></ul>
+<p>而不再只是：</p>
+<ul>
+<li><strong>用户输入 → AI 回复</strong></li></ul>
+<hr>
+<h2 id="h2--5-">问题 5：规则只存在内存里，没有实际使用价值</h2><p>如果规则每次重启应用就丢，那就算模型能生成规则，也只能算实验功能。<br>这个问题在 Day7 才真正补齐：</p>
+<blockquote>
+<p><strong>规则必须持久化。</strong></p>
+</blockquote>
+<h3 id="h3-u89E3u51B3u601Du8DEF">解决思路</h3><p>把 <code>RuleRepo</code> 从内存容器升级成真正的本地存储层。</p>
+<h3 id="h3-u5173u952Eu5B9Eu73B0">关键实现</h3><p>现在 <code>RuleRepo</code> 已经通过 Room 建了一个本地数据库：</p>
+<ul>
+<li><code>RuleRepo.init(context)</code> 里使用 <code>Room.databaseBuilder(..., &quot;rule_store.db&quot;)</code></li><li><code>addRule(action)</code> 调 <code>dao.upsert(...)</code></li><li><code>getRules(ssid)</code> 调 <code>dao.getByTrigger(ssid)</code> 再转回 <code>Action</code>。</li></ul>
+<p><code>MainActivity.onCreate()</code> 里也已经在页面初始化时执行了 <code>RuleRepo.init(applicationContext)</code>。</p>
+<h3 id="h3-u8FD9u4E00u6B65u7684u610Fu4E49">这一步的意义</h3><p>项目从“会生成规则”升级成了“规则真的能被保存下来，并在下次启动时继续生效”。</p>
+<hr>
+<h2 id="h2--6-app-ai-">问题 6：用户问“这个 App 能做什么”时，AI 也需要有边界</h2><p>项目加了聊天入口后，很自然会出现一个新问题：</p>
+<ul>
+<li>用户会问：“你能做什么？”</li><li>或者：“这个软件到底是干嘛的？”</li></ul>
+<p>如果没有明确约束，模型很容易回答得过宽，甚至超出项目真实能力边界。</p>
+<h3 id="h3-u89E3u51B3u601Du8DEF">解决思路</h3><p>为普通聊天链路单独加一条能力说明 prompt。</p>
+<h3 id="h3-u5173u952Eu5B9Eu73B0">关键实现</h3><p><code>PromptBuilder</code> 里增加了 <code>buildAppCapabilityPrompt()</code>，专门告诉模型：</p>
+<ul>
+<li><p>这是这个 App 的助手</p>
+</li><li><p>当用户询问能力边界时，要明确回答：</p>
+<ul>
+<li>当前可以通过与 AI 聊天设置 Wi-Fi 环境下的手机配置</li><li>支持音量、亮度、蓝牙开关</li><li>并且下次启动时会自动应用这些已保存配置。</li></ul>
+</li></ul>
+<p>当前普通聊天上下文里，会 prepend 这条 capability prompt，再拼接普通聊天消息。这样普通聊天不只是在“能说话”，而是开始有了更清楚的产品边界。</p>
+<hr>
+<h2 id="h2-u6700u7EC8u67B6u6784u957Fu4EC0u4E48u6837">最终架构长什么样</h2><h3 id="h3-1-">1）输入链路</h3><pre><code class="language-mermaid">flowchart TD  
+A[用户输入] --&gt; B[MainActivity]  
+B --&gt; C[ChatViewModel.handleUserInput]  
+C --&gt; D[InputClassifier]  
+D --&gt;|NormalChat| E[NormalChatContextManager]  
+D --&gt;|CommandChat| F[CommandChatContextManager]  
+E --&gt; G[普通聊天 Prompt]  
+F --&gt; H[规则生成 Prompt]  
+G --&gt; I[ChatRepo.streamChat]  
+H --&gt; I  
+I --&gt; J[流式文本拼接]  
+J --&gt; K[更新 UI]  
+J --&gt; L{是否为 CommandChat}  
+L --&gt;|否| M[写回普通上下文]  
+L --&gt;|是| N[ActionParser]  
+N --&gt; O[RuleRepo.addRule]  
+O --&gt; P[ActionExecutor.execute]  
+P --&gt; Q[写回指令上下文]
+</code></pre>
+<h3 id="h3-2-">2）环境运行链路</h3><pre><code class="language-mermaid">flowchart TD
+    A[onCreate / onResume / Wi-Fi 权限回调] --&gt; B[onWifiMaybeChanged]
+    B --&gt; C[读取当前 SSID]
+    C --&gt; D[RuleEngine.run]
+    D --&gt; E{匹配结果}
+    E --&gt;|NoRule| F[界面提示无匹配规则]
+    E --&gt;|SkippedDuplicate| G[界面提示跳过重复执行]
+    E --&gt;|Success| H[执行 Action 列表]
+    H --&gt; I[更新环境状态与执行结果]</code></pre>
+<h3 id="h3-3-">3）模块关系图</h3><pre><code class="language-mermaid">flowchart LR
+    UI[MainActivity / UI] --&gt; VM[ChatViewModel]
+    VM --&gt; Classifier[InputClassifier]
+    VM --&gt; NCtx[NormalChatContextManager]
+    VM --&gt; CCtx[CommandChatContextManager]
+    VM --&gt; Prompt[PromptBuilder]
+    VM --&gt; Repo[ChatRepo]
+    VM --&gt; Parser[ActionParser]
+    Parser --&gt; RuleRepo[RuleRepo]
+    UI --&gt; RuleEngine[RuleEngine]
+    RuleEngine --&gt; RuleRepo
+    RuleEngine --&gt; Executor[ActionExecutor]</code></pre>
+<hr>
+<h2 id="h2-u8FD9u4E2Au9879u76EEu73B0u5728u7684u8FB9u754Cu548Cu4E0Bu4E00u6B65">这个项目现在的边界和下一步</h2><p>到当前阶段，这个项目已经具备：</p>
+<ul>
+<li>文本输入</li><li>输入分流</li><li>上下文管理</li><li>规则生成</li><li>规则持久化</li><li>环境触发执行</li><li>产品能力边界说明</li></ul>
+<p>它已经足够作为一个完整的 AI 端侧工程原型来讲。<br>如果继续往下做，比较自然的方向会是：</p>
+<ul>
+<li>增加规则编辑、删除和覆盖策略的 UI</li><li>给 <code>InputClassifier</code> 增加更细粒度分类</li><li>把日志和可观测性做得更系统</li><li>再补一层更清晰的消息模式建模</li><li>逐步引入更多系统能力和工具模块</li></ul>
+<hr>
+<h2 id="h2-u7ED3u8BED">结语</h2><p>这个项目过程中最重要的变化，不是“多了几个类”，而是系统边界越来越清楚了：</p>
+<ul>
+<li>输入不是都一样的</li><li>上下文不是都能混着用的</li><li>模型输出不能只停留在文本</li><li>规则运行不能挂在聊天链路上</li><li>规则如果不持久化，就不是真正的工具能力</li></ul>
+<p>最后得到的不是一个“AI 聊天 App”，而是一个：</p>
+<blockquote>
+<p><strong>AI 驱动的 Wi-Fi 场景规则生成与执行系统</strong></p>
+</blockquote>
+<p><a href="https://github.com/u3shadow/ShaverAI.git">完整的代码可以点这里移步我的github查看</a></p></article>
+</main>
+
+<footer>Generated from local Z-Blog backup for GitHub Pages.</footer>
+<script>
+  document.querySelectorAll("img").forEach((img) => {
+    const replaceMissingImage = () => {
+      const box = document.createElement("div");
+      box.className = "image-missing";
+      const src = img.currentSrc || img.src || img.getAttribute("src") || "";
+      box.innerHTML = `<strong>Image unavailable</strong><span>This image could not be loaded from the static backup.</span><br><a href="${src}" target="_blank" rel="noreferrer">Open original image URL</a>`;
+      img.replaceWith(box);
+    };
+    img.addEventListener("error", replaceMissingImage, { once: true });
+    if (img.complete && img.naturalWidth === 0) replaceMissingImage();
+  });
+</script>
+
+<script type="module">
+  import mermaid from "https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.esm.min.mjs";
+  mermaid.initialize({
+    startOnLoad: false,
+    securityLevel: "loose",
+    theme: "base",
+    themeVariables: {
+      primaryColor: "#e8f6f3",
+      primaryTextColor: "#1f2937",
+      primaryBorderColor: "#0f766e",
+      lineColor: "#64748b",
+      tertiaryColor: "#f8fafc",
+      fontFamily: "-apple-system, BlinkMacSystemFont, Segoe UI, PingFang SC, Microsoft YaHei, sans-serif"
+    }
+  });
+  document.querySelectorAll("pre > code.language-mermaid").forEach((code, index) => {
+    const wrapper = document.createElement("div");
+    wrapper.className = "mermaid-wrap";
+    const graph = document.createElement("div");
+    graph.className = "mermaid";
+    graph.id = `mermaid-${index + 1}`;
+    graph.textContent = code.textContent.trim();
+    wrapper.appendChild(graph);
+    code.closest("pre").replaceWith(wrapper);
+  });
+  await mermaid.run({ querySelector: ".mermaid" });
+</script>
+
+</body>
+</html>

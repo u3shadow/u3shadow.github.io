@@ -1,0 +1,134 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="大数据学习 我的学习算法有时候会面对大数据的考验，我们需要做一些优化才能保证速度 随机梯度下降 传统的梯度下降法每次会遍历整个集合，效率较低，随机梯度下降不必每次都遍历，效率较高 首先引入几个公式 算法步骤 1.随机排序数据集合 2.遍历随机的数据，使用如下公式进行学习 迷你梯度下降法 迷你梯度下降是一个折中的办法，不像梯度下降每次使用全部，也不是只使用一个...">
+  <title>[W10]大数据学习 - u3coding</title>
+  <link rel="canonical" href="https://u3.github.io/posts/2016/12/623-w10learning-with-large-datasets/">
+  <style>
+    :root { --bg:#f6f7f8; --paper:#fff; --ink:#1f2937; --muted:#667085; --line:#d7dde3; --accent:#0f766e; --code:#0b1720; }
+    * { box-sizing:border-box; }
+    body { margin:0; background:var(--bg); color:var(--ink); font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Microsoft YaHei",sans-serif; line-height:1.76; }
+    header { border-bottom:1px solid var(--line); background:rgba(255,255,255,.9); backdrop-filter:blur(12px); position:sticky; top:0; z-index:10; }
+    .bar { max-width:1080px; margin:0 auto; padding:15px 24px; display:flex; align-items:center; justify-content:space-between; gap:16px; }
+    .brand { color:#111827; text-decoration:none; font-weight:760; }
+    nav { display:flex; gap:14px; flex-wrap:wrap; justify-content:flex-end; }
+    nav a { color:var(--muted); text-decoration:none; font-size:14px; }
+    main { max-width:920px; margin:0 auto; padding:46px 24px 72px; }
+    .eyebrow { margin:0 0 12px; color:var(--accent); font-size:14px; font-weight:750; }
+    h1.title { margin:0; font-size:clamp(34px,5.8vw,56px); line-height:1.14; letter-spacing:0; }
+    .meta { margin:18px 0 32px; color:var(--muted); font-size:15px; }
+    .hero { margin:0 0 30px; border:1px solid var(--line); border-radius:8px; overflow:hidden; background:#eef2f5; }
+    .hero img { display:block; width:100%; max-height:560px; object-fit:contain; }
+    article, .panel { background:var(--paper); border:1px solid var(--line); border-radius:8px; padding:clamp(22px,4vw,44px); box-shadow:0 18px 45px rgba(31,41,55,.06); }
+    article h1, article h2, article h3 { line-height:1.34; margin:1.9em 0 .75em; letter-spacing:0; }
+    article h1 { font-size:28px; } article h2 { font-size:24px; } article h3 { font-size:20px; }
+    article p { margin:0 0 1.08em; }
+    article img { display:block; max-width:100%; height:auto; margin:18px auto 8px; border:1px solid var(--line); border-radius:6px; background:#eef2f5; }
+    article figure { margin:24px 0; }
+    article figcaption { text-align:center; color:var(--muted); font-size:14px; margin-top:8px; }
+    article pre { margin:20px 0; overflow:auto; padding:16px; border-radius:8px; background:var(--code); color:#e6edf3; line-height:1.62; }
+    article code { font-family:"Cascadia Code",Consolas,"SFMono-Regular",monospace; font-size:.92em; }
+    article :not(pre) > code { color:#9a3412; background:#fff7ed; padding:.12em .34em; border-radius:4px; }
+    article blockquote { margin:20px 0; padding:10px 18px; border-left:4px solid var(--accent); background:#f5fbfa; color:#374151; }
+    .post-list { display:grid; gap:18px; }
+    .post-card { padding:0 0 18px; border-bottom:1px solid var(--line); }
+    .post-card:last-child { border-bottom:0; padding-bottom:0; }
+    .post-card h2 { margin:0 0 6px; font-size:22px; line-height:1.36; }
+    .post-card a { color:var(--ink); text-decoration:none; }
+    .post-card a:hover { color:var(--accent); }
+    .post-card p { margin:8px 0 0; color:#475569; }
+    .image-missing { margin:22px 0; padding:18px; border:1px dashed #cbd5e1; border-radius:8px; background:#f8fafc; color:#475569; }
+    .image-missing strong { display:block; color:#334155; margin-bottom:6px; }
+    .image-missing a { overflow-wrap:anywhere; font-size:13px; }
+
+    a { color:var(--accent); }
+    footer { max-width:920px; margin:0 auto; padding:0 24px 44px; color:var(--muted); font-size:14px; }
+    @media (max-width:640px) { .bar { padding:13px 16px; } main { padding:32px 16px 54px; } article,.panel { padding:20px 16px; } h1.title { font-size:31px; } }
+  </style>
+</head>
+<body>
+<header><div class="bar"><a class="brand" href="/">u3coding</a><nav><a href="/">首页</a><a href="/archive/">归档</a><a href="/feed.xml">RSS</a></nav></div></header>
+
+<main>
+  <p class="eyebrow">未分类 · 文章 ID 623</p>
+  <h1 class="title">[W10]大数据学习</h1>
+  <div class="meta">发布于 2016-12-12 14:54 · 已迁移为静态页面</div>
+  <figure class="hero"><img src="/assets/images/cfeffa8e48fa.png" alt="[W10]大数据学习"></figure>
+  <article><h2>大数据学习</h2>
+
+我的学习算法有时候会面对大数据的考验，我们需要做一些优化才能保证速度
+
+<h2>随机梯度下降</h2>
+
+传统的梯度下降法每次会遍历整个集合，效率较低，随机梯度下降不必每次都遍历，效率较高
+首先引入几个公式
+
+<blockquote>
+  <a href="https://www.u3blog.xyz/zb_users/upload/2016/12/cost.png"><img loading="lazy"  src="/assets/images/cfeffa8e48fa.png" alt="" class="alignnone size-full wp-image-625" /></a>
+</blockquote>
+
+<a href="https://www.u3blog.xyz/zb_users/upload/2016/12/jtrain.png"><img loading="lazy"  src="/assets/images/e07aa5b4b959.png" alt="" class="alignnone size-full wp-image-626" /></a>
+
+<h3>算法步骤</h3>
+
+1.随机排序数据集合
+2.遍历随机的数据，使用如下公式进行学习
+<a href="https://www.u3blog.xyz/zb_users/upload/2016/12/随机梯度参数改变.png"><img loading="lazy"  src="/assets/images/c5a455a2d9f5.png" alt="" class="alignnone size-full wp-image-627" /></a>
+
+<h2>迷你梯度下降法</h2>
+
+迷你梯度下降是一个折中的办法，不像梯度下降每次使用全部，也不是只使用一个数据。
+迷你梯度下降一次只使用少量数据，一般范围是2-100
+公式如下
+
+<blockquote>
+  <a href="https://www.u3blog.xyz/zb_users/upload/2016/12/迷你梯度下降.png"><img loading="lazy"  src="/assets/images/a7f683424cc3.png" alt="" class="alignnone size-full wp-image-628" /></a>
+</blockquote>
+
+<h2>随机梯度下降的收敛</h2>
+
+我们怎么判断什么样的下降率a是合适的？我们如何确定已经到达了全局最优解的点？
+
+我们可以每隔1000个数据绘制一个cost点
+
+使用较小的下降率会更有可能获得更好的解，因为最终我们的结果会在最优解附近徘徊，小的小将率会让跳跃步幅减小
+
+一个有效的获得全局最优解的办法就是，缓慢的调整下降下降率a,例如下面这个公式
+
+<blockquote>
+  <a href="https://www.u3blog.xyz/zb_users/upload/2016/12/下降率减小.png"><img loading="lazy"  src="/assets/images/a76aebe00754.png" alt="" class="alignnone size-full wp-image-629" /></a>
+</blockquote>
+
+<h2>在线学习</h2>
+
+对于持续不断的数据流，我们可以使用一个无限循环，每次有输入我们就用其训练，并更新，这就是在线学习。
+
+<h2>映射缩减和数据并发</h2>
+
+如果我们的数据集合可以被分为多个子集，而且如果你有多台机器，那么我们可以把任务分割为子任务，让每台机器执行一个，这样就能加快我们的运算。
+例如对于梯度
+
+<blockquote>
+  <a href="https://www.u3blog.xyz/zb_users/upload/2016/12/并发.png"><img loading="lazy"  src="/assets/images/61e8a97c8cb1.png" alt="" class="alignnone size-full wp-image-630" /></a>
+</blockquote></article>
+</main>
+
+<footer>Generated from local Z-Blog backup for GitHub Pages.</footer>
+<script>
+  document.querySelectorAll("img").forEach((img) => {
+    const replaceMissingImage = () => {
+      const box = document.createElement("div");
+      box.className = "image-missing";
+      const src = img.currentSrc || img.src || img.getAttribute("src") || "";
+      box.innerHTML = `<strong>Image unavailable</strong><span>This image could not be loaded from the static backup.</span><br><a href="${src}" target="_blank" rel="noreferrer">Open original image URL</a>`;
+      img.replaceWith(box);
+    };
+    img.addEventListener("error", replaceMissingImage, { once: true });
+    if (img.complete && img.naturalWidth === 0) replaceMissingImage();
+  });
+</script>
+
+</body>
+</html>

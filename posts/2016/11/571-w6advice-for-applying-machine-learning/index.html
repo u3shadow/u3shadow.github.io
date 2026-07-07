@@ -1,0 +1,194 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="采取什么措施来进一步优化 主要有五种措施 1.获取更多训练样本 2.尝试使用更小规模的特称 3.尝试增加特征 4.尝试使用多项式特征 5.增加或者减小正则参数λ 评估假设 我们如何评估一个已经做出的假设是否合理呢？也许我们的假设在训练集合上面有较好的表现，但是对于其他的数据却表现得不好。 这时候我们需要使用一些方法来评估我们的假设是否合理。 首先，我们需要把...">
+  <title>[W6]机器学习应用建议 - u3coding</title>
+  <link rel="canonical" href="https://u3.github.io/posts/2016/11/571-w6advice-for-applying-machine-learning/">
+  <style>
+    :root { --bg:#f6f7f8; --paper:#fff; --ink:#1f2937; --muted:#667085; --line:#d7dde3; --accent:#0f766e; --code:#0b1720; }
+    * { box-sizing:border-box; }
+    body { margin:0; background:var(--bg); color:var(--ink); font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Microsoft YaHei",sans-serif; line-height:1.76; }
+    header { border-bottom:1px solid var(--line); background:rgba(255,255,255,.9); backdrop-filter:blur(12px); position:sticky; top:0; z-index:10; }
+    .bar { max-width:1080px; margin:0 auto; padding:15px 24px; display:flex; align-items:center; justify-content:space-between; gap:16px; }
+    .brand { color:#111827; text-decoration:none; font-weight:760; }
+    nav { display:flex; gap:14px; flex-wrap:wrap; justify-content:flex-end; }
+    nav a { color:var(--muted); text-decoration:none; font-size:14px; }
+    main { max-width:920px; margin:0 auto; padding:46px 24px 72px; }
+    .eyebrow { margin:0 0 12px; color:var(--accent); font-size:14px; font-weight:750; }
+    h1.title { margin:0; font-size:clamp(34px,5.8vw,56px); line-height:1.14; letter-spacing:0; }
+    .meta { margin:18px 0 32px; color:var(--muted); font-size:15px; }
+    .hero { margin:0 0 30px; border:1px solid var(--line); border-radius:8px; overflow:hidden; background:#eef2f5; }
+    .hero img { display:block; width:100%; max-height:560px; object-fit:contain; }
+    article, .panel { background:var(--paper); border:1px solid var(--line); border-radius:8px; padding:clamp(22px,4vw,44px); box-shadow:0 18px 45px rgba(31,41,55,.06); }
+    article h1, article h2, article h3 { line-height:1.34; margin:1.9em 0 .75em; letter-spacing:0; }
+    article h1 { font-size:28px; } article h2 { font-size:24px; } article h3 { font-size:20px; }
+    article p { margin:0 0 1.08em; }
+    article img { display:block; max-width:100%; height:auto; margin:18px auto 8px; border:1px solid var(--line); border-radius:6px; background:#eef2f5; }
+    article figure { margin:24px 0; }
+    article figcaption { text-align:center; color:var(--muted); font-size:14px; margin-top:8px; }
+    article pre { margin:20px 0; overflow:auto; padding:16px; border-radius:8px; background:var(--code); color:#e6edf3; line-height:1.62; }
+    article code { font-family:"Cascadia Code",Consolas,"SFMono-Regular",monospace; font-size:.92em; }
+    article :not(pre) > code { color:#9a3412; background:#fff7ed; padding:.12em .34em; border-radius:4px; }
+    article blockquote { margin:20px 0; padding:10px 18px; border-left:4px solid var(--accent); background:#f5fbfa; color:#374151; }
+    .post-list { display:grid; gap:18px; }
+    .post-card { padding:0 0 18px; border-bottom:1px solid var(--line); }
+    .post-card:last-child { border-bottom:0; padding-bottom:0; }
+    .post-card h2 { margin:0 0 6px; font-size:22px; line-height:1.36; }
+    .post-card a { color:var(--ink); text-decoration:none; }
+    .post-card a:hover { color:var(--accent); }
+    .post-card p { margin:8px 0 0; color:#475569; }
+    .image-missing { margin:22px 0; padding:18px; border:1px dashed #cbd5e1; border-radius:8px; background:#f8fafc; color:#475569; }
+    .image-missing strong { display:block; color:#334155; margin-bottom:6px; }
+    .image-missing a { overflow-wrap:anywhere; font-size:13px; }
+
+    a { color:var(--accent); }
+    footer { max-width:920px; margin:0 auto; padding:0 24px 44px; color:var(--muted); font-size:14px; }
+    @media (max-width:640px) { .bar { padding:13px 16px; } main { padding:32px 16px 54px; } article,.panel { padding:20px 16px; } h1.title { font-size:31px; } }
+  </style>
+</head>
+<body>
+<header><div class="bar"><a class="brand" href="/">u3coding</a><nav><a href="/">首页</a><a href="/archive/">归档</a><a href="/feed.xml">RSS</a></nav></div></header>
+
+<main>
+  <p class="eyebrow">未分类 · 文章 ID 571</p>
+  <h1 class="title">[W6]机器学习应用建议</h1>
+  <div class="meta">发布于 2016-11-23 15:19 · 已迁移为静态页面</div>
+  <figure class="hero"><img src="/assets/images/a396c8eeb203.png" alt="[W6]机器学习应用建议"></figure>
+  <article><h2>采取什么措施来进一步优化</h2>
+
+主要有五种措施
+1.获取更多训练样本
+2.尝试使用更小规模的特称
+3.尝试增加特征
+4.尝试使用多项式特征
+5.增加或者减小正则参数λ
+
+<h2>评估假设</h2>
+
+<h3>我们如何评估一个已经做出的假设是否合理呢？也许我们的假设在训练集合上面有较好的表现，但是对于其他的数据却表现得不好。</h3>
+
+这时候我们需要使用一些方法来评估我们的假设是否合理。
+首先，我们需要把训练样本分为两部分，训练集合和测试集合
+接着做如下步骤：
+1.使用训练集合训练参数集合Θ 以及最小化Jtrain(Θ) 
+2.使用测试集合运算误差Jtrain(Θ)
+
+<h3>测试集合误差计算</h3>
+
+1.对于线性回归问题，按照如下公式
+
+<blockquote>
+  <a href="https://www.u3blog.xyz/zb_users/upload/2016/11/线性回归测试集合误差.png"><img loading="lazy"  src="/assets/images/a396c8eeb203.png" alt="%e7%ba%bf%e6%80%a7%e5%9b%9e%e5%bd%92%e6%b5%8b%e8%af%95%e9%9b%86%e5%90%88%e8%af%af%e5%b7%ae" class="alignnone size-full wp-image-572" /></a>
+  2.对于分类问题，（非0即1）
+  <a href="https://www.u3blog.xyz/zb_users/upload/2016/11/分类问题误差计算.png"><img loading="lazy"  src="/assets/images/f039195313a9.png" alt="%e5%88%86%e7%b1%bb%e9%97%ae%e9%a2%98%e8%af%af%e5%b7%ae%e8%ae%a1%e7%ae%97" class="alignnone size-full wp-image-573" /></a>
+  <a href="https://www.u3blog.xyz/zb_users/upload/2016/11/分类误差均值.png"><img loading="lazy"  src="/assets/images/0f2813dc3654.png" alt="%e5%88%86%e7%b1%bb%e8%af%af%e5%b7%ae%e5%9d%87%e5%80%bc" class="alignnone size-full wp-image-574" /></a>
+  第二个公式结果给出了分类错误的概率
+</blockquote>
+
+<h3>模型选择以及训练/验证/测试集合</h3>
+
+我们增加一个交叉验证集合
+我们可以把学习样本分成三部分
+1.训练样本 60%
+2.交叉验证样本 20%
+3.测试集合 20%
+首先训练训练样本，然后将结果在交叉验证样本进行调试，最后使用测试样本进行测试。
+
+<h3>诊断偏差和方差</h3>
+
+1.高偏差意味着我们的方案对训练样本的适应性不够
+2.高方差意味着我们过度的适配了训练样本
+这两种情况都会导致我们的解决方案对新加入的样本无法正确预测/适配
+
+<h3>如何判断是否高偏差/高方差</h3>
+
+高偏差， Jtrain(Θ) 和 JCV(Θ) 都很高而且相近
+高方差， Jtrain(Θ) 很低 JCV(Θ) 很高
+如下图
+
+<blockquote>
+  <a href="https://www.u3blog.xyz/zb_users/upload/2016/11/高方差高偏差.png"><img loading="lazy"  src="/assets/images/b6b489013022.png" alt="%e9%ab%98%e6%96%b9%e5%b7%ae%e9%ab%98%e5%81%8f%e5%b7%ae" class="alignnone size-full wp-image-575" /></a>
+</blockquote>
+
+<h3>正则化参数λ对偏差和方差的影响</h3>
+
+过大的λ会导致高偏差（过度正则化，不适配训练样本）
+反之，过小的λ会导致高方差（过度适配训练样本）
+如下图
+
+<blockquote>
+  <a href="https://www.u3blog.xyz/zb_users/upload/2016/11/正则化参数的影响.png"><img loading="lazy"  src="/assets/images/bd9c86b67b67.png" alt="%e6%ad%a3%e5%88%99%e5%8c%96%e5%8f%82%e6%95%b0%e7%9a%84%e5%bd%b1%e5%93%8d" class="alignnone size-full wp-image-576" /></a>
+</blockquote>
+
+<h3>学习曲线</h3>
+
+即随着学习样本的增加，error的变化情况的曲线
+
+<h4>高偏差</h4>
+
+在样本数量较小时，Jtrain(Θ)较小，JCV(Θ)较大
+样本数量较多时，Jtrain(Θ)和JCV(Θ)都会较高且接近
+当我们的算法高偏差时，增加样本数量不会对结果有明显的改善
+
+<blockquote>
+  <a href="https://www.u3blog.xyz/zb_users/upload/2016/11/高偏差学习曲线.png"><img loading="lazy"  src="/assets/images/ed248aed6bec.png" alt="%e9%ab%98%e5%81%8f%e5%b7%ae%e5%ad%a6%e4%b9%a0%e6%9b%b2%e7%ba%bf" class="alignnone size-full wp-image-577" /></a>
+</blockquote>
+
+<h4>高偏差</h4>
+
+样本较小时与高偏差无异
+样本较多时，JCV(Θ)减小，Jtrain(Θ)增加，JCV(Θ) > Jtrain(Θ),不会互相近似
+高偏差时，增加测试样本可以提高算法学习精度
+
+<blockquote>
+  <a href="https://www.u3blog.xyz/zb_users/upload/2016/11/高方差学习曲线.png"><img loading="lazy"  src="/assets/images/45d7c4ff59bf.png" alt="%e9%ab%98%e6%96%b9%e5%b7%ae%e5%ad%a6%e4%b9%a0%e6%9b%b2%e7%ba%bf" class="alignnone size-full wp-image-578" /></a>
+</blockquote>
+
+<h2>使用哪些手法优化机器学习效率</h2>
+
+1.获取更多的训练样本
+可以提高高方差情况下的效率
+2.尝试使用更小规模的特称
+可以提高高方差情况下的效率
+3.尝试增加特征
+可以提高高偏差情况下的效率
+4.尝试使用多项式特征
+可以提高高偏差情况下的效率
+5.减小正则参数λ
+可以提高高偏差情况下的效率
+6.增加正则参数λ
+可以提高高方差情况下的效率
+
+<h2>神经网络问题的优化方法</h2>
+
+1.参数较少的神经网络问题更易于不耦合训练样本，计算量也较少
+2.拥有更多参数的神经网络问题容易过度耦合训练样本，但是计算量较大，可以用正则化来优化。
+
+<h2>模型选择</h2>
+
+主要有两方面的问题，选择多项式次数，选择哪些参数可以被留下，去掉哪些参数
+主要有三个方式来解决这个问题
+1.获取更多的数据（非常困难）
+2.选择适合训练样本的模型（非常困难）
+3.通过正则化来避免过度耦合</article>
+</main>
+
+<footer>Generated from local Z-Blog backup for GitHub Pages.</footer>
+<script>
+  document.querySelectorAll("img").forEach((img) => {
+    const replaceMissingImage = () => {
+      const box = document.createElement("div");
+      box.className = "image-missing";
+      const src = img.currentSrc || img.src || img.getAttribute("src") || "";
+      box.innerHTML = `<strong>Image unavailable</strong><span>This image could not be loaded from the static backup.</span><br><a href="${src}" target="_blank" rel="noreferrer">Open original image URL</a>`;
+      img.replaceWith(box);
+    };
+    img.addEventListener("error", replaceMissingImage, { once: true });
+    if (img.complete && img.naturalWidth === 0) replaceMissingImage();
+  });
+</script>
+
+</body>
+</html>

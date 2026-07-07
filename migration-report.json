@@ -1,0 +1,16 @@
+{
+  "posts": 215,
+  "html_files": 217,
+  "assets": 182,
+  "image_download_failures": 7,
+  "issues": [],
+  "failures": {
+    "https://p0-xtjj-private.juejin.cn/tos-cn-i-73owjymdk6/71b95ea83dfc4b1695bf05eb549ea226~tplv-73owjymdk6-jj-mark-v1:0:0:0:0:5o6Y6YeR5oqA5pyv56S-5Yy6IEAgdTNzaGFkb3c=:q75.awebp?policy=eyJ2bSI6MywidWlkIjoiMjQzNjE3MzQ5NjU5MzI3MiJ9&rk3s=f64ab15b&x-orig-authkey=f32326d3454f2ac7e96d3d06cdbb035152127018&x-orig-expires=1777441461&x-orig-sign=4BpOCiTgsvMGLIgMUyjsHxqmdOA%3D": "HTTP Error 403: Forbidden",
+    "https://p0-xtjj-private.juejin.cn/tos-cn-i-73owjymdk6/7876fa55f9b345cda50af9b161742123~tplv-73owjymdk6-jj-mark-v1:0:0:0:0:5o6Y6YeR5oqA5pyv56S-5Yy6IEAgdTNzaGFkb3c=:q75.awebp?policy=eyJ2bSI6MywidWlkIjoiMjQzNjE3MzQ5NjU5MzI3MiJ9&rk3s=f64ab15b&x-orig-authkey=f32326d3454f2ac7e96d3d06cdbb035152127018&x-orig-expires=1777441461&x-orig-sign=0vD4mK4IXg6dpiuDNC%2BxidkEXVU%3D": "HTTP Error 403: Forbidden",
+    "https://p0-xtjj-private.juejin.cn/tos-cn-i-73owjymdk6/b96c85c5ed9f4602817aadb04d892484~tplv-73owjymdk6-jj-mark-v1:0:0:0:0:5o6Y6YeR5oqA5pyv56S-5Yy6IEAgdTNzaGFkb3c=:q75.awebp?policy=eyJ2bSI6MywidWlkIjoiMjQzNjE3MzQ5NjU5MzI3MiJ9&rk3s=f64ab15b&x-orig-authkey=f32326d3454f2ac7e96d3d06cdbb035152127018&x-orig-expires=1777441461&x-orig-sign=x5EiuH5neVX6H2vtsokMB%2FYSdMI%3D": "HTTP Error 403: Forbidden",
+    "https://www.paypalobjects.com/zh_XC/i/scr/pixel.gif": "downloaded file too small: 43",
+    "https://raw.githubusercontent.com/orhanobut/logger/master/images/description.png": "HTTP Error 404: Not Found",
+    "http://img.my.csdn.net/uploads/201211/29/1354170699_6619.png": "HTTP Error 502: Bad Gateway",
+    "http://img.my.csdn.net/uploads/201211/29/1354170682_3824.png": "HTTP Error 502: Bad Gateway"
+  }
+}

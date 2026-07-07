@@ -1,0 +1,145 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="什么是window 直接引用作者的原话了，window表示一个窗口的概念，具体实现是phonewindow，通过windowmanager来管理，windowmanager又和windowmanagerservice进行通信，其过程是一个ipc的过程。 Android中的所有视图都是通过window来呈现，无论是activity，dialog，toast都是...">
+  <title>Android中的Window和Windowmanager - u3coding</title>
+  <link rel="canonical" href="https://u3.github.io/posts/2016/04/327-android中的window和windowmanager/">
+  <style>
+    :root { --bg:#f6f7f8; --paper:#fff; --ink:#1f2937; --muted:#667085; --line:#d7dde3; --accent:#0f766e; --code:#0b1720; }
+    * { box-sizing:border-box; }
+    body { margin:0; background:var(--bg); color:var(--ink); font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Microsoft YaHei",sans-serif; line-height:1.76; }
+    header { border-bottom:1px solid var(--line); background:rgba(255,255,255,.9); backdrop-filter:blur(12px); position:sticky; top:0; z-index:10; }
+    .bar { max-width:1080px; margin:0 auto; padding:15px 24px; display:flex; align-items:center; justify-content:space-between; gap:16px; }
+    .brand { color:#111827; text-decoration:none; font-weight:760; }
+    nav { display:flex; gap:14px; flex-wrap:wrap; justify-content:flex-end; }
+    nav a { color:var(--muted); text-decoration:none; font-size:14px; }
+    main { max-width:920px; margin:0 auto; padding:46px 24px 72px; }
+    .eyebrow { margin:0 0 12px; color:var(--accent); font-size:14px; font-weight:750; }
+    h1.title { margin:0; font-size:clamp(34px,5.8vw,56px); line-height:1.14; letter-spacing:0; }
+    .meta { margin:18px 0 32px; color:var(--muted); font-size:15px; }
+    .hero { margin:0 0 30px; border:1px solid var(--line); border-radius:8px; overflow:hidden; background:#eef2f5; }
+    .hero img { display:block; width:100%; max-height:560px; object-fit:contain; }
+    article, .panel { background:var(--paper); border:1px solid var(--line); border-radius:8px; padding:clamp(22px,4vw,44px); box-shadow:0 18px 45px rgba(31,41,55,.06); }
+    article h1, article h2, article h3 { line-height:1.34; margin:1.9em 0 .75em; letter-spacing:0; }
+    article h1 { font-size:28px; } article h2 { font-size:24px; } article h3 { font-size:20px; }
+    article p { margin:0 0 1.08em; }
+    article img { display:block; max-width:100%; height:auto; margin:18px auto 8px; border:1px solid var(--line); border-radius:6px; background:#eef2f5; }
+    article figure { margin:24px 0; }
+    article figcaption { text-align:center; color:var(--muted); font-size:14px; margin-top:8px; }
+    article pre { margin:20px 0; overflow:auto; padding:16px; border-radius:8px; background:var(--code); color:#e6edf3; line-height:1.62; }
+    article code { font-family:"Cascadia Code",Consolas,"SFMono-Regular",monospace; font-size:.92em; }
+    article :not(pre) > code { color:#9a3412; background:#fff7ed; padding:.12em .34em; border-radius:4px; }
+    article blockquote { margin:20px 0; padding:10px 18px; border-left:4px solid var(--accent); background:#f5fbfa; color:#374151; }
+    .post-list { display:grid; gap:18px; }
+    .post-card { padding:0 0 18px; border-bottom:1px solid var(--line); }
+    .post-card:last-child { border-bottom:0; padding-bottom:0; }
+    .post-card h2 { margin:0 0 6px; font-size:22px; line-height:1.36; }
+    .post-card a { color:var(--ink); text-decoration:none; }
+    .post-card a:hover { color:var(--accent); }
+    .post-card p { margin:8px 0 0; color:#475569; }
+    .image-missing { margin:22px 0; padding:18px; border:1px dashed #cbd5e1; border-radius:8px; background:#f8fafc; color:#475569; }
+    .image-missing strong { display:block; color:#334155; margin-bottom:6px; }
+    .image-missing a { overflow-wrap:anywhere; font-size:13px; }
+
+    a { color:var(--accent); }
+    footer { max-width:920px; margin:0 auto; padding:0 24px 44px; color:var(--muted); font-size:14px; }
+    @media (max-width:640px) { .bar { padding:13px 16px; } main { padding:32px 16px 54px; } article,.panel { padding:20px 16px; } h1.title { font-size:31px; } }
+  </style>
+</head>
+<body>
+<header><div class="bar"><a class="brand" href="/">u3coding</a><nav><a href="/">首页</a><a href="/archive/">归档</a><a href="/feed.xml">RSS</a></nav></div></header>
+
+<main>
+  <p class="eyebrow">未分类 · 文章 ID 327</p>
+  <h1 class="title">Android中的Window和Windowmanager</h1>
+  <div class="meta">发布于 2016-04-16 14:29 · 已迁移为静态页面</div>
+  
+  <article><h2>什么是window</h2>
+
+直接引用作者的原话了，window表示一个窗口的概念，具体实现是phonewindow，通过windowmanager来管理，windowmanager又和windowmanagerservice进行通信，其过程是一个ipc的过程。
+Android中的所有视图都是通过window来呈现，无论是activity，dialog，toast都是附加在window上的。
+所以，window实际是view的直接管理者。
+
+<h2>window与windowmanager</h2>
+
+window是通过windowmanager来访问和管理的，比如，我们要在window上添加一个button，具体的步骤就是，新建一个button，设置其属性，然后通过windowmanager.layoutparams来新建其在window上的布局属性。
+可以在布局属性中设置一些flag来达到特殊效果，比如，无法获取焦点，不能被点击，在锁屏时显示在窗口上等等。
+window也是分层级的，分为三级，分别对应的级别为，1-99，1000-1999，2000-2999，对应于windowmanager.layoutparams的type参数，层级越大的就会显示在上面。
+windowmanager常用的有三个方法，添加，更新，移除view
+
+<h2>window的内部机制</h2>
+
+<h3>window的添加过程</h3>
+
+首先，通过调用windowmanager来进行第一步，但是windowmanager只是一个接口，具体的操作委派给了windowmanagerimp，windowmanagerimp再调用了windowmanagerglobal来处理
+在windowmanagerglobal的addview方法中，主要做了三块内容
+1.检查参数的合法性，如果是子window还会进行一些布局参数的调整
+2.创建viewrootimp，并将要添加的view添加到列表中去
+3.通过viewrootimp来更新界面，完成window的添加，添加的入口函数是scheduleTraversals(),内部调用了一个windowsession对象的addtodisplay方法，这个对象其实是一个binder类型，所以其实质是一次ipc过程
+4.在addtodisplay内部，使用了windowmanagerservice来实现window的添加，接下来，就把添加任务交给了windowmanagerservice处理
+
+<h3>window的删除过程</h3>
+
+<ol>
+<li>也是通过windowmanagerimp然后通过windowmanagerglobal来实现的
+2.在windowmanagerglobal的removeview方法中，首先差找到要删除view的索引，然后调用removeviewlocked方法来删除
+3.在removeview方法中，首先回收输入法，然后调用viewrootimp的die方法来发送一个消息，并把要移除的view加入mDyingViews数组中
+4.在die方法中，如果是同步模式，会立即调用dodie方法，否则只会发送一个emptymessage给viewrootimp去调用dodie方法
+5.在dodie方法中，调用了dispatchedfromwindow方法来实现真正的移除view,该方法主要做几件事，垃圾回收，通过session的remove方法进行ipc，从而调用windowmanagerservice的removewindow方法，调用view的dispatchdetachedfromwindow方法，通过该方法调用view的一些周期回调，从而进行一些回收资源的收尾工作
+6.调用windowmanagerglobal的doremoveview方法刷新数据，将当前window所关联的mroots,mparams,mdyingviews三类对象从中移除</li>
+</ol>
+
+<h2>window的更新过程</h2>
+
+1.使用windowmanagerglobal的updateviewlayout方法，更新替换要更新的view的layoutparams,通过移除就的，添加新的来实现，然后再替换viewrootimp的layoutparams，通过viewrootimp的setlayoutparams方法来实现，viewrootimp会重新布局，测量，绘制要更新的view，并通过session发起ipc来让windowmanagerservice进行relayoutwindow更新window.
+
+<h2>window的创建过程</h2>
+
+通过上面，可以知道，view是android中视图的呈现方式，依赖于window，下面就三个主要的视图的创建方式进行总结
+
+<h3>Activity的window创建过程</h3>
+
+1.由于activity的创建过程十分复杂，我们直接看ActivityThread中的performLaunchActivity方法，首先，使用类加载器获取activity的实例对象，然后创建相关的上下文变量，再用activity的attach方法将这些上下文变量与activity关联起来
+2.在attach方法中，会使用policymanager来创建window实例，然后为其设置回调接口，这样当事件发生时就可以回调这些activity方法了
+3.在setContentView这个常用函数中，其实是把工作交给了window去处理，而window的实现就是phoneWindow
+4.phoneWindow中，具体做了以下几步
+4.1 检查是否有decorview，没有就创建
+4.2 把view添加到decorview的mcontentparent中，使用了layoutinflater
+4.3 回掉activity的oncontentviewchanged方法通知activity视图改变
+5 最后，在onresume中调用makevisible方法，将DecorView加入了window之中，用了addview，然后将其显示出来
+
+<h3>Dialog的Window创建过程</h3>
+
+1.创建window，使用policymanager，与上面的过程相同
+2.初始化decorview,并添加视图，也与上面内容相似
+3.将decorview添加到window中，也与activity的对应过程相同
+4.关闭时从window移除decorview
+
+<h3>Toast的Window创建过程</h3>
+
+从toast的show方法开始
+1.通过调用notificationmanagerservice的enqeueToast方法，传入包名，回掉实例，持续时间
+2.enqeueToast中，把请求封装为record对象，然后加入一个数组中，然后nms通过showNextToastLocked方法来显示当前toast
+3.显示是通过回调record对象的tn来实现的，这是一个ipc的过程，使用的是binder
+4.nms通过调用scheduleTimeoutLocked发送延时消息，来隐藏现在的toast并将其从队列中移除，显示下一个toast</article>
+</main>
+
+<footer>Generated from local Z-Blog backup for GitHub Pages.</footer>
+<script>
+  document.querySelectorAll("img").forEach((img) => {
+    const replaceMissingImage = () => {
+      const box = document.createElement("div");
+      box.className = "image-missing";
+      const src = img.currentSrc || img.src || img.getAttribute("src") || "";
+      box.innerHTML = `<strong>Image unavailable</strong><span>This image could not be loaded from the static backup.</span><br><a href="${src}" target="_blank" rel="noreferrer">Open original image URL</a>`;
+      img.replaceWith(box);
+    };
+    img.addEventListener("error", replaceMissingImage, { once: true });
+    if (img.complete && img.naturalWidth === 0) replaceMissingImage();
+  });
+</script>
+
+</body>
+</html>

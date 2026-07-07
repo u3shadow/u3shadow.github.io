@@ -1,0 +1,126 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="ReomveButterKnife插件 这是一个用于移除代码中对ButterKnife使用的AS插件，接下来我们将从头开始讲讲AS插件开发和这个插件的开发过程 地址是&lt;a href=&quot;https://github.com/u3shadow/RemoveButterKnife&quot; target=&quot;_blank&quot;&gt;RemoveButterKnife&lt;/a&gt; &lt;a...">
+  <title>AndroidStudio插件开发——RemoveButterKnife从构思到实现 - u3coding</title>
+  <link rel="canonical" href="https://u3.github.io/posts/2022/10/691-androidstudio插件开发-removebutterknife从构思到实现/">
+  <style>
+    :root { --bg:#f6f7f8; --paper:#fff; --ink:#1f2937; --muted:#667085; --line:#d7dde3; --accent:#0f766e; --code:#0b1720; }
+    * { box-sizing:border-box; }
+    body { margin:0; background:var(--bg); color:var(--ink); font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Microsoft YaHei",sans-serif; line-height:1.76; }
+    header { border-bottom:1px solid var(--line); background:rgba(255,255,255,.9); backdrop-filter:blur(12px); position:sticky; top:0; z-index:10; }
+    .bar { max-width:1080px; margin:0 auto; padding:15px 24px; display:flex; align-items:center; justify-content:space-between; gap:16px; }
+    .brand { color:#111827; text-decoration:none; font-weight:760; }
+    nav { display:flex; gap:14px; flex-wrap:wrap; justify-content:flex-end; }
+    nav a { color:var(--muted); text-decoration:none; font-size:14px; }
+    main { max-width:920px; margin:0 auto; padding:46px 24px 72px; }
+    .eyebrow { margin:0 0 12px; color:var(--accent); font-size:14px; font-weight:750; }
+    h1.title { margin:0; font-size:clamp(34px,5.8vw,56px); line-height:1.14; letter-spacing:0; }
+    .meta { margin:18px 0 32px; color:var(--muted); font-size:15px; }
+    .hero { margin:0 0 30px; border:1px solid var(--line); border-radius:8px; overflow:hidden; background:#eef2f5; }
+    .hero img { display:block; width:100%; max-height:560px; object-fit:contain; }
+    article, .panel { background:var(--paper); border:1px solid var(--line); border-radius:8px; padding:clamp(22px,4vw,44px); box-shadow:0 18px 45px rgba(31,41,55,.06); }
+    article h1, article h2, article h3 { line-height:1.34; margin:1.9em 0 .75em; letter-spacing:0; }
+    article h1 { font-size:28px; } article h2 { font-size:24px; } article h3 { font-size:20px; }
+    article p { margin:0 0 1.08em; }
+    article img { display:block; max-width:100%; height:auto; margin:18px auto 8px; border:1px solid var(--line); border-radius:6px; background:#eef2f5; }
+    article figure { margin:24px 0; }
+    article figcaption { text-align:center; color:var(--muted); font-size:14px; margin-top:8px; }
+    article pre { margin:20px 0; overflow:auto; padding:16px; border-radius:8px; background:var(--code); color:#e6edf3; line-height:1.62; }
+    article code { font-family:"Cascadia Code",Consolas,"SFMono-Regular",monospace; font-size:.92em; }
+    article :not(pre) > code { color:#9a3412; background:#fff7ed; padding:.12em .34em; border-radius:4px; }
+    article blockquote { margin:20px 0; padding:10px 18px; border-left:4px solid var(--accent); background:#f5fbfa; color:#374151; }
+    .post-list { display:grid; gap:18px; }
+    .post-card { padding:0 0 18px; border-bottom:1px solid var(--line); }
+    .post-card:last-child { border-bottom:0; padding-bottom:0; }
+    .post-card h2 { margin:0 0 6px; font-size:22px; line-height:1.36; }
+    .post-card a { color:var(--ink); text-decoration:none; }
+    .post-card a:hover { color:var(--accent); }
+    .post-card p { margin:8px 0 0; color:#475569; }
+    .image-missing { margin:22px 0; padding:18px; border:1px dashed #cbd5e1; border-radius:8px; background:#f8fafc; color:#475569; }
+    .image-missing strong { display:block; color:#334155; margin-bottom:6px; }
+    .image-missing a { overflow-wrap:anywhere; font-size:13px; }
+
+    a { color:var(--accent); }
+    footer { max-width:920px; margin:0 auto; padding:0 24px 44px; color:var(--muted); font-size:14px; }
+    @media (max-width:640px) { .bar { padding:13px 16px; } main { padding:32px 16px 54px; } article,.panel { padding:20px 16px; } h1.title { font-size:31px; } }
+  </style>
+</head>
+<body>
+<header><div class="bar"><a class="brand" href="/">u3coding</a><nav><a href="/">首页</a><a href="/archive/">归档</a><a href="/feed.xml">RSS</a></nav></div></header>
+
+<main>
+  <p class="eyebrow">技术文章 · 文章 ID 691</p>
+  <h1 class="title">AndroidStudio插件开发——RemoveButterKnife从构思到实现</h1>
+  <div class="meta">发布于 2022-10-08 14:56 · 已迁移为静态页面</div>
+  <figure class="hero"><img src="/assets/images/1a133fd21363.png" alt="AndroidStudio插件开发——RemoveButterKnife从构思到实现"></figure>
+  <article><h2 id="h2-reomvebutterknife-">ReomveButterKnife插件</h2><p>这是一个用于移除代码中对ButterKnife使用的AS插件，接下来我们将从头开始讲讲AS插件开发和这个插件的开发过程<br>地址是&lt;a href=&quot;https://github.com/u3shadow/RemoveButterKnife&quot; target=&quot;_blank&quot;&gt;RemoveButterKnife&lt;/a&gt;<br><img loading="lazy"  src="/assets/images/1a133fd21363.png" alt="undefined" title="undefined"></p>
+<h2 id="h2--androidstudio-">什么是AndroidStudio插件</h2><p>相信能开始阅读这篇文章的朋友都是从事，或者有兴趣从事Android开发的，那么，我们现在最常用的开发工具无疑就是AndroidStudio了。</p>
+<p>那么，什么又是AndroidStudio插件呢？</p>
+<p>AndroidStudio虽然是Google公司推出的一款很方便的开发环境，但是在实际的使用中，还是有一些功能是我们需要而它没有的，比如对vim输入方式的支持，这时候，就需要我们在它上面安装各种各样的插件来获得这些额外的功能了。</p>
+<p>通常我们可以在AndroidStudio的右上角找到一个小小的放大镜，点击它，然后搜索plugin，就可以找到插件搜索的界面了，在这里，我们可以搜索到自己想要的插件，当然，这些插件得上传到插件库里才行，这个后面会讲到。<br><img loading="lazy"  src="/assets/images/e0c5c8c36077.png" alt="undefined" title="undefined"><br><img loading="lazy"  src="/assets/images/7926562dddf2.png" alt="undefined" title="undefined"></p>
+<h2 id="h2-androidstudio-">AndroidStudio插件应该怎么用</h2><p>现在，我们装好了插件，该怎么用呢？这就要视插件的功能而定了，比如，用于支持vim输入的插件————IdeaVim，装上我们就可以开始使用，我们就能在AS里面使用Vim的快捷键和操作了，非常的厉害呢。</p>
+<h2 id="h2-removebutterknife-">RemoveButterKnife插件的设计目的</h2><p>相信大家都听说过大名鼎鼎的ButterKnife,一款用于通过注解绑定View的第三方库，我们一旦用了它，就可以不用写长长的findViewById语句了，用几个注解就可以绑定。</p>
+<p>再配合上AS插件——android butterknife zelezny一起使用，直接从布局自动生成相应的butterknife注解到你的代码里，真是太愉快了。</p>
+<p>但是，事情总不是像我们想象的那么顺利，当我们愉快的使用着butterknife的时候，往往会遇到一些尴尬的情况，比如</p>
+<p>1.ButterKnife这个第三方库每次更新之后，绑定view的注解都会改变，从bind,到inject，再到bindview，搞得很多人都不敢升级，一旦升级，就会有巨量的代码需要手动修改，非常痛苦</p>
+<p>2.当我们有一些非常棒的代码需要拿到其他项目使用，但是我们发现，那个项目对第三方库的使用是有限制的，我们不能使用butterknife，这时候，我们又得从注解改回findviewbyid</p>
+<p><strong>针对上面的两种情况，如果view比较少还好说，如果有几十个view，那么我们一个个的手动删除注解，写findviewbyid语句，简直是一场噩梦（别问我为什么知道这是噩梦）</strong></p>
+<p>所以，这种有规律又重复简单的工作为什么不能用一个插件来实现呢？于是RemoveButterKnife的想法就出现在了笔者脑海中。</p>
+<figure><img loading="lazy"  src="/assets/images/7c307f0709ee.gif" alt="undefined" title="undefined"></figure>
+<h2 id="h2-u5F00u53D1u63D2u4EF6u524Du7684u51C6u5907u5DE5u4F5C">开发插件前的准备工作</h2><p>1.要开发插件，我们需要一些工具，由于AS是基于Idea开发的，其实我们开发的插件也是一个idea插件，我们需要去下载一个idea的社区版本，大家只要搜索IntelliJ Idea就可以找到了。</p>
+<p>2.既然是用java做插件开发，肯定要设置好jdk，这个网上的资料更多，大家可以自行搜索。</p>
+<p>有了以上两点，我们的工具就准备完毕了，就可以开始写了。</p>
+<h2 id="h2--101">插件开发101</h2><p>有了想法和工具，我们就可以开始编码了，但是，插件该怎么写呢？</p>
+<p>其实，插件就是一种项目类型，我们新建项目的时候就会发现，有plugin这个类型，我们就新建一个这个类型的项目，中途会选择idea sdk,如果没有我们就新建一个（点击new 然后选择你的idea安装目录就可以了）<br><img loading="lazy"  src="/assets/images/5c7115d68b86.png" alt="undefined" title="undefined"></p>
+<p>现在，我们有了插件项目了，我们点击src目录，这就是我们存放代码的地方，右键，新建一个Action<br><img loading="lazy"  src="/assets/images/4c48a5151666.png" alt="undefined" title="undefined"></p>
+<p>这里会填写一些信息<br><img loading="lazy"  src="/assets/images/bba9cfcfcb16.png" alt="undefined" title="undefined"></p>
+<p>完成创建之后，我们的类代码是这样的</p>
+<p>&lt;pre class=&quot;lang:default decode:true &quot; &gt;import com.intellij.openapi.actionSystem.AnAction;<br>import com.intellij.openapi.actionSystem.AnActionEvent;<br><br>public class test extends AnAction {<br><br>    <a href="https://github.com/Override" title="&#64;Override" class="at-link">@Override</a><br>    public void actionPerformed(AnActionEvent e) {<br>        // TODO: insert action logic here<br>    }<br>}&lt;/pre&gt; 
+
+</p>
+<p>每次我们在菜单或者快捷键激活我们的插件的时候，actionPerformed方法就会被调用，里面的代码就会执行。</p>
+<p>到此为止，我们的第一个插件就完成了，是不是很简单呢。</p>
+<h2 id="h2-removebutterknife-">RemoveButterKnife的主要功能分析</h2><p>知道了怎么写插件，接下来我们就要开始想一想，我们的插件应该有哪些功能了</p>
+<p>1.适用于Activity/Fragment，使用了ButterKnife的情况</p>
+<p>2.删除对butterknife的引用</p>
+<p>3.删除butterknife的注解（<a href="https://github.com/bind" title="&#64;bind" class="at-link">@bind</a>（R.id.xyz））</p>
+<p>4.生成findviewbyid语句</p>
+<p>5.删除ButterKnife.inject（this）等方法的使用语句</p>
+<p>说完了功能，我们来看一个简单的对比例子，来说明到底是怎样的效果</p>
+<p>整容前：<br><img loading="lazy"  src="/assets/images/f7f3048f23af.png" alt="undefined" title="undefined"></p>
+<p>整容后：<br><img loading="lazy"  src="/assets/images/e8f5fb81553f.png" alt="undefined" title="undefined"></p>
+<h2 id="h2-u5177u4F53u5B9Eu73B0u601Du8DEF">具体实现思路</h2><p>有了上面的功能分析和效果图，想必大家都有了一个比较清晰的了解了，那么我们来从代码层面分析如何实现。</p>
+<p>1.由于import语句都是固定的，我们可以直接匹配，记录行号</p>
+<p>2.因为注解语句有很多种，我们可能需要正则表达式去匹配，并提取id和view的名字信息，并生成一个map,用来对应id和名字以及view的类型，当然，也记录下注解的行号</p>
+<p>3.对于butterknife.method的方法调用，使用字符串匹配，也记录下来行号</p>
+<p>4.删除记录下行号的行</p>
+<p>5.根据记录下的id和name的map，找到oncreate/oncreateview方法，在设置了layout的代码下面生成findviewbyid语句</p>
+<h2 id="h2-u5177u4F53u4EE3u7801u5206u6790">具体代码分析</h2><p>为了实现上述的功能，我们用了三个</p>
+<p>1.MainAction         ————  主要用于扫描匹配，记录行号，生成id和name的map</p>
+<p>2.DeleteAction       ————  主要用于删除记录下行号的代码</p>
+<p>3.FindViewByIdWriter ————  用于生成findviewbyid代码</p>
+<p>具体的代码可以在github上面找到<br>地址是&lt;a href=&quot;https://github.com/u3shadow/RemoveButterKnife&quot; target=&quot;_blank&quot;&gt;RemoveButterKnife&lt;/a&gt;<br><img loading="lazy"  src="/assets/images/fa8c7db5f238.png" alt="undefined" title="undefined"></p>
+<p>在代码中，使用了一些idea提供的api来获取当前编辑文件的内容，并编辑，这些api都很简单，各位如果想查询的话可以到idea的支持页面上进行查找.</p>
+<h2 id="h2-u628Au4F60u7684u63D2u4EF6u53D1u5E03u51FAu53BB">把你的插件发布出去</h2><p>你可以把你的插件发布到仓库里面去，这样就能在IDE里面找到它了，方法很简单，登陆仓库地址然后注册账号，发布插件等待通过审核即可。<br>&lt;a href=&quot;https://plugins.jetbrains.com/?idea&quot; target=&quot;_blank&quot;&gt;仓库地址&lt;/a&gt;</p></article>
+</main>
+
+<footer>Generated from local Z-Blog backup for GitHub Pages.</footer>
+<script>
+  document.querySelectorAll("img").forEach((img) => {
+    const replaceMissingImage = () => {
+      const box = document.createElement("div");
+      box.className = "image-missing";
+      const src = img.currentSrc || img.src || img.getAttribute("src") || "";
+      box.innerHTML = `<strong>Image unavailable</strong><span>This image could not be loaded from the static backup.</span><br><a href="${src}" target="_blank" rel="noreferrer">Open original image URL</a>`;
+      img.replaceWith(box);
+    };
+    img.addEventListener("error", replaceMissingImage, { once: true });
+    if (img.complete && img.naturalWidth === 0) replaceMissingImage();
+  });
+</script>
+
+</body>
+</html>

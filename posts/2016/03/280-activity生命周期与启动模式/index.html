@@ -1,0 +1,131 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="生命周期 Activity的生命周期相信大家都烂熟于胸了，总结起来可以用一张图片概括 这其中又分为两种情况，正常启动和异常启动 正常启动 沿着上图中的中轴线的启动方式，是最经典的启动方式，就无需多言了 一个问题，onStart onResume, onPause onStop 看起来差不多，它们有什么区别呢 区别在于，前者都是从是否可见的角度来进行的生命周期...">
+  <title>Activity生命周期与启动模式 - u3coding</title>
+  <link rel="canonical" href="https://u3.github.io/posts/2016/03/280-activity生命周期与启动模式/">
+  <style>
+    :root { --bg:#f6f7f8; --paper:#fff; --ink:#1f2937; --muted:#667085; --line:#d7dde3; --accent:#0f766e; --code:#0b1720; }
+    * { box-sizing:border-box; }
+    body { margin:0; background:var(--bg); color:var(--ink); font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Microsoft YaHei",sans-serif; line-height:1.76; }
+    header { border-bottom:1px solid var(--line); background:rgba(255,255,255,.9); backdrop-filter:blur(12px); position:sticky; top:0; z-index:10; }
+    .bar { max-width:1080px; margin:0 auto; padding:15px 24px; display:flex; align-items:center; justify-content:space-between; gap:16px; }
+    .brand { color:#111827; text-decoration:none; font-weight:760; }
+    nav { display:flex; gap:14px; flex-wrap:wrap; justify-content:flex-end; }
+    nav a { color:var(--muted); text-decoration:none; font-size:14px; }
+    main { max-width:920px; margin:0 auto; padding:46px 24px 72px; }
+    .eyebrow { margin:0 0 12px; color:var(--accent); font-size:14px; font-weight:750; }
+    h1.title { margin:0; font-size:clamp(34px,5.8vw,56px); line-height:1.14; letter-spacing:0; }
+    .meta { margin:18px 0 32px; color:var(--muted); font-size:15px; }
+    .hero { margin:0 0 30px; border:1px solid var(--line); border-radius:8px; overflow:hidden; background:#eef2f5; }
+    .hero img { display:block; width:100%; max-height:560px; object-fit:contain; }
+    article, .panel { background:var(--paper); border:1px solid var(--line); border-radius:8px; padding:clamp(22px,4vw,44px); box-shadow:0 18px 45px rgba(31,41,55,.06); }
+    article h1, article h2, article h3 { line-height:1.34; margin:1.9em 0 .75em; letter-spacing:0; }
+    article h1 { font-size:28px; } article h2 { font-size:24px; } article h3 { font-size:20px; }
+    article p { margin:0 0 1.08em; }
+    article img { display:block; max-width:100%; height:auto; margin:18px auto 8px; border:1px solid var(--line); border-radius:6px; background:#eef2f5; }
+    article figure { margin:24px 0; }
+    article figcaption { text-align:center; color:var(--muted); font-size:14px; margin-top:8px; }
+    article pre { margin:20px 0; overflow:auto; padding:16px; border-radius:8px; background:var(--code); color:#e6edf3; line-height:1.62; }
+    article code { font-family:"Cascadia Code",Consolas,"SFMono-Regular",monospace; font-size:.92em; }
+    article :not(pre) > code { color:#9a3412; background:#fff7ed; padding:.12em .34em; border-radius:4px; }
+    article blockquote { margin:20px 0; padding:10px 18px; border-left:4px solid var(--accent); background:#f5fbfa; color:#374151; }
+    .post-list { display:grid; gap:18px; }
+    .post-card { padding:0 0 18px; border-bottom:1px solid var(--line); }
+    .post-card:last-child { border-bottom:0; padding-bottom:0; }
+    .post-card h2 { margin:0 0 6px; font-size:22px; line-height:1.36; }
+    .post-card a { color:var(--ink); text-decoration:none; }
+    .post-card a:hover { color:var(--accent); }
+    .post-card p { margin:8px 0 0; color:#475569; }
+    .image-missing { margin:22px 0; padding:18px; border:1px dashed #cbd5e1; border-radius:8px; background:#f8fafc; color:#475569; }
+    .image-missing strong { display:block; color:#334155; margin-bottom:6px; }
+    .image-missing a { overflow-wrap:anywhere; font-size:13px; }
+
+    a { color:var(--accent); }
+    footer { max-width:920px; margin:0 auto; padding:0 24px 44px; color:var(--muted); font-size:14px; }
+    @media (max-width:640px) { .bar { padding:13px 16px; } main { padding:32px 16px 54px; } article,.panel { padding:20px 16px; } h1.title { font-size:31px; } }
+  </style>
+</head>
+<body>
+<header><div class="bar"><a class="brand" href="/">u3coding</a><nav><a href="/">首页</a><a href="/archive/">归档</a><a href="/feed.xml">RSS</a></nav></div></header>
+
+<main>
+  <p class="eyebrow">未分类 · 文章 ID 280</p>
+  <h1 class="title">Activity生命周期与启动模式</h1>
+  <div class="meta">发布于 2016-03-14 20:38 · 已迁移为静态页面</div>
+  <figure class="hero"><img src="/assets/images/149f9b7cd3fb.gif" alt="Activity生命周期与启动模式"></figure>
+  <article><h2>生命周期</h2>
+
+Activity的生命周期相信大家都烂熟于胸了，总结起来可以用一张图片概括
+<img loading="lazy"  src="/assets/images/149f9b7cd3fb.gif" alt="" />
+
+这其中又分为两种情况，正常启动和异常启动
+
+<h3>正常启动</h3>
+
+沿着上图中的中轴线的启动方式，是最经典的启动方式，就无需多言了
+
+<h4>一个问题，onStart onResume, onPause onStop 看起来差不多，它们有什么区别呢</h4>
+
+区别在于，前者都是从是否可见的角度来进行的生命周期调用，而后者都是从是否位于前台的角度来看的， 可以根据这个区别在不同的周期回掉里做不同的处理。
+
+<h3>异常情况</h3>
+
+主要的是activity在后台被杀死后的重启过程，如果没有特殊设置的话，在被杀死之前，会调用onSaveInstanceState来保存一些状态，比如文本框文字等
+
+在启动过后，会调用onRestyoreInstanceState来恢复之前保存的状态信息。
+
+当我们在manifest中设置了onconfigchange属性的时候，在结束之前，会调用onConfigrationChanged来进行状态保存，那么我们就可以通过对onConfigCHnage属性的配置来针对不同情况下做出不同的状态保存了。
+
+<h2>Activity的启动模式</h2>
+
+提到启动模式，无非就是经典的几种
+
+stand 标准模式
+
+singleTask 只会在任务栈里存在一个，如果已经有了，会将上部的任务全部出栈
+
+singleTop 如果栈顶没有，就新建，如果有，就不新建
+
+singleInstance 新开一个任务栈，将这个任务入栈
+
+<h3>TaskAffinity属性</h3>
+
+这是一个比较难理解的属性，大概可以认为是，亲和性，当一个任务被新建的时候，如果这个属性设置了另一个任务栈的包名，那么它会被盖到那个任务栈上去，成为其中的一部分。
+具体可以看这一篇文章
+<a href="http://144.34.248.28/2015/02/26/%E5%85%B3%E4%BA%8Etaskaffinity%E5%B1%9E%E6%80%A7%E7%9A%84%E4%BD%9C%E7%94%A8/">关于TaskAffinity属性的作用</a>
+
+<h2>在代码中通过FLAG设置Activity的启动方式</h2>
+
+不仅可以通过在manifest中配置launch_mode来设置启动模式，还可以在代码中通过FLAG来设置，当然，代码设置的优先级是比配置文件更低的。
+
+常用的FLAG有这么几个
+FLAG_ACTIVITY_NEW_TASK                对应singletask
+FLAG_ACTIVITY_SINGLE_TOP              对应singleTop
+FLAG_ACTIVITY_CLEAR_TOP               对应singletask
+FLAG_ACTIVITY_EXCLUDE_FROM_RECENTS    比较特殊，可以让activity在recent app界面（一般是按菜单键弹出的那个界面）不可见
+
+<h2>关于ACTION和CATEGORY的匹配规则</h2>
+
+简单的说，ACTION必须要有，而category可以没有因为系统会自动给没有的加上一个DEFAULT的category。</article>
+</main>
+
+<footer>Generated from local Z-Blog backup for GitHub Pages.</footer>
+<script>
+  document.querySelectorAll("img").forEach((img) => {
+    const replaceMissingImage = () => {
+      const box = document.createElement("div");
+      box.className = "image-missing";
+      const src = img.currentSrc || img.src || img.getAttribute("src") || "";
+      box.innerHTML = `<strong>Image unavailable</strong><span>This image could not be loaded from the static backup.</span><br><a href="${src}" target="_blank" rel="noreferrer">Open original image URL</a>`;
+      img.replaceWith(box);
+    };
+    img.addEventListener("error", replaceMissingImage, { once: true });
+    if (img.complete && img.naturalWidth === 0) replaceMissingImage();
+  });
+</script>
+
+</body>
+</html>

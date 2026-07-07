@@ -1,0 +1,186 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="工厂模式 什么是工厂模式 顾名思义，工厂模式就是一种生产产品的模式，我们这里的产品就是各种各样的对象 工厂模式的类图 如图所示： 1.我们有一个抽象类，工厂，两个具体实现，NYstore和Bstore，实现了抽象工厂的几个方法 2.我们有一种产品，pizza，并且对于它我们有很多实现，分为ny系和b系，不过他们都是pizza 当我们需要pizza的时候，我们...">
+  <title>工厂模式和抽象工厂概述以及二者的区别 - u3coding</title>
+  <link rel="canonical" href="https://u3.github.io/posts/2016/11/509-factory-and-abstract-factory/">
+  <style>
+    :root { --bg:#f6f7f8; --paper:#fff; --ink:#1f2937; --muted:#667085; --line:#d7dde3; --accent:#0f766e; --code:#0b1720; }
+    * { box-sizing:border-box; }
+    body { margin:0; background:var(--bg); color:var(--ink); font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Microsoft YaHei",sans-serif; line-height:1.76; }
+    header { border-bottom:1px solid var(--line); background:rgba(255,255,255,.9); backdrop-filter:blur(12px); position:sticky; top:0; z-index:10; }
+    .bar { max-width:1080px; margin:0 auto; padding:15px 24px; display:flex; align-items:center; justify-content:space-between; gap:16px; }
+    .brand { color:#111827; text-decoration:none; font-weight:760; }
+    nav { display:flex; gap:14px; flex-wrap:wrap; justify-content:flex-end; }
+    nav a { color:var(--muted); text-decoration:none; font-size:14px; }
+    main { max-width:920px; margin:0 auto; padding:46px 24px 72px; }
+    .eyebrow { margin:0 0 12px; color:var(--accent); font-size:14px; font-weight:750; }
+    h1.title { margin:0; font-size:clamp(34px,5.8vw,56px); line-height:1.14; letter-spacing:0; }
+    .meta { margin:18px 0 32px; color:var(--muted); font-size:15px; }
+    .hero { margin:0 0 30px; border:1px solid var(--line); border-radius:8px; overflow:hidden; background:#eef2f5; }
+    .hero img { display:block; width:100%; max-height:560px; object-fit:contain; }
+    article, .panel { background:var(--paper); border:1px solid var(--line); border-radius:8px; padding:clamp(22px,4vw,44px); box-shadow:0 18px 45px rgba(31,41,55,.06); }
+    article h1, article h2, article h3 { line-height:1.34; margin:1.9em 0 .75em; letter-spacing:0; }
+    article h1 { font-size:28px; } article h2 { font-size:24px; } article h3 { font-size:20px; }
+    article p { margin:0 0 1.08em; }
+    article img { display:block; max-width:100%; height:auto; margin:18px auto 8px; border:1px solid var(--line); border-radius:6px; background:#eef2f5; }
+    article figure { margin:24px 0; }
+    article figcaption { text-align:center; color:var(--muted); font-size:14px; margin-top:8px; }
+    article pre { margin:20px 0; overflow:auto; padding:16px; border-radius:8px; background:var(--code); color:#e6edf3; line-height:1.62; }
+    article code { font-family:"Cascadia Code",Consolas,"SFMono-Regular",monospace; font-size:.92em; }
+    article :not(pre) > code { color:#9a3412; background:#fff7ed; padding:.12em .34em; border-radius:4px; }
+    article blockquote { margin:20px 0; padding:10px 18px; border-left:4px solid var(--accent); background:#f5fbfa; color:#374151; }
+    .post-list { display:grid; gap:18px; }
+    .post-card { padding:0 0 18px; border-bottom:1px solid var(--line); }
+    .post-card:last-child { border-bottom:0; padding-bottom:0; }
+    .post-card h2 { margin:0 0 6px; font-size:22px; line-height:1.36; }
+    .post-card a { color:var(--ink); text-decoration:none; }
+    .post-card a:hover { color:var(--accent); }
+    .post-card p { margin:8px 0 0; color:#475569; }
+    .image-missing { margin:22px 0; padding:18px; border:1px dashed #cbd5e1; border-radius:8px; background:#f8fafc; color:#475569; }
+    .image-missing strong { display:block; color:#334155; margin-bottom:6px; }
+    .image-missing a { overflow-wrap:anywhere; font-size:13px; }
+
+    a { color:var(--accent); }
+    footer { max-width:920px; margin:0 auto; padding:0 24px 44px; color:var(--muted); font-size:14px; }
+    @media (max-width:640px) { .bar { padding:13px 16px; } main { padding:32px 16px 54px; } article,.panel { padding:20px 16px; } h1.title { font-size:31px; } }
+  </style>
+</head>
+<body>
+<header><div class="bar"><a class="brand" href="/">u3coding</a><nav><a href="/">首页</a><a href="/archive/">归档</a><a href="/feed.xml">RSS</a></nav></div></header>
+
+<main>
+  <p class="eyebrow">未分类 · 文章 ID 509</p>
+  <h1 class="title">工厂模式和抽象工厂概述以及二者的区别</h1>
+  <div class="meta">发布于 2016-11-10 16:30 · 已迁移为静态页面</div>
+  <figure class="hero"><img src="/assets/images/11ba9db19a76.png" alt="工厂模式和抽象工厂概述以及二者的区别"></figure>
+  <article><h1>工厂模式</h1>
+
+<h2>什么是工厂模式</h2>
+
+顾名思义，工厂模式就是一种生产产品的模式，我们这里的产品就是各种各样的对象
+
+<h2>工厂模式的类图</h2>
+
+<img loading="lazy"  src="/assets/images/11ba9db19a76.png" alt="" />
+如图所示：
+1.我们有一个抽象类，工厂，两个具体实现，NYstore和Bstore，实现了抽象工厂的几个方法
+2.我们有一种产品，pizza，并且对于它我们有很多实现，分为ny系和b系，不过他们都是pizza
+当我们需要pizza的时候，我们只要用一个store对象的创建方法来点餐就可以了，工厂类会根据其类型的不同创建相应的pizza给我们吃。
+调用代码：
+
+<pre class="theme:github lang:default decode:true " >public class FactoryDriver {
+    public static void main(String[] args){
+        PizzaStore nystore = new NYStore();//创建store
+        PizzaStore shstore = new SHStore();//创建另一个store
+        Pizza shchess = shstore.createPizza("chess");//点一个chess pizza
+        System.out.println(shchess.getName());//我们发现，在sh点的chess是上海风味！
+        Pizza nychess = nystore.createPizza("chess");
+        System.out.println(nychess.getName());//我们发现，在ny点的chess是纽约风味！
+    }
+}</pre>
+
+<h1>抽象工厂</h1>
+
+<h2>什么是抽象工厂</h2>
+
+简单的说，抽象工厂就是加强的工厂模式，工厂模式只能生成一种产品，比如披萨工厂只能生成披萨，然而，我们的抽象工厂，可以生产<strong>全家桶</strong>！薯条，可乐，鸡腿，煎饼果子，这些都能生产！
+
+<h2>抽象工厂的类图</h2>
+
+<img loading="lazy"  src="/assets/images/dbe67e81ca9a.png" alt="" />
+1.如图所示，我们的thingfactory定义了几个创建方法，可以让我们生产特定的套餐，里面包含thing1，thing2,thing3，可以是啤酒，薯条，鸡腿
+2.然后我们的两个具体类来实现了生产这个套餐的过程，左边的啤酒，薯条，鸡腿又分成了两派
+3.我们的具体工厂是怎么生产啤酒，薯条，鸡腿呢？我们的北京商店有可能提供，北京特产咖啡味啤酒，北京特产红酒味啤酒，当然要用我们上面说的工厂方法！
+怎么使用抽象工厂呢？看代码！
+
+<h3>Factory</h3>
+
+<pre class="theme:github lang:default decode:true " >public class HKFactory implements PizzaIngredientFactory {
+    @Override
+    public Dough createDough() {
+        return new HKDough();
+    }
+
+    @Override
+    public Sauce createSauce() {
+        return new HKSauce();
+    }
+}</pre>
+
+<h3>HKPizza</h3>
+
+<pre class="theme:github lang:default decode:true " >public class HKpizza extends Pizza {
+    PizzaIngredientFactory factory;
+    Sauce sauce;
+    Dough dough;
+    public HKpizza(PizzaIngredientFactory factory){
+        this.factory = factory;
+        this.sauce = factory.createSauce();
+        this.dough = factory.createDough();
+    }//我们的pizza现在是一个组合套餐了，里面有好几个成员
+
+}</pre>
+
+<h3>HKStore</h3>
+
+<pre class="theme:github lang:default decode:true " >public class HKStore implements Store{
+    PizzaIngredientFactory factory = new HKFactory();
+    @Override
+    public Pizza orderPizza(String name) {
+        if (name.equals("pizza"))
+        return new HKpizza(factory);
+        else
+            return null;
+    }
+}</pre>
+
+<h3>Driver</h3>
+
+//最外层还是跟我们的工厂方法一样
+
+<pre class="theme:github lang:default decode:true " >public class Driver {
+
+    public static void main(String[] args){
+    Store hkstore = new HKStore();
+    Store nystore = new NYStore();
+    Pizza pizza =  hkstore.orderPizza("HKpizza");
+        Pizza pizza1 =  nystore.orderPizza("NYpizza");
+    }
+}</pre>
+
+<h1>抽象工厂和工厂的同异</h1>
+
+<h2>相同点</h2>
+
+1.都是生产对象的方法
+2.都把使用者和具体类型解绑了
+3.抽象工厂生产套餐的具体元素的时候经常使用工厂方法（比如生产套餐里的可乐的时候，用了可乐工厂来根据不同地区生产不同可乐），再把他们组合起来，形成套餐
+
+<h2>不同点</h2>
+
+1.创建方式不同，工厂创建一个新对象使用的是继承现有工厂类然后复写工厂方法，而抽象工厂是使用了类的组合
+2.针对的对象不同，工厂方法主要针对是一种产品，比如，可乐，薯条其中的一种，而抽象工厂却是针对一系列产品，比如薯条和可乐的组合套餐，也可以称之为产品族
+3.1当需要新增一种产品的时候，在工厂方法中，我们只需要增加一种产品实例，并在具体工厂中加入生产这种实例的判断条件就可以了。
+3.2在抽象工厂中新增一个元素（比如在现有套餐中加送一块鸡腿），我们需要改工厂接口，新增这个鸡腿的接口，并修改这个接口的实现，新增这个方法并实现，在这个实现里来创建这个赠送的鸡腿</article>
+</main>
+
+<footer>Generated from local Z-Blog backup for GitHub Pages.</footer>
+<script>
+  document.querySelectorAll("img").forEach((img) => {
+    const replaceMissingImage = () => {
+      const box = document.createElement("div");
+      box.className = "image-missing";
+      const src = img.currentSrc || img.src || img.getAttribute("src") || "";
+      box.innerHTML = `<strong>Image unavailable</strong><span>This image could not be loaded from the static backup.</span><br><a href="${src}" target="_blank" rel="noreferrer">Open original image URL</a>`;
+      img.replaceWith(box);
+    };
+    img.addEventListener("error", replaceMissingImage, { once: true });
+    if (img.complete && img.naturalWidth === 0) replaceMissingImage();
+  });
+</script>
+
+</body>
+</html>

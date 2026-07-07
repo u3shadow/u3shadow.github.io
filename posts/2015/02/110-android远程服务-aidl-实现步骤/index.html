@@ -1,0 +1,164 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="AIDL是安卓接口定义语言的缩写 由于笔者使用的是android studio所以建立AIDL文件的位置也需要注意，要在APPNAME-&gt;main-&gt;aidl-&gt;packagename目录下，否则无法自动生成接口类文件 首先，编写我们的AIDL文件，定义接口方法，语法与JAVA略有不同 其次，我们要在建立的service类中建立实现了该AIDL文件名.stu...">
+  <title>Android远程服务（AIDL）实现步骤 - u3coding</title>
+  <link rel="canonical" href="https://u3.github.io/posts/2015/02/110-android远程服务-aidl-实现步骤/">
+  <style>
+    :root { --bg:#f6f7f8; --paper:#fff; --ink:#1f2937; --muted:#667085; --line:#d7dde3; --accent:#0f766e; --code:#0b1720; }
+    * { box-sizing:border-box; }
+    body { margin:0; background:var(--bg); color:var(--ink); font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Microsoft YaHei",sans-serif; line-height:1.76; }
+    header { border-bottom:1px solid var(--line); background:rgba(255,255,255,.9); backdrop-filter:blur(12px); position:sticky; top:0; z-index:10; }
+    .bar { max-width:1080px; margin:0 auto; padding:15px 24px; display:flex; align-items:center; justify-content:space-between; gap:16px; }
+    .brand { color:#111827; text-decoration:none; font-weight:760; }
+    nav { display:flex; gap:14px; flex-wrap:wrap; justify-content:flex-end; }
+    nav a { color:var(--muted); text-decoration:none; font-size:14px; }
+    main { max-width:920px; margin:0 auto; padding:46px 24px 72px; }
+    .eyebrow { margin:0 0 12px; color:var(--accent); font-size:14px; font-weight:750; }
+    h1.title { margin:0; font-size:clamp(34px,5.8vw,56px); line-height:1.14; letter-spacing:0; }
+    .meta { margin:18px 0 32px; color:var(--muted); font-size:15px; }
+    .hero { margin:0 0 30px; border:1px solid var(--line); border-radius:8px; overflow:hidden; background:#eef2f5; }
+    .hero img { display:block; width:100%; max-height:560px; object-fit:contain; }
+    article, .panel { background:var(--paper); border:1px solid var(--line); border-radius:8px; padding:clamp(22px,4vw,44px); box-shadow:0 18px 45px rgba(31,41,55,.06); }
+    article h1, article h2, article h3 { line-height:1.34; margin:1.9em 0 .75em; letter-spacing:0; }
+    article h1 { font-size:28px; } article h2 { font-size:24px; } article h3 { font-size:20px; }
+    article p { margin:0 0 1.08em; }
+    article img { display:block; max-width:100%; height:auto; margin:18px auto 8px; border:1px solid var(--line); border-radius:6px; background:#eef2f5; }
+    article figure { margin:24px 0; }
+    article figcaption { text-align:center; color:var(--muted); font-size:14px; margin-top:8px; }
+    article pre { margin:20px 0; overflow:auto; padding:16px; border-radius:8px; background:var(--code); color:#e6edf3; line-height:1.62; }
+    article code { font-family:"Cascadia Code",Consolas,"SFMono-Regular",monospace; font-size:.92em; }
+    article :not(pre) > code { color:#9a3412; background:#fff7ed; padding:.12em .34em; border-radius:4px; }
+    article blockquote { margin:20px 0; padding:10px 18px; border-left:4px solid var(--accent); background:#f5fbfa; color:#374151; }
+    .post-list { display:grid; gap:18px; }
+    .post-card { padding:0 0 18px; border-bottom:1px solid var(--line); }
+    .post-card:last-child { border-bottom:0; padding-bottom:0; }
+    .post-card h2 { margin:0 0 6px; font-size:22px; line-height:1.36; }
+    .post-card a { color:var(--ink); text-decoration:none; }
+    .post-card a:hover { color:var(--accent); }
+    .post-card p { margin:8px 0 0; color:#475569; }
+    .image-missing { margin:22px 0; padding:18px; border:1px dashed #cbd5e1; border-radius:8px; background:#f8fafc; color:#475569; }
+    .image-missing strong { display:block; color:#334155; margin-bottom:6px; }
+    .image-missing a { overflow-wrap:anywhere; font-size:13px; }
+
+    a { color:var(--accent); }
+    footer { max-width:920px; margin:0 auto; padding:0 24px 44px; color:var(--muted); font-size:14px; }
+    @media (max-width:640px) { .bar { padding:13px 16px; } main { padding:32px 16px 54px; } article,.panel { padding:20px 16px; } h1.title { font-size:31px; } }
+  </style>
+</head>
+<body>
+<header><div class="bar"><a class="brand" href="/">u3coding</a><nav><a href="/">首页</a><a href="/archive/">归档</a><a href="/feed.xml">RSS</a></nav></div></header>
+
+<main>
+  <p class="eyebrow">未分类 · 文章 ID 110</p>
+  <h1 class="title">Android远程服务（AIDL）实现步骤</h1>
+  <div class="meta">发布于 2015-02-03 14:05 · 已迁移为静态页面</div>
+  
+  <article><p>&nbsp;</p>
+<p>AIDL是安卓接口定义语言的缩写</p>
+<p>由于笔者使用的是android studio所以建立AIDL文件的位置也需要注意，要在APPNAME->main->aidl->packagename目录下，否则无法自动生成接口类文件</p>
+<p>首先，编写我们的AIDL文件，定义接口方法，语法与JAVA略有不同</p>
+<p>其次，我们要在建立的service类中建立实现了该AIDL文件名.stub类的子类，实现继承的方法。</p>
+<p>在onbind方法中返回这个子类的一个实例</p>
+<p>注册该服务，并给其一个ACTION，此ACTION就是以后访问该服务的ID</p>
+<p>&nbsp;</p>
+<p>在ACTIVITY中，通过INTENT设立ACTION以及bindService的方法来启动该服务，需要注意的是，Android5.0中service的intent一定要显性声明，所以我们要给INTENT设置上我们现在的包名，使用上下文的GETPACKAGENAME即可，并建立一个ServiceConnection实例，实现该实例的方法，在onServiceConnected方法中可以通过其参数service来获得service传回的子类实例。</p>
+<p>通过该实例，我们就可以调用服务中子类实例的方法了。</p>
+<p>&nbsp;</p>
+<p>上面就是AIDL服务的建立和使用的简易教程</p>
+<p>Activity</p>
+<div class="cnblogs_code">
+<pre><span style="color: #0000ff;">public</span> <span style="color: #0000ff;">class</span> aidlactivity <span style="color: #0000ff;">extends</span><span style="color: #000000;"> Activity{
+    </span><span style="color: #0000ff;">private</span> IMyAidlInterface mys = <span style="color: #0000ff;">null</span><span style="color: #000000;">;
+
+    </span><span style="color: #0000ff;">public</span> ServiceConnection sc = <span style="color: #0000ff;">new</span><span style="color: #000000;"> ServiceConnection() {
+        @Override
+        </span><span style="color: #0000ff;">public</span> <span style="color: #0000ff;">void</span><span style="color: #000000;"> onServiceConnected(ComponentName name, IBinder service) {
+            mys </span>=<span style="color: #000000;"> IMyAidlInterface.Stub.asInterface(service);
+            </span><span style="color: #0000ff;">if</span>(mys != <span style="color: #0000ff;">null</span><span style="color: #000000;">) {
+                </span><span style="color: #0000ff;">try</span><span style="color: #000000;"> {
+                    Toast.makeText(aidlactivity.</span><span style="color: #0000ff;">this</span><span style="color: #000000;">, mys.getvalue(), Toast.LENGTH_LONG).show();
+                } </span><span style="color: #0000ff;">catch</span><span style="color: #000000;"> (RemoteException e) {
+                    e.printStackTrace();
+                }
+                Log.v(</span>"sk", "not null"<span style="color: #000000;">);
+            }
+
+
+        }
+
+        @Override
+        </span><span style="color: #0000ff;">public</span> <span style="color: #0000ff;">void</span><span style="color: #000000;"> onServiceDisconnected(ComponentName name) {
+
+        }
+    };
+    @Override
+    </span><span style="color: #0000ff;">protected</span> <span style="color: #0000ff;">void</span><span style="color: #000000;"> onCreate(Bundle savedInstanceState) {
+        </span><span style="color: #0000ff;">super</span><span style="color: #000000;">.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+        Intent intent </span>= <span style="color: #0000ff;">new</span><span style="color: #000000;"> Intent();
+        intent.setAction(</span>"com.xl.aild.myaidl"<span style="color: #000000;">);
+        intent.setPackage(</span><span style="color: #0000ff;">this</span><span style="color: #000000;">.getPackageName());
+        bindService(intent, sc, Context.BIND_AUTO_CREATE);
+    }
+}<br /><br /></span></pre>
+</div>
+<div class="cnblogs_code">
+<pre><span style="color: #0000ff;">interface</span><span style="color: #000000;"> IMyAidlInterface {
+    </span><span style="color: #008000;">/**</span><span style="color: #008000;">
+     * Demonstrates some basic types that you can use as parameters
+     * and return values in AIDL.
+     </span><span style="color: #008000;">*/</span><span style="color: #000000;">
+   String getvalue();
+}</span></pre>
+</div>
+<p>AIDL文件&uarr;</p>
+<p>Servece文件</p>
+<div class="cnblogs_code">
+<pre><span style="color: #0000ff;">public</span> <span style="color: #0000ff;">class</span> aidlservice <span style="color: #0000ff;">extends</span><span style="color: #000000;"> Service {
+    @Override
+    </span><span style="color: #0000ff;">public</span><span style="color: #000000;"> IBinder onBind(Intent intent) {
+        Log.v(</span>"sk", "return"<span style="color: #000000;">);
+        </span><span style="color: #0000ff;">return</span> <span style="color: #0000ff;">new</span><span style="color: #000000;"> myaidl();
+    }
+
+    </span><span style="color: #0000ff;">class</span> myaidl <span style="color: #0000ff;">extends</span><span style="color: #000000;"> IMyAidlInterface.Stub {
+
+        @Override
+        </span><span style="color: #0000ff;">public</span> String getvalue() <span style="color: #0000ff;">throws</span><span style="color: #000000;"> RemoteException {
+            </span><span style="color: #0000ff;">return</span> "such a powerful aidl"<span style="color: #000000;">;
+        }
+    }
+}</span></pre>
+</div>
+<p>&nbsp;</p>
+<p>全称是：Android&nbsp;Interface&nbsp;Define&nbsp;Language</p>
+<p>在Android中,&nbsp;每个应用程序都可以有自己的进程.&nbsp;在写UI应用的时候,&nbsp;经常要用到Service.&nbsp;在不同的进程中,&nbsp;怎样传递对象呢?显然,&nbsp;Java中不允许跨进程内存共享.&nbsp;因此传递对象,&nbsp;只能把对象拆分成操作系统能理解的简单形式,&nbsp;以达到跨界对象访问的目的.&nbsp;在J2EE中,采用RMI的方式,&nbsp;可以通过序列化传递对象.&nbsp;在Android中,&nbsp;则采用AIDL的方式.&nbsp;理论上AIDL可以传递Bundle,实际上做起来却比较麻烦。</p>
+<p>AIDL(AndRoid接口描述语言)是一种接口描述语言;&nbsp;编译器可以通过aidl文件生成一段代码，通过预先定义的接口达到两个进程内部通信进程的目的.&nbsp;如果需要在一个Activity中,&nbsp;访问另一个Service中的某个对象,&nbsp;需要先将对象转化成AIDL可识别的参数(可能是多个参数),&nbsp;然后使用AIDL来传递这些参数,&nbsp;在消息的接收端,&nbsp;使用这些参数组装成自己需要的对象.</p>
+<p>AIDL的IPC的机制和COM或CORBA类似,&nbsp;是基于接口的，但它是轻量级的。它使用代理类在客户端和实现层间传递值.&nbsp;如果要使用AIDL,&nbsp;需要完成2件事情:&nbsp;1.&nbsp;引入AIDL的相关类.;&nbsp;2.&nbsp;调用aidl产生的class.</p>
+<p>AIDL的创建方法:</p>
+<p>AIDL语法很简单,可以用来声明一个带一个或多个方法的接口，也可以传递参数和返回值。&nbsp;由于远程调用的需要,&nbsp;这些参数和返回值并不是任何类型.下面是些AIDL支持的数据类型:</p>
+<p>1.&nbsp;不需要import声明的简单Java编程语言类型(int,boolean等)</p>
+<p>2.&nbsp;String,&nbsp;CharSequence不需要特殊声明</p>
+<p>3.&nbsp;List,&nbsp;Map和Parcelables类型,&nbsp;这些类型内所包含的数据成员也只能是简单数据类型,&nbsp;String等其他比支持的类型.</p></article>
+</main>
+
+<footer>Generated from local Z-Blog backup for GitHub Pages.</footer>
+<script>
+  document.querySelectorAll("img").forEach((img) => {
+    const replaceMissingImage = () => {
+      const box = document.createElement("div");
+      box.className = "image-missing";
+      const src = img.currentSrc || img.src || img.getAttribute("src") || "";
+      box.innerHTML = `<strong>Image unavailable</strong><span>This image could not be loaded from the static backup.</span><br><a href="${src}" target="_blank" rel="noreferrer">Open original image URL</a>`;
+      img.replaceWith(box);
+    };
+    img.addEventListener("error", replaceMissingImage, { once: true });
+    if (img.complete && img.naturalWidth === 0) replaceMissingImage();
+  });
+</script>
+
+</body>
+</html>

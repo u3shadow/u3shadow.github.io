@@ -1,0 +1,137 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="SVM支持向量机 支持向量机是一种监督学习算法，有时比现有算法更加简洁高效。 回顾一下逻辑回归的代价函数 注意展开后的第一项 当 θTx远远大于1的时候，此项接近于0 当 θTx远远小于1的时候，我们可以用一条直线来替代sigmoid曲线，最终图形如下 对于第二项，我们的标尺是-1 小于等于-1的时候是0，大于等于-1的时候是一条直线，如下图 Kernels...">
+  <title>[W7]优化目标 - u3coding</title>
+  <link rel="canonical" href="https://u3.github.io/posts/2016/11/587-w7optimization-objective/">
+  <style>
+    :root { --bg:#f6f7f8; --paper:#fff; --ink:#1f2937; --muted:#667085; --line:#d7dde3; --accent:#0f766e; --code:#0b1720; }
+    * { box-sizing:border-box; }
+    body { margin:0; background:var(--bg); color:var(--ink); font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Microsoft YaHei",sans-serif; line-height:1.76; }
+    header { border-bottom:1px solid var(--line); background:rgba(255,255,255,.9); backdrop-filter:blur(12px); position:sticky; top:0; z-index:10; }
+    .bar { max-width:1080px; margin:0 auto; padding:15px 24px; display:flex; align-items:center; justify-content:space-between; gap:16px; }
+    .brand { color:#111827; text-decoration:none; font-weight:760; }
+    nav { display:flex; gap:14px; flex-wrap:wrap; justify-content:flex-end; }
+    nav a { color:var(--muted); text-decoration:none; font-size:14px; }
+    main { max-width:920px; margin:0 auto; padding:46px 24px 72px; }
+    .eyebrow { margin:0 0 12px; color:var(--accent); font-size:14px; font-weight:750; }
+    h1.title { margin:0; font-size:clamp(34px,5.8vw,56px); line-height:1.14; letter-spacing:0; }
+    .meta { margin:18px 0 32px; color:var(--muted); font-size:15px; }
+    .hero { margin:0 0 30px; border:1px solid var(--line); border-radius:8px; overflow:hidden; background:#eef2f5; }
+    .hero img { display:block; width:100%; max-height:560px; object-fit:contain; }
+    article, .panel { background:var(--paper); border:1px solid var(--line); border-radius:8px; padding:clamp(22px,4vw,44px); box-shadow:0 18px 45px rgba(31,41,55,.06); }
+    article h1, article h2, article h3 { line-height:1.34; margin:1.9em 0 .75em; letter-spacing:0; }
+    article h1 { font-size:28px; } article h2 { font-size:24px; } article h3 { font-size:20px; }
+    article p { margin:0 0 1.08em; }
+    article img { display:block; max-width:100%; height:auto; margin:18px auto 8px; border:1px solid var(--line); border-radius:6px; background:#eef2f5; }
+    article figure { margin:24px 0; }
+    article figcaption { text-align:center; color:var(--muted); font-size:14px; margin-top:8px; }
+    article pre { margin:20px 0; overflow:auto; padding:16px; border-radius:8px; background:var(--code); color:#e6edf3; line-height:1.62; }
+    article code { font-family:"Cascadia Code",Consolas,"SFMono-Regular",monospace; font-size:.92em; }
+    article :not(pre) > code { color:#9a3412; background:#fff7ed; padding:.12em .34em; border-radius:4px; }
+    article blockquote { margin:20px 0; padding:10px 18px; border-left:4px solid var(--accent); background:#f5fbfa; color:#374151; }
+    .post-list { display:grid; gap:18px; }
+    .post-card { padding:0 0 18px; border-bottom:1px solid var(--line); }
+    .post-card:last-child { border-bottom:0; padding-bottom:0; }
+    .post-card h2 { margin:0 0 6px; font-size:22px; line-height:1.36; }
+    .post-card a { color:var(--ink); text-decoration:none; }
+    .post-card a:hover { color:var(--accent); }
+    .post-card p { margin:8px 0 0; color:#475569; }
+    .image-missing { margin:22px 0; padding:18px; border:1px dashed #cbd5e1; border-radius:8px; background:#f8fafc; color:#475569; }
+    .image-missing strong { display:block; color:#334155; margin-bottom:6px; }
+    .image-missing a { overflow-wrap:anywhere; font-size:13px; }
+
+    a { color:var(--accent); }
+    footer { max-width:920px; margin:0 auto; padding:0 24px 44px; color:var(--muted); font-size:14px; }
+    @media (max-width:640px) { .bar { padding:13px 16px; } main { padding:32px 16px 54px; } article,.panel { padding:20px 16px; } h1.title { font-size:31px; } }
+  </style>
+</head>
+<body>
+<header><div class="bar"><a class="brand" href="/">u3coding</a><nav><a href="/">首页</a><a href="/archive/">归档</a><a href="/feed.xml">RSS</a></nav></div></header>
+
+<main>
+  <p class="eyebrow">未分类 · 文章 ID 587</p>
+  <h1 class="title">[W7]优化目标</h1>
+  <div class="meta">发布于 2016-11-29 15:49 · 已迁移为静态页面</div>
+  <figure class="hero"><img src="/assets/images/21b8ed6b46b2.png" alt="[W7]优化目标"></figure>
+  <article><h2>SVM支持向量机</h2>
+
+支持向量机是一种监督学习算法，有时比现有算法更加简洁高效。
+回顾一下逻辑回归的代价函数
+
+<blockquote>
+  <a href="https://www.u3blog.xyz/zb_users/upload/2016/11/逻辑回归代价函数展开.png"><img loading="lazy"  src="/assets/images/21b8ed6b46b2.png" alt="%e9%80%bb%e8%be%91%e5%9b%9e%e5%bd%92%e4%bb%a3%e4%bb%b7%e5%87%bd%e6%95%b0%e5%b1%95%e5%bc%80" class="alignnone size-full wp-image-589" /></a>
+  注意展开后的第一项
+  <a href="https://www.u3blog.xyz/zb_users/upload/2016/11/展开后第一项.png"><img loading="lazy"  src="/assets/images/7bb640f9f7c2.png" alt="%e5%b1%95%e5%bc%80%e5%90%8e%e7%ac%ac%e4%b8%80%e9%a1%b9" class="alignnone size-full wp-image-590" /></a>
+  当 θTx远远大于1的时候，此项接近于0
+  当 θTx远远小于1的时候，我们可以用一条直线来替代sigmoid曲线，最终图形如下
+  <a href="https://www.u3blog.xyz/zb_users/upload/2016/11/优化第一项.png"><img loading="lazy"  src="/assets/images/008996e25b5b.png" alt="%e4%bc%98%e5%8c%96%e7%ac%ac%e4%b8%80%e9%a1%b9" class="alignnone size-full wp-image-591" /></a>
+  对于第二项，我们的标尺是-1
+  小于等于-1的时候是0，大于等于-1的时候是一条直线，如下图
+  <a href="https://www.u3blog.xyz/zb_users/upload/2016/11/优化第二项.png"><img loading="lazy"  src="/assets/images/4b19fb92987e.png" alt="%e4%bc%98%e5%8c%96%e7%ac%ac%e4%ba%8c%e9%a1%b9" class="alignnone size-full wp-image-592" /></a>
+</blockquote>
+
+<h2>KernelsI</h2>
+
+Kernels 允许我们在SVM上创建复杂的，非线性的算法
+给出一个x，可以通过计算其与地标l1,l2,l3的相似度来选取是否增加为新的特征域
+例如，高斯kernel如下
+
+<blockquote>
+  <a href="https://www.u3blog.xyz/zb_users/upload/2016/11/高斯kernel.png"><img loading="lazy"  src="/assets/images/d28e0fe959b4.png" alt="%e9%ab%98%e6%96%afkernel" class="alignnone size-full wp-image-593" /></a>
+  当x与l接近时，fi ≈ 1
+  当与l远离时，fi ≈ 0
+</blockquote>
+
+<h2>Kernels II</h2>
+
+有了高斯Kernels，我们就知道了kernels算法，那么我们的优化目标就可以用下面公式来表达了
+
+<blockquote>
+  <a href="https://www.u3blog.xyz/zb_users/upload/2016/11/kernels优化目标.png"><img loading="lazy"  src="/assets/images/5640d488ad6f.png" alt="kernels%e4%bc%98%e5%8c%96%e7%9b%ae%e6%a0%87" class="alignnone size-full wp-image-595" /></a>
+</blockquote>
+
+<h2>选择SVM的参数</h2>
+
+选择C(C=1/λ)
+1.C很大，我们有高方差，低偏差
+2.C很小，我们有高偏差，低方差
+选择σ^2
+1.很大的情况，fi变量非常平滑，导致高偏差低方差
+2.很小的时候，fi变得不那么平滑，导致高方差低偏差
+
+<h2>使用SVM</h2>
+
+现在已经有很多现成的库来实现SVM了，比如 'liblinear' 和'libsvm'，当我们使用的时候我们需要做一些选择
+1.选择C
+2.选择kernel方法
+3.无kernel——会产生标准的线性分辨算法
+4.高斯kernel需要选择σ^2
+5.在n很小m很大的时候做选择
+
+<h2>逻辑回归vsSVM</h2>
+
+如果n很大，使用逻辑回归
+如果n很小m很大，使用逻辑回归
+如果n很小m适中，使用高斯Kernel的SVM</article>
+</main>
+
+<footer>Generated from local Z-Blog backup for GitHub Pages.</footer>
+<script>
+  document.querySelectorAll("img").forEach((img) => {
+    const replaceMissingImage = () => {
+      const box = document.createElement("div");
+      box.className = "image-missing";
+      const src = img.currentSrc || img.src || img.getAttribute("src") || "";
+      box.innerHTML = `<strong>Image unavailable</strong><span>This image could not be loaded from the static backup.</span><br><a href="${src}" target="_blank" rel="noreferrer">Open original image URL</a>`;
+      img.replaceWith(box);
+    };
+    img.addEventListener("error", replaceMissingImage, { once: true });
+    if (img.complete && img.naturalWidth === 0) replaceMissingImage();
+  });
+</script>
+
+</body>
+</html>

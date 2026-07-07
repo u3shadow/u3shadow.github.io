@@ -1,0 +1,537 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="在Android开发中，我们经常会用到各种各样的图片加载框架来帮助我们加载网络图片，那有没有想过自己实现一个呢 本文记录了实现一个图片框架的整个流程，以及对代码的优化整理过程，文章比较长，如果只对其中的一部分感兴趣直接跳转到相应部分即可 提问环节 把大象装进冰箱分几步?是不是感觉在这初秋时节更加凉爽了呢 好吧，下面开始提问 大多数图片都是网络获取的，如何加载...">
+  <title>自己实现一个Android网络图片加载器 - u3coding</title>
+  <link rel="canonical" href="https://u3.github.io/posts/2022/10/696-自己实现一个android网络图片加载器/">
+  <style>
+    :root { --bg:#f6f7f8; --paper:#fff; --ink:#1f2937; --muted:#667085; --line:#d7dde3; --accent:#0f766e; --code:#0b1720; }
+    * { box-sizing:border-box; }
+    body { margin:0; background:var(--bg); color:var(--ink); font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Microsoft YaHei",sans-serif; line-height:1.76; }
+    header { border-bottom:1px solid var(--line); background:rgba(255,255,255,.9); backdrop-filter:blur(12px); position:sticky; top:0; z-index:10; }
+    .bar { max-width:1080px; margin:0 auto; padding:15px 24px; display:flex; align-items:center; justify-content:space-between; gap:16px; }
+    .brand { color:#111827; text-decoration:none; font-weight:760; }
+    nav { display:flex; gap:14px; flex-wrap:wrap; justify-content:flex-end; }
+    nav a { color:var(--muted); text-decoration:none; font-size:14px; }
+    main { max-width:920px; margin:0 auto; padding:46px 24px 72px; }
+    .eyebrow { margin:0 0 12px; color:var(--accent); font-size:14px; font-weight:750; }
+    h1.title { margin:0; font-size:clamp(34px,5.8vw,56px); line-height:1.14; letter-spacing:0; }
+    .meta { margin:18px 0 32px; color:var(--muted); font-size:15px; }
+    .hero { margin:0 0 30px; border:1px solid var(--line); border-radius:8px; overflow:hidden; background:#eef2f5; }
+    .hero img { display:block; width:100%; max-height:560px; object-fit:contain; }
+    article, .panel { background:var(--paper); border:1px solid var(--line); border-radius:8px; padding:clamp(22px,4vw,44px); box-shadow:0 18px 45px rgba(31,41,55,.06); }
+    article h1, article h2, article h3 { line-height:1.34; margin:1.9em 0 .75em; letter-spacing:0; }
+    article h1 { font-size:28px; } article h2 { font-size:24px; } article h3 { font-size:20px; }
+    article p { margin:0 0 1.08em; }
+    article img { display:block; max-width:100%; height:auto; margin:18px auto 8px; border:1px solid var(--line); border-radius:6px; background:#eef2f5; }
+    article figure { margin:24px 0; }
+    article figcaption { text-align:center; color:var(--muted); font-size:14px; margin-top:8px; }
+    article pre { margin:20px 0; overflow:auto; padding:16px; border-radius:8px; background:var(--code); color:#e6edf3; line-height:1.62; }
+    article code { font-family:"Cascadia Code",Consolas,"SFMono-Regular",monospace; font-size:.92em; }
+    article :not(pre) > code { color:#9a3412; background:#fff7ed; padding:.12em .34em; border-radius:4px; }
+    article blockquote { margin:20px 0; padding:10px 18px; border-left:4px solid var(--accent); background:#f5fbfa; color:#374151; }
+    .post-list { display:grid; gap:18px; }
+    .post-card { padding:0 0 18px; border-bottom:1px solid var(--line); }
+    .post-card:last-child { border-bottom:0; padding-bottom:0; }
+    .post-card h2 { margin:0 0 6px; font-size:22px; line-height:1.36; }
+    .post-card a { color:var(--ink); text-decoration:none; }
+    .post-card a:hover { color:var(--accent); }
+    .post-card p { margin:8px 0 0; color:#475569; }
+    .image-missing { margin:22px 0; padding:18px; border:1px dashed #cbd5e1; border-radius:8px; background:#f8fafc; color:#475569; }
+    .image-missing strong { display:block; color:#334155; margin-bottom:6px; }
+    .image-missing a { overflow-wrap:anywhere; font-size:13px; }
+
+    a { color:var(--accent); }
+    footer { max-width:920px; margin:0 auto; padding:0 24px 44px; color:var(--muted); font-size:14px; }
+    @media (max-width:640px) { .bar { padding:13px 16px; } main { padding:32px 16px 54px; } article,.panel { padding:20px 16px; } h1.title { font-size:31px; } }
+  </style>
+</head>
+<body>
+<header><div class="bar"><a class="brand" href="/">u3coding</a><nav><a href="/">首页</a><a href="/archive/">归档</a><a href="/feed.xml">RSS</a></nav></div></header>
+
+<main>
+  <p class="eyebrow">技术文章 · 文章 ID 696</p>
+  <h1 class="title">自己实现一个Android网络图片加载器</h1>
+  <div class="meta">发布于 2022-10-08 14:59 · 已迁移为静态页面</div>
+  
+  <article><p>在Android开发中，我们经常会用到各种各样的图片加载框架来帮助我们加载网络图片，那有没有想过自己实现一个呢</p>
+<p>本文记录了实现一个图片框架的整个流程，以及对代码的优化整理过程，文章比较长，如果只对其中的一部分感兴趣直接跳转到相应部分即可</p>
+<h4 id="h4-u63D0u95EEu73AFu8282">提问环节</h4><p>把大象装进冰箱分几步?是不是感觉在这初秋时节更加凉爽了呢</p>
+<p>好吧，下面开始提问</p>
+<ul>
+<li>大多数图片都是网络获取的，如何加载网络图片到本地imageview</li><li>图片有可能很大，怎么在加载前进行压缩</li><li>每次加载同一个url的图片都要请求网络，可以做一个缓存来防止过度请求吗</li><li>头像想显示圆角，怎么通过加载器显示圆角图片</li><li>在图片没加载出来之前，会显示placeholder图，加载完成之后切换会闪烁一下，很不美观，怎么处理</li><li>写好了代码，但是用起来很麻烦，想用设计模式优化一下，让它用起来像glide一样，减少学习成本，该怎么做</li></ul>
+<p>如果只想看其中某一部分，可以直接跳转到相应段落，完整的代码放到了我github上，点击<a href="https://github.com/u3shadow/MyImageLoader">这里</a>可以直达</p>
+<p>那么，女士们先生们，下面就开始我们的旅程吧</p>
+<h4 id="h4--imageview">如何加载网络图片到本地imageview</h4><p>这个功能很简单，怎么实现我不管，明天上线</p>
+<p>这个问题确实很简单，开启一个线程，从网络请求中获取图片流，再组装成bitmap，加载到imageview里面去就行了，看代码</p>
+<pre><code>  private fun getNetImg(imageView: ImageView): Bitmap? {
+        var bitmap: Bitmap? = null
+        val url = URL(params.imageURL)
+        val connection = url.openConnection() as HttpURLConnection
+        connection.requestMethod = &quot;GET&quot;
+        connection.connectTimeout = 10000
+        val code = connection.responseCode
+        if (code == 200) {
+            val inputStream = connection.inputStream
+            bitmap = bitmapCompressor.getCompressBitmap(inputStream, imageView)//获取到亚索（压缩，谐音梗扣钱）图片
+            inputStream.close()
+        } else {
+            Log.e(&quot;NetImageView&quot;, &quot;server error&quot;)
+        }
+        return bitmap//获取到bitmap了，返回，直接扔给imageview用就行
+    }</code></pre><h4 id="h4-u600Eu4E48u5728u52A0u8F7Du524Du8FDBu884Cu538Bu7F29">怎么在加载前进行压缩</h4><p>网络图片有时候会很大，我们的ImageView就那么小一点，图片很大浪费了我们宝贵的内存资源，怎么办呢？我们勤劳的劳动人民有很多办法，没错，就是图片压缩，在加载前我们先获取到图片的宽高以及ImageView的宽高，根据比例来压缩图片，再加载，就没问题啦。</p>
+<p>关键利用了</p>
+<ul>
+<li><p>val options = BitmapFactory.Options()这个Options里有个方法，叫inSampleSize，设置比例</p>
+</li><li><p>还有一个参数，叫inJustDecodeBounds，只返回图片尺寸</p>
+</li></ul>
+<p>这俩配合，就能让我们压缩图片了</p>
+<p>关键代码：</p>
+<pre><code>    val options = BitmapFactory.Options()
+      options.inJustDecodeBounds = true
+        BitmapFactory.decodeStream(sizeInputStream, null, options)
+        options.inSampleSize = getInSampleSize(options, imageView)//getInSampleSize就是算比理的函数
+        options.inJustDecodeBounds = false
+
+        -----getInSampleSize的代码在下面-----
+
+     private fun getInSampleSize(options: BitmapFactory.Options, imageView: ImageView): Int {
+        var inSampleSize = 1
+        val (viewWidth, viewHeight) = getImageViewSize(imageView)//这个函数是什么？别急，它的代码就在下面，算ImageView尺寸的
+
+        val outWidth = options.outWidth
+        val outHeight = options.outHeight
+
+        if (outWidth &gt; viewWidth || outHeight &gt; viewHeight) {
+            val widthRadio = (outWidth / viewWidth).toDouble().roundToInt()
+            val heightRadio = (outHeight / viewHeight).toDouble().roundToInt()
+
+            inSampleSize = if (widthRadio &gt; heightRadio) widthRadio else heightRadio
+        }
+
+        return inSampleSize
+    }
+
+    //计算ImageView尺寸的函数
+   private fun getImageViewSize(imageView: ImageView): Pair&lt;Int, Int&gt; {
+        val displayMetrics = context.resources?.displayMetrics
+        val layoutParams = imageView.layoutParams
+        var viewWidth = imageView.width
+        var viewHeight = imageView.height
+        if (viewWidth &lt;= 0) {
+            viewWidth = layoutParams.width
+        }
+        if (viewWidth &lt;= 0) {
+            viewWidth = imageView.maxWidth
+        }
+        if (viewWidth &lt;= 0) {
+            viewWidth = displayMetrics?.widthPixels!!
+        }
+        if (viewHeight &lt;= 0) {
+            viewHeight = layoutParams.height
+        }
+        if (viewHeight &lt;= 0) {
+            viewHeight = imageView.maxHeight
+        }
+        if (viewHeight &lt;= 0) {
+            viewHeight = displayMetrics?.heightPixels!!
+        }
+        return Pair(viewWidth, viewHeight)//返回一个pair，可以同时返回算好的宽和高
+    }</code></pre><p>看完了关键代码，是不是很简单呢，我们来看看完整的代码</p>
+<pre><code>//图片压缩类
+class BitmapCompressor(private val context:Context) {
+//计算imageview尺寸
+    private fun getImageViewSize(imageView: ImageView): Pair&lt;Int, Int&gt; {
+        val displayMetrics = context.resources?.displayMetrics
+        val layoutParams = imageView.layoutParams
+        var viewWidth = imageView.width
+        var viewHeight = imageView.height
+        if (viewWidth &lt;= 0) {
+            viewWidth = layoutParams.width
+        }
+        if (viewWidth &lt;= 0) {
+            viewWidth = imageView.maxWidth
+        }
+        if (viewWidth &lt;= 0) {
+            viewWidth = displayMetrics?.widthPixels!!
+        }
+        if (viewHeight &lt;= 0) {
+            viewHeight = layoutParams.height
+        }
+        if (viewHeight &lt;= 0) {
+            viewHeight = imageView.maxHeight
+        }
+        if (viewHeight &lt;= 0) {
+            viewHeight = displayMetrics?.heightPixels!!
+        }
+        return Pair(viewWidth, viewHeight)
+    }
+//计算压缩比例
+    private fun getInSampleSize(options: BitmapFactory.Options, imageView: ImageView): Int {
+        var inSampleSize = 1
+        val (viewWidth, viewHeight) = getImageViewSize(imageView)
+
+        val outWidth = options.outWidth
+        val outHeight = options.outHeight
+
+        if (outWidth &gt; viewWidth || outHeight &gt; viewHeight) {
+            val widthRadio = (outWidth / viewWidth).toDouble().roundToInt()
+            val heightRadio = (outHeight / viewHeight).toDouble().roundToInt()
+
+            inSampleSize = if (widthRadio &gt; heightRadio) widthRadio else heightRadio
+        }
+
+        return inSampleSize
+    }
+
+//获取压缩后的bitmap
+    fun getCompressBitmap(input: InputStream, imageView: ImageView): Bitmap? {
+        val stream = ByteArrayOutputStream()
+        val bufferSize = 1024
+        try {
+            val buffer = ByteArray(bufferSize)
+            var len: Int
+            while (input.read(buffer).also { len = it } &gt; -1) {
+                stream.write(buffer, 0, len)
+            }
+            stream.flush()
+        } catch (e: IOException) {
+            e.printStackTrace()
+        }
+
+        val sizeInputStream: InputStream = ByteArrayInputStream(stream.toByteArray())
+        val bitmapInputStream: InputStream = ByteArrayInputStream(stream.toByteArray())
+
+        val options = BitmapFactory.Options()
+        options.inJustDecodeBounds = true
+        BitmapFactory.decodeStream(sizeInputStream, null, options)
+
+        options.inSampleSize = getInSampleSize(options, imageView)
+        options.inJustDecodeBounds = false
+        return BitmapFactory.decodeStream(bitmapInputStream, null, options)
+
+    }
+}</code></pre><p>这个功能稍微复杂一点点，不过也挺简单，相信大家都表示问题不大</p>
+<h4 id="h4-u53EFu4EE5u505Au4E00u4E2Au7F13u5B58u6765u9632u6B62u8FC7u5EA6u8BF7u6C42u5417">可以做一个缓存来防止过度请求吗</h4><p>当然可以，这个功能也非常简单，我们用文件来进行缓存，怎么确保缓存唯一呢——使用图片url来当文件名即可</p>
+<p>这个功能太简单了，直接看代码吧</p>
+<pre><code>//先来一个接口，为了以后可能的更多缓存形式做准备
+interface ImageCache{
+    fun cacheImg(bitmap: Bitmap?,name:String);
+    fun getCacheImage(name:String): Bitmap?
+}
+
+//文件缓存类
+class FileImageCache(private val context: Context): ImageCache {
+//储存缓存文件
+   override fun cacheImg(bitmap: Bitmap?,name:String) {
+       if (bitmap != null)
+        try {
+            val file = File(context.cacheDir, name)
+            val out = FileOutputStream(file)
+            bitmap.compress(Bitmap.CompressFormat.PNG, 100, out)
+            out.flush()
+            out.close()
+        } catch (e: IOException) {
+            e.printStackTrace()
+        }
+    }
+    //根据名字获取文件
+    override fun getCacheImage(name:String): Bitmap? {
+        val file = File(context.cacheDir, name)
+        var bitmap: Bitmap? = null
+        if (file.length() &gt; 0) {
+            val inputStream: InputStream = FileInputStream(file)
+             bitmap = BitmapFactory.decodeStream(inputStream)
+        }
+        return bitmap
+    }
+
+}</code></pre><p>这个就不用多解释了吧，只是一个文件存取而已</p>
+<h4 id="h4-u600Eu4E48u901Au8FC7u52A0u8F7Du5668u663Eu793Au5706u89D2u56FEu7247">怎么通过加载器显示圆角图片</h4><p>现在我们的图片加载器以及初具雏形了，但是好多头像都有圆角，我们怎么给这个加载器添加这个功能呢？</p>
+<p>这个稍微复杂一点，需要用到canvas的绘制功能，大体思路是这样的</p>
+<ul>
+<li>绘制一个圆角的rect</li><li>设置xfermode为PorterDuffXfermode(PorterDuff.Mode.SRC_IN)</li><li>绘制bitmap<br>上代码<pre><code>object BitmapRounder{
+fun getRoundedCornerBitmap(bitmap: Bitmap, round: Float): Bitmap? {
+return try {
+   val output = Bitmap.createBitmap(
+       bitmap.width,
+       bitmap.height, Bitmap.Config.ARGB_8888
+   )
+   val canvas = Canvas(output)
+   val paint = Paint()
+   val rect = Rect(
+       0, 0, bitmap.width,
+       bitmap.height
+   )
+   val rectF = RectF(
+       Rect(
+           0, 0, bitmap.width,
+           bitmap.height
+       )
+   )
+   paint.isAntiAlias = true
+   canvas.drawARGB(0, 0, 0, 0)
+   paint.color = Color.BLACK
+   canvas.drawRoundRect(rectF, round, round, paint)//重点，绘制一个圆角的矩形
+   paint.xfermode = PorterDuffXfermode(PorterDuff.Mode.SRC_IN)//也是重点，设置xfermode为src_in
+   val src = Rect(
+       0, 0, bitmap.width,
+       bitmap.height
+   )
+   canvas.drawBitmap(bitmap, src, rect, paint)//绘制bitmap
+   output
+} catch (e: Exception) {
+   bitmap
+}
+}
+}</code></pre></li></ul>
+<p>圆角功能也就完成了</p>
+<h4 id="h4--placeholder-">在图片没加载出来之前，会显示placeholder图，加载完成之后切换会闪烁一下，很不美观，怎么处理</h4><p>一句话，用动画</p>
+<p>怎么用动画，这里就要引入一个类，drawable，想必大家都不陌生，我们直接自定义一个drawable，在里面执行显示内容的切换动画即可</p>
+<p>看代码</p>
+<pre><code>
+class MyAnimationDrawable(private val bitmap: Bitmap, private val placeholder: Bitmap) : Drawable(),Animatable {
+    private var mValueAnimator = ValueAnimator()
+    var placeholderAlpha = 250
+    var paint:Paint
+    var isFinish = false
+    init {
+        mValueAnimator = ObjectAnimator.ofInt(this,&quot;placeholderAlpha&quot;,0)
+        mValueAnimator.duration = 1200
+        mValueAnimator.startDelay = 1000
+        paint = Paint()
+        mValueAnimator.addUpdateListener { // 监听属性动画并进行重绘
+            invalidateSelf()
+        }
+    }
+    override fun draw(canvas: Canvas){
+        if (!isFinish) {
+            val rectF = RectF(
+                0f,
+                0f,
+                bounds.width().toFloat(),
+                bounds.height().toFloat()
+            ) //w和h分别是屏幕的宽和高，也就是你想让图片显示的宽和高
+            paint.reset()
+            canvas.drawBitmap(bitmap, null, rectF, paint)
+            paint.alpha = placeholderAlpha
+            canvas.drawBitmap(placeholder, null, rectF, paint)
+            paint.reset()
+        }
+        if (placeholderAlpha == 0)isFinish = true
+    }
+
+    override fun setAlpha(p0: Int) {
+    }
+
+    @SuppressLint(&quot;WrongConstant&quot;)
+    override fun getOpacity(): Int {
+        return  1
+    }
+
+    override fun setColorFilter(p0: ColorFilter?) {
+    }
+
+    override fun isRunning(): Boolean {
+        return mValueAnimator.isRunning
+    }
+
+    override fun start() {
+        mValueAnimator.start()
+    }
+
+    override fun stop() {
+    }
+
+}</code></pre><p>用这个类替代bitmap,即可实现从一个图片到另一个图片的动画效果切换，是不是很简单呢</p>
+<h4 id="h4--glide-">写好了代码，但是用起来很麻烦，想用设计模式优化一下，让它用起来像glide一样，减少学习成本，该怎么做</h4><p>核心，使用builder模式</p>
+<p>关于这个问题，我们就要去看看glide是怎么做的了</p>
+<p>经过对glide的分析，我们发现它是用了builder模式，我们也整一个，我们还发现它的builder不直接设置加载器，而是设置了一个param类，最后加载的时候再传入参数，所以我们也这么玩</p>
+<p>下面是我们的builder代码</p>
+<pre><code>class RequestBuilder {
+    data class ImageParams(
+         var roundPx: Float = 0f,
+         val emptyPlaceHolderId: Int = -1,
+         var placeHolder: Int = emptyPlaceHolderId,
+         var imageURL: String = &quot;&quot;,
+         var imageMaxSideSize: Float = -1f,
+         var useCache: Boolean = true,
+         var context: Context? = null)
+     private var params = ImageParams()
+    fun withContext(context: Context): RequestBuilder {
+        params.context = context
+        return this
+    }
+
+    fun useCache(useCache: Boolean): RequestBuilder {
+        params.useCache = useCache
+        return this
+    }
+
+    fun placeholder(placeholder: Int): RequestBuilder {
+        params.placeHolder = placeholder
+        return this
+    }
+
+    fun load(url: String): RequestBuilder {
+        params.imageURL = url
+        return this
+    }
+    fun round(round:Float): RequestBuilder {
+        params.roundPx = round
+        return this
+    }
+    fun into(imageView: ImageView) {
+        val realLoader = RealImageLoader(params)
+        realLoader.loadImage(imageView)
+    }
+    fun adjustImageScale(imageMaxSideSize:Float): RequestBuilder {
+        params.imageMaxSideSize = imageMaxSideSize
+        return this
+    }
+
+}</code></pre><p>是不是so easy呢</p>
+<p>我们来看看具体使用的时候长什么样</p>
+<pre><code>   ImageLoader.withContext(this)
+            .placeholder(R.drawable.holder)
+            .load(&quot;https://www.baidu.com/img/flexible/logo/pc/result.png&quot;)
+            .useCache(true)
+            .into(image)</code></pre><p>是不是感觉和glide一模一样呢</p>
+<h4 id="h4-u6700u540E">最后</h4><p>前面说了那么多，可能有人想说，你的加载图片代码呢，不急，这里就放出全部的代码</p>
+<pre><code>class RealImageLoader(private val params: RequestBuilder.ImageParams) {
+    private var fileCache = FileImageCache(params.context!!)//缓存类
+    private var bitmapCompressor = BitmapCompressor(params.context!!)//压缩类
+//加载图片的方法
+    fun loadImage(imageView: ImageView) {
+        if (params.context == null) {
+            Log.e(&quot;ImageLoader&quot;, &quot;Empty context&quot;)
+            return
+        }//参数为空，直接返回
+        var bitmap: Bitmap? = null
+        loadPlaceHolderImg(imageView)//加载placeholder
+        GlobalScope.launch(Dispatchers.IO) {//开启一个协程，用来处理图片
+            try {
+                if (params.useCache) {
+                    bitmap = fileCache.getCacheImage(getCacheFileName())//从缓存查找
+                }
+                if (bitmap == null) {
+                    bitmap = getNetImg(imageView)//缓存没有，从网络获取
+                }
+                if (bitmap != null)
+                    bitmap = roundBitmap(bitmap)//根据设置，进行圆角处理
+            } catch (e: IOException) {
+                e.printStackTrace()
+                Log.e(&quot;NetImageView&quot;, &quot;Load image error&quot;)
+            }
+            withContext(Dispatchers.Main) {//切换到主线程，进行图片加载
+                if (bitmap != null) {
+                   imageView.setImageBitmap(bitmap)
+/*                          val placeholder = BitmapFactory.decodeResource(
+                              params.context?.resources,
+                              params.placeHolder
+                          )
+                          val drawable = MyAnimationDrawable(bitmap!!, placeholder!!)
+                          imageView.setImageDrawable(drawable)
+                          drawable.start()*/
+                }
+            }
+        }
+    }
+
+    private fun loadPlaceHolderImg(imageView: ImageView) {
+        if (params.placeHolder != params.emptyPlaceHolderId) {
+            var bitmap = BitmapFactory.decodeResource(params.context?.resources, params.placeHolder)
+            bitmap = roundBitmap(bitmap)
+            imageView.setImageBitmap(bitmap)
+        }
+    }
+
+    private fun roundBitmap(bitmap: Bitmap?): Bitmap? {
+        var roundBitmap = bitmap
+        if (params.roundPx != 0f) {
+            if (roundBitmap != null)
+                roundBitmap = BitmapRounder.getRoundedCornerBitmap(roundBitmap, params.roundPx)
+        }
+        return roundBitmap
+    }
+
+    private fun getNetImg(imageView: ImageView): Bitmap? {
+        var bitmap: Bitmap? = null
+        val url = URL(params.imageURL)
+        val connection = url.openConnection() as HttpURLConnection
+        connection.requestMethod = &quot;GET&quot;
+        connection.connectTimeout = 10000
+        val code = connection.responseCode
+        if (code == 200) {
+            val inputStream = connection.inputStream
+            bitmap = bitmapCompressor.getCompressBitmap(inputStream, imageView)
+            if (bitmap != null)
+                bitmap = changeScale(bitmap)
+            if (params.useCache)
+                fileCache.cacheImg(bitmap, getCacheFileName())
+            inputStream.close()
+        } else {
+            Log.e(&quot;NetImageView&quot;, &quot;server error&quot;)
+        }
+        return bitmap
+    }
+
+    private fun getCacheFileName(): String {
+        var name = &quot;&quot;
+        val strings = params.imageURL.split(&quot;/&quot;)
+        for (s in strings) {
+            name += s
+        }
+        return name
+    }
+
+    private fun changeScale(bitmap: Bitmap): Bitmap {
+        var mBitmap = bitmap
+        if (params.imageMaxSideSize &gt; 0) {
+            var height = bitmap.height
+            var width = bitmap.width
+            if (width &gt;= height) {
+                width = params.imageMaxSideSize.toInt()
+                height =
+                    (params.imageMaxSideSize * (bitmap.height.toFloat() / bitmap.width)).toInt()
+            } else {
+                height = params.imageMaxSideSize.toInt()
+                width = (params.imageMaxSideSize * (bitmap.width.toFloat() / bitmap.height)).toInt()
+            }
+            mBitmap = zoomImg(bitmap, width, height)
+        }
+        return mBitmap
+    }
+
+    private fun zoomImg(bm: Bitmap, newWidth: Int, newHeight: Int): Bitmap {
+        val width = bm.width
+        val height = bm.height
+        val scaleWidth = newWidth.toFloat() / width
+        val scaleHeight = newHeight.toFloat() / height
+        val matrix = Matrix()
+        matrix.postScale(scaleWidth, scaleHeight)
+        return Bitmap.createBitmap(bm, 0, 0, width, height, matrix, true)
+    }
+
+}</code></pre><p>至此，我们的图片加载工具已经做好啦，大家可以根据自己的需求愉快的使用了，希望这篇文章能对你有帮助，我们下次再见</p></article>
+</main>
+
+<footer>Generated from local Z-Blog backup for GitHub Pages.</footer>
+<script>
+  document.querySelectorAll("img").forEach((img) => {
+    const replaceMissingImage = () => {
+      const box = document.createElement("div");
+      box.className = "image-missing";
+      const src = img.currentSrc || img.src || img.getAttribute("src") || "";
+      box.innerHTML = `<strong>Image unavailable</strong><span>This image could not be loaded from the static backup.</span><br><a href="${src}" target="_blank" rel="noreferrer">Open original image URL</a>`;
+      img.replaceWith(box);
+    };
+    img.addEventListener("error", replaceMissingImage, { once: true });
+    if (img.complete && img.naturalWidth === 0) replaceMissingImage();
+  });
+</script>
+
+</body>
+</html>

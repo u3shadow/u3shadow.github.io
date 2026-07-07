@@ -1,0 +1,152 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="异常检测动机 当我们有新的数据样本的时候，我们希望通过一个模型p(x)以及一个门槛值ϵ来判定这个样本是否是异常的。 高斯分布 高斯分布是一种可以被描述为 的类钟型线。 具体公式是 其中几个参数的计算如下 普遍公式 只有公式部分不同，其余部分均与高斯分布相同 异常检测vs监督学习 何时使用异常检测 正样本较少，负样本多，正样本不够训练，且种类太多 何时使用监督...">
+  <title>[W9]异常检测 - u3coding</title>
+  <link rel="canonical" href="https://u3.github.io/posts/2016/12/606-w9anomaly-detection/">
+  <style>
+    :root { --bg:#f6f7f8; --paper:#fff; --ink:#1f2937; --muted:#667085; --line:#d7dde3; --accent:#0f766e; --code:#0b1720; }
+    * { box-sizing:border-box; }
+    body { margin:0; background:var(--bg); color:var(--ink); font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Microsoft YaHei",sans-serif; line-height:1.76; }
+    header { border-bottom:1px solid var(--line); background:rgba(255,255,255,.9); backdrop-filter:blur(12px); position:sticky; top:0; z-index:10; }
+    .bar { max-width:1080px; margin:0 auto; padding:15px 24px; display:flex; align-items:center; justify-content:space-between; gap:16px; }
+    .brand { color:#111827; text-decoration:none; font-weight:760; }
+    nav { display:flex; gap:14px; flex-wrap:wrap; justify-content:flex-end; }
+    nav a { color:var(--muted); text-decoration:none; font-size:14px; }
+    main { max-width:920px; margin:0 auto; padding:46px 24px 72px; }
+    .eyebrow { margin:0 0 12px; color:var(--accent); font-size:14px; font-weight:750; }
+    h1.title { margin:0; font-size:clamp(34px,5.8vw,56px); line-height:1.14; letter-spacing:0; }
+    .meta { margin:18px 0 32px; color:var(--muted); font-size:15px; }
+    .hero { margin:0 0 30px; border:1px solid var(--line); border-radius:8px; overflow:hidden; background:#eef2f5; }
+    .hero img { display:block; width:100%; max-height:560px; object-fit:contain; }
+    article, .panel { background:var(--paper); border:1px solid var(--line); border-radius:8px; padding:clamp(22px,4vw,44px); box-shadow:0 18px 45px rgba(31,41,55,.06); }
+    article h1, article h2, article h3 { line-height:1.34; margin:1.9em 0 .75em; letter-spacing:0; }
+    article h1 { font-size:28px; } article h2 { font-size:24px; } article h3 { font-size:20px; }
+    article p { margin:0 0 1.08em; }
+    article img { display:block; max-width:100%; height:auto; margin:18px auto 8px; border:1px solid var(--line); border-radius:6px; background:#eef2f5; }
+    article figure { margin:24px 0; }
+    article figcaption { text-align:center; color:var(--muted); font-size:14px; margin-top:8px; }
+    article pre { margin:20px 0; overflow:auto; padding:16px; border-radius:8px; background:var(--code); color:#e6edf3; line-height:1.62; }
+    article code { font-family:"Cascadia Code",Consolas,"SFMono-Regular",monospace; font-size:.92em; }
+    article :not(pre) > code { color:#9a3412; background:#fff7ed; padding:.12em .34em; border-radius:4px; }
+    article blockquote { margin:20px 0; padding:10px 18px; border-left:4px solid var(--accent); background:#f5fbfa; color:#374151; }
+    .post-list { display:grid; gap:18px; }
+    .post-card { padding:0 0 18px; border-bottom:1px solid var(--line); }
+    .post-card:last-child { border-bottom:0; padding-bottom:0; }
+    .post-card h2 { margin:0 0 6px; font-size:22px; line-height:1.36; }
+    .post-card a { color:var(--ink); text-decoration:none; }
+    .post-card a:hover { color:var(--accent); }
+    .post-card p { margin:8px 0 0; color:#475569; }
+    .image-missing { margin:22px 0; padding:18px; border:1px dashed #cbd5e1; border-radius:8px; background:#f8fafc; color:#475569; }
+    .image-missing strong { display:block; color:#334155; margin-bottom:6px; }
+    .image-missing a { overflow-wrap:anywhere; font-size:13px; }
+
+    a { color:var(--accent); }
+    footer { max-width:920px; margin:0 auto; padding:0 24px 44px; color:var(--muted); font-size:14px; }
+    @media (max-width:640px) { .bar { padding:13px 16px; } main { padding:32px 16px 54px; } article,.panel { padding:20px 16px; } h1.title { font-size:31px; } }
+  </style>
+</head>
+<body>
+<header><div class="bar"><a class="brand" href="/">u3coding</a><nav><a href="/">首页</a><a href="/archive/">归档</a><a href="/feed.xml">RSS</a></nav></div></header>
+
+<main>
+  <p class="eyebrow">未分类 · 文章 ID 606</p>
+  <h1 class="title">[W9]异常检测</h1>
+  <div class="meta">发布于 2016-12-06 15:34 · 已迁移为静态页面</div>
+  <figure class="hero"><img src="/assets/images/2e689d4b514c.png" alt="[W9]异常检测"></figure>
+  <article><h2>异常检测动机</h2>
+
+当我们有新的数据样本的时候，我们希望通过一个模型p(x)以及一个门槛值ϵ来判定这个样本是否是异常的。
+
+<h2>高斯分布</h2>
+
+高斯分布是一种可以被描述为<a href="https://www.u3blog.xyz/zb_users/upload/2016/12/高斯分布公式.png"><img loading="lazy"  src="/assets/images/2e689d4b514c.png" alt="%e9%ab%98%e6%96%af%e5%88%86%e5%b8%83%e5%85%ac%e5%bc%8f" class="alignnone size-full wp-image-607" /></a>的类钟型线。
+具体公式是
+
+<blockquote>
+  <a href="https://www.u3blog.xyz/zb_users/upload/2016/12/高斯分布模型.png"><img loading="lazy"  src="/assets/images/39b5a924799c.png" alt="%e9%ab%98%e6%96%af%e5%88%86%e5%b8%83%e6%a8%a1%e5%9e%8b" class="alignnone size-full wp-image-608" /></a>
+  其中几个参数的计算如下
+  <a href="https://www.u3blog.xyz/zb_users/upload/2016/12/u计算.png"><img loading="lazy"  src="/assets/images/a26b2012905a.png" alt="u%e8%ae%a1%e7%ae%97" class="alignnone size-full wp-image-609" /></a>
+</blockquote>
+
+<a href="https://www.u3blog.xyz/zb_users/upload/2016/12/第二参数计算.png"><img loading="lazy"  src="/assets/images/758b5485cd5f.png" alt="%e7%ac%ac%e4%ba%8c%e5%8f%82%e6%95%b0%e8%ae%a1%e7%ae%97" class="alignnone size-full wp-image-610" /></a>
+
+<h3>普遍公式</h3>
+
+只有公式部分不同，其余部分均与高斯分布相同
+
+<blockquote>
+  <a href="https://www.u3blog.xyz/zb_users/upload/2016/12/普遍公式.png"><img loading="lazy"  src="/assets/images/f50d6200cece.png" alt="%e6%99%ae%e9%81%8d%e5%85%ac%e5%bc%8f" class="alignnone size-full wp-image-612" /></a>
+</blockquote>
+
+<h2>异常检测vs监督学习</h2>
+
+何时使用异常检测
+正样本较少，负样本多，正样本不够训练，且种类太多
+何时使用监督学习
+有大量的正负样本，我们有足够的正样本来训练，未来的正样本与现有的类似
+
+<h2>推荐系统</h2>
+
+推荐系统的目的是为了给用户推荐产品
+这里有几个定义
+nu 用户数量
+nm 电影（产品）数量
+r(i,j) = 1 表示用户j给电影i打了分了
+y(i,j) 表示用户j给电影i打的分
+
+<h3>基于内容的推荐</h3>
+
+θ(j) 对于用户j的参数向量
+x(i) 对于电影i的特征向量
+预测用户j对电影i的评分公式
+
+<blockquote>
+  <a href="https://www.u3blog.xyz/zb_users/upload/2016/12/预测评分.png"><img loading="lazy"  src="/assets/images/712d3d3eb1c7.png" alt="" class="alignnone size-full wp-image-615" /></a>
+  如何学习θ(j)?公式类似线性回归，如下
+  <a href="https://www.u3blog.xyz/zb_users/upload/2016/12/内容预测学习公式.png"><img loading="lazy"  src="/assets/images/e9587fd94e3f.png" alt="" class="alignnone size-full wp-image-616" /></a>
+  一次性学习全部的公式
+  <a href="https://www.u3blog.xyz/zb_users/upload/2016/12/一对多.png"><img loading="lazy"  src="/assets/images/1cea52ee48ec.png" alt="" class="alignnone size-full wp-image-617" /></a>
+</blockquote>
+
+<h3>协同筛选</h3>
+
+如果我们不能获得准确的电影特征向量 x(i)
+那么我们可以让用户告诉我们他们对每种类型有多少的喜爱，然后我们就能使用这些数据进行学习，公式如下
+
+<blockquote>
+  <a href="https://www.u3blog.xyz/zb_users/upload/2016/12/协同筛选.png"><img loading="lazy"  src="/assets/images/23ce92c48cea.png" alt="" class="alignnone size-full wp-image-619" /></a>
+</blockquote>
+
+<h3>协同筛选算法步骤</h3>
+
+首先是代价函数公式，如下
+
+<blockquote>
+  <a href="https://www.u3blog.xyz/zb_users/upload/2016/12/协同筛选代价函数.png"><img loading="lazy"  src="/assets/images/2993272f2873.png" alt="" class="alignnone size-full wp-image-620" /></a>
+  具体步骤：
+  1.初始化x(i)到x(nm)以及θ(1)到θ(nu)为很小的随机值，这一步是为了让每个x都不相同
+  2.最小化J(x(i),...,x(nm),θ(1),...,θ(nu))通过梯度下降或者高级算法均可
+  3.通过θTx预测用户评分
+</blockquote></article>
+</main>
+
+<footer>Generated from local Z-Blog backup for GitHub Pages.</footer>
+<script>
+  document.querySelectorAll("img").forEach((img) => {
+    const replaceMissingImage = () => {
+      const box = document.createElement("div");
+      box.className = "image-missing";
+      const src = img.currentSrc || img.src || img.getAttribute("src") || "";
+      box.innerHTML = `<strong>Image unavailable</strong><span>This image could not be loaded from the static backup.</span><br><a href="${src}" target="_blank" rel="noreferrer">Open original image URL</a>`;
+      img.replaceWith(box);
+    };
+    img.addEventListener("error", replaceMissingImage, { once: true });
+    if (img.complete && img.naturalWidth === 0) replaceMissingImage();
+  });
+</script>
+
+</body>
+</html>

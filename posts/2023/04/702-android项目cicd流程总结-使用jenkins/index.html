@@ -1,0 +1,171 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="没有cicd之前我们都是怎么做的 相信做安卓开发的都做过这些事 手动运行单元测试，根据报错改代码 检查代码风格，根据报错改代码 构建apk包，发给测试，有时候还得打很多个 接收测试的反馈，改bug， 重复之前的步骤 把apk放到ftp或者其他地方去发布 是不是想到这一套流程，头都大了，虽然每一步都不难，但是连起来都手工操作就很繁琐 像这些手动流程固定的事，我...">
+  <title>Android项目cicd流程总结（使用jenkins） - u3coding</title>
+  <link rel="canonical" href="https://u3.github.io/posts/2023/04/702-android项目cicd流程总结-使用jenkins/">
+  <style>
+    :root { --bg:#f6f7f8; --paper:#fff; --ink:#1f2937; --muted:#667085; --line:#d7dde3; --accent:#0f766e; --code:#0b1720; }
+    * { box-sizing:border-box; }
+    body { margin:0; background:var(--bg); color:var(--ink); font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Microsoft YaHei",sans-serif; line-height:1.76; }
+    header { border-bottom:1px solid var(--line); background:rgba(255,255,255,.9); backdrop-filter:blur(12px); position:sticky; top:0; z-index:10; }
+    .bar { max-width:1080px; margin:0 auto; padding:15px 24px; display:flex; align-items:center; justify-content:space-between; gap:16px; }
+    .brand { color:#111827; text-decoration:none; font-weight:760; }
+    nav { display:flex; gap:14px; flex-wrap:wrap; justify-content:flex-end; }
+    nav a { color:var(--muted); text-decoration:none; font-size:14px; }
+    main { max-width:920px; margin:0 auto; padding:46px 24px 72px; }
+    .eyebrow { margin:0 0 12px; color:var(--accent); font-size:14px; font-weight:750; }
+    h1.title { margin:0; font-size:clamp(34px,5.8vw,56px); line-height:1.14; letter-spacing:0; }
+    .meta { margin:18px 0 32px; color:var(--muted); font-size:15px; }
+    .hero { margin:0 0 30px; border:1px solid var(--line); border-radius:8px; overflow:hidden; background:#eef2f5; }
+    .hero img { display:block; width:100%; max-height:560px; object-fit:contain; }
+    article, .panel { background:var(--paper); border:1px solid var(--line); border-radius:8px; padding:clamp(22px,4vw,44px); box-shadow:0 18px 45px rgba(31,41,55,.06); }
+    article h1, article h2, article h3 { line-height:1.34; margin:1.9em 0 .75em; letter-spacing:0; }
+    article h1 { font-size:28px; } article h2 { font-size:24px; } article h3 { font-size:20px; }
+    article p { margin:0 0 1.08em; }
+    article img { display:block; max-width:100%; height:auto; margin:18px auto 8px; border:1px solid var(--line); border-radius:6px; background:#eef2f5; }
+    article figure { margin:24px 0; }
+    article figcaption { text-align:center; color:var(--muted); font-size:14px; margin-top:8px; }
+    article pre { margin:20px 0; overflow:auto; padding:16px; border-radius:8px; background:var(--code); color:#e6edf3; line-height:1.62; }
+    article code { font-family:"Cascadia Code",Consolas,"SFMono-Regular",monospace; font-size:.92em; }
+    article :not(pre) > code { color:#9a3412; background:#fff7ed; padding:.12em .34em; border-radius:4px; }
+    article blockquote { margin:20px 0; padding:10px 18px; border-left:4px solid var(--accent); background:#f5fbfa; color:#374151; }
+    .post-list { display:grid; gap:18px; }
+    .post-card { padding:0 0 18px; border-bottom:1px solid var(--line); }
+    .post-card:last-child { border-bottom:0; padding-bottom:0; }
+    .post-card h2 { margin:0 0 6px; font-size:22px; line-height:1.36; }
+    .post-card a { color:var(--ink); text-decoration:none; }
+    .post-card a:hover { color:var(--accent); }
+    .post-card p { margin:8px 0 0; color:#475569; }
+    .image-missing { margin:22px 0; padding:18px; border:1px dashed #cbd5e1; border-radius:8px; background:#f8fafc; color:#475569; }
+    .image-missing strong { display:block; color:#334155; margin-bottom:6px; }
+    .image-missing a { overflow-wrap:anywhere; font-size:13px; }
+
+    a { color:var(--accent); }
+    footer { max-width:920px; margin:0 auto; padding:0 24px 44px; color:var(--muted); font-size:14px; }
+    @media (max-width:640px) { .bar { padding:13px 16px; } main { padding:32px 16px 54px; } article,.panel { padding:20px 16px; } h1.title { font-size:31px; } }
+  </style>
+</head>
+<body>
+<header><div class="bar"><a class="brand" href="/">u3coding</a><nav><a href="/">首页</a><a href="/archive/">归档</a><a href="/feed.xml">RSS</a></nav></div></header>
+
+<main>
+  <p class="eyebrow">技术文章 · 文章 ID 702</p>
+  <h1 class="title">Android项目cicd流程总结（使用jenkins）</h1>
+  <div class="meta">发布于 2023-04-21 16:59 · 已迁移为静态页面</div>
+  <figure class="hero"><img src="/assets/images/451d9e87e228.png" alt="Android项目cicd流程总结（使用jenkins）"></figure>
+  <article><h2 id="h2--cicd-">没有cicd之前我们都是怎么做的</h2><p>相信做安卓开发的都做过这些事</p>
+<ol>
+<li>手动运行单元测试，根据报错改代码</li><li>检查代码风格，根据报错改代码</li><li>构建apk包，发给测试，有时候还得打很多个</li><li>接收测试的反馈，改bug，</li><li>重复之前的步骤</li><li>把apk放到ftp或者其他地方去发布</li></ol>
+<p>是不是想到这一套流程，头都大了，虽然每一步都不难，但是连起来都手工操作就很繁琐</p>
+<p>像这些手动流程固定的事，我们完全就可以交给机器来做，让我们有更多时间做点别的事，没错，这就是今天要说的cicd</p>
+<h2 id="h2--cicd-cicd-">什么是cicd，以及在cicd过程中包含了哪些步骤</h2><p>一般来说，安卓开发的CI/CD流程包括以下几个阶段:代码提交、代码检查、编译构建、单元测试集成测试、部署发布、用户反馈。</p>
+<ol>
+<li>在代码提交阶段，开发者将自己的代码推送到远程仓库，例如Git或SVN，并触发CI/CD工具或平台例如Jenkins或Travis CI等</li><li>在代码检查阶段，CI/CD工具或平台会对代码进行静态分析和风格检查，例如使用SonarQube或Checkstyle等。</li><li>在编译构建阶段，CI/CD工具或平台会使用Gradle或Maven等工具对代码进行编译和打包，生成APK文件</li><li>在单元测试阶段，CI/CD工具或平台会使用JUnit或Espresso等框架对代码进行单元测试，并生成测试报告。</li><li>在集成测试阶段，CI/CD工具或平台会使用Appium或Selenium等框架对应用进行集成测试，并生成测试报告</li><li>在部署发布阶段，CI/CD工具或平台会将APK文件上传到内部服务器或外部平台，例如蒲公英或Google Play等，并通知相关人员。</li><li>在用户反馈阶段，开发者可以通过Bugly或Firebase等工具收集用户的反馈和错误信息，并根据需要进行修复和更新</li></ol>
+<p>通过以上几个步骤，我们可以把以前的app构建流程从手动变为自动，而且可以通过不断以非常低的成本的重复这个过程，提高我们的项目质量，这就是cicd带给我们的自信</p>
+<p>今天我们来通过jenkins来实现上面的几个步骤</p>
+<h2 id="h2--jenkins">安装配置jenkins</h2><p>本文讨论的主要是在windows环境下安装jenkins</p>
+<ol>
+<li>从jenkins官网下载对应的安装包即可</li><li>安装过程很简单但是需要提供一个账号，就像下图显示的界面，这个账号需要有权限<br><img loading="lazy"  src="/assets/images/451d9e87e228.png" alt=""><br>打开开始菜单，搜索<code>本地安全策略</code>，选择<code>本地策略</code>、<code>用户权限分配</code>，在右侧的策略中找到<code>作为服务登录</code>，双击打开。点击<code>添加用户或组</code>，在输入框中填入你的账户的名字，单击<code>检查名称</code>，如果加上了下划线，则说明没有问题，如果输入的用户不存在，则会跳出来一个<code>找不到名称</code>的对话框。<br><img loading="lazy"  src="/assets/images/46cc96252703.png" alt=""></li></ol>
+<p>这里需要注意一点，windows家庭版默认是没有本地安全策略的，需要用一些技巧把它开启，如下：</p>
+<pre><code>1.  在桌面上单击右键，选择“新建”-&gt;“文本文档”。
+
+2.  将文本文档重命名为“OpenLocalSecurityPolicy.bat”。
+
+3.  右键单击“OpenLocalSecurityPolicy.bat”，选择“编辑”。
+
+4.  将以下命令复制并粘贴到文本编辑器中：
+
+
+@echo off
+pushd &quot;%SystemRoot%\system32&quot;
+findstr /c:&quot;[SR] Cannot repair member file&quot; %windir%\logs\cbs\cbs.log &gt;%userprofile%\Desktop\sfcdetails.txt
+start ms-settings:windowsdefender
+start ms-settings:windowsupdate
+start ms-settings:windowsupdate-history
+start ms-settings:windowsupdate-options
+start ms-settings:storagesense
+start ms-settings:storagesense-diagnostics
+start ms-settings:storagesense-configurecleanup
+start ms-settings:storagesense-changehowwesave
+start ms-settings:storagesense-runstoragecleanupnow
+start ms-settings:storagesense-storageusage
+start ms-settings:storagesense-changestoragesavelocations
+start ms-settings:backup
+start ms-settings:backup-advancedsettings
+start ms-settings:backup-addalocaldriveornetworklocation
+start ms-settings:backup-managebackups
+start ms-settings:backup-moreoptions
+start ms-settings:dateandtime
+start ms-settings:regionlanguage
+start ms-settings:regionlanguage-languagepacks
+start ms-settings:regionlanguage-speech
+start ms-settings:regionlanguage-keyboards
+start ms-settings:regionlanguage-morespeechservicesonline
+start ms-settings:speech
+start ms-settings:speech-microphoneprivacysettings
+
+
+5.  保存并关闭文本编辑器。
+6.  双击“OpenLocalSecurityPolicy.bat”文件，以打开本地安全策略。</code></pre><ol start="3">
+<li>修改默认根地址到其他盘符</li></ol>
+<p>默认情况下，jenkins的主目录都是在c盘，如果这样，我们使用中产生的数据都是在c盘，用过windows的都知道，数据放在c盘是很危险也是很让人不爽的一件事，我们可以通过修改jenkins的主目录方法来把数据放到其他盘</p>
+<p>  在成功安装了jenkins并解锁之后，我们可以配置环境变量JENKINS_HOME，地址就是我们想改的目录，</p>
+<p><img loading="lazy"  src="/assets/images/564fbb88d1d3.png" alt=""><br> 然后修改jenkins.xml</p>
+<pre><code>    &lt;env name=&quot;JENKINS_HOME&quot; value=&quot;%LocalAppData%\Jenkins.jenkins&quot;/&gt;</code></pre><p>改为</p>
+<pre><code>    &lt;env name=&quot;JENKINS_HOME&quot; value=&quot;E:\jenkins&quot;/&gt;</code></pre><ol start="4">
+<li>配置常用的插件<br>在第一次启动jenkins的时候，会让你选择安装哪些插件，这时候直接选择推荐的插件就好，包含了一些常用插件，比如git等等，如下图</li></ol>
+<figure><img loading="lazy"  src="/assets/images/6117cb6d58bd.png" alt=""></figure>
+<h2 id="h2--android-">配置针对于android的环境</h2><ol>
+<li><p>android sdk 见下图<br><img loading="lazy"  src="/assets/images/7b0050327bb4.png" alt=""></p>
+</li><li><p>gradle – Dashboard -&gt; Manage Jenkins -&gt; Global Tool  Configuration中的Gradle配置gradle路径即可</p>
+</li><li><p>jdk – Dashboard -&gt; Manage Jenkins -&gt; Global Tool  Configuration中的JDK配置jdk路径即可</p>
+</li><li><p>git – Dashboard -&gt; Manage Jenkins -&gt; Global Tool  Configuration中的Git installations配置git路径即可</p>
+<h2 id="h2--android-job-">配置Android的具体job信息</h2><p>新建一个freestyle的item，在里面做以下几步：</p>
+</li><li><p>配置git仓库地址以及构建分支</p>
+</li><li><p>设置构建触发器（定时构建） –  找到构建触发器，勾选build periodically,在编辑框里按照规则设置构建时间，在某天的某个时段自动构建，比如45 9-15/2 * * 1-5，虽然可以提交一次就构建一次，但是不建议这么做。构建表达式的规则见下图，可以根据自己的需要写表达式。<br><img loading="lazy"  src="/assets/images/3107f1cc0631.png" alt=""></p>
+</li><li><p>添加构建步骤，打包出apk，如下图在build step中触发<br><img loading="lazy"  src="/assets/images/13cf8f3f404c.png" alt=""></p>
+</li><li><p>配置构建后步骤，自动把apk包上传到ftp或者其他地方</p>
+<p> 在Jenkins的项目中，选择“构建”-&gt;“增加构建步骤”-&gt;“执行shell”或“执行Windows批处理命令”<br>一个上传ftp的例子</p>
+<pre><code>ftp -n &lt;&lt;EOF
+open ftp.example.com
+user username password
+cd /remote/directory
+put /local/file
+bye
+EOF</code></pre></li></ol>
+<h2 id="h2-u914Du7F6Eu90AEu4EF6u901Au77E5">配置邮件通知</h2><p>在构建完成之后，特别是失败的时候，我们希望收到一封邮件告诉我们构建失败了，快去处理，我们可以通过以下步骤来实现</p>
+<ol>
+<li>在Jenkins中安装Email Extension Plugin插件，可以在插件管理中搜索并安装。</li><li>在Jenkins的系统管理中，配置邮件服务器的地址，用户名，密码和端口。如果使用的是QQ邮箱或者163邮箱，还需要获取邮箱授权码并使用授权码作为密码。</li><li>在Jenkins的项目中，选择“构建后操作”-&gt;“增加构建后操作”-&gt;“Editable Email Notification”。</li><li>在邮件通知的配置中，填写收件人，抄送人，邮件主题，邮件内容等信息。可以使用一些变量来自定义邮件内容，例如BUILDSTATUS表示构建状态，BUILDS​TATUS表示构建状态， {BUILD_URL}表示构建链接等。</li></ol>
+<p>这里特别要注意的是，上面的配置地址和授权码需要在job的设置里面进行，在全局配置有可能发不出邮件</p>
+<h2 id="h2-u914Du7F6Eu5355u5143u6D4Bu8BD5u548Cu4EE3u7801u68C0u67E5">配置单元测试和代码检查</h2><p>我们还需要在运行前执行代码lint检查和单元测试，也需要配插件，插件名字是JUnit和Warnings Next Generation</p>
+<ol>
+<li>参考上面 配置Android的具体job信息 中的配置，添加lint和单元测试的任务</li><li>配置单元测试插件和lint插件，主要指定报告文件的位置,见下图</li></ol>
+<figure><img loading="lazy"  src="/assets/images/d19e1e8c26ce.png" alt=""></figure>
+<figure><img loading="lazy"  src="/assets/images/e43b09da4f3b.png" alt=""></figure>
+<ol start="3">
+<li>把单元测试的结果放到邮件的附件中去，配置见下图,也可以放些别的东西</li></ol>
+<figure><img loading="lazy"  src="/assets/images/488eedf03256.png" alt=""></figure>
+<h2 id="h2--docker-">一劳永逸，使用docker把上面的配置做到随时随地使用</h2><p>上面的步骤完成之后，我们就能自动构建，上传apk什么的了，但是每次换台机器我们都得再配一次，想下就很累，这时候我们就可以用docker，创建一个容器，把上面这些操作放在容器里面，在新环境里面拉个镜像，创建容器跑起来，就ok啦，关于怎么用docker，就需要大家自己去搜索学习了</p>
+<p>最后放张图吧，jenkins真好用啊<br><img loading="lazy"  src="/assets/images/e24fe39d8525.png" alt=""></p></article>
+</main>
+
+<footer>Generated from local Z-Blog backup for GitHub Pages.</footer>
+<script>
+  document.querySelectorAll("img").forEach((img) => {
+    const replaceMissingImage = () => {
+      const box = document.createElement("div");
+      box.className = "image-missing";
+      const src = img.currentSrc || img.src || img.getAttribute("src") || "";
+      box.innerHTML = `<strong>Image unavailable</strong><span>This image could not be loaded from the static backup.</span><br><a href="${src}" target="_blank" rel="noreferrer">Open original image URL</a>`;
+      img.replaceWith(box);
+    };
+    img.addEventListener("error", replaceMissingImage, { once: true });
+    if (img.complete && img.naturalWidth === 0) replaceMissingImage();
+  });
+</script>
+
+</body>
+</html>

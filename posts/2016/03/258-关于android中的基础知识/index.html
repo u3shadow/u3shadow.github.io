@@ -1,0 +1,134 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="什么是View View 是Android中所有控件的基类，基本所有控件都是其子类 控件中又主要分为两类，View和ViewGroup，毫无疑问，都属于View，不同的是，ViewGroup中一般可以包含多个View。 常见的布局都属于ViewGroup View的位置参数 既然知道了什么是View，那么怎么确定View在屏幕上的位置呢？ 关于这一点，And...">
+  <title>关于Android中View的基础知识 - u3coding</title>
+  <link rel="canonical" href="https://u3.github.io/posts/2016/03/258-关于android中的基础知识/">
+  <style>
+    :root { --bg:#f6f7f8; --paper:#fff; --ink:#1f2937; --muted:#667085; --line:#d7dde3; --accent:#0f766e; --code:#0b1720; }
+    * { box-sizing:border-box; }
+    body { margin:0; background:var(--bg); color:var(--ink); font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Microsoft YaHei",sans-serif; line-height:1.76; }
+    header { border-bottom:1px solid var(--line); background:rgba(255,255,255,.9); backdrop-filter:blur(12px); position:sticky; top:0; z-index:10; }
+    .bar { max-width:1080px; margin:0 auto; padding:15px 24px; display:flex; align-items:center; justify-content:space-between; gap:16px; }
+    .brand { color:#111827; text-decoration:none; font-weight:760; }
+    nav { display:flex; gap:14px; flex-wrap:wrap; justify-content:flex-end; }
+    nav a { color:var(--muted); text-decoration:none; font-size:14px; }
+    main { max-width:920px; margin:0 auto; padding:46px 24px 72px; }
+    .eyebrow { margin:0 0 12px; color:var(--accent); font-size:14px; font-weight:750; }
+    h1.title { margin:0; font-size:clamp(34px,5.8vw,56px); line-height:1.14; letter-spacing:0; }
+    .meta { margin:18px 0 32px; color:var(--muted); font-size:15px; }
+    .hero { margin:0 0 30px; border:1px solid var(--line); border-radius:8px; overflow:hidden; background:#eef2f5; }
+    .hero img { display:block; width:100%; max-height:560px; object-fit:contain; }
+    article, .panel { background:var(--paper); border:1px solid var(--line); border-radius:8px; padding:clamp(22px,4vw,44px); box-shadow:0 18px 45px rgba(31,41,55,.06); }
+    article h1, article h2, article h3 { line-height:1.34; margin:1.9em 0 .75em; letter-spacing:0; }
+    article h1 { font-size:28px; } article h2 { font-size:24px; } article h3 { font-size:20px; }
+    article p { margin:0 0 1.08em; }
+    article img { display:block; max-width:100%; height:auto; margin:18px auto 8px; border:1px solid var(--line); border-radius:6px; background:#eef2f5; }
+    article figure { margin:24px 0; }
+    article figcaption { text-align:center; color:var(--muted); font-size:14px; margin-top:8px; }
+    article pre { margin:20px 0; overflow:auto; padding:16px; border-radius:8px; background:var(--code); color:#e6edf3; line-height:1.62; }
+    article code { font-family:"Cascadia Code",Consolas,"SFMono-Regular",monospace; font-size:.92em; }
+    article :not(pre) > code { color:#9a3412; background:#fff7ed; padding:.12em .34em; border-radius:4px; }
+    article blockquote { margin:20px 0; padding:10px 18px; border-left:4px solid var(--accent); background:#f5fbfa; color:#374151; }
+    .post-list { display:grid; gap:18px; }
+    .post-card { padding:0 0 18px; border-bottom:1px solid var(--line); }
+    .post-card:last-child { border-bottom:0; padding-bottom:0; }
+    .post-card h2 { margin:0 0 6px; font-size:22px; line-height:1.36; }
+    .post-card a { color:var(--ink); text-decoration:none; }
+    .post-card a:hover { color:var(--accent); }
+    .post-card p { margin:8px 0 0; color:#475569; }
+    .image-missing { margin:22px 0; padding:18px; border:1px dashed #cbd5e1; border-radius:8px; background:#f8fafc; color:#475569; }
+    .image-missing strong { display:block; color:#334155; margin-bottom:6px; }
+    .image-missing a { overflow-wrap:anywhere; font-size:13px; }
+
+    a { color:var(--accent); }
+    footer { max-width:920px; margin:0 auto; padding:0 24px 44px; color:var(--muted); font-size:14px; }
+    @media (max-width:640px) { .bar { padding:13px 16px; } main { padding:32px 16px 54px; } article,.panel { padding:20px 16px; } h1.title { font-size:31px; } }
+  </style>
+</head>
+<body>
+<header><div class="bar"><a class="brand" href="/">u3coding</a><nav><a href="/">首页</a><a href="/archive/">归档</a><a href="/feed.xml">RSS</a></nav></div></header>
+
+<main>
+  <p class="eyebrow">未分类 · 文章 ID 258</p>
+  <h1 class="title">关于Android中View的基础知识</h1>
+  <div class="meta">发布于 2016-03-08 21:30 · 已迁移为静态页面</div>
+  
+  <article><h2>什么是View</h2>
+
+View 是Android中所有控件的基类，基本所有控件都是其子类
+
+控件中又主要分为两类，View和ViewGroup，毫无疑问，都属于View，不同的是，ViewGroup中一般可以包含多个View。
+
+常见的布局都属于ViewGroup
+
+<h2>View的位置参数</h2>
+
+既然知道了什么是View，那么怎么确定View在屏幕上的位置呢？
+
+关于这一点，Android系统并没有使用什么奇特的办法，还是常规的用四个坐标点来描述位置
+
+top,left,right,bottom
+
+正方向分别是下和右
+
+需要注意的是，这些位置点都是相对于父容器的，是相对坐标。
+
+自3.0之后，添加了两个新坐标值，translationX，translationY,表示控件左上角相对父容器的偏移量。
+
+<h2>MotionEvent和TouchSlop</h2>
+
+MotionEvent是指手指接触屏幕后的一系列动作，主要包含三种
+ACTION_DOWN
+ACTION_MOVE
+ACTION_UP
+
+TouchSlop指的是系统指定的滑动的最小距离，不足这个距离系统就不认为产生了滑动事件。
+
+<h2>VelocityTracker，GestureDetector和Scroller</h2>
+
+分别代表了滑动速度测量的类
+
+手势检测的类
+
+以及滑动的类
+
+由于这三个类的使用都比较简单，这里就不详细叙述了
+
+<h2>View的滑动</h2>
+
+View的滑动有三种方法
+1.scrollTo/ScrollBy  适用于内容的滑动，像listview的滑动等等
+2.使用动画            比较简单，适合整体移动，但是移动后点击事件区域不会跟着动，需要特殊处理
+3.改变布局参数        比较复杂，但是无明显的副作用
+
+<h2>关于弹性滑动的几种方式</h2>
+
+弹性滑动指的是滑动的时候有一个过程，而不是瞬间到达
+
+主要有三种方式
+
+1.使用scroller进行滑动  其实是通过强制重绘来达到的弹性滑动
+2.通过动画              可以在滑动过程中进行一些自己的操作，原生也有滑动的动画
+3.使用延时策略          定时发送消息调用scroll实现，可以实现自己操作</article>
+</main>
+
+<footer>Generated from local Z-Blog backup for GitHub Pages.</footer>
+<script>
+  document.querySelectorAll("img").forEach((img) => {
+    const replaceMissingImage = () => {
+      const box = document.createElement("div");
+      box.className = "image-missing";
+      const src = img.currentSrc || img.src || img.getAttribute("src") || "";
+      box.innerHTML = `<strong>Image unavailable</strong><span>This image could not be loaded from the static backup.</span><br><a href="${src}" target="_blank" rel="noreferrer">Open original image URL</a>`;
+      img.replaceWith(box);
+    };
+    img.addEventListener("error", replaceMissingImage, { once: true });
+    if (img.complete && img.naturalWidth === 0) replaceMissingImage();
+  });
+</script>
+
+</body>
+</html>

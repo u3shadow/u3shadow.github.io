@@ -1,0 +1,393 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="需求分析与实现规划 引子 前段时间看到了豆瓣FM的音乐播放界面，有一个环形的进度条，非常的好看，于是想了想，为什么不自己做一个呢，于是就开始了自定义的过程 豆瓣FM的播放界面如下图： 功能分析 虽然功能比较简单，但是仍然需要仔细分析 1.图标外还有一圈圆圈，可以设置宽度 2.圆形进度条和进度条底部，可以设置宽度，颜色等 3.内部有一个圆形图片，可旋转 实现思...">
+  <title>自定义View实践——环形进度条的设计与实现分析 - u3coding</title>
+  <link rel="canonical" href="https://u3.github.io/posts/2016/03/293-自定义view实践-环形进度条的设计与实现分析/">
+  <style>
+    :root { --bg:#f6f7f8; --paper:#fff; --ink:#1f2937; --muted:#667085; --line:#d7dde3; --accent:#0f766e; --code:#0b1720; }
+    * { box-sizing:border-box; }
+    body { margin:0; background:var(--bg); color:var(--ink); font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Microsoft YaHei",sans-serif; line-height:1.76; }
+    header { border-bottom:1px solid var(--line); background:rgba(255,255,255,.9); backdrop-filter:blur(12px); position:sticky; top:0; z-index:10; }
+    .bar { max-width:1080px; margin:0 auto; padding:15px 24px; display:flex; align-items:center; justify-content:space-between; gap:16px; }
+    .brand { color:#111827; text-decoration:none; font-weight:760; }
+    nav { display:flex; gap:14px; flex-wrap:wrap; justify-content:flex-end; }
+    nav a { color:var(--muted); text-decoration:none; font-size:14px; }
+    main { max-width:920px; margin:0 auto; padding:46px 24px 72px; }
+    .eyebrow { margin:0 0 12px; color:var(--accent); font-size:14px; font-weight:750; }
+    h1.title { margin:0; font-size:clamp(34px,5.8vw,56px); line-height:1.14; letter-spacing:0; }
+    .meta { margin:18px 0 32px; color:var(--muted); font-size:15px; }
+    .hero { margin:0 0 30px; border:1px solid var(--line); border-radius:8px; overflow:hidden; background:#eef2f5; }
+    .hero img { display:block; width:100%; max-height:560px; object-fit:contain; }
+    article, .panel { background:var(--paper); border:1px solid var(--line); border-radius:8px; padding:clamp(22px,4vw,44px); box-shadow:0 18px 45px rgba(31,41,55,.06); }
+    article h1, article h2, article h3 { line-height:1.34; margin:1.9em 0 .75em; letter-spacing:0; }
+    article h1 { font-size:28px; } article h2 { font-size:24px; } article h3 { font-size:20px; }
+    article p { margin:0 0 1.08em; }
+    article img { display:block; max-width:100%; height:auto; margin:18px auto 8px; border:1px solid var(--line); border-radius:6px; background:#eef2f5; }
+    article figure { margin:24px 0; }
+    article figcaption { text-align:center; color:var(--muted); font-size:14px; margin-top:8px; }
+    article pre { margin:20px 0; overflow:auto; padding:16px; border-radius:8px; background:var(--code); color:#e6edf3; line-height:1.62; }
+    article code { font-family:"Cascadia Code",Consolas,"SFMono-Regular",monospace; font-size:.92em; }
+    article :not(pre) > code { color:#9a3412; background:#fff7ed; padding:.12em .34em; border-radius:4px; }
+    article blockquote { margin:20px 0; padding:10px 18px; border-left:4px solid var(--accent); background:#f5fbfa; color:#374151; }
+    .post-list { display:grid; gap:18px; }
+    .post-card { padding:0 0 18px; border-bottom:1px solid var(--line); }
+    .post-card:last-child { border-bottom:0; padding-bottom:0; }
+    .post-card h2 { margin:0 0 6px; font-size:22px; line-height:1.36; }
+    .post-card a { color:var(--ink); text-decoration:none; }
+    .post-card a:hover { color:var(--accent); }
+    .post-card p { margin:8px 0 0; color:#475569; }
+    .image-missing { margin:22px 0; padding:18px; border:1px dashed #cbd5e1; border-radius:8px; background:#f8fafc; color:#475569; }
+    .image-missing strong { display:block; color:#334155; margin-bottom:6px; }
+    .image-missing a { overflow-wrap:anywhere; font-size:13px; }
+
+    a { color:var(--accent); }
+    footer { max-width:920px; margin:0 auto; padding:0 24px 44px; color:var(--muted); font-size:14px; }
+    @media (max-width:640px) { .bar { padding:13px 16px; } main { padding:32px 16px 54px; } article,.panel { padding:20px 16px; } h1.title { font-size:31px; } }
+  </style>
+</head>
+<body>
+<header><div class="bar"><a class="brand" href="/">u3coding</a><nav><a href="/">首页</a><a href="/archive/">归档</a><a href="/feed.xml">RSS</a></nav></div></header>
+
+<main>
+  <p class="eyebrow">未分类 · 文章 ID 293</p>
+  <h1 class="title">自定义View实践——环形进度条的设计与实现分析</h1>
+  <div class="meta">发布于 2016-03-22 17:34 · 已迁移为静态页面</div>
+  <figure class="hero"><img src="/assets/images/bbb47a670a51.png" alt="自定义View实践——环形进度条的设计与实现分析"></figure>
+  <article><h2>需求分析与实现规划</h2>
+
+<h3>引子</h3>
+
+前段时间看到了豆瓣FM的音乐播放界面，有一个环形的进度条，非常的好看，于是想了想，为什么不自己做一个呢，于是就开始了自定义的过程
+豆瓣FM的播放界面如下图：
+<img loading="lazy"  src="/assets/images/bbb47a670a51.png" alt="" width = "400" height = "300"/>
+
+<h3>功能分析</h3>
+
+虽然功能比较简单，但是仍然需要仔细分析
+
+1.图标外还有一圈圆圈，可以设置宽度
+2.圆形进度条和进度条底部，可以设置宽度，颜色等
+3.内部有一个圆形图片，可旋转
+
+<h3>实现思路分析</h3>
+
+<h4>1.可以设置宽度的圆圈</h4>
+
+这个比较容易，直接在onDraw方法中使用canvas绘制即可，当然，在间距和半径的处理上需要仔细，控件本体其实还是一个长方形，我们需要选取较短的那一边作为直径，同时也要处理内部的padding
+
+<h4>2.圆形进度条和进度条底部，可以设置宽度，颜色等</h4>
+
+这个可以用canvas的drawArc方法来实现，通过绘制不同长度的弧形来达到显示进度的目的，但是需要注意的是，我们需要计算好弧形的半径以及开始和结束点。
+
+<h4>3.内部有一个圆形图片，可旋转</h4>
+
+这个需求可以分为三个部分，有图片，圆形，可以旋转
+
+先说有图，很简单，canvas的drawbitmap方法绘制（canvas真是好东西）
+
+再说圆形，这就比较复杂了，但是整体来说依然是使用canvas来对bitmap进行操作，会在代码中细说
+
+最后是可以旋转，我们可以通过canvas的rotate方法来做。
+
+<h3>效果展示</h3>
+
+说了这么多，那么最后的效果是怎样的呢？毕竟空口无凭，在进入代码展示的环节之前还是看看最后的效果吧。
+这是我自己做的一个定时锁屏的项目，地址是<a href="https://github.com/u3shadow/DontDistraction">这里是地址</a>
+这是这个项目运行锁屏的时候的动图（大家都喜欢动图）
+<img loading="lazy"  src="/assets/images/0d23d41c2651.gif" alt="" />
+
+<h2>代码实现</h2>
+
+下面开始展示代码，并加以分析
+
+我们主要的工作是在一个自定义的view中的onDraw方法实现的，所以，我们需要有一个继承View类的子类，我们就叫他MyProgress吧
+
+我们展示的就是这个MyProgress的onDraw方法
+
+<h3>1.可以设置宽度的圆圈</h3>
+
+很简单，我们只需要调用canvas的drawCircle方法即可,但是需要注意对padding的处理，因为不处理就会无效
+
+<pre class="theme:github font-size:16 lang:java decode:true " >
+super.onDraw(canvas);  //需要在函数开始的地方调用父类的onDraw
+
+        final int paddingLeft = getPaddingLeft();
+        final int paddingRight = getPaddingRight();
+        final int paddingTop = getPaddingTop();
+        final int paddingBottom = getPaddingBottom();  //获取padding
+
+        //get the view's width and height and decide the radiu
+        int width = getWidth() - paddingLeft - paddingRight;
+        int height = getHeight() - paddingTop - paddingBottom;
+        radiu = Math.min(width , height) / 2 - boundWidth - progressWidth;  //计算半径，选取长宽中短的那个做处理，boundWidth是圆圈的宽度，progressWidth是进度条的宽度
+
+        //setup the paint
+        paint.setStyle(Paint.Style.STROKE); //设置paint为画轮廓
+        paint.setStrokeWidth(boundWidth);   //设置宽度
+        paint.setColor(Color.BLACK);        //设置颜色
+
+        //draw the inner circle
+        int centerX = paddingLeft + getWidth()/2;
+        int centerY = paddingTop + getHeight() / 2;  //计算圆的中心点
+        canvas.drawCircle(centerX,centerY, radiu, paint);  //绘制圆形
+ </pre>
+
+<h3>2.圆形进度条和进度条底部，可以设置宽度，颜色等</h3>
+
+这里需要注意的就是开始的角度和结束的角度了，为了达到进度条目的，所以我们需要随着业务状态的改变来改变这个值
+
+<pre class="theme:github font-size:16 lang:java decode:true " >  
+        //set paint for arc
+        paint.setStrokeWidth(progressWidth);
+        paint.setStrokeCap(Paint.Cap.ROUND);//设置进度宽度,设置末端是一个圆弧
+
+        //prepare for draw arc
+        RectF oval = new RectF();
+        oval.left = centerX -totalRadiu ;
+        oval.top =centerY- totalRadiu ;
+        oval.right =  centerX + totalRadiu;
+        oval.bottom = centerY+ totalRadiu; //新建一个椭圆，设置其四个点的坐标
+        paint.setColor(progressBackColor);//设置进度条背景的颜色
+
+        //draw background arc
+        canvas.drawArc(oval, arcStar, arcEnd, false, paint); //绘制底部的一个圆弧，作为背景
+
+        //draw progress arc
+        paint.setColor(progressColor);//设置进度条的颜色
+        canvas.drawArc(oval, arcStar, progress, false, paint);//绘制进度条
+</pre>
+
+<h3>3.内部有一个圆形图片，可旋转</h3>
+
+这一段比较复杂，直接用代码解释
+
+<pre class="theme:github font-size:15 lang:java decode:true " > 
+
+       float  totalRadiu = radiu +boundWidth  +progressWidth/2;//设置外径
+
+        //draw the circlr pic
+        if (drawable != null&amp;&amp;bitmap == null) {
+            image = ((BitmapDrawable) drawable).getBitmap();//获取设置的bitmap资源
+
+            bitmap = Bitmap.createBitmap((int)(2*totalRadiu),(int)(2*totalRadiu), Bitmap.Config.ARGB_8888);
+            Canvas bitmapCanvas = new Canvas(bitmap);//新建一个bitmap并新建一个canvas用以操作
+
+            Paint bitmapPaint = new Paint();
+            bitmapPaint.setAntiAlias(true);//新建一个paint并设置反锯齿
+
+            bitmapCanvas.drawCircle(totalRadiu, totalRadiu, radiu, bitmapPaint);//画一个圆
+
+            bitmapPaint.setXfermode(new PorterDuffXfermode(PorterDuff.Mode.SRC_IN));//关键代码，设置为交集模式，会让后面的内容和已有内容取交集
+            bitmapCanvas.drawBitmap(image,null,new RectF(0,0,2*totalRadiu,2*totalRadiu) , bitmapPaint);//绘制自己的图片到现有画布上
+
+        }
+        Rect rect = new Rect((int)(centerX -totalRadiu),(int)(centerY-totalRadiu),(int)(centerX+totalRadiu),(int)(centerY+ totalRadiu));//新建一个rect,设定边界点
+        canvas.save();
+        if(isRotate)
+        canvas.rotate(rotateDegree,centerX,centerY);//设置旋转，为了实现图片转动效果，rotateDegree为旋转角度
+        canvas.drawBitmap(bitmap,null ,rect, paint);//绘制处理过的图片
+</pre>
+
+有了上面这些代码，我们自定义View的主体部分就完成了，当然还有一些辅助的部分，比如更新进度和选择角度的函数，设置一些颜色和宽度之类的参数等
+
+<h2>完整代码</h2>
+
+MyProgress
+
+<pre class="theme:github font-size:16 lang:java decode:true " >public class MyProgressBar extends View {
+    float progress = 360;
+    float arcStar = 270;
+    float arcEnd = 360;
+    double rotateStep = 0.2;
+    Bitmap bitmap;
+    int totalTime;
+    Bitmap image;
+    Drawable drawable;
+    int boundWidth = 5;
+    private int progressWidth = 30;
+    private boolean isRotate = false;
+    private int progressColor = Color.GREEN;
+    private int progressBackColor = Color.GREEN;
+    private float rotateDegree = 0;
+
+
+    public MyProgressBar(Context context) {
+        super(context);
+    }
+
+    public MyProgressBar(Context context, AttributeSet attrs) {
+        super(context, attrs);
+    }
+
+    public MyProgressBar(Context context, AttributeSet attrs, int defStyleAttr) {
+        super(context, attrs, defStyleAttr);
+    }
+
+    private float radiu;
+    private Paint paint = new Paint(Paint.ANTI_ALIAS_FLAG);
+
+    public void setRadiu(float radiu) {
+        this.radiu = radiu;
+        invalidate();
+    }
+//start 函数使用 countDownTimer类来更新progress和旋转角度
+    public void start(long time) {
+        bitmap = null;
+
+        time *= 60000;
+        final float step = (float) 360 / (time / 30);
+        CountDownTimer mTimer = new CountDownTimer(time, 30) {
+            public void onTick(long millisUntilFinished) {
+                progress -= step;
+                rotateDegree -= rotateStep;
+                invalidate();
+            }
+
+            @Override
+            public void onFinish() {
+                end(step);
+            }
+
+        };
+        mTimer.start();
+    }
+
+    private void end(float step) {
+        progress -= step;
+        invalidate();
+        progress = 0;
+        rotateDegree = 0;
+        invalidate();
+    }
+
+    public void setBoundWidth(int width) {
+        boundWidth = width;
+    }
+
+    public void setProgressWidth(int width) {
+        progressWidth = width;
+    }
+
+    public void setProgressColor(int color) {
+        progressColor = color;
+    }
+
+    public void setProgressBackColor(int color) {
+        progressBackColor = color;
+    }
+
+    public void setDrawable(Drawable drawable) {
+        this.drawable = drawable;
+        invalidate();
+    }
+    public void setIsRote(boolean rotate)
+    {
+        this.isRotate = rotate;
+        invalidate();
+    }
+
+    @Override
+    protected void onDraw(Canvas canvas) {
+        super.onDraw(canvas);
+
+        final int paddingLeft = getPaddingLeft();
+        final int paddingRight = getPaddingRight();
+        final int paddingTop = getPaddingTop();
+        final int paddingBottom = getPaddingBottom();
+
+        //get the view's width and height and decide the radiu
+        int width = getWidth() - paddingLeft - paddingRight;
+        int height = getHeight() - paddingTop - paddingBottom;
+        radiu = Math.min(width , height) / 2 - boundWidth - progressWidth;
+
+        //setup the paint
+        paint.setStyle(Paint.Style.STROKE);
+        paint.setStrokeWidth(boundWidth);
+        paint.setColor(Color.BLACK);
+
+        //draw the inner circle
+        int centerX = paddingLeft + getWidth()/2;
+        int centerY = paddingTop + getHeight() / 2;
+        canvas.drawCircle(centerX,centerY, radiu, paint);
+        
+
+        float  totalRadiu = radiu +boundWidth  +progressWidth/2;
+
+        //draw the circlr pic
+        if (drawable != null&amp;&amp;bitmap == null) {
+            image = ((BitmapDrawable) drawable).getBitmap();
+
+            bitmap = Bitmap.createBitmap((int)(2*totalRadiu),(int)(2*totalRadiu), Bitmap.Config.ARGB_8888);
+            Canvas bitmapCanvas = new Canvas(bitmap);
+
+            Paint bitmapPaint = new Paint();
+            bitmapPaint.setAntiAlias(true);
+
+            bitmapCanvas.drawCircle(totalRadiu, totalRadiu, radiu, bitmapPaint);
+
+            bitmapPaint.setXfermode(new PorterDuffXfermode(PorterDuff.Mode.SRC_IN));
+            bitmapCanvas.drawBitmap(image,null,new RectF(0,0,2*totalRadiu,2*totalRadiu) , bitmapPaint);
+
+
+        }
+        Rect rect = new Rect((int)(centerX -totalRadiu),(int)(centerY-totalRadiu),(int)(centerX+totalRadiu),(int)(centerY+ totalRadiu));
+        canvas.save();
+        if(isRotate)
+        canvas.rotate(rotateDegree,centerX,centerY);
+        canvas.drawBitmap(bitmap,null ,rect, paint);
+
+        canvas.restore();
+        //set paint for arc
+        paint.setStrokeWidth(progressWidth);
+        paint.setStrokeCap(Paint.Cap.ROUND);
+
+        //prepare for draw arc
+        RectF oval = new RectF();
+        oval.left = centerX -totalRadiu ;
+        oval.top =centerY- totalRadiu ;
+        oval.right =  centerX + totalRadiu;
+        oval.bottom = centerY+ totalRadiu;
+        paint.setColor(progressBackColor);
+
+        //draw background arc
+        canvas.drawArc(oval, arcStar, arcEnd, false, paint);
+
+        //draw progress arc
+        paint.setColor(progressColor);
+        canvas.drawArc(oval, arcStar, progress, false, paint);
+    }
+
+}</pre>
+
+完整的工程，包括对这个自定义VIEW的应用例子可以参考我在GitHub上的工程地址在<a href="https://github.com/u3shadow/Dashboard">这里</a>
+
+<h2>几点总结</h2>
+
+这个看似简单的自定义View的制作当中还是遇到了不少值得思考的问题，这也是为什么有这篇文章的原因
+
+1.在处理圆形剪裁图片的时候，要注意剪裁的canvas所用的坐标是相对于处理图片的，而不是整体坐标
+2.在绘制时，应该尽量减少重复的处理，比如圆形图片剪裁，一次就够了，如果次数过多，每次更新进度的时候就会去进行一次，导致整个View比较卡，进度不准确
+3.对于自定义View中几个关键点的坐标，应该用一个比较简单易懂的表达式表示，否则做到后期会搞混淆，而陷入坐标的泥潭之中
+4.某些看起来很厉害的效果只要合理分析，分步实现，并不会很难</article>
+</main>
+
+<footer>Generated from local Z-Blog backup for GitHub Pages.</footer>
+<script>
+  document.querySelectorAll("img").forEach((img) => {
+    const replaceMissingImage = () => {
+      const box = document.createElement("div");
+      box.className = "image-missing";
+      const src = img.currentSrc || img.src || img.getAttribute("src") || "";
+      box.innerHTML = `<strong>Image unavailable</strong><span>This image could not be loaded from the static backup.</span><br><a href="${src}" target="_blank" rel="noreferrer">Open original image URL</a>`;
+      img.replaceWith(box);
+    };
+    img.addEventListener("error", replaceMissingImage, { once: true });
+    if (img.complete && img.naturalWidth === 0) replaceMissingImage();
+  });
+</script>
+
+</body>
+</html>

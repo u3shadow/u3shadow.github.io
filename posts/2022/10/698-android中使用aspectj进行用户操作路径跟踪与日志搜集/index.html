@@ -1,0 +1,140 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="编写初衷 在Android App开发中，出现了bug和崩溃测试们就会提着手机上门，然后开发一顿操作，bug消失了，测试们又只有进行大量的操作来复现。 这样的情况想必大家都遇到过，更极端的是线上出现了bug，虽然可以设置崩溃日志上传来收集崩溃日志，但是用户是怎么操作的，我们也只能靠猜 为什么不能有一个工具，记录下最近打开了什么界面，点击了哪些按钮，并且记录到...">
+  <title>Android中使用ASPECTJ进行用户操作路径跟踪与日志搜集 - u3coding</title>
+  <link rel="canonical" href="https://u3.github.io/posts/2022/10/698-android中使用aspectj进行用户操作路径跟踪与日志搜集/">
+  <style>
+    :root { --bg:#f6f7f8; --paper:#fff; --ink:#1f2937; --muted:#667085; --line:#d7dde3; --accent:#0f766e; --code:#0b1720; }
+    * { box-sizing:border-box; }
+    body { margin:0; background:var(--bg); color:var(--ink); font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Microsoft YaHei",sans-serif; line-height:1.76; }
+    header { border-bottom:1px solid var(--line); background:rgba(255,255,255,.9); backdrop-filter:blur(12px); position:sticky; top:0; z-index:10; }
+    .bar { max-width:1080px; margin:0 auto; padding:15px 24px; display:flex; align-items:center; justify-content:space-between; gap:16px; }
+    .brand { color:#111827; text-decoration:none; font-weight:760; }
+    nav { display:flex; gap:14px; flex-wrap:wrap; justify-content:flex-end; }
+    nav a { color:var(--muted); text-decoration:none; font-size:14px; }
+    main { max-width:920px; margin:0 auto; padding:46px 24px 72px; }
+    .eyebrow { margin:0 0 12px; color:var(--accent); font-size:14px; font-weight:750; }
+    h1.title { margin:0; font-size:clamp(34px,5.8vw,56px); line-height:1.14; letter-spacing:0; }
+    .meta { margin:18px 0 32px; color:var(--muted); font-size:15px; }
+    .hero { margin:0 0 30px; border:1px solid var(--line); border-radius:8px; overflow:hidden; background:#eef2f5; }
+    .hero img { display:block; width:100%; max-height:560px; object-fit:contain; }
+    article, .panel { background:var(--paper); border:1px solid var(--line); border-radius:8px; padding:clamp(22px,4vw,44px); box-shadow:0 18px 45px rgba(31,41,55,.06); }
+    article h1, article h2, article h3 { line-height:1.34; margin:1.9em 0 .75em; letter-spacing:0; }
+    article h1 { font-size:28px; } article h2 { font-size:24px; } article h3 { font-size:20px; }
+    article p { margin:0 0 1.08em; }
+    article img { display:block; max-width:100%; height:auto; margin:18px auto 8px; border:1px solid var(--line); border-radius:6px; background:#eef2f5; }
+    article figure { margin:24px 0; }
+    article figcaption { text-align:center; color:var(--muted); font-size:14px; margin-top:8px; }
+    article pre { margin:20px 0; overflow:auto; padding:16px; border-radius:8px; background:var(--code); color:#e6edf3; line-height:1.62; }
+    article code { font-family:"Cascadia Code",Consolas,"SFMono-Regular",monospace; font-size:.92em; }
+    article :not(pre) > code { color:#9a3412; background:#fff7ed; padding:.12em .34em; border-radius:4px; }
+    article blockquote { margin:20px 0; padding:10px 18px; border-left:4px solid var(--accent); background:#f5fbfa; color:#374151; }
+    .post-list { display:grid; gap:18px; }
+    .post-card { padding:0 0 18px; border-bottom:1px solid var(--line); }
+    .post-card:last-child { border-bottom:0; padding-bottom:0; }
+    .post-card h2 { margin:0 0 6px; font-size:22px; line-height:1.36; }
+    .post-card a { color:var(--ink); text-decoration:none; }
+    .post-card a:hover { color:var(--accent); }
+    .post-card p { margin:8px 0 0; color:#475569; }
+    .image-missing { margin:22px 0; padding:18px; border:1px dashed #cbd5e1; border-radius:8px; background:#f8fafc; color:#475569; }
+    .image-missing strong { display:block; color:#334155; margin-bottom:6px; }
+    .image-missing a { overflow-wrap:anywhere; font-size:13px; }
+
+    a { color:var(--accent); }
+    footer { max-width:920px; margin:0 auto; padding:0 24px 44px; color:var(--muted); font-size:14px; }
+    @media (max-width:640px) { .bar { padding:13px 16px; } main { padding:32px 16px 54px; } article,.panel { padding:20px 16px; } h1.title { font-size:31px; } }
+  </style>
+</head>
+<body>
+<header><div class="bar"><a class="brand" href="/">u3coding</a><nav><a href="/">首页</a><a href="/archive/">归档</a><a href="/feed.xml">RSS</a></nav></div></header>
+
+<main>
+  <p class="eyebrow">技术文章 · 文章 ID 698</p>
+  <h1 class="title">Android中使用ASPECTJ进行用户操作路径跟踪与日志搜集</h1>
+  <div class="meta">发布于 2022-10-08 15:01 · 已迁移为静态页面</div>
+  <figure class="hero"><img src="/assets/images/4c65c35325b9.png" alt="Android中使用ASPECTJ进行用户操作路径跟踪与日志搜集"></figure>
+  <article><h2 id="h2-u7F16u5199u521Du8877">编写初衷</h2><p>在Android App开发中，出现了bug和崩溃测试们就会提着手机上门，然后开发一顿操作，bug消失了，测试们又只有进行大量的操作来复现。</p>
+<p>这样的情况想必大家都遇到过，更极端的是线上出现了bug，虽然可以设置崩溃日志上传来收集崩溃日志，但是用户是怎么操作的，我们也只能靠猜</p>
+<p>为什么不能有一个工具，记录下最近打开了什么界面，点击了哪些按钮，并且记录到本地，方便开发们查看呢？于是笔者有了写这个工具的想法。</p>
+<p>我们来缕一缕：我们的工具要实现的几个功能</p>
+<ol>
+<li>记录activity的打开和关闭情况</li><li>记录fragment的打开和关闭情况</li><li>记录控件的点击情况</li><li>把这些日志存放到本地，方便上传和查阅</li></ol>
+<h2 id="h2-u7528u4EC0u4E48u6280u672Fu5B9Eu73B0">用什么技术实现</h2><p>有了目标，我们就可以考虑怎样实现了，大概有以下几种方式实现操作收集</p>
+<p>这种技术有个名称，叫做埋点，因为我们就像埋地雷一样在指定位置设置代码，当触发的时候打日志并收集</p>
+<ol>
+<li>人工手动埋点</li><li>使用特殊控件，原理与1类似，不过工作转移给了写控件的人</li><li>使用aop框架进行自动化埋点，比如aspectj或者asm</li><li>AccessibilityService配合ContentDescription进行埋点</li></ol>
+<p>选择哪项技术呢，我们逐项分析</p>
+<ol>
+<li>虽然最简单，但是工作量大，容错错埋漏埋，放弃</li><li>工作量巨大，使用者学习成本高，放弃</li><li>使用简单，通用，考虑使用</li><li>需要开发时添加ContentDescription并且某些机型无法开启AccessibilityService相关设置，有局限性</li></ol>
+<p>综合考虑之后，我们选择了使用aop的方式埋点，我们现在有两个选择，aspectj或者asm,但是有于asm过于灵活学习和使用均有一定门槛，所以我们选择简单易用的aspectj</p>
+<h2 id="h2-u57FAu672Cu601Du8DEF">基本思路</h2><p>通过对aspectj的学习，我们发现可以对onclick方法以及生命周期方法进行切点设置，至于什么是切点，将会在后续部分解释</p>
+<p>日志方面，我们采用了开源项目ZLog进行记录，该框架实现了日志写到文件，以及对文件的数量和大小管理功能，比较方便<br><img loading="lazy"  src="/assets/images/4c65c35325b9.png" alt=""></p>
+<p>对于最后一项，由于使用itembinding等框架的时候会遇到捕获不到具体类的情况，所以按需要进行捕捉</p>
+<h2 id="h2--aspectj">关于Aspectj</h2><p>这个工具最关键的还是怎样使用aspectj去做埋点，关于aspectj的使用网上有很多例子，这里就不赘述了，下面贴出一个简单的使用文件，大家配合注解看一下，如果还是不太明白建议先去搜一些基本使用的帖子</p>
+<pre><code>@Aspect//标注这个类是一个aspectj需要处理的类
+class AspectJTest {
+    @Pointcut(&quot;execution(void _internalCallbackOnClick(..))&quot;)//切点，检测返回值为void的_internalCallbackOnClick方法
+    fun onBindingClick() {
+    }
+
+    @Around(&quot;onBindingClick()&quot;)//在合适的时机对切点进行处理
+    @Throws(Throwable::class)
+    fun onClickMethodBinding(joinPoint: ProceedingJoinPoint) {
+        val args = joinPoint.args//获取方法参数
+        if (args.size &gt;= 1 &amp;&amp; args[1] is View) {
+            val view = args[1] as View//获取view
+            val id = view.id
+            //处理该view或者打印日志
+        }
+        joinPoint.proceed() //执行原来的代码
+    }
+    }</code></pre><h2 id="h2-u9700u8981u89E3u51B3u7684u95EEu9898">需要解决的问题</h2><p>虽然看起来aspectj用起来很简单，但还是有一些问题需要我们处理</p>
+<ol>
+<li>怎样获取点击事件的控件id和它所在的类名</li><li>怎么获取在list中的点击事件，并获取它的位置信息<br>关于第一点，我们普通使用setOnClick设置是可以拿到的，但是当使用databinding等技术的时候情况就比较复杂了，我们如果使用以下代码，就会获取到生成类里的一个onclick文件，根本不知道哪个页面的控件被点击了<pre><code><a href="https://github.com/Around" title="&#64;Around" class="at-link">@Around</a>(&quot;onClick()&quot;)
+ <a href="https://github.com/Throws" title="&#64;Throws" class="at-link">@Throws</a>(Throwable::class)
+ fun onClickMethodAround(joinPoint: ProceedingJoinPoint) {
+     //获取点击事件view对象及名称，可以对不同按钮的点击事件进行统计
+     val target = joinPoint.target
+     var className = &quot;&quot;
+     if (target != null) {
+         className = target.javaClass.name
+         if (className.contains(&quot;$&quot;)) {
+             className = className.split(&quot;\\$&quot;).toTypedArray()[0]
+         }
+         if (className.contains(&quot;_ViewBinding&quot;)) {
+             className = className.split(&quot;_ViewBinding&quot;).toTypedArray()[0]
+         }
+     }//看似可以获取，但是实际使用itembinding的时候只能拿到生成的onclick文件名，没有其他信息
+     joinPoint.proceed() //执行原来的代码
+ }</code></pre></li></ol>
+<p>要处理这个问题，我们需要监听生成类中的点击事件，在笔者这里，这个事件方法名叫做_internalCallbackOnClick，我们添加一个对它的切点就可以了</p>
+<p>对于问题2，我们可以通过获取view的父view,并判断它的类型，再通过强转来解决，代码如下</p>
+<pre><code>  val view = args[0] as View
+                var index = -1
+                if (view.parent is RecyclerView) {
+                    index = (view.parent as RecyclerView).getChildPosition(view)
+                }</code></pre><h2 id="h2-u8F93u51FA">输出</h2><p>当完成了埋点之后，我们就可以把日志输出到文件里了，这里我使用了一个叫ZLog的库，不过由于有一些年头了，我直接复制了文件到项目中。如果大家有兴趣可以去看看<a href="https://github.com/0xZhangKe/ZLog">ZLog代码仓库</a>并点个star</p>
+<h2 id="h2-u603Bu7ED3u4E0Eu5B8Cu5168u4EE3u7801">总结与完全代码</h2><p>解决了上面的问题，我们就可以检测到想要的信息并保存了，以后测试来找我们的时候排查bug又多了一点点线索，线上用户报bug的时候也不用胡乱猜测了，是不是感觉很有用呢？（可能并没有</p>
+<p>如果想看完全的代码，可以到github上的<a href="https://github.com/u3shadow/AspectTest">这里</a>来看看如果能顺便点个star就再好不过了，如果有任何问题，也可以留言讨论</p></article>
+</main>
+
+<footer>Generated from local Z-Blog backup for GitHub Pages.</footer>
+<script>
+  document.querySelectorAll("img").forEach((img) => {
+    const replaceMissingImage = () => {
+      const box = document.createElement("div");
+      box.className = "image-missing";
+      const src = img.currentSrc || img.src || img.getAttribute("src") || "";
+      box.innerHTML = `<strong>Image unavailable</strong><span>This image could not be loaded from the static backup.</span><br><a href="${src}" target="_blank" rel="noreferrer">Open original image URL</a>`;
+      img.replaceWith(box);
+    };
+    img.addEventListener("error", replaceMissingImage, { once: true });
+    if (img.complete && img.naturalWidth === 0) replaceMissingImage();
+  });
+</script>
+
+</body>
+</html>

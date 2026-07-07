@@ -1,0 +1,118 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="什么是机器学习 Tom Mitchell provides a more modern definition: &quot;A computer program is said to learn from experience E with respect to some class of tasks T and performance measure P, if i...">
+  <title>[W1]机器学习的概念以及最简单的算法 - u3coding</title>
+  <link rel="canonical" href="https://u3.github.io/posts/2016/11/512-w1base-about-ml/">
+  <style>
+    :root { --bg:#f6f7f8; --paper:#fff; --ink:#1f2937; --muted:#667085; --line:#d7dde3; --accent:#0f766e; --code:#0b1720; }
+    * { box-sizing:border-box; }
+    body { margin:0; background:var(--bg); color:var(--ink); font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Microsoft YaHei",sans-serif; line-height:1.76; }
+    header { border-bottom:1px solid var(--line); background:rgba(255,255,255,.9); backdrop-filter:blur(12px); position:sticky; top:0; z-index:10; }
+    .bar { max-width:1080px; margin:0 auto; padding:15px 24px; display:flex; align-items:center; justify-content:space-between; gap:16px; }
+    .brand { color:#111827; text-decoration:none; font-weight:760; }
+    nav { display:flex; gap:14px; flex-wrap:wrap; justify-content:flex-end; }
+    nav a { color:var(--muted); text-decoration:none; font-size:14px; }
+    main { max-width:920px; margin:0 auto; padding:46px 24px 72px; }
+    .eyebrow { margin:0 0 12px; color:var(--accent); font-size:14px; font-weight:750; }
+    h1.title { margin:0; font-size:clamp(34px,5.8vw,56px); line-height:1.14; letter-spacing:0; }
+    .meta { margin:18px 0 32px; color:var(--muted); font-size:15px; }
+    .hero { margin:0 0 30px; border:1px solid var(--line); border-radius:8px; overflow:hidden; background:#eef2f5; }
+    .hero img { display:block; width:100%; max-height:560px; object-fit:contain; }
+    article, .panel { background:var(--paper); border:1px solid var(--line); border-radius:8px; padding:clamp(22px,4vw,44px); box-shadow:0 18px 45px rgba(31,41,55,.06); }
+    article h1, article h2, article h3 { line-height:1.34; margin:1.9em 0 .75em; letter-spacing:0; }
+    article h1 { font-size:28px; } article h2 { font-size:24px; } article h3 { font-size:20px; }
+    article p { margin:0 0 1.08em; }
+    article img { display:block; max-width:100%; height:auto; margin:18px auto 8px; border:1px solid var(--line); border-radius:6px; background:#eef2f5; }
+    article figure { margin:24px 0; }
+    article figcaption { text-align:center; color:var(--muted); font-size:14px; margin-top:8px; }
+    article pre { margin:20px 0; overflow:auto; padding:16px; border-radius:8px; background:var(--code); color:#e6edf3; line-height:1.62; }
+    article code { font-family:"Cascadia Code",Consolas,"SFMono-Regular",monospace; font-size:.92em; }
+    article :not(pre) > code { color:#9a3412; background:#fff7ed; padding:.12em .34em; border-radius:4px; }
+    article blockquote { margin:20px 0; padding:10px 18px; border-left:4px solid var(--accent); background:#f5fbfa; color:#374151; }
+    .post-list { display:grid; gap:18px; }
+    .post-card { padding:0 0 18px; border-bottom:1px solid var(--line); }
+    .post-card:last-child { border-bottom:0; padding-bottom:0; }
+    .post-card h2 { margin:0 0 6px; font-size:22px; line-height:1.36; }
+    .post-card a { color:var(--ink); text-decoration:none; }
+    .post-card a:hover { color:var(--accent); }
+    .post-card p { margin:8px 0 0; color:#475569; }
+    .image-missing { margin:22px 0; padding:18px; border:1px dashed #cbd5e1; border-radius:8px; background:#f8fafc; color:#475569; }
+    .image-missing strong { display:block; color:#334155; margin-bottom:6px; }
+    .image-missing a { overflow-wrap:anywhere; font-size:13px; }
+
+    a { color:var(--accent); }
+    footer { max-width:920px; margin:0 auto; padding:0 24px 44px; color:var(--muted); font-size:14px; }
+    @media (max-width:640px) { .bar { padding:13px 16px; } main { padding:32px 16px 54px; } article,.panel { padding:20px 16px; } h1.title { font-size:31px; } }
+  </style>
+</head>
+<body>
+<header><div class="bar"><a class="brand" href="/">u3coding</a><nav><a href="/">首页</a><a href="/archive/">归档</a><a href="/feed.xml">RSS</a></nav></div></header>
+
+<main>
+  <p class="eyebrow">未分类 · 文章 ID 512</p>
+  <h1 class="title">[W1]机器学习的概念以及最简单的算法</h1>
+  <div class="meta">发布于 2016-11-15 16:15 · 已迁移为静态页面</div>
+  <figure class="hero"><img src="/assets/images/18a09c203295.png" alt="[W1]机器学习的概念以及最简单的算法"></figure>
+  <article><h2>什么是机器学习</h2>
+
+<blockquote>
+  Tom Mitchell provides a more modern definition: "A computer program is said to learn from experience E with respect to some class of tasks T and performance measure P, if its performance at tasks in T, as measured by P, improves with experience E."
+  简单翻译一下就是，有任务T,经验E，结果P，当经验E增加时，一个计算机程序对任务T的结果P会越来越准确。
+</blockquote>
+
+<h3>机器学习的分类</h3>
+
+机器学习主要分为两个大类，监督学习和非监督学习。下面来简单总结一下。
+
+<h4>监督学习</h4>
+
+监督学习是指，在这一类的问题之中，我们的学习结果分类是已经明确的，比如，判断一封邮件是否为垃圾邮件，我们已经明确了结果的分类，是或者不是。
+
+<h3>非监督学习</h3>
+
+对应监督学习，非监督学习是指这样的问题当中，结果是没有明确划分的，比如，给出一大堆新闻，将内容相近的新闻划分出来，进行归类，这时我们的结果是不确定的，随着我们给出的文章进行变换。
+
+<h2>最简单算法</h2>
+
+<h3>一元线性回归</h3>
+
+这种问题只有一个变量，从公式上来讲就是我们最常见的一元函数
+
+<blockquote>
+  y = θ0 + θ1x
+</blockquote>
+
+<h3>代价函数</h3>
+
+代价函数是指这样一个函数，它表示了使用输入X所得出的结果y与实际输入的结果y之间的平均偏差值。
+从定义可以得出，我们希望代价函数越接近0越好，这时代表着我们的输入X通过公式得出的结果能够完全符合实际结果Y.
+对于一元线性回归，我们的代价函数可以写为：
+
+<blockquote>
+  <a href="https://www.u3blog.xyz/zb_users/upload/2016/11/QQ截图20161115160241.png"><img loading="lazy"  src="/assets/images/18a09c203295.png" alt="qq%e6%88%aa%e5%9b%be20161115160241" class="alignnone size-full wp-image-514" /></a>
+  从最后的一个公式来看，我们可以理解为，使用现有的参数[θ0，θ1],我们得到的结果与实际结果的差的平方的均值。
+</blockquote>
+
+<h3>梯度下降法寻找参数最小化代价函数</h3></article>
+</main>
+
+<footer>Generated from local Z-Blog backup for GitHub Pages.</footer>
+<script>
+  document.querySelectorAll("img").forEach((img) => {
+    const replaceMissingImage = () => {
+      const box = document.createElement("div");
+      box.className = "image-missing";
+      const src = img.currentSrc || img.src || img.getAttribute("src") || "";
+      box.innerHTML = `<strong>Image unavailable</strong><span>This image could not be loaded from the static backup.</span><br><a href="${src}" target="_blank" rel="noreferrer">Open original image URL</a>`;
+      img.replaceWith(box);
+    };
+    img.addEventListener("error", replaceMissingImage, { once: true });
+    if (img.complete && img.naturalWidth === 0) replaceMissingImage();
+  });
+</script>
+
+</body>
+</html>

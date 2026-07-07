@@ -1,0 +1,238 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="前言 这篇文章记述了我的插件RemoveButterKnife的代码改进过程以及思路，关于插件，各位可以看 RemoveButterKnife代码库 ，关于文章，可以看 构思到实现RemoveButterKnife 原因 近期想给原来的插件RemoveButterKnife加入一些新的功能，发现以前的代码没有使用任何的设计模式，全部功能都写在一起，对于新功能...">
+  <title>项目的改造——RemoveButterKnife插件代码的重构 - u3coding</title>
+  <link rel="canonical" href="https://u3.github.io/posts/2022/10/692-项目的改造-removebutterknife插件代码的重构/">
+  <style>
+    :root { --bg:#f6f7f8; --paper:#fff; --ink:#1f2937; --muted:#667085; --line:#d7dde3; --accent:#0f766e; --code:#0b1720; }
+    * { box-sizing:border-box; }
+    body { margin:0; background:var(--bg); color:var(--ink); font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Microsoft YaHei",sans-serif; line-height:1.76; }
+    header { border-bottom:1px solid var(--line); background:rgba(255,255,255,.9); backdrop-filter:blur(12px); position:sticky; top:0; z-index:10; }
+    .bar { max-width:1080px; margin:0 auto; padding:15px 24px; display:flex; align-items:center; justify-content:space-between; gap:16px; }
+    .brand { color:#111827; text-decoration:none; font-weight:760; }
+    nav { display:flex; gap:14px; flex-wrap:wrap; justify-content:flex-end; }
+    nav a { color:var(--muted); text-decoration:none; font-size:14px; }
+    main { max-width:920px; margin:0 auto; padding:46px 24px 72px; }
+    .eyebrow { margin:0 0 12px; color:var(--accent); font-size:14px; font-weight:750; }
+    h1.title { margin:0; font-size:clamp(34px,5.8vw,56px); line-height:1.14; letter-spacing:0; }
+    .meta { margin:18px 0 32px; color:var(--muted); font-size:15px; }
+    .hero { margin:0 0 30px; border:1px solid var(--line); border-radius:8px; overflow:hidden; background:#eef2f5; }
+    .hero img { display:block; width:100%; max-height:560px; object-fit:contain; }
+    article, .panel { background:var(--paper); border:1px solid var(--line); border-radius:8px; padding:clamp(22px,4vw,44px); box-shadow:0 18px 45px rgba(31,41,55,.06); }
+    article h1, article h2, article h3 { line-height:1.34; margin:1.9em 0 .75em; letter-spacing:0; }
+    article h1 { font-size:28px; } article h2 { font-size:24px; } article h3 { font-size:20px; }
+    article p { margin:0 0 1.08em; }
+    article img { display:block; max-width:100%; height:auto; margin:18px auto 8px; border:1px solid var(--line); border-radius:6px; background:#eef2f5; }
+    article figure { margin:24px 0; }
+    article figcaption { text-align:center; color:var(--muted); font-size:14px; margin-top:8px; }
+    article pre { margin:20px 0; overflow:auto; padding:16px; border-radius:8px; background:var(--code); color:#e6edf3; line-height:1.62; }
+    article code { font-family:"Cascadia Code",Consolas,"SFMono-Regular",monospace; font-size:.92em; }
+    article :not(pre) > code { color:#9a3412; background:#fff7ed; padding:.12em .34em; border-radius:4px; }
+    article blockquote { margin:20px 0; padding:10px 18px; border-left:4px solid var(--accent); background:#f5fbfa; color:#374151; }
+    .post-list { display:grid; gap:18px; }
+    .post-card { padding:0 0 18px; border-bottom:1px solid var(--line); }
+    .post-card:last-child { border-bottom:0; padding-bottom:0; }
+    .post-card h2 { margin:0 0 6px; font-size:22px; line-height:1.36; }
+    .post-card a { color:var(--ink); text-decoration:none; }
+    .post-card a:hover { color:var(--accent); }
+    .post-card p { margin:8px 0 0; color:#475569; }
+    .image-missing { margin:22px 0; padding:18px; border:1px dashed #cbd5e1; border-radius:8px; background:#f8fafc; color:#475569; }
+    .image-missing strong { display:block; color:#334155; margin-bottom:6px; }
+    .image-missing a { overflow-wrap:anywhere; font-size:13px; }
+
+    a { color:var(--accent); }
+    footer { max-width:920px; margin:0 auto; padding:0 24px 44px; color:var(--muted); font-size:14px; }
+    @media (max-width:640px) { .bar { padding:13px 16px; } main { padding:32px 16px 54px; } article,.panel { padding:20px 16px; } h1.title { font-size:31px; } }
+  </style>
+</head>
+<body>
+<header><div class="bar"><a class="brand" href="/">u3coding</a><nav><a href="/">首页</a><a href="/archive/">归档</a><a href="/feed.xml">RSS</a></nav></div></header>
+
+<main>
+  <p class="eyebrow">技术文章 · 文章 ID 692</p>
+  <h1 class="title">项目的改造——RemoveButterKnife插件代码的重构</h1>
+  <div class="meta">发布于 2022-10-08 14:57 · 已迁移为静态页面</div>
+  <figure class="hero"><img src="/assets/images/e142317ad466.png" alt="项目的改造——RemoveButterKnife插件代码的重构"></figure>
+  <article><h2 id="h2-u524Du8A00">前言</h2><p>这篇文章记述了我的插件RemoveButterKnife的代码改进过程以及思路，关于插件，各位可以看<a href="https://github.com/u3shadow/RemoveButterKnife">RemoveButterKnife代码库</a>，关于文章，可以看<a href="http://www.u3coding.com/2016/06/24/androidstudio-plugin-removebutterknife-di/">构思到实现RemoveButterKnife</a></p>
+<h2 id="h2-u539Fu56E0">原因</h2><p>近期想给原来的插件RemoveButterKnife加入一些新的功能，发现以前的代码没有使用任何的设计模式，全部功能都写在一起，对于新功能的添加来说十分糟糕。趁此机会重构了一下代码，在此记录过程。</p>
+<h2 id="h2-u5177u4F53u6B65u9AA4">具体步骤</h2><p>插件主要分为三个部分</p>
+<ol>
+<li>主插件入口部分</li><li>代码寻找/处理部分</li><li>代码生成部分<h2 id="h2-1-">1. 主插件入口部分</h2>我们首先看第一部分，主入口部分，这部分内容主要代码如下 <pre><code><a href="https://github.com/Override" title="&#64;Override" class="at-link">@Override</a>
+ public void actionPerformed(AnActionEvent event) {
+     try {
+     project = event.getData(PlatformDataKeys.PROJECT);
+     Editor editor = event.getData(PlatformDataKeys.EDITOR);
+     file = PsiUtilBase.getPsiFileInEditor(editor, project);
+     mFactory = JavaPsiFacade.getElementFactory(project);
+     mClass = getTargetClass(editor,file);
+     Document document = editor.getDocument(); //以上都是从上下文中获取的辅助对象，具体可以查阅idea plugin文档
+     new DeleteAction(project,file,document,mClass).execute();//执行删除操作
+     }catch (Exception e){
+         e.printStackTrace();
+     }
+ }</code></pre>这部分主要是获取一些需要处理的上下文变量以及下发操作给删除操作，不需要进行处理<h2 id="h2-2-">2. 代码寻找/处理部分</h2>第二部分，也是我们的主要逻辑所在的部分，主要代码逻辑如下<br>1.寻找import相关代码，并把行号存入列表<br>2.寻找Api调用代码，存入行号<br>3.寻找bind相关代码，存入行号，分离id和name以及type，分别存入对应集合<br>4.删除上述生成的行号集合对应代码<br>5.将生成findview的指令下发给代码生成类<br>通过上述逻辑，我们可以看到，1-3步是逻辑不相关部分，没有前后顺序，也没有相互依赖。<br>那么，我们就可以通过责任链的模式来对1-3步进行拆分。<h4 id="h4--basechain-">首先，我们创建一个BaseChain作为基类</h4>BaseChain主要分为三个部分<br>1.成员部分<br>2.处理逻辑部分<br>3.设置子链部分<br>代码如下</li></ol>
+<pre><code>public abstract class BaseChain {
+   protected BaseChain next;
+   protected String[] currentDoc;
+   protected List&lt;Integer&gt; deleteLineNumbers;
+   protected Map&lt;String,String&gt; nameAndIdMap;//第一部分，声明成员
+   public void setNext(BaseChain next){
+      this.next = next;
+   }//设置下一步
+    final public void handle(String[] currentDoc,List deleteLineNumbers,Map nameAndIdMap){
+        this.deleteLineNumbers = deleteLineNumbers;
+        this.nameAndIdMap = nameAndIdMap;
+        this.currentDoc = currentDoc;
+        process();
+        dispatcher();
+    }//内部处理逻辑，无法被子类修改
+    abstract public void process();//子类需要实现的处理部分
+    private void dispatcher(){
+        if(next != null) {
+            next.handle(currentDoc, deleteLineNumbers, nameAndIdMap);
+        }
+    }//转发逻辑
+}</code></pre><h4 id="h4--chain-">然后继续创建子Chain类</h4><p>1.寻找import相关代码，并把行号存入列表<br>2.寻找Api调用代码，存入行号<br>3.寻找bind相关代码，存入行号，分离id和name以及type，分别存入对应集合<br>我们这里拿寻找import相关代码，并把行号存入列表来举例</p>
+<pre><code>public class DetectImportChain extends BaseChain{
+
+    public static final String IMPORT_BUTTERKNIFE_BIND = &quot;import butterknife.Bind;&quot;;
+    public static final String IMPORT_BUTTERKNIFE_INJECT_VIEW = &quot;import butterknife.InjectView;&quot;;
+    public static final String IMPORT_BUTTERKNIFE_BUTTER_KNIFE = &quot;import butterknife.ButterKnife;&quot;;
+    public static final String IMPORT_BUTTERKNIFE_BIND_VIEW = &quot;import butterknife.BindView;&quot;;//定义了我们需要寻找的语句
+
+    @Override
+    public void process() {
+        for (int i = 0;i &lt; currentDoc.length;i++){
+            if (currentDoc[i].equals(IMPORT_BUTTERKNIFE_BIND)||currentDoc[i].equals(IMPORT_BUTTERKNIFE_BIND_VIEW)||currentDoc[i].equals(IMPORT_BUTTERKNIFE_BUTTER_KNIFE)||currentDoc[i].equals(IMPORT_BUTTERKNIFE_INJECT_VIEW)){
+                deleteLineNumbers.add(i);
+            }
+        }
+    }//进行处理
+}</code></pre><p>有了对应的子类，我们还需要加上junit测试，例如</p>
+<pre><code>@Test
+    public void test_with_api_use() {
+        currentDoc[0] = &quot;NotUseApi();&quot;;
+        currentDoc[1] = &quot;ButterKnife.useApi();&quot;;
+        chain.handle(currentDoc,deleteLineNumbers,nameAndIdMap);
+        int expect = 1;
+        int result = deleteLineNumbers.size();
+        assertEquals(expect,result);
+    }</code></pre><p>这时候我们发现，在这几个子类的测试中，每次都需要初始化一些集合，每个都写十分麻烦，于是我们将其抽出来成为基类，代码如下</p>
+<pre><code>class BaseTest {
+   protected Map&lt;String,String&gt; nameAndIdMap;
+   protected Map&lt;Integer,String&gt; typeAndNameMap;
+   protected String[] currentDoc;
+   protected List&lt;Integer&gt; deleteLineNumbers;
+   @Before
+   public void init(){
+       nameAndIdMap = new LinkedHashMap&lt;&gt;();
+       typeAndNameMap = new LinkedHashMap&lt;&gt;();
+       deleteLineNumbers = new ArrayList&lt;&gt;();
+       currentDoc = new String[10];
+   }
+}</code></pre><p>这样，我们的测试类直接继承这个基类就可以省下一些代码量了。</p>
+<h3 id="h3-u5220u9664u5BF9u5E94u884Cu4EE3u7801">删除对应行代码</h3><p>此部分主要是调用idea的api进行处理，所以我们这里不做过多修改，把方法保留在action里即可。</p>
+<h2 id="h2-3-findviewbyid-">3生成findViewByid部分</h2><p>生成代码的逻辑是寻找到文本的特定位置然后依据上述找到的id,name等，进行语句的插入<br>这一部分前期只负责生成findViewById语句，所以做成单个工具类没有问题。<br>但是随着项目的扩展，我们还会生成更多种类的代码，例如onclick对应的代码序列等，这时我们就需要对其进行重构。</p>
+<h4 id="h4-u5206u6790u884Cu4E3A">分析行为</h4><p>该部分的主要操作是寻找代码指定部分，并使用信息生成代码</p>
+<h4 id="h4-1-">1.拆分行为</h4><p>我们可以拆分为两个步骤<br>1.寻找特定部分<br>2.按照分类生成代码<br>生成代码部分可以分为基础行为和特定行为，基础行为是指生成代码的api调用，特定行为是指生成的代码根据种类不同而不同</p>
+<h4 id="h4-2-">2.拆分方案</h4><p>根据上述分析，我们可以使用策略模式进行优化，每一种生成代码都有对应的策略，我们使用的时候只需要根据类别使用不同的策略类来生成即可<br>首先，我们建立接口GenCodeStrategy</p>
+<pre><code>public interface GenCodeStrategy {
+    default void genCode(PsiClass mClass, PsiElementFactory mFactory){
+        genFindView(mClass,mFactory);
+        genOnClick(mClass,mFactory);
+    }
+    void genFindView(PsiClass mClass, PsiElementFactory mFactory);//生成findviewbyid代码
+    void genOnClick(PsiClass mClass, PsiElementFactory mFactory);//生成onclick代码
+}</code></pre><p>然后，让我们建立一个Context类，GenCodeContext</p>
+<pre><code>public class GenCodeContext {
+    private GenCodeStrategy strategy;
+    public GenCodeContext(){
+    }
+    public void setStrategy(GenCodeStrategy strategy){
+        this.strategy = strategy;
+    }
+    public void executeStrategy(PsiClass mClass, PsiElementFactory mFactory){
+        strategy.genCode(mClass,mFactory);
+    }
+}</code></pre><p>再来看看我们其中一个策略类，ActivityStrategy</p>
+<pre><code>public class ActivityStrategy implements GenCodeStrategy{
+    private List&lt;String&gt; code;
+    public ActivityStrategy(List&lt;String&gt; code){
+        this.code = code;
+    }
+    @Override
+    public void genFindView(PsiClass mClass, PsiElementFactory mFactory) {
+         try {
+            PsiMethod onCreate = mClass.findMethodsByName(&quot;onCreate&quot;, false)[0];
+            for (PsiStatement statement : onCreate.getBody().getStatements()) {
+                // Search for setContentView()
+                if (statement.getFirstChild() instanceof PsiMethodCallExpression) {
+                    PsiReferenceExpression methodExpression
+                            = ((PsiMethodCallExpression) statement.getFirstChild())
+                            .getMethodExpression();
+                    if (methodExpression.getText().equals(&quot;setContentView&quot;)) {
+                        for (int i = code.size() - 1; i &gt;= 0; i--) {
+                            onCreate.getBody().addAfter(mFactory.createStatementFromText(
+                                    code.get(i) + &quot;\n&quot;, mClass), statement);
+                        }
+                        break;
+                    }
+                }
+            }
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+    }
+
+    @Override
+    public void genOnClick(PsiClass mClass, PsiElementFactory mFactory) {
+
+    }
+}</code></pre><p>最后，我们要在原来直接写代码生成的文件FindViewByIdWriter中使用我们的策略模式</p>
+<pre><code>public class FindViewByIdWriter extends  WriteCommandAction.Simple {
+    PsiClass mClass;
+    private PsiElementFactory mFactory;
+    List&lt;String&gt; code;
+    Project mProject;
+    public FindViewByIdWriter(Project project, PsiFile file, PsiClass psiClass, List&lt;String&gt; code, PsiElementFactory mFactory) {
+        super(project, file);
+        mClass = psiClass;
+        this.code = code;
+        this.mFactory = mFactory;
+        mProject = project;
+    }
+
+    @Override
+    protected void run(){
+            GenCodeContext codeContext = new GenCodeContext();
+            codeContext.setStrategy(new ActivityStrategy(code));
+            codeContext.executeStrategy(mClass,mFactory);
+            codeContext.setStrategy(new FragmentStrategy(code));
+            codeContext.executeStrategy(mClass,mFactory);
+    }
+}</code></pre><h2 id="h2-u5BF9u6BD4">对比</h2><p>我们可以从重构前/后的目录结构来对比重构的效果</p>
+<p>重构之前<br><img loading="lazy"  src="/assets/images/e142317ad466.png" alt="undefined" title="undefined"></p>
+<p>重构之后<br><img loading="lazy"  src="/assets/images/a959291a2d6b.png" alt="undefined" title="undefined"></p>
+<p>可能会有人问了，重构后感觉复杂了很多，但是从逻辑的维度上来说，一个熟悉设计模式的程序员可以很快/方便的阅读重构后的代码，而重构前的代码虽然看起来文件少，但是所有逻辑都在一个文件中，往往会让人无法阅读/理解</p></article>
+</main>
+
+<footer>Generated from local Z-Blog backup for GitHub Pages.</footer>
+<script>
+  document.querySelectorAll("img").forEach((img) => {
+    const replaceMissingImage = () => {
+      const box = document.createElement("div");
+      box.className = "image-missing";
+      const src = img.currentSrc || img.src || img.getAttribute("src") || "";
+      box.innerHTML = `<strong>Image unavailable</strong><span>This image could not be loaded from the static backup.</span><br><a href="${src}" target="_blank" rel="noreferrer">Open original image URL</a>`;
+      img.replaceWith(box);
+    };
+    img.addEventListener("error", replaceMissingImage, { once: true });
+    if (img.complete && img.naturalWidth === 0) replaceMissingImage();
+  });
+</script>
+
+</body>
+</html>

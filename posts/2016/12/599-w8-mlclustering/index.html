@@ -1,0 +1,155 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="非监督学习：介绍 非监督学习和监督学习相反，是一种无标签学习。 换而言之，我们不知道y的具体分类。 非监督学习适用于： 1.市场分割 2.社交网络分析 3.组织电脑集群 4.天文数据分析 K-Means算法 K-Means算法是最广泛应用的自动分类算法。 具体过程如下 1.随机在数据集合中初始化两个点，叫做聚类中心 2.将整个集合分为两个子集，一个是对于中心...">
+  <title>[W8]聚集 - u3coding</title>
+  <link rel="canonical" href="https://u3.github.io/posts/2016/12/599-w8-mlclustering/">
+  <style>
+    :root { --bg:#f6f7f8; --paper:#fff; --ink:#1f2937; --muted:#667085; --line:#d7dde3; --accent:#0f766e; --code:#0b1720; }
+    * { box-sizing:border-box; }
+    body { margin:0; background:var(--bg); color:var(--ink); font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Microsoft YaHei",sans-serif; line-height:1.76; }
+    header { border-bottom:1px solid var(--line); background:rgba(255,255,255,.9); backdrop-filter:blur(12px); position:sticky; top:0; z-index:10; }
+    .bar { max-width:1080px; margin:0 auto; padding:15px 24px; display:flex; align-items:center; justify-content:space-between; gap:16px; }
+    .brand { color:#111827; text-decoration:none; font-weight:760; }
+    nav { display:flex; gap:14px; flex-wrap:wrap; justify-content:flex-end; }
+    nav a { color:var(--muted); text-decoration:none; font-size:14px; }
+    main { max-width:920px; margin:0 auto; padding:46px 24px 72px; }
+    .eyebrow { margin:0 0 12px; color:var(--accent); font-size:14px; font-weight:750; }
+    h1.title { margin:0; font-size:clamp(34px,5.8vw,56px); line-height:1.14; letter-spacing:0; }
+    .meta { margin:18px 0 32px; color:var(--muted); font-size:15px; }
+    .hero { margin:0 0 30px; border:1px solid var(--line); border-radius:8px; overflow:hidden; background:#eef2f5; }
+    .hero img { display:block; width:100%; max-height:560px; object-fit:contain; }
+    article, .panel { background:var(--paper); border:1px solid var(--line); border-radius:8px; padding:clamp(22px,4vw,44px); box-shadow:0 18px 45px rgba(31,41,55,.06); }
+    article h1, article h2, article h3 { line-height:1.34; margin:1.9em 0 .75em; letter-spacing:0; }
+    article h1 { font-size:28px; } article h2 { font-size:24px; } article h3 { font-size:20px; }
+    article p { margin:0 0 1.08em; }
+    article img { display:block; max-width:100%; height:auto; margin:18px auto 8px; border:1px solid var(--line); border-radius:6px; background:#eef2f5; }
+    article figure { margin:24px 0; }
+    article figcaption { text-align:center; color:var(--muted); font-size:14px; margin-top:8px; }
+    article pre { margin:20px 0; overflow:auto; padding:16px; border-radius:8px; background:var(--code); color:#e6edf3; line-height:1.62; }
+    article code { font-family:"Cascadia Code",Consolas,"SFMono-Regular",monospace; font-size:.92em; }
+    article :not(pre) > code { color:#9a3412; background:#fff7ed; padding:.12em .34em; border-radius:4px; }
+    article blockquote { margin:20px 0; padding:10px 18px; border-left:4px solid var(--accent); background:#f5fbfa; color:#374151; }
+    .post-list { display:grid; gap:18px; }
+    .post-card { padding:0 0 18px; border-bottom:1px solid var(--line); }
+    .post-card:last-child { border-bottom:0; padding-bottom:0; }
+    .post-card h2 { margin:0 0 6px; font-size:22px; line-height:1.36; }
+    .post-card a { color:var(--ink); text-decoration:none; }
+    .post-card a:hover { color:var(--accent); }
+    .post-card p { margin:8px 0 0; color:#475569; }
+    .image-missing { margin:22px 0; padding:18px; border:1px dashed #cbd5e1; border-radius:8px; background:#f8fafc; color:#475569; }
+    .image-missing strong { display:block; color:#334155; margin-bottom:6px; }
+    .image-missing a { overflow-wrap:anywhere; font-size:13px; }
+
+    a { color:var(--accent); }
+    footer { max-width:920px; margin:0 auto; padding:0 24px 44px; color:var(--muted); font-size:14px; }
+    @media (max-width:640px) { .bar { padding:13px 16px; } main { padding:32px 16px 54px; } article,.panel { padding:20px 16px; } h1.title { font-size:31px; } }
+  </style>
+</head>
+<body>
+<header><div class="bar"><a class="brand" href="/">u3coding</a><nav><a href="/">首页</a><a href="/archive/">归档</a><a href="/feed.xml">RSS</a></nav></div></header>
+
+<main>
+  <p class="eyebrow">未分类 · 文章 ID 599</p>
+  <h1 class="title">[W8]聚集</h1>
+  <div class="meta">发布于 2016-12-02 14:56 · 已迁移为静态页面</div>
+  <figure class="hero"><img src="/assets/images/35acde8c1d1f.png" alt="[W8]聚集"></figure>
+  <article><h2>非监督学习：介绍</h2>
+
+非监督学习和监督学习相反，是一种无标签学习。
+换而言之，我们不知道y的具体分类。
+非监督学习适用于：
+1.市场分割
+2.社交网络分析
+3.组织电脑集群
+4.天文数据分析
+
+<h2>K-Means算法</h2>
+
+K-Means算法是最广泛应用的自动分类算法。
+具体过程如下
+1.随机在数据集合中初始化两个点，叫做聚类中心
+2.将整个集合分为两个子集，一个是对于中心1较近的点，一个是对中心2较近的点
+3.将划分好的集合中的点求出一个平均值，把聚类中心移到这个点
+4.重复2和3过程
+
+<h2>优化算法</h2>
+
+<h3>随机赋值</h3>
+
+我们的算法有时会在局部最优解停留，我们需要做的是重复随机赋值几次，来确保取到全局最优解。
+
+<h3>选择聚类的数量</h3>
+
+绘制代价曲线J和聚类数量k的图像，在代价曲线扁平化的那个点选择K的数量。
+代价函数J的公式如下
+
+<blockquote>
+  <a href="https://www.u3blog.xyz/zb_users/upload/2016/12/集群代价函数.png"><img loading="lazy"  src="/assets/images/35acde8c1d1f.png" alt="%e9%9b%86%e7%be%a4%e4%bb%a3%e4%bb%b7%e5%87%bd%e6%95%b0" class="alignnone size-full wp-image-600" /></a>
+  其中：
+  c(i)表示x（i）当前属于的集群的序号
+  uk  表示集群中心k
+  uc(i) 表示x(i)属于集群的集群中心
+</blockquote>
+
+<h2>维度下降</h2>
+
+有时候一个数据有多个维度的数据，但是我们为了一些需求，会想办法降低其维度，主要场景有两个
+1.数据压缩
+2.数据可视化
+
+<h3>PCA问题分析公式</h3>
+
+最常见和常用的维度下降算法就是PCA(Principal Component Analysis)
+
+<h4>问题描述</h4>
+
+这类问题是为了用一条线来同时描述多个特征，以及适配新的特征。
+PCA的目的就是为了让每个点到这条线的投射距离的平均值最小。
+
+<h4>PCA并不是线性回归</h4>
+
+在线性回归中，我们计算的是每个点的方差
+在PCA中，我们计算的是每个点到线上的距离最小值
+
+<h3>PCA算法</h3>
+
+1.给出训练样本集合
+2.均值化训练集合
+
+<blockquote>
+  <a href="https://www.u3blog.xyz/zb_users/upload/2016/12/均值化.png"><img loading="lazy"  src="/assets/images/1600e97078fd.png" alt="%e5%9d%87%e5%80%bc%e5%8c%96" class="alignnone size-full wp-image-601" /></a>
+  3.让每个样本减去均值化结果<a href="https://www.u3blog.xyz/zb_users/upload/2016/12/均值化替代.png"><img loading="lazy"  src="/assets/images/d3dc63cd699b.png" alt="%e5%9d%87%e5%80%bc%e5%8c%96%e6%9b%bf%e4%bb%a3" class="alignnone size-full wp-image-602" /></a>
+  4.将处于不同规格范围的特征处理为可比较的范围内
+</blockquote>
+
+<h3>如何降低维度</h3>
+
+首先计算协方差矩阵
+
+<blockquote>
+  <a href="https://www.u3blog.xyz/zb_users/upload/2016/12/协方差矩阵计算.png"><img loading="lazy"  src="/assets/images/094962056509.png" alt="%e5%8d%8f%e6%96%b9%e5%b7%ae%e7%9f%a9%e9%98%b5%e8%ae%a1%e7%ae%97" class="alignnone size-full wp-image-604" /></a>
+  然后使用SVD（奇异值分解）算法得到U，S，V
+  然后取U的前x列作就是我们的结果
+</blockquote></article>
+</main>
+
+<footer>Generated from local Z-Blog backup for GitHub Pages.</footer>
+<script>
+  document.querySelectorAll("img").forEach((img) => {
+    const replaceMissingImage = () => {
+      const box = document.createElement("div");
+      box.className = "image-missing";
+      const src = img.currentSrc || img.src || img.getAttribute("src") || "";
+      box.innerHTML = `<strong>Image unavailable</strong><span>This image could not be loaded from the static backup.</span><br><a href="${src}" target="_blank" rel="noreferrer">Open original image URL</a>`;
+      img.replaceWith(box);
+    };
+    img.addEventListener("error", replaceMissingImage, { once: true });
+    if (img.complete && img.naturalWidth === 0) replaceMissingImage();
+  });
+</script>
+
+</body>
+</html>

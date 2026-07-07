@@ -1,0 +1,108 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="近日，拜读了马丁大叔的《重构——改善既有代码设计》一书，虽然是囫囵吞枣，但是也有不少的感悟，为了避免忘记，特作此文以记录。 这本书是什么？ 这是一本讲述如何重构的书，让代码更加合理，更加的容易阅读与维护，可以说是提高代码质量的武林秘籍，江湖上闻名遐迩的一种技术（虽然就目前看来，并不是每个公司都喜欢这么做）。 作者是马丁大叔——Martin Fowler 马丁...">
+  <title>所谓武功，不过是招式和经验——读《重构》有感 - u3coding</title>
+  <link rel="canonical" href="https://u3.github.io/posts/2016/04/342-所谓武功-不过是招式和经验-读-重构-有感/">
+  <style>
+    :root { --bg:#f6f7f8; --paper:#fff; --ink:#1f2937; --muted:#667085; --line:#d7dde3; --accent:#0f766e; --code:#0b1720; }
+    * { box-sizing:border-box; }
+    body { margin:0; background:var(--bg); color:var(--ink); font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Microsoft YaHei",sans-serif; line-height:1.76; }
+    header { border-bottom:1px solid var(--line); background:rgba(255,255,255,.9); backdrop-filter:blur(12px); position:sticky; top:0; z-index:10; }
+    .bar { max-width:1080px; margin:0 auto; padding:15px 24px; display:flex; align-items:center; justify-content:space-between; gap:16px; }
+    .brand { color:#111827; text-decoration:none; font-weight:760; }
+    nav { display:flex; gap:14px; flex-wrap:wrap; justify-content:flex-end; }
+    nav a { color:var(--muted); text-decoration:none; font-size:14px; }
+    main { max-width:920px; margin:0 auto; padding:46px 24px 72px; }
+    .eyebrow { margin:0 0 12px; color:var(--accent); font-size:14px; font-weight:750; }
+    h1.title { margin:0; font-size:clamp(34px,5.8vw,56px); line-height:1.14; letter-spacing:0; }
+    .meta { margin:18px 0 32px; color:var(--muted); font-size:15px; }
+    .hero { margin:0 0 30px; border:1px solid var(--line); border-radius:8px; overflow:hidden; background:#eef2f5; }
+    .hero img { display:block; width:100%; max-height:560px; object-fit:contain; }
+    article, .panel { background:var(--paper); border:1px solid var(--line); border-radius:8px; padding:clamp(22px,4vw,44px); box-shadow:0 18px 45px rgba(31,41,55,.06); }
+    article h1, article h2, article h3 { line-height:1.34; margin:1.9em 0 .75em; letter-spacing:0; }
+    article h1 { font-size:28px; } article h2 { font-size:24px; } article h3 { font-size:20px; }
+    article p { margin:0 0 1.08em; }
+    article img { display:block; max-width:100%; height:auto; margin:18px auto 8px; border:1px solid var(--line); border-radius:6px; background:#eef2f5; }
+    article figure { margin:24px 0; }
+    article figcaption { text-align:center; color:var(--muted); font-size:14px; margin-top:8px; }
+    article pre { margin:20px 0; overflow:auto; padding:16px; border-radius:8px; background:var(--code); color:#e6edf3; line-height:1.62; }
+    article code { font-family:"Cascadia Code",Consolas,"SFMono-Regular",monospace; font-size:.92em; }
+    article :not(pre) > code { color:#9a3412; background:#fff7ed; padding:.12em .34em; border-radius:4px; }
+    article blockquote { margin:20px 0; padding:10px 18px; border-left:4px solid var(--accent); background:#f5fbfa; color:#374151; }
+    .post-list { display:grid; gap:18px; }
+    .post-card { padding:0 0 18px; border-bottom:1px solid var(--line); }
+    .post-card:last-child { border-bottom:0; padding-bottom:0; }
+    .post-card h2 { margin:0 0 6px; font-size:22px; line-height:1.36; }
+    .post-card a { color:var(--ink); text-decoration:none; }
+    .post-card a:hover { color:var(--accent); }
+    .post-card p { margin:8px 0 0; color:#475569; }
+    .image-missing { margin:22px 0; padding:18px; border:1px dashed #cbd5e1; border-radius:8px; background:#f8fafc; color:#475569; }
+    .image-missing strong { display:block; color:#334155; margin-bottom:6px; }
+    .image-missing a { overflow-wrap:anywhere; font-size:13px; }
+
+    a { color:var(--accent); }
+    footer { max-width:920px; margin:0 auto; padding:0 24px 44px; color:var(--muted); font-size:14px; }
+    @media (max-width:640px) { .bar { padding:13px 16px; } main { padding:32px 16px 54px; } article,.panel { padding:20px 16px; } h1.title { font-size:31px; } }
+  </style>
+</head>
+<body>
+<header><div class="bar"><a class="brand" href="/">u3coding</a><nav><a href="/">首页</a><a href="/archive/">归档</a><a href="/feed.xml">RSS</a></nav></div></header>
+
+<main>
+  <p class="eyebrow">未分类 · 文章 ID 342</p>
+  <h1 class="title">所谓武功，不过是招式和经验——读《重构》有感</h1>
+  <div class="meta">发布于 2016-04-19 18:03 · 已迁移为静态页面</div>
+  
+  <article>近日，拜读了马丁大叔的《重构——改善既有代码设计》一书，虽然是囫囵吞枣，但是也有不少的感悟，为了避免忘记，特作此文以记录。
+
+<h2>这本书是什么？</h2>
+
+这是一本讲述如何重构的书，让代码更加合理，更加的容易阅读与维护，可以说是提高代码质量的武林秘籍，江湖上闻名遐迩的一种技术（虽然就目前看来，并不是每个公司都喜欢这么做）。
+作者是马丁大叔——Martin Fowler
+马丁大叔是个很厉害的程序员，厉害到什么程度呢？甚至我都不用说他的履历你就知道他是谁了。
+
+<h2>这本书讲了什么？</h2>
+
+很明显，讲了重构，不同于大多数的书籍，高屋建瓴，这本书颇有些下里巴人的意思，讲了很多重构的手法，每一个手法都不复杂，而且还有详尽的操作指南，第一步该怎么做，第二补怎么做，都一一列举，配合例子，很容易理解。
+可以说更像是一本操作指南，但是当这些浅显易懂的东西合体的时候，就变成了神秘莫测的重构技术。
+
+<h2>什么人应该来读这本书？</h2>
+
+每个程序员，是的，只要有志于代码行业的青年，都可以来读一读这本书，重构并不是所谓高级工程师的专利，当然，常常是这些人在进行重构，但是每个层级来读这本书都会有收获。
+如果是一个初出茅庐的菜鸟，你读了这本书之后大概就会知道代码该怎么写才是正确的，相当于是给了你一整本书的反面教材和改错例子，可以拿来作为自己日后写代码的参考。
+如果是一个资深的工程师，那么，这本书对于提高自己的代码质量和团队的代码规范都是有好处的，有了这些招式，以前靠经验堆积出来的，这里应该这么做，那里应该那么做就终于有了理论的支撑，化无形为有形，让这些盘踞在脑子里的概念可以顺利的说出来与人交流了，不再是茶壶煮饺子。
+
+<h2>该怎么来读这本书呢？</h2>
+
+关于这个问题，看起来很愚蠢，但是，我想说的是，并不是这样。技术书籍不同于文学著作，需要一字一句的细嚼慢咽，我们需要从这种书中学到的是一门技术或者思想，并不是去观测作者的遣词造句，这时候，一个正确的打开姿势就很重要了。
+就拿这本书来说，里面有很多具体的操作细节，比如，第一步，注释变量，第二步添加函数，我们需要一个字一个字的去读吗？
+根本不需要
+我们需要关注的是什么时候该进行怎么样的重构，这种重构能为我们带来什么好处，至于具体的做法，就跟操作手册一样，用到了再来查询也不迟，我觉得我们应该先在脑子里建立一个重构索引库，当我们遇到问题的时候，会联想到具体的重构手法，这就足够了。不然就成了靠背字典来学习外语的可笑角色了。
+
+<h2>我的感想</h2>
+
+有人的地方就有江湖，在代码江湖中行走，没有一把趁手的兵器怎么行？我们的兵器就是代码，当然，这把武器越锋利越好，而糟糕的代码设计，往往会让我们的武器生锈，让我们在与bug搏斗的时候显得束手无策，空有利刃而不得用，实在是遗憾至极。
+重构就是我们武器的磨刀石，经常重构，不仅能让我的武器更加锋利，而且在遇到敌人时，也为我们提供了丰富的招式来应对，让我们不再是以经验来处理问题，就像是以前靠着蛮力和一点点战斗经验行走江湖，突然，有一个神秘的老爷爷给了你一本武林人士的出招表，这可真是不得了的东西，不仅能提高自己，还能更加了解敌人。
+当然，再好的东西不去用也只是纸上谈兵，马丁大叔也知道这点，他提到了，最难的不是重构，而是停止重构，任何招式，想要做到收放自如都需要大量的经验积累，所以，让我们从今天开始，努力提高自己的代码质量并重构它吧。</article>
+</main>
+
+<footer>Generated from local Z-Blog backup for GitHub Pages.</footer>
+<script>
+  document.querySelectorAll("img").forEach((img) => {
+    const replaceMissingImage = () => {
+      const box = document.createElement("div");
+      box.className = "image-missing";
+      const src = img.currentSrc || img.src || img.getAttribute("src") || "";
+      box.innerHTML = `<strong>Image unavailable</strong><span>This image could not be loaded from the static backup.</span><br><a href="${src}" target="_blank" rel="noreferrer">Open original image URL</a>`;
+      img.replaceWith(box);
+    };
+    img.addEventListener("error", replaceMissingImage, { once: true });
+    if (img.complete && img.naturalWidth === 0) replaceMissingImage();
+  });
+</script>
+
+</body>
+</html>

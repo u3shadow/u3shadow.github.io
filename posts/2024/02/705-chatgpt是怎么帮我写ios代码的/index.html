@@ -1,0 +1,250 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="背景 博主只会安卓开发，最近使用chatGPT3.5把一个安卓项目转换成了ios项目并成功运行实现功能 应用的主要功能 这个安卓应用主要是拿来看比赛回放的，有时候太迟的足球比赛不想熬夜，但是又不想被剧透看全场回放，就写了个这个应用，这次讨论的重点并不是应用本身，如果大家有兴趣可以评论区留言，我把应用发出来 应用的主要页面有下面几个，1.登录爱奇艺账号页面，2...">
+  <title>ChatGPT是怎么帮我写ios代码的 - u3coding</title>
+  <link rel="canonical" href="https://u3.github.io/posts/2024/02/705-chatgpt是怎么帮我写ios代码的/">
+  <style>
+    :root { --bg:#f6f7f8; --paper:#fff; --ink:#1f2937; --muted:#667085; --line:#d7dde3; --accent:#0f766e; --code:#0b1720; }
+    * { box-sizing:border-box; }
+    body { margin:0; background:var(--bg); color:var(--ink); font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Microsoft YaHei",sans-serif; line-height:1.76; }
+    header { border-bottom:1px solid var(--line); background:rgba(255,255,255,.9); backdrop-filter:blur(12px); position:sticky; top:0; z-index:10; }
+    .bar { max-width:1080px; margin:0 auto; padding:15px 24px; display:flex; align-items:center; justify-content:space-between; gap:16px; }
+    .brand { color:#111827; text-decoration:none; font-weight:760; }
+    nav { display:flex; gap:14px; flex-wrap:wrap; justify-content:flex-end; }
+    nav a { color:var(--muted); text-decoration:none; font-size:14px; }
+    main { max-width:920px; margin:0 auto; padding:46px 24px 72px; }
+    .eyebrow { margin:0 0 12px; color:var(--accent); font-size:14px; font-weight:750; }
+    h1.title { margin:0; font-size:clamp(34px,5.8vw,56px); line-height:1.14; letter-spacing:0; }
+    .meta { margin:18px 0 32px; color:var(--muted); font-size:15px; }
+    .hero { margin:0 0 30px; border:1px solid var(--line); border-radius:8px; overflow:hidden; background:#eef2f5; }
+    .hero img { display:block; width:100%; max-height:560px; object-fit:contain; }
+    article, .panel { background:var(--paper); border:1px solid var(--line); border-radius:8px; padding:clamp(22px,4vw,44px); box-shadow:0 18px 45px rgba(31,41,55,.06); }
+    article h1, article h2, article h3 { line-height:1.34; margin:1.9em 0 .75em; letter-spacing:0; }
+    article h1 { font-size:28px; } article h2 { font-size:24px; } article h3 { font-size:20px; }
+    article p { margin:0 0 1.08em; }
+    article img { display:block; max-width:100%; height:auto; margin:18px auto 8px; border:1px solid var(--line); border-radius:6px; background:#eef2f5; }
+    article figure { margin:24px 0; }
+    article figcaption { text-align:center; color:var(--muted); font-size:14px; margin-top:8px; }
+    article pre { margin:20px 0; overflow:auto; padding:16px; border-radius:8px; background:var(--code); color:#e6edf3; line-height:1.62; }
+    article code { font-family:"Cascadia Code",Consolas,"SFMono-Regular",monospace; font-size:.92em; }
+    article :not(pre) > code { color:#9a3412; background:#fff7ed; padding:.12em .34em; border-radius:4px; }
+    article blockquote { margin:20px 0; padding:10px 18px; border-left:4px solid var(--accent); background:#f5fbfa; color:#374151; }
+    .post-list { display:grid; gap:18px; }
+    .post-card { padding:0 0 18px; border-bottom:1px solid var(--line); }
+    .post-card:last-child { border-bottom:0; padding-bottom:0; }
+    .post-card h2 { margin:0 0 6px; font-size:22px; line-height:1.36; }
+    .post-card a { color:var(--ink); text-decoration:none; }
+    .post-card a:hover { color:var(--accent); }
+    .post-card p { margin:8px 0 0; color:#475569; }
+    .image-missing { margin:22px 0; padding:18px; border:1px dashed #cbd5e1; border-radius:8px; background:#f8fafc; color:#475569; }
+    .image-missing strong { display:block; color:#334155; margin-bottom:6px; }
+    .image-missing a { overflow-wrap:anywhere; font-size:13px; }
+
+    a { color:var(--accent); }
+    footer { max-width:920px; margin:0 auto; padding:0 24px 44px; color:var(--muted); font-size:14px; }
+    @media (max-width:640px) { .bar { padding:13px 16px; } main { padding:32px 16px 54px; } article,.panel { padding:20px 16px; } h1.title { font-size:31px; } }
+  </style>
+</head>
+<body>
+<header><div class="bar"><a class="brand" href="/">u3coding</a><nav><a href="/">首页</a><a href="/archive/">归档</a><a href="/feed.xml">RSS</a></nav></div></header>
+
+<main>
+  <p class="eyebrow">技术文章 · 文章 ID 705</p>
+  <h1 class="title">ChatGPT是怎么帮我写ios代码的</h1>
+  <div class="meta">发布于 2024-02-02 16:28 · 已迁移为静态页面</div>
+  <figure class="hero"><img src="/assets/images/52dfdef54212.png" alt="ChatGPT是怎么帮我写ios代码的"></figure>
+  <article><h2 id="h2-u80CCu666F">背景</h2><p>博主只会安卓开发，最近使用chatGPT3.5把一个安卓项目转换成了ios项目并成功运行实现功能</p>
+<h2 id="h2-u5E94u7528u7684u4E3Bu8981u529Fu80FD">应用的主要功能</h2><p>这个安卓应用主要是拿来看比赛回放的，有时候太迟的足球比赛不想熬夜，但是又不想被剧透看全场回放，就写了个这个应用，这次讨论的重点并不是应用本身，如果大家有兴趣可以评论区留言，我把应用发出来</p>
+<figure><img loading="lazy"  src="/assets/images/52dfdef54212.png" alt=""></figure>
+<p>应用的主要页面有下面几个，1.登录爱奇艺账号页面，2.球队列表页面，3.播放页面</p>
+<p>其中播放页面最复杂，要实现以下几个功能</p>
+<ol>
+<li>根据选择的球队，加载搜索比赛结果页面，并把回放和广告列表隐藏，把比赛列表文字放大</li><li>点击了比赛列表，跳转到播放页面</li><li>等待播放页面加载完成，自动点击全屏元素按钮</li><li>在全屏开始播放之后，加载左右两个快放按钮，长按调用网页上的快速播放元素，松开恢复正常速播放<h2 id="h2-u5F00u59CBu8F6Cu6362">开始转换</h2><h3 id="h3-u6587u4EF6u7ED3u6784u5DEEu5F02">文件结构差异</h3>Android的页面主要由两个部分组成</li><li>XML布局文件，决定了页面上有哪些元素，以及如何摆放，实现布局部分</li><li>Activity文件，决定了页面上元素的各种行为，实现逻辑部分</li></ol>
+<p>但是在ios上，并不是这样，chatgpt告诉我，转换出来的东西是一个继承自<strong>UIViewController</strong>的类，里面同时包含了上面的两个部分内容</p>
+<h3 id="h3-u8981u8F6Cu6362u54EAu4E9Bu529Fu80FD">要转换哪些功能</h3><p>应用主要功能就是操作webview加载页面，然后通过调用js的方法来操作页面上的元素，所以webview的加载和js的加载就是这次转换的重点</p>
+<p>问题有两个</p>
+<ol>
+<li>怎么用webview加载内容</li><li>怎么操作webview中的内容<h3 id="h3--gpt-">我和gpt的对话</h3>由于gpt没法自动合并xml和activity的代码，所以我只有让它先转xml，得到布局的controller内容<br>列表页面</li></ol>
+<figure><img loading="lazy"  src="/assets/images/11e9a264ef2f.png" alt=""></figure>
+<p>比如这个布局</p>
+<pre><code class="language-html">
+    &lt;androidx.constraintlayout.widget.ConstraintLayout xmlns:android=&quot;http://schemas.android.com/apk/res/android&quot;
+        xmlns:app=&quot;http://schemas.android.com/apk/res-auto&quot;
+        xmlns:tools=&quot;http://schemas.android.com/tools&quot;
+        android:layout_width=&quot;match_parent&quot;
+        android:layout_height=&quot;match_parent&quot;
+        tools:context=&quot;.PlayerActivity&quot;&gt;
+        &lt;FrameLayout
+            android:visibility=&quot;gone&quot;
+            android:id=&quot;@+id/mFlVideoContainer&quot;
+            android:layout_width=&quot;match_parent&quot;
+            android:layout_height=&quot;match_parent&quot;&gt;
+        &lt;FrameLayout
+            android:id=&quot;@+id/mFlVideoContainer1&quot;
+            android:layout_width=&quot;match_parent&quot;
+            android:layout_height=&quot;match_parent&quot;/&gt;
+            &lt;LinearLayout
+                android:orientation=&quot;horizontal&quot;
+                android:id=&quot;@+id/ll_container&quot;
+                android:layout_marginBottom=&quot;50dp&quot;
+                android:layout_width=&quot;match_parent&quot;
+                android:layout_height=&quot;match_parent&quot;&gt;
+                &lt;Button
+                    android:layout_weight=&quot;1&quot;
+                    android:layout_width=&quot;0dp&quot;
+                    android:background=&quot;#00000000&quot;
+                    android:id=&quot;@+id/back_bt&quot;
+                    android:layout_height=&quot;match_parent&quot;/&gt;
+                &lt;Button
+                    android:layout_weight=&quot;3&quot;
+                    android:layout_width=&quot;0dp&quot;
+                    android:visibility=&quot;invisible&quot;
+                    android:enabled=&quot;false&quot;
+                    android:background=&quot;#00000000&quot;
+                    android:id=&quot;@+id/pause_bt&quot;
+                    android:layout_height=&quot;match_parent&quot;/&gt;
+                &lt;Button
+                    android:layout_weight=&quot;1&quot;
+                    android:layout_width=&quot;0dp&quot;
+                    android:background=&quot;#00000000&quot;
+                    android:id=&quot;@+id/go_bt&quot;
+                    android:layout_height=&quot;match_parent&quot;/&gt;
+            &lt;/LinearLayout&gt;
+        &lt;/FrameLayout&gt;
+        &lt;WebView
+            android:layout_width=&quot;match_parent&quot;
+            android:layout_height=&quot;match_parent&quot;
+            android:id=&quot;@+id/webview&quot;
+            app:layout_constraintBottom_toBottomOf=&quot;parent&quot;
+            app:layout_constraintEnd_toEndOf=&quot;parent&quot;
+            app:layout_constraintStart_toStartOf=&quot;parent&quot;
+            app:layout_constraintTop_toTopOf=&quot;parent&quot; /&gt;
+    &lt;/androidx.constraintlayout.widget.ConstraintLayout&gt;</code></pre>
+<p>让它给我转成ios版本，转出来是下面这样的</p>
+<pre><code class="language-swift">import UIKit
+import WebKit
+
+class PlayerViewController: UIViewController {
+
+    // UIView elements
+    let videoContainer: UIView = {
+        let view = UIView()
+        view.isHidden = true
+        return view
+    }()
+
+    let videoContainer1: UIView = {
+        let view = UIView()
+        return view
+    }()
+
+    let backButton: UIButton = {
+        let button = UIButton()
+        button.backgroundColor = UIColor.clear
+        return button
+    }()
+
+    let pauseButton: UIButton = {
+        let button = UIButton()
+        button.isHidden = true
+        button.isEnabled = false
+        button.backgroundColor = UIColor.clear
+        return button
+    }()
+
+    let goButton: UIButton = {
+        let button = UIButton()
+        button.backgroundColor = UIColor.clear
+        return button
+    }()
+
+    let webView: WKWebView = {
+        let webView = WKWebView()
+        return webView
+    }()
+
+    override func viewDidLoad() {
+        super.viewDidLoad()
+
+        // Set up constraints for each element
+        videoContainer.translatesAutoresizingMaskIntoConstraints = false
+        videoContainer1.translatesAutoresizingMaskIntoConstraints = false
+        backButton.translatesAutoresizingMaskIntoConstraints = false
+        pauseButton.translatesAutoresizingMaskIntoConstraints = false
+        goButton.translatesAutoresizingMaskIntoConstraints = false
+        webView.translatesAutoresizingMaskIntoConstraints = false
+
+        view.addSubview(videoContainer)
+        view.addSubview(webView)
+
+        NSLayoutConstraint.activate([
+            videoContainer.topAnchor.constraint(equalTo: view.topAnchor),
+            videoContainer.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            videoContainer.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            videoContainer.bottomAnchor.constraint(equalTo: view.bottomAnchor),
+
+            videoContainer1.topAnchor.constraint(equalTo: videoContainer.topAnchor),
+            videoContainer1.leadingAnchor.constraint(equalTo: videoContainer.leadingAnchor),
+            videoContainer1.trailingAnchor.constraint(equalTo: videoContainer.trailingAnchor),
+            videoContainer1.bottomAnchor.constraint(equalTo: videoContainer.bottomAnchor),
+
+            backButton.topAnchor.constraint(equalTo: videoContainer.bottomAnchor),
+            backButton.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            backButton.bottomAnchor.constraint(equalTo: view.bottomAnchor),
+            backButton.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.25),
+
+            pauseButton.topAnchor.constraint(equalTo: videoContainer.bottomAnchor),
+            pauseButton.leadingAnchor.constraint(equalTo: backButton.trailingAnchor),
+            pauseButton.bottomAnchor.constraint(equalTo: view.bottomAnchor),
+            pauseButton.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.5),
+
+            goButton.topAnchor.constraint(equalTo: videoContainer.bottomAnchor),
+            goButton.leadingAnchor.constraint(equalTo: pauseButton.trailingAnchor),
+            goButton.bottomAnchor.constraint(equalTo: view.bottomAnchor),
+            goButton.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.25),
+
+            webView.topAnchor.constraint(equalTo: view.topAnchor),
+            webView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            webView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            webView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
+        ])
+    }
+}
+</code></pre>
+<h2 id="h2-u9047u5230u7684u5751">遇到的坑</h2><h3 id="h3-gpt-">gpt生成的代码并不是直接可以用的</h3><p>gpt生成出来的代码看似正确，但是有时候运行就会发现缺少内容，比如有的变量没有定义就使用了，你得追问它，才会告诉你</p>
+<p>虽然告诉你了，但是大概率会重新生成一份代码，这又是一个坑，这个重新生成的代码又有概率和第一次完全不同</p>
+<p>这坑需要有一定的编程能力，自己阅读下gpt给的代码，才可以实现想要的功能，不然就会被它坑</p>
+<h3 id="h3--gpt-">对于稍微复杂一点的布局，gpt给出的方案并不总能成功实现</h3><p>由于给出的ios界面是用代码实现的，给出的安卓布局是xml的，有些时候ios并没有安卓的布局控件，gpt给出的方案运行起来就会出现错位等情况，这时候也需要人工调试</p>
+<h3 id="h3--gpt-">对于项目配置方面，gpt并不能给出精准的解答</h3><p>这点主要体现在其中一个功能上，从ios应用中拉起爱奇异体育并播放，chatgpt给出的方案不管怎么设置都无法实现，因为它理解成了我需要从其他应用跳转到自己的ios应用</p>
+<p>其实这个问题在网上一搜就能处理，这也是一个坑，不能全部相信gpt的话</p>
+<h3 id="h3-ios-webview-">ios和安卓webview的差异导致的功能实现不同</h3><p>由于爱奇艺的限制，使用ios的wkwebview无法进行播放，在安卓却可以播放，所以需要调整功能，不能直接在应用内播放，需要走scheme的方式跳转爱奇艺app做播放</p>
+<p>对于wkwebview无法播放的问题，我问了gpt很久，每次它也非常配合，给出各种各样的方案，花了很多时间，但是都无效</p>
+<p>这个问题也需要自己想一想，用自带的浏览器打开一下页面，把agent换成pc端，发现也无法播放，所以确认是wkwebview的问题，而不是实现方案的问题</p>
+<h2 id="h2-u603Bu7ED3">总结</h2><ul>
+<li><p>在使用gpt的时候，也不能无脑相信它，有时候它明明不会或者不懂，也会给出答案，这种答案看起来没问题，其实是错误的，会把方向带偏，需要特别留意</p>
+</li><li><p>使用gpt可以让我这样一个完全不懂ios的开发人员在短时间内完成简单的开发工作，放在以前我至少需要学习基础的ios开发知识,学习完了之后，我还需要在开发遇到问题的时候一个点一个点的搜，大概率是没有相同问题的，需要自己从各种各样的结果中提炼</p>
+</li><li><p>现在gpt帮我完成了这个步骤，让这次开发变得轻松了很多</p>
+</li><li><p>gpt对开发人员的帮助确实是非常大，粗略估计，这次的小应用开发，为了节省了60%以上的时间，相信随着技术的发展，这个工具会越来越便利，这次使用的是免费的gpt3.5都如此强大，收费的4.0真是不敢想象</p>
+</li></ul></article>
+</main>
+
+<footer>Generated from local Z-Blog backup for GitHub Pages.</footer>
+<script>
+  document.querySelectorAll("img").forEach((img) => {
+    const replaceMissingImage = () => {
+      const box = document.createElement("div");
+      box.className = "image-missing";
+      const src = img.currentSrc || img.src || img.getAttribute("src") || "";
+      box.innerHTML = `<strong>Image unavailable</strong><span>This image could not be loaded from the static backup.</span><br><a href="${src}" target="_blank" rel="noreferrer">Open original image URL</a>`;
+      img.replaceWith(box);
+    };
+    img.addEventListener("error", replaceMissingImage, { once: true });
+    if (img.complete && img.naturalWidth === 0) replaceMissingImage();
+  });
+</script>
+
+</body>
+</html>

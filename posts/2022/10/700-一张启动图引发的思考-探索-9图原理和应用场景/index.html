@@ -1,0 +1,334 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="highlight: vs theme: juejin 引子 小u啊，我们应用启动的时候有一段白屏，不雅观，你给整个启动图上去，给，这里是资源图片 换好了 嗯，不错不错，咦，这个小米fold怎么显示了两个logo？ 啊？这。。。我来看看 是这样的，activity启动图和启动背景图标一起显示了，但是启动图片又不适配fold这种狭长的屏幕，而且下半部分由于没有...">
+  <title>一张启动图引发的思考--探索.9图原理和应用场景 - u3coding</title>
+  <link rel="canonical" href="https://u3.github.io/posts/2022/10/700-一张启动图引发的思考-探索-9图原理和应用场景/">
+  <style>
+    :root { --bg:#f6f7f8; --paper:#fff; --ink:#1f2937; --muted:#667085; --line:#d7dde3; --accent:#0f766e; --code:#0b1720; }
+    * { box-sizing:border-box; }
+    body { margin:0; background:var(--bg); color:var(--ink); font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Microsoft YaHei",sans-serif; line-height:1.76; }
+    header { border-bottom:1px solid var(--line); background:rgba(255,255,255,.9); backdrop-filter:blur(12px); position:sticky; top:0; z-index:10; }
+    .bar { max-width:1080px; margin:0 auto; padding:15px 24px; display:flex; align-items:center; justify-content:space-between; gap:16px; }
+    .brand { color:#111827; text-decoration:none; font-weight:760; }
+    nav { display:flex; gap:14px; flex-wrap:wrap; justify-content:flex-end; }
+    nav a { color:var(--muted); text-decoration:none; font-size:14px; }
+    main { max-width:920px; margin:0 auto; padding:46px 24px 72px; }
+    .eyebrow { margin:0 0 12px; color:var(--accent); font-size:14px; font-weight:750; }
+    h1.title { margin:0; font-size:clamp(34px,5.8vw,56px); line-height:1.14; letter-spacing:0; }
+    .meta { margin:18px 0 32px; color:var(--muted); font-size:15px; }
+    .hero { margin:0 0 30px; border:1px solid var(--line); border-radius:8px; overflow:hidden; background:#eef2f5; }
+    .hero img { display:block; width:100%; max-height:560px; object-fit:contain; }
+    article, .panel { background:var(--paper); border:1px solid var(--line); border-radius:8px; padding:clamp(22px,4vw,44px); box-shadow:0 18px 45px rgba(31,41,55,.06); }
+    article h1, article h2, article h3 { line-height:1.34; margin:1.9em 0 .75em; letter-spacing:0; }
+    article h1 { font-size:28px; } article h2 { font-size:24px; } article h3 { font-size:20px; }
+    article p { margin:0 0 1.08em; }
+    article img { display:block; max-width:100%; height:auto; margin:18px auto 8px; border:1px solid var(--line); border-radius:6px; background:#eef2f5; }
+    article figure { margin:24px 0; }
+    article figcaption { text-align:center; color:var(--muted); font-size:14px; margin-top:8px; }
+    article pre { margin:20px 0; overflow:auto; padding:16px; border-radius:8px; background:var(--code); color:#e6edf3; line-height:1.62; }
+    article code { font-family:"Cascadia Code",Consolas,"SFMono-Regular",monospace; font-size:.92em; }
+    article :not(pre) > code { color:#9a3412; background:#fff7ed; padding:.12em .34em; border-radius:4px; }
+    article blockquote { margin:20px 0; padding:10px 18px; border-left:4px solid var(--accent); background:#f5fbfa; color:#374151; }
+    .post-list { display:grid; gap:18px; }
+    .post-card { padding:0 0 18px; border-bottom:1px solid var(--line); }
+    .post-card:last-child { border-bottom:0; padding-bottom:0; }
+    .post-card h2 { margin:0 0 6px; font-size:22px; line-height:1.36; }
+    .post-card a { color:var(--ink); text-decoration:none; }
+    .post-card a:hover { color:var(--accent); }
+    .post-card p { margin:8px 0 0; color:#475569; }
+    .image-missing { margin:22px 0; padding:18px; border:1px dashed #cbd5e1; border-radius:8px; background:#f8fafc; color:#475569; }
+    .image-missing strong { display:block; color:#334155; margin-bottom:6px; }
+    .image-missing a { overflow-wrap:anywhere; font-size:13px; }
+
+    a { color:var(--accent); }
+    footer { max-width:920px; margin:0 auto; padding:0 24px 44px; color:var(--muted); font-size:14px; }
+    @media (max-width:640px) { .bar { padding:13px 16px; } main { padding:32px 16px 54px; } article,.panel { padding:20px 16px; } h1.title { font-size:31px; } }
+  </style>
+</head>
+<body>
+<header><div class="bar"><a class="brand" href="/">u3coding</a><nav><a href="/">首页</a><a href="/archive/">归档</a><a href="/feed.xml">RSS</a></nav></div></header>
+
+<main>
+  <p class="eyebrow">技术文章 · 文章 ID 700</p>
+  <h1 class="title">一张启动图引发的思考--探索.9图原理和应用场景</h1>
+  <div class="meta">发布于 2022-10-08 15:02 · 已迁移为静态页面</div>
+  <figure class="hero"><img src="/assets/images/d08f6f502a64.png" alt="一张启动图引发的思考--探索.9图原理和应用场景"></figure>
+  <article><h2 id="h2-u5F15u5B50">引子</h2><p>小u啊，我们应用启动的时候有一段白屏，不雅观，你给整个启动图上去，给，这里是资源图片</p>
+<p>换好了</p>
+<p>嗯，不错不错，咦，这个小米fold怎么显示了两个logo？</p>
+<p>啊？这。。。我来看看</p>
+<p>是这样的，activity启动图和启动背景图标一起显示了，但是启动图片又不适配fold这种狭长的屏幕，而且下半部分由于没有背景，是透明的，所以就显示了两个图标，一个启动图标，一个启动图图片图标，请看示意图</p>
+<figure><img loading="lazy"  src="/assets/images/d08f6f502a64.png" alt=""></figure>
+<p>那怎么解决呢？</p>
+<p>有几个办法，1.让启动图拉伸，覆盖下部分区域，但是会有形变，不够优雅，2.给imageview设置一个白色背景，让它不透明，3.使用android studio的。9图片制作工具，让空白部分拉伸，内容不拉伸，非常优雅。</p>
+<figure><img loading="lazy"  src="/assets/images/554e1ee509a7.png" alt=""></figure>
+<p>好，那你先试试.9图片吧</p>
+<h2 id="h2--9-">.9简介</h2><p>我知道看这篇文章的朋友肯定对.9图或多或少有点了解，就简单介绍下就行<br>.9图可以通过设置来让图片某一部分拉伸 其他部分不拉伸 还可以控制图片里面显示内容的区域<br>这就是.9图的简介 够简了吧 如果想看更详细的说明可以移步谷歌官方的说明 大体上也是这意思</p>
+<p>这个是官方的文档<a href="https://developer.android.com/studio/write/draw9patch?hl=zh-cn">https://developer.android.com/studio/write/draw9patch?hl=zh-cn</a></p>
+<figure><img loading="lazy"  src="/assets/images/e5e020b71470.png" alt=""></figure>
+<figure><img loading="lazy"  src="/assets/images/58c070d71e5d.png" alt=""></figure>
+<figure><img loading="lazy"  src="/assets/images/30ac83071a0b.png" alt=""></figure>
+<p>这是.9图在三种拉伸情况下的例子，纵向，横向，横纵双向。</p>
+<h2 id="h2--9-">.9图制作</h2><p>网上很多文章说最简单是用as内置工具来做 但是网上文章好多都是很早的 都是老版本工具 让我们来看看这工具现在啥样</p>
+<p><img loading="lazy"  src="/assets/images/79d50b97a1a6.png" alt=""><br>好像也不是很简单啊 这些东西做什么用的第一次看确实会很蒙，这里介绍下这个工具</p>
+<ul>
+<li><p><strong>Zoom</strong>：调整图形在绘制区域中的缩放级别。</p>
+</li><li><p><strong>Patch scale</strong>：调整图像在预览区域中的比例。</p>
+</li><li><p><strong>Show lock</strong>：当鼠标悬停在图形的不可绘制区域上时以直观方式呈现。</p>
+</li><li><p><strong>Show patches</strong>：预览绘制区域中的可拉伸图块（粉色为可拉伸图块），如上面的图 2 所示。</p>
+</li><li><p><strong>Show content</strong>：突出显示预览图像中的内容区域（紫色为允许绘制内容的区域），如图 2 所示。</p>
+</li><li><p><strong>Show bad patches</strong>：在拉伸时可能会在图形中产生伪影的图块区域周围添加红色边框，如图 2 所示。如果您消除所有不良图块，已拉伸图像的视觉连贯性将得以保持。<br>怎么生成.9图不是重点，网上文章不要太多，最主要就是绘制左边和上面的黑线，左边黑线控制的是哪里可以被上下拉伸，上面黑线控制哪里可以被水平拉伸，可以有多条，右边和下面的黑线控制了哪里可以放内容，不在这个区域的内容不会被显示。</p>
+</li></ul>
+<p>当然 还有很多办法生成.9图 单独工具或者在线工具都行 看个人喜好了。</p>
+<h2 id="h2--9-">.9图原理</h2><p>上面的介绍都很大众化 那么为啥.9图这么神奇呢？它是什么原理呢，这个好像没什么人说过，这里也简单阐述下。</p>
+<p>主要是四条黑线 分为两组<br>左边和上面的黑线 负责判定图片哪个部分可以被拉伸<br>右边和下面的黑线 负责确定图片内部展示内容的区域 比如这个图是个聊天气泡 内容是一堆文字</p>
+<p>大概就是下面这个图的样子 分成了九个区域</p>
+<figure><img loading="lazy"  src="/assets/images/c46b74c01acd.png" alt=""></figure>
+<p>我们把他们编号成1-9，这几个区域对应情况如下</p>
+<ol>
+<li>1 3 7 9 号区域，不在两条黑线区域内，不会被拉伸</li><li>4 6 号区域，只在左侧黑线范围内，可以被上下拉伸</li><li>2 8 号区域，只在上面黑线区域内，会被左右拉伸</li><li>5号区域，同时在上和左区域内，会被上下左右拉伸</li></ol>
+<p>回到刚才的问题 为啥处理之后就能控制拉伸和内容了？</p>
+<p>首先我们发现处理之后的图片后缀还是原来的 证明没有变成其他格式 但是名字里加上了.9</p>
+<p>那猜测是不是在文件里加上了一些额外信息 用.9作为标识 图片系统处理拉伸的时候就去读这些信息</p>
+<p>那么 到底加了什么信息呢 又是怎么判断和使用的呢 下面一一道来</p>
+<h3 id="h3--">首先 我们给图片加了什么信息</h3><p>我们看看官方怎么描述.9图的</p>
+<blockquote>
+<p><code>NinePatchDrawable</code> 图形是一种可拉伸的位图，可用作视图的背景。Android 会自动调整图形的大小以适应视图的内容。NinePatch 图形是标准 PNG 图片，包含一个额外的 1 像素边框。必须使用 <code>9.png</code> 扩展名将其保存在项目的 <code>res/drawable/</code> 目录下。</p>
+</blockquote>
+<p>可以看到，.9图本质上还是png图片，但是加了1像素边框，且名字里加了个.9。</p>
+<p>让我们来看看什么是png图片，以及它的数据构成</p>
+<blockquote>
+<p> The PNG format provides a portable, legally unencumbered, well-compressed, well-specified standard for lossless bitmapped image files.</p>
+</blockquote>
+<blockquote>
+<p> A PNG file consists of a PNG signature followed by a series of chunks.  This chapter defines the signature and the basic properties of chunks.</p>
+</blockquote>
+<p>png的签名块后面跟了两个数据块critical chunk和ancillary chunks，其中critical chunk包含关键数据，也是每个图片必须有的，ancillary chunks包含一些辅助信息，png如果不识别这些辅助块，可以忽略它打到向下兼容的目的。</p>
+<p>签名块就是一个八个字节的十六进制码，用来标识图片。</p>
+<p>重点来看看数据块的布局<br>名称                      | 字节数  | 说明                                |<br>| ———————– | —- | ——————————— |<br>| 长度(Length)              | 4字节  | 指定数据块中数据区域的长度，长度不可超过(231-1)个字节    |<br>| 数据块类型码(Chunk Type Code) | 4字节  | 数据块类型码由ASCII字母(A-Z和a-z)组成的”数据块符号” |<br>| 数据块数据(Chunk Data)       | 可变长度 | 存储数据块类型码指定的数据                     |<br>| 循环冗余检测(CRC)             | 4字节  | 存储用来检测是否文件传输有误的循环冗余码</p>
+<p>看到这个可以猜测，我们添加的黑色边框就是往辅助块里面加了内容，在展示的时候识别添加的信息，达到控制哪些地方伸缩的目的。</p>
+<p>让我们看看一张图片被弄成.9之后加了些什么内容。</p>
+<p>原图数据如下</p>
+<figure><img loading="lazy"  src="/assets/images/2cf0fe2b5437.png" alt=""></figure>
+<p>.9数据如下</p>
+<figure><img loading="lazy"  src="/assets/images/2f06f83ac4b2.png" alt=""></figure>
+<p>可以看到，变成.9图片之后，多了5个IDAT块，而且参数里面的长宽都增加了2像素，而且图片大小也增加了不少从80kb增加到了180kb，我们可以猜测到，这几个块里面记录的数据就是我们生成.9图时画的那几条线生成的了。</p>
+<h3 id="h3--">其次 这些信息在图片发生拉伸时怎么被识别和使用的</h3><p>这就涉及到android怎么加载一张图片的问题了，当然这些操作都是native层进行的，经过代码跟踪，我们发现有这样一个类 ** NinePatchPeeker.cpp**</p>
+<p>我们来看看这个类里面的readChunk方法干了些什么</p>
+<pre><code class="language-js">bool NinePatchPeeker::readChunk(const char tag[], const void* data, size_t length) {
+
+    if (!strcmp(&quot;npTc&quot;, tag) &amp;&amp; length &gt;= sizeof(Res_png_9patch)) {
+
+        Res_png_9patch* patch = (Res_png_9patch*) data;
+
+        size_t patchSize = patch-&gt;serializedSize();
+
+        if (length != patchSize) {
+
+            return false;
+
+        }
+
+        // You have to copy the data because it is owned by the png reader
+
+        Res_png_9patch* patchNew = (Res_png_9patch*) malloc(patchSize);
+
+        memcpy(patchNew, patch, patchSize);
+
+        Res_png_9patch::deserialize(patchNew);
+
+        patchNew-&gt;fileToDevice();
+
+        free(mPatch);
+
+        mPatch = patchNew;
+
+        mPatchSize = patchSize;
+
+    } else if (!strcmp(&quot;npLb&quot;, tag) &amp;&amp; length == sizeof(int32_t) * 4) {
+
+        mHasInsets = true;
+
+        memcpy(&amp;mOpticalInsets, data, sizeof(int32_t) * 4);
+
+    } else if (!strcmp(&quot;npOl&quot;, tag) &amp;&amp; length == 24) { // 4 int32_ts, 1 float, 1 int32_t sized byte
+
+        mHasInsets = true;
+
+        memcpy(&amp;mOutlineInsets, data, sizeof(int32_t) * 4);
+
+        mOutlineRadius = ((const float*)data)[4];
+
+        mOutlineAlpha = ((const int32_t*)data)[5] &amp; 0xff;
+
+    }
+
+    return true;
+
+}</code></pre>
+<p>我们看到这里处理了<code>npTc</code>、<code>npLb</code>、<code>npOl</code>三个数据块，当判断有<code>npTc</code>这个数据块的时候，系统就认为这是.9图片，就会进行下一步处理。</p>
+<h3 id="h3--code-nptc-code-">那<code>npTc</code>这个数据又是从哪来的呢？</h3><p>从上面内容我们知道已经添加了一些额外信息，我们发现官方的说明里有一句，要把.9图放在src/drawable目录下，这是因为在编译的时候，aapt会在发现图片名字符合.9图规则的时候，把四周的黑色边框提取出来，放在<code>npTc</code>数据块里面。</p>
+<p>接下来我们看看结构体<code>Res_png_9patch</code>里面有什么。</p>
+<pre><code class="language-js">/**
+
+ * This chunk specifies how to split an image into segments for
+
+ * scaling.
+
+ *
+
+ * There are J horizontal and K vertical segments.  These segments divide
+
+ * the image into J*K regions as follows (where J=4 and K=3):
+
+ *
+
+ *      F0   S0    F1     S1
+
+ *   +-----+----+------+-------+
+
+ * S2|  0  |  1 |  2   |   3   |
+
+ *   +-----+----+------+-------+
+
+ *   |     |    |      |       |
+
+ *   |     |    |      |       |
+
+ * F2|  4  |  5 |  6   |   7   |
+
+ *   |     |    |      |       |
+
+ *   |     |    |      |       |
+
+ *   +-----+----+------+-------+
+
+ * S3|  8  |  9 |  10  |   11  |
+
+ *   +-----+----+------+-------+
+
+ *
+
+ * Each horizontal and vertical segment is considered to by either
+
+ * stretchable (marked by the Sx labels) or fixed (marked by the Fy
+
+ * labels), in the horizontal or vertical axis, respectively. In the
+
+ * above example, the first is horizontal segment (F0) is fixed, the
+
+ * next is stretchable and then they continue to alternate. Note that
+
+ * the segment list for each axis can begin or end with a stretchable
+
+ * or fixed segment.
+
+ *
+
+ * ...
+
+ *
+
+ * The colors array contains hints for each of the regions. They are
+
+ * ordered according left-to-right and top-to-bottom as indicated above.
+
+ * For each segment that is a solid color the array entry will contain
+
+ * that color value; otherwise it will contain NO_COLOR. Segments that
+
+ * are completely transparent will always have the value TRANSPARENT_COLOR.
+
+ *
+
+ * The PNG chunk type is &quot;npTc&quot;.
+
+ */
+
+struct alignas(uintptr_t) Res_png_9patch
+
+{
+
+    int8_t wasDeserialized;
+
+    uint8_t numXDivs, numYDivs, numColors;
+
+
+    uint32_t xDivsOffset, yDivsOffset, colorsOffset;
+
+    int32_t paddingLeft, paddingRight, paddingTop, paddingBottom;
+
+
+    enum {
+
+        // The 9 patch segment is not a solid color.
+
+        NO_COLOR = 0x00000001,
+
+
+        // The 9 patch segment is completely transparent.
+
+        TRANSPARENT_COLOR = 0x00000000
+
+    };
+
+
+    ...
+
+
+
+    inline int32_t* getXDivs() const {
+
+        return reinterpret_cast&lt;int32_t*&gt;(reinterpret_cast&lt;uintptr_t&gt;(this) + xDivsOffset);
+
+    }
+
+    inline int32_t* getYDivs() const {
+
+        return reinterpret_cast&lt;int32_t*&gt;(reinterpret_cast&lt;uintptr_t&gt;(this) + yDivsOffset);
+
+    }
+
+    inline uint32_t* getColors() const {
+
+        return reinterpret_cast&lt;uint32_t*&gt;(reinterpret_cast&lt;uintptr_t&gt;(this) + colorsOffset);
+
+    }
+
+}</code></pre>
+<p>从注释我们看出，一张图片被分成了很多个部分，s开头的代表可以拉伸的，f开头的代表不能拉伸，还有一些颜色的数据，他们共同构成了这个结构体，x，y轴上这些可以拉伸和不可拉伸的部分分别放在<code>xdiv</code>和<code>ydivs</code>数组里，同时内容的显示区域也由几个<code>padding</code>来存放，到这里，就把.9图的额外信息都给读出来了。</p>
+<p>既然已经获得了这些额外的信息，那么绘制的时候，系统就可以根据这些信息判断怎么拉伸一张.9图了，绘制调用了<code>NinePatchDrawable</code>，最终也会走到native层去处理这些数据。</p>
+<p>到此为止，制作.9和解析.9的过程就分析完毕了，一张.9图背后居然这么复杂，还是挺让人意外的，果然是学无止境啊。</p>
+<h2 id="h2--9-">.9图应用以及一个小坑</h2><p>看完了怎么生成和它的原理 该我们去使用它了 回到开头 用我们新做的酷炫.9图解决问题吧！<br>代码张这样</p>
+<p><img loading="lazy"  src="/assets/images/bc8b77e7fc09.png" alt=""><br>效果张这样<br><img loading="lazy"  src="/assets/images/dec6d14eeab7.png" alt=""></p>
+<p>为什么我们的.9图没有按照预期的拉伸,而是把内容也给拉伸了？因为.9图的特性问题，<strong>它只支持拉伸</strong>，如果一个图片本身就比imageview大了，那就不会去拉伸，所以我们的.9图本身太大了，也就不存在拉伸的说法了，那肯定是无效的。<br>那我们再来尝试把图片尺寸改小，这下可以拉伸了吧，来看看效果。</p>
+<figure><img loading="lazy"  src="/assets/images/030b55c6b8f0.png" alt=""></figure>
+<p>可以看到，下面图标被遮挡住了，<strong>但是内容也太小了吧</strong>，<strong>所以用.9图来做splash screen背景不是个好主意</strong>。</p>
+<p>那么，到底哪些场景可以用它呢？总结一下就是，一张图片，角落不能拉伸，其他部分可以随着内容的增多随便拉伸的情况，像这样。</p>
+<figure><img loading="lazy"  src="/assets/images/46add2d7d396.png" alt=""></figure>
+<p>简单来说，就是聊天气泡一类的，如果一张图片的主体是内容要放缩的话，是不适合的，因为.9图只会拉伸特定部分，主体部分会维持原大小。</p>
+<p>比如我们上面做背景图这种情况。</p>
+<h2 id="h2-u603Bu7ED3">总结</h2><ol>
+<li>.9图并不适合作为全屏展示页面，要不太大了没有拉伸效果，要不内容太小了不美观</li><li>.9图适合做一些纯色拉伸不形变的背景，比如聊天气泡和按钮背景这种</li><li>在android中，.9图得放到sr/drawable目录才行，系统才会去生成对应数据块，才可以被解析，否则就要自己去生成</li><li>普通图片由于没有额外的数据，是不能达到.9图这样的效果的</li></ol></article>
+</main>
+
+<footer>Generated from local Z-Blog backup for GitHub Pages.</footer>
+<script>
+  document.querySelectorAll("img").forEach((img) => {
+    const replaceMissingImage = () => {
+      const box = document.createElement("div");
+      box.className = "image-missing";
+      const src = img.currentSrc || img.src || img.getAttribute("src") || "";
+      box.innerHTML = `<strong>Image unavailable</strong><span>This image could not be loaded from the static backup.</span><br><a href="${src}" target="_blank" rel="noreferrer">Open original image URL</a>`;
+      img.replaceWith(box);
+    };
+    img.addEventListener("error", replaceMissingImage, { once: true });
+    if (img.complete && img.naturalWidth === 0) replaceMissingImage();
+  });
+</script>
+
+</body>
+</html>
