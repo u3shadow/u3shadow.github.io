@@ -376,10 +376,230 @@
       .tracks-intro h1 { font-size:28px; }
       article, .panel, .single-head { padding:30px 22px; }
     }
+
+
+    /* Refinements: cinematic hero, complete thumbnails, and About page. */
+    .bar { max-width:1180px; }
+    nav a::before { content:"//"; margin-right:6px; color:#7f7f7f; }
+    .home-hero {
+      position:relative;
+      min-height:430px;
+      margin:24px 0 42px;
+      overflow:hidden;
+      background:#101317;
+      border:1px solid #2b3036;
+      box-shadow:0 30px 90px rgba(0,0,0,.36);
+      isolation:isolate;
+    }
+    .home-hero img {
+      position:absolute;
+      inset:0;
+      width:100%;
+      height:100%;
+      object-fit:cover;
+      filter:saturate(1.08) contrast(1.04);
+      z-index:-2;
+    }
+    .home-hero::before {
+      content:"";
+      position:absolute;
+      inset:0;
+      background:
+        linear-gradient(90deg, rgba(10,12,16,.94) 0%, rgba(10,12,16,.72) 42%, rgba(10,12,16,.18) 100%),
+        linear-gradient(180deg, rgba(0,0,0,.12), rgba(0,0,0,.38));
+      z-index:-1;
+    }
+    .hero-copy {
+      max-width:680px;
+      padding:72px 64px 76px;
+      color:#fff;
+    }
+    .hero-copy .eyebrow,
+    .about-hero .eyebrow {
+      margin:0 0 16px;
+      color:#7fe5d7;
+      font-size:12px;
+      font-weight:900;
+      text-transform:uppercase;
+      letter-spacing:1.8px;
+    }
+    .hero-copy h1 {
+      margin:0 0 18px;
+      color:#fff;
+      font-size:58px;
+      line-height:.98;
+      text-transform:uppercase;
+      letter-spacing:1px;
+    }
+    .hero-copy p {
+      max-width:570px;
+      margin:0;
+      color:#c8d3d8;
+      font-size:18px;
+      line-height:1.8;
+    }
+    .hero-actions {
+      display:flex;
+      flex-wrap:wrap;
+      gap:14px;
+      margin-top:30px;
+    }
+    .hero-actions a,
+    .contact-link {
+      display:inline-flex;
+      align-items:center;
+      min-height:44px;
+      padding:0 18px;
+      color:#101317;
+      background:#7fe5d7;
+      text-decoration:none;
+      font-size:13px;
+      font-weight:900;
+      text-transform:uppercase;
+      letter-spacing:.8px;
+    }
+    .hero-actions a.secondary {
+      color:#e9f4f5;
+      background:rgba(255,255,255,.12);
+      border:1px solid rgba(255,255,255,.28);
+    }
+    .tracks-intro { display:none; }
+    .post-list {
+      max-width:1120px;
+      margin:0 auto;
+      display:grid;
+      grid-template-columns:1fr;
+      gap:24px;
+    }
+    .post-card {
+      min-height:0;
+      grid-template-columns:minmax(300px, 43%) minmax(0, 1fr);
+      align-items:center;
+      border:1px solid #303030;
+      background:#f3f3f3;
+      box-shadow:0 18px 46px rgba(0,0,0,.2);
+    }
+    .post-card:nth-child(even) .post-thumb { order:2; }
+    .post-card:nth-child(even) .post-summary { order:1; }
+    .post-thumb {
+      width:auto;
+      min-height:0;
+      margin:22px;
+      aspect-ratio:16 / 10;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      background:
+        radial-gradient(circle at 20% 20%, rgba(127,229,215,.18), transparent 34%),
+        linear-gradient(135deg,#151a20,#2b3036);
+      border:1px solid rgba(255,255,255,.08);
+    }
+    .post-thumb img {
+      width:100%;
+      height:100%;
+      min-height:0;
+      object-fit:contain;
+      padding:10px;
+      filter:saturate(.98) contrast(1);
+      transition:transform .22s ease, filter .22s ease;
+    }
+    .post-card:hover .post-thumb img {
+      transform:scale(1.018);
+      filter:saturate(1.06) contrast(1.02);
+    }
+    .post-summary {
+      min-height:0;
+      align-items:flex-start;
+      text-align:left;
+      padding:38px 42px;
+    }
+    .post-card .rule { margin:18px 0; background:#111; }
+    .post-card h2 { font-size:28px; letter-spacing:.6px; }
+    .post-card p { -webkit-line-clamp:3; }
+    .about-wrap {
+      max-width:920px;
+      margin:0 auto;
+      padding:34px 0 62px;
+    }
+    .about-hero {
+      padding:58px 56px 48px;
+      color:#efefef;
+      background:
+        linear-gradient(135deg, rgba(127,229,215,.12), rgba(255,255,255,.03)),
+        #171717;
+      border:1px solid #2b3036;
+      box-shadow:0 28px 72px rgba(0,0,0,.28);
+    }
+    .about-hero h1 {
+      margin:0 0 18px;
+      color:#fff;
+      font-size:46px;
+      line-height:1.08;
+      text-transform:uppercase;
+      letter-spacing:1px;
+    }
+    .about-hero p {
+      margin:0 0 18px;
+      color:#c8c8c8;
+      font-size:17px;
+    }
+    .about-grid {
+      display:grid;
+      grid-template-columns:repeat(3, 1fr);
+      gap:18px;
+      margin-top:22px;
+    }
+    .about-chip {
+      padding:18px;
+      color:#dcdcdc;
+      background:#222;
+      border:1px solid #303030;
+    }
+    .about-chip strong {
+      display:block;
+      color:#fff;
+      margin-bottom:6px;
+      font-size:13px;
+      text-transform:uppercase;
+      letter-spacing:.8px;
+    }
+    .contact-panel {
+      margin-top:24px;
+      padding:30px;
+      background:#f2f2f2;
+      border:1px solid #d7d7d7;
+    }
+    .contact-panel h2 {
+      margin:0 0 10px;
+      font-size:24px;
+      text-transform:uppercase;
+      letter-spacing:.8px;
+    }
+    .contact-panel p { margin:0 0 18px; color:#666; }
+    @media (max-width:880px) {
+      .hero-copy { padding:54px 34px 58px; }
+      .hero-copy h1 { font-size:42px; }
+      .post-card,
+      .post-card:nth-child(even) { grid-template-columns:1fr; }
+      .post-card:nth-child(even) .post-thumb,
+      .post-card:nth-child(even) .post-summary { order:initial; }
+      .post-summary { padding:30px 26px 34px; }
+      .post-thumb { margin:18px; }
+      .about-grid { grid-template-columns:1fr; }
+      .about-hero { padding:40px 28px; }
+    }
+    @media (max-width:560px) {
+      .home-hero { min-height:390px; margin-top:12px; }
+      .hero-copy { padding:44px 24px 48px; }
+      .hero-copy h1 { font-size:34px; }
+      .hero-copy p { font-size:16px; }
+      .post-card h2 { font-size:23px; }
+    }
+
   </style>
 </head>
 <body>
-<header><div class="bar"><a class="brand" href="/">u3coding</a><nav><a href="/">Home</a><a href="/archive/">Archive</a><a href="/feed.xml">RSS</a></nav></div></header>
+<header><div class="bar"><a class="brand" href="/">u3coding</a><nav><a href="/">Home</a><a href="/archive/">Archive</a><a href="/about/">About</a><a href="/feed.xml">RSS</a></nav></div></header>
 
 <main><div class="single-wrap"><section class="single-head"><p class="eyebrow">未分类 · 文章 ID 92</p><h1 class="title">关于taskaffinity属性的作用</h1><div class="title-rule"></div><div class="meta">发布于 2015-02-26 11:11 · 已迁移为静态页面</div></section><article><p>意味着这activity更喜欢哪个TESK，具体见下方说明</p>
 <p>当一个包含FLAG_ACTIVITY_NEW_TASK标志的intent启动一个activity时。</p>

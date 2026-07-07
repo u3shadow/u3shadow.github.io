@@ -3,10 +3,10 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="requestLayout 当一个VIEW的布局属性发生了变化的时候，可以调用该方法，让父VIEW调用onmeasure 和onlayout重新定位该view的位置，需要在UI线程调用 invalidate 强制使view重绘，需要在UI线程调用 postinvalidate 作用同上，但是可以直接在子线程调用">
-  <title>requestLayout, invalidate和postInvalidate的异同 - u3coding</title>
-  <link rel="canonical" href="https://u3.github.io/posts/2015/03/72-requestlayout-invalidate和postinvalidate的异同/">
-  <style>
+  <meta name="description" content="About u3coding">
+  <title>About - u3coding</title>
+  <link rel="canonical" href="https://u3.github.io/about/">
+<style>
 
     :root {
       --bg:#1f1f1f;
@@ -600,32 +600,26 @@
 </head>
 <body>
 <header><div class="bar"><a class="brand" href="/">u3coding</a><nav><a href="/">Home</a><a href="/archive/">Archive</a><a href="/about/">About</a><a href="/feed.xml">RSS</a></nav></div></header>
-
-<main><div class="single-wrap"><section class="single-head"><p class="eyebrow">未分类 · 文章 ID 72</p><h1 class="title">requestLayout, invalidate和postInvalidate的异同</h1><div class="title-rule"></div><div class="meta">发布于 2015-03-07 08:16 · 已迁移为静态页面</div></section><article><p>requestLayout</p>
-<p>当一个VIEW的布局属性发生了变化的时候，可以调用该方法，让父VIEW调用onmeasure 和onlayout重新定位该view的位置，需要在UI线程调用</p>
-<p>&nbsp;</p>
-<p>invalidate</p>
-<p>强制使view重绘，需要在UI线程调用</p>
-<p>&nbsp;</p>
-<p>postinvalidate</p>
-<p>作用同上，但是可以直接在子线程调用</p>
-<p>&nbsp;</p></article></div>
+<main>
+  <div class="about-wrap">
+    <section class="about-hero">
+      <p class="eyebrow">About u3coding</p>
+      <h1>专注 Android 与工程实践的技术记录者</h1>
+      <p>这里整理的是我在移动开发、AI 工具、自动化、性能优化和日常工程问题里的长期记录。相比包装概念，我更喜欢把真实踩坑、解决路径和可复用的经验写清楚。</p>
+      <p>博客从 Z-Blog 迁移为静态站点后，会继续作为个人技术档案存在，也会逐步补齐近期项目、工具改造和 AI 开发实践。</p>
+      <div class="about-grid">
+        <div class="about-chip"><strong>Focus</strong>Android, AI, tooling, engineering notes</div>
+        <div class="about-chip"><strong>Archive</strong>2014 至今的个人技术文章</div>
+        <div class="about-chip"><strong>GitHub</strong>u3shadow</div>
+      </div>
+    </section>
+    <section class="contact-panel">
+      <h2>Contact</h2>
+      <p>如果你想交流技术问题、项目想法，或者发现迁移后的页面有显示问题，可以直接发邮件联系我。</p>
+      <a class="contact-link" href="mailto:u3coding@gmail.com">u3coding@gmail.com</a>
+    </section>
+  </div>
 </main>
-
-<footer>Generated from local Z-Blog backup for GitHub Pages.</footer>
-<script>
-  document.querySelectorAll("img").forEach((img) => {
-    const replaceMissingImage = () => {
-      const box = document.createElement("div");
-      box.className = "image-missing";
-      const src = img.currentSrc || img.src || img.getAttribute("src") || "";
-      box.innerHTML = `<strong>Image unavailable</strong><span>This image could not be loaded from the static backup.</span><br><a href="${src}" target="_blank" rel="noreferrer">Open original image URL</a>`;
-      img.replaceWith(box);
-    };
-    img.addEventListener("error", replaceMissingImage, { once: true });
-    if (img.complete && img.naturalWidth === 0) replaceMissingImage();
-  });
-</script>
-
+<footer>Generated static archive for GitHub Pages · u3coding</footer>
 </body>
 </html>
