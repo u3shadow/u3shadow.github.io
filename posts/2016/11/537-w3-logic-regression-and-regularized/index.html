@@ -1853,6 +1853,77 @@
       }
     }
 
+
+    /* Selected hero: cyan-orange microglow. */
+    .bar::before {
+      background:
+        linear-gradient(180deg, rgba(5,7,11,.08), rgba(5,7,11,.86)),
+        linear-gradient(90deg, rgba(5,7,11,.68), rgba(5,7,11,.16)),
+        url("/assets/site/hero-cyan-orange.png") 62% 26% / 245% auto no-repeat !important;
+    }
+    .home-hero::before {
+      background:
+        linear-gradient(90deg, rgba(5,7,11,.94) 0%, rgba(5,7,11,.72) 42%, rgba(5,7,11,.2) 100%),
+        linear-gradient(180deg, rgba(0,0,0,.12), rgba(0,0,0,.34)),
+        url("/assets/site/hero-cyan-orange.png") center / cover no-repeat !important;
+      opacity:1;
+    }
+    .home-hero,
+    .bar {
+      border-color:rgba(255,170,86,.18);
+      box-shadow:
+        0 28px 88px rgba(0,0,0,.38),
+        0 0 46px rgba(0,229,195,.06),
+        inset 0 1px 0 rgba(255,255,255,.075);
+    }
+    .home-hero::after {
+      content:"";
+      position:absolute;
+      right:0;
+      top:0;
+      width:42%;
+      height:100%;
+      pointer-events:none;
+      background:
+        radial-gradient(circle at 82% 24%, rgba(255,170,86,.16), transparent 36%),
+        radial-gradient(circle at 64% 68%, rgba(0,229,195,.12), transparent 38%);
+      z-index:0;
+    }
+    .hero-copy {
+      position:relative;
+      z-index:2;
+    }
+    .hero-copy .eyebrow {
+      color:#5ff4e8;
+    }
+    .hero-actions a:first-child {
+      color:#061015;
+      background:linear-gradient(135deg,#5ff4e8,#ffb36c);
+      padding:9px 14px;
+      border-radius:10px;
+      box-shadow:0 12px 30px rgba(0,229,195,.16);
+    }
+    .hero-actions a:first-child::after {
+      content:"";
+    }
+    .hero-actions a.secondary {
+      color:#f2f7fb;
+      padding:8px 13px;
+      border-radius:10px;
+      border:1px solid rgba(255,255,255,.16);
+      background:rgba(255,255,255,.055);
+    }
+    .hero-actions a.secondary::after {
+      content:"";
+    }
+    @media (max-width:900px) {
+      .bar::before {
+        background:
+          linear-gradient(180deg, rgba(5,7,11,.1), rgba(5,7,11,.86)),
+          url("/assets/site/hero-cyan-orange.png") center / cover no-repeat !important;
+      }
+    }
+
   </style>
 </head>
 <body>
