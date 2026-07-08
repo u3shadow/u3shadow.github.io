@@ -1293,6 +1293,232 @@
       border-color:rgba(126,231,220,.15);
     }
 
+
+    /* Visual Author theme: image-backed background and themed post items. */
+    body {
+      background:
+        linear-gradient(135deg, rgba(5,7,11,.34), rgba(7,10,15,.82)),
+        url("/assets/site/obsidian-teal-bg.png") center top / cover fixed no-repeat,
+        #070a0f;
+    }
+    body::after {
+      content:"";
+      position:fixed;
+      inset:0;
+      pointer-events:none;
+      background:
+        radial-gradient(circle at 76% 14%, rgba(0,229,195,.18), transparent 30%),
+        radial-gradient(circle at 38% 72%, rgba(26,115,232,.12), transparent 36%),
+        linear-gradient(180deg, rgba(5,7,11,.12), rgba(5,7,11,.58));
+      z-index:-1;
+    }
+    .bar {
+      position:relative;
+      overflow:hidden;
+      justify-content:flex-start;
+      padding-top:38px;
+    }
+    .bar::before {
+      content:"";
+      position:absolute;
+      inset:0 0 auto 0;
+      height:238px;
+      background:
+        linear-gradient(180deg, rgba(5,7,11,.1), rgba(5,7,11,.82)),
+        url("/assets/site/obsidian-teal-bg.png") 58% 20% / 230% auto no-repeat;
+      opacity:.95;
+      z-index:-1;
+    }
+    .bar::after {
+      content:"";
+      position:absolute;
+      left:26px;
+      right:26px;
+      top:216px;
+      height:1px;
+      background:linear-gradient(90deg, transparent, rgba(0,229,195,.55), transparent);
+    }
+    .brand {
+      margin-top:8px;
+    }
+    .site-bio {
+      margin-bottom:24px;
+    }
+    nav {
+      margin-top:4px;
+    }
+    main {
+      width:min(940px, calc(100vw - 500px));
+      margin-left:max(390px, calc(340px + (100vw - 340px - 940px) / 2));
+    }
+    .home-hero {
+      position:relative;
+      overflow:hidden;
+      padding:38px 42px;
+      border-radius:22px;
+    }
+    .home-hero::before {
+      content:"";
+      position:absolute;
+      inset:0;
+      display:block;
+      background:
+        linear-gradient(90deg, rgba(7,10,15,.9), rgba(7,10,15,.56)),
+        url("/assets/site/obsidian-teal-bg.png") center / cover no-repeat;
+      opacity:.92;
+      z-index:-1;
+    }
+    .hero-copy {
+      position:relative;
+      z-index:1;
+    }
+    .post-list {
+      display:grid;
+      gap:24px;
+    }
+    .post-card {
+      position:relative;
+      display:grid;
+      grid-template-columns:260px minmax(0, 1fr);
+      gap:26px;
+      align-items:stretch;
+      margin:0;
+      padding:18px;
+      border-radius:22px;
+      overflow:hidden;
+      background:
+        linear-gradient(135deg, rgba(255,255,255,.085), rgba(255,255,255,.025)),
+        linear-gradient(90deg, rgba(0,229,195,.09), rgba(26,115,232,.035) 42%, rgba(7,10,15,.72)),
+        rgba(8,14,22,.82);
+      border:1px solid rgba(126,231,220,.18);
+      box-shadow:
+        0 24px 70px rgba(0,0,0,.34),
+        inset 0 1px 0 rgba(255,255,255,.07);
+      backdrop-filter:blur(18px);
+      transition:transform .2s ease, border-color .2s ease, box-shadow .2s ease;
+    }
+    .post-card::before {
+      content:"";
+      position:absolute;
+      inset:-1px;
+      pointer-events:none;
+      background:
+        radial-gradient(circle at 12% 16%, rgba(0,229,195,.16), transparent 30%),
+        radial-gradient(circle at 84% 0%, rgba(26,115,232,.12), transparent 34%);
+      opacity:.8;
+    }
+    .post-card:hover {
+      transform:translateY(-3px);
+      border-color:rgba(0,229,195,.38);
+      box-shadow:
+        0 30px 90px rgba(0,0,0,.42),
+        0 0 42px rgba(0,229,195,.08),
+        inset 0 1px 0 rgba(255,255,255,.09);
+    }
+    .post-thumb {
+      position:relative;
+      z-index:1;
+      width:100%;
+      height:100%;
+      min-height:190px;
+      margin:0;
+      aspect-ratio:auto;
+      border-radius:16px;
+      background:
+        linear-gradient(135deg, rgba(0,229,195,.12), rgba(26,115,232,.08)),
+        rgba(255,255,255,.045);
+      border:1px solid rgba(126,231,220,.16);
+      box-shadow:inset 0 1px 0 rgba(255,255,255,.06);
+    }
+    .post-thumb img {
+      padding:10px;
+      object-fit:contain;
+    }
+    .post-summary {
+      position:relative;
+      z-index:1;
+      display:flex;
+      flex-direction:column;
+      justify-content:center;
+      min-height:206px;
+      padding:4px 8px 4px 0;
+    }
+    .post-card h2 {
+      max-width:620px;
+      margin-bottom:14px;
+      font-size:30px;
+      line-height:1.2;
+    }
+    .post-card p {
+      max-width:620px;
+      margin-bottom:20px;
+      color:#b9c7d6;
+      -webkit-line-clamp:3;
+    }
+    .meta {
+      margin-bottom:10px;
+      color:#78f1e6;
+    }
+    .readmore {
+      width:max-content;
+      padding:8px 0 0;
+      border-top:1px solid rgba(126,231,220,.18);
+    }
+    .single-head,
+    article,
+    .panel,
+    .about-hero,
+    .contact-panel {
+      border-radius:22px;
+      background:
+        linear-gradient(135deg, rgba(255,255,255,.075), rgba(255,255,255,.024)),
+        rgba(8,14,22,.78);
+    }
+    .single-head,
+    article,
+    .panel,
+    .about-hero,
+    .contact-panel {
+      padding:30px 34px;
+    }
+    .single-head { margin-bottom:22px; }
+    article { margin-top:22px; }
+    .hero {
+      border-radius:18px;
+      overflow:hidden;
+    }
+    @media (max-width:1100px) {
+      main {
+        width:min(780px, calc(100vw - 430px));
+        margin-left:max(374px, calc(340px + (100vw - 340px - 780px) / 2));
+      }
+      .post-card {
+        grid-template-columns:220px minmax(0, 1fr);
+      }
+      .post-card h2 { font-size:27px; }
+    }
+    @media (max-width:900px) {
+      body { background-attachment:scroll; }
+      main {
+        width:auto;
+        margin:0;
+      }
+      .bar::before { height:180px; background-size:cover; }
+      .bar::after { top:168px; }
+      .post-card {
+        grid-template-columns:1fr;
+        gap:18px;
+      }
+      .post-thumb {
+        aspect-ratio:16 / 9;
+        min-height:0;
+      }
+      .post-summary {
+        min-height:0;
+        padding:0;
+      }
+    }
+
   </style>
 </head>
 <body>
