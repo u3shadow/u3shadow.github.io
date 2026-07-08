@@ -1519,6 +1519,340 @@
       }
     }
 
+
+    /* Alternating post cards: 4 visual variants matching the selected mockup. */
+    .post-list {
+      display:grid;
+      gap:26px;
+    }
+    .post-card {
+      position:relative;
+      isolation:isolate;
+      margin:0;
+      padding:0;
+      min-height:0;
+      display:grid;
+      grid-template-columns:300px minmax(0, 1fr);
+      gap:0;
+      align-items:stretch;
+      overflow:hidden;
+      border-radius:24px;
+      border:1px solid rgba(126,231,220,.2);
+      background:
+        linear-gradient(135deg, rgba(255,255,255,.075), rgba(255,255,255,.022)),
+        linear-gradient(120deg, rgba(0,229,195,.10), rgba(26,115,232,.045) 38%, rgba(7,12,20,.78)),
+        rgba(8,14,22,.88);
+      box-shadow:
+        0 28px 82px rgba(0,0,0,.36),
+        inset 0 1px 0 rgba(255,255,255,.08);
+      backdrop-filter:blur(18px);
+      transition:transform .2s ease, border-color .2s ease, box-shadow .2s ease;
+    }
+    .post-card:hover {
+      transform:translateY(-3px);
+      border-color:rgba(0,229,195,.42);
+      box-shadow:
+        0 34px 96px rgba(0,0,0,.44),
+        0 0 48px rgba(0,229,195,.08),
+        inset 0 1px 0 rgba(255,255,255,.1);
+    }
+    .post-card::before {
+      content:"";
+      position:absolute;
+      inset:0;
+      pointer-events:none;
+      z-index:-1;
+      background:
+        radial-gradient(circle at 12% 18%, rgba(0,229,195,.17), transparent 30%),
+        radial-gradient(circle at 88% 0%, rgba(26,115,232,.15), transparent 32%);
+      opacity:.9;
+    }
+    .post-card::after {
+      content:"";
+      position:absolute;
+      inset:1px;
+      pointer-events:none;
+      border-radius:23px;
+      background:linear-gradient(180deg, rgba(255,255,255,.045), transparent 32%);
+      z-index:-1;
+    }
+    .post-thumb {
+      position:relative;
+      z-index:1;
+      width:auto;
+      height:auto;
+      min-height:230px;
+      margin:18px;
+      aspect-ratio:auto;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      overflow:hidden;
+      border-radius:18px;
+      background:
+        radial-gradient(circle at 26% 22%, rgba(0,229,195,.16), transparent 35%),
+        linear-gradient(135deg, rgba(255,255,255,.07), rgba(255,255,255,.025)),
+        rgba(6,11,18,.78);
+      border:1px solid rgba(126,231,220,.17);
+      box-shadow:
+        inset 0 1px 0 rgba(255,255,255,.08),
+        0 18px 46px rgba(0,0,0,.25);
+    }
+    .post-thumb img {
+      display:block;
+      width:100%;
+      height:100%;
+      min-height:0;
+      padding:12px;
+      object-fit:contain;
+      filter:saturate(.96) contrast(.98) brightness(.9);
+      transform:none;
+    }
+    .post-card:hover .post-thumb img {
+      filter:saturate(1.05) contrast(1.02) brightness(.96);
+      transform:none;
+    }
+    .post-summary {
+      position:relative;
+      z-index:1;
+      min-height:230px;
+      padding:30px 34px 28px 10px;
+      display:flex;
+      flex-direction:column;
+      justify-content:center;
+      text-align:left;
+    }
+    .meta {
+      margin:0 0 12px;
+      color:#6ff4e7;
+      font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Microsoft YaHei",sans-serif;
+      font-size:12px;
+      font-weight:900;
+      text-transform:uppercase;
+      letter-spacing:1.5px;
+    }
+    .post-card h2 {
+      max-width:620px;
+      margin:0 0 14px;
+      color:#eef7fb;
+      font-size:30px;
+      line-height:1.2;
+      font-weight:760;
+      letter-spacing:0;
+      text-transform:none;
+    }
+    .post-card h2 a {
+      color:#eef7fb;
+      text-decoration:none;
+    }
+    .post-card h2 a:hover { color:#ffffff; }
+    .post-card p {
+      max-width:620px;
+      margin:0 0 20px;
+      color:#9fb1c4;
+      font-size:16px;
+      line-height:1.78;
+      -webkit-line-clamp:3;
+    }
+    .readmore {
+      width:max-content;
+      margin-top:auto;
+      padding-top:10px;
+      color:#00e5c3;
+      border-top:1px solid rgba(126,231,220,.2);
+      font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Microsoft YaHei",sans-serif;
+      font-size:12px;
+      font-weight:900;
+      text-transform:uppercase;
+      letter-spacing:1.4px;
+    }
+
+    /* 1. Featured split card */
+    .post-card:nth-child(4n+1) {
+      grid-template-columns:310px minmax(0, 1fr);
+      min-height:286px;
+    }
+    .post-card:nth-child(4n+1) .post-thumb {
+      min-height:250px;
+      background:
+        linear-gradient(135deg, rgba(0,229,195,.14), rgba(26,115,232,.06)),
+        rgba(8,14,22,.78);
+    }
+    .post-card:nth-child(4n+1) h2 {
+      font-size:32px;
+    }
+
+    /* 2. Compact strip card */
+    .post-card:nth-child(4n+2) {
+      grid-template-columns:172px minmax(0, 1fr);
+      min-height:184px;
+      border-left:4px solid rgba(0,229,195,.74);
+      background:
+        linear-gradient(90deg, rgba(0,229,195,.13), rgba(7,14,23,.84) 34%, rgba(9,15,24,.86)),
+        rgba(8,14,22,.88);
+    }
+    .post-card:nth-child(4n+2)::before {
+      background:radial-gradient(circle at 0% 50%, rgba(0,229,195,.18), transparent 38%);
+    }
+    .post-card:nth-child(4n+2) .post-thumb {
+      min-height:142px;
+      margin:18px 0 18px 18px;
+      border-radius:16px;
+    }
+    .post-card:nth-child(4n+2) .post-summary {
+      min-height:170px;
+      padding:22px 28px;
+    }
+    .post-card:nth-child(4n+2) h2 {
+      font-size:25px;
+      margin-bottom:10px;
+    }
+    .post-card:nth-child(4n+2) p {
+      -webkit-line-clamp:2;
+      margin-bottom:14px;
+    }
+
+    /* 3. Reversed emphasis card */
+    .post-card:nth-child(4n+3) {
+      grid-template-columns:minmax(0, 1fr) 292px;
+      background:
+        radial-gradient(circle at 92% 12%, rgba(26,115,232,.18), transparent 34%),
+        linear-gradient(135deg, rgba(255,255,255,.07), rgba(255,255,255,.023)),
+        rgba(8,14,22,.88);
+    }
+    .post-card:nth-child(4n+3) .post-thumb {
+      order:2;
+      min-height:224px;
+      margin:18px 18px 18px 0;
+      box-shadow:
+        0 0 42px rgba(26,115,232,.1),
+        inset 0 1px 0 rgba(255,255,255,.08);
+    }
+    .post-card:nth-child(4n+3) .post-summary {
+      order:1;
+      padding:30px 22px 28px 34px;
+    }
+
+    /* 4. Text note card */
+    .post-card:nth-child(4n) {
+      display:block;
+      padding:30px 34px 30px 38px;
+      min-height:210px;
+      border-left:1px solid rgba(126,231,220,.22);
+      background:
+        linear-gradient(90deg, rgba(0,229,195,.16), transparent 5px),
+        radial-gradient(circle at 92% 20%, rgba(0,229,195,.1), transparent 28%),
+        linear-gradient(135deg, rgba(255,255,255,.064), rgba(255,255,255,.022)),
+        rgba(8,14,22,.88);
+    }
+    .post-card:nth-child(4n)::before {
+      background:
+        linear-gradient(90deg, rgba(0,229,195,.14) 1px, transparent 1px),
+        linear-gradient(rgba(255,255,255,.025) 1px, transparent 1px);
+      background-size:24px 24px;
+      opacity:.45;
+    }
+    .post-card:nth-child(4n) .post-thumb {
+      display:none;
+    }
+    .post-card:nth-child(4n) .post-summary {
+      min-height:0;
+      padding:0;
+    }
+    .post-card:nth-child(4n) .meta {
+      display:inline-flex;
+      width:max-content;
+      padding:5px 10px;
+      border-radius:999px;
+      background:rgba(0,229,195,.08);
+      border:1px solid rgba(126,231,220,.2);
+    }
+    .post-card:nth-child(4n) h2 {
+      max-width:760px;
+      font-size:31px;
+    }
+    .post-card:nth-child(4n) p {
+      max-width:760px;
+    }
+
+    @media (max-width:900px) {
+      .post-card,
+      .post-card:nth-child(4n+1),
+      .post-card:nth-child(4n+2),
+      .post-card:nth-child(4n+3) {
+        grid-template-columns:1fr;
+        min-height:0;
+      }
+      .post-thumb,
+      .post-card:nth-child(4n+2) .post-thumb,
+      .post-card:nth-child(4n+3) .post-thumb {
+        order:initial;
+        min-height:0;
+        aspect-ratio:16 / 9;
+        margin:18px 18px 0;
+      }
+      .post-summary,
+      .post-card:nth-child(4n+2) .post-summary,
+      .post-card:nth-child(4n+3) .post-summary {
+        order:initial;
+        min-height:0;
+        padding:22px 24px 24px;
+      }
+      .post-card h2,
+      .post-card:nth-child(4n+1) h2,
+      .post-card:nth-child(4n) h2 {
+        font-size:25px;
+      }
+    }
+
+
+    /* Final contrast fix: remove legacy white post panels. */
+    .post-card .post-summary {
+      background:
+        linear-gradient(135deg, rgba(9,18,29,.92), rgba(8,14,22,.74)) !important;
+      border-left:1px solid rgba(126,231,220,.13);
+    }
+    .post-card:nth-child(4n+2) .post-summary,
+    .post-card:nth-child(4n+3) .post-summary,
+    .post-card:nth-child(4n+1) .post-summary {
+      background:
+        radial-gradient(circle at 94% 8%, rgba(0,229,195,.075), transparent 34%),
+        linear-gradient(135deg, rgba(10,20,32,.94), rgba(8,14,22,.78)) !important;
+    }
+    .post-card:nth-child(4n+3) .post-summary {
+      border-left:0;
+      border-right:1px solid rgba(126,231,220,.13);
+    }
+    .post-card:nth-child(4n) .post-summary {
+      background:transparent !important;
+      border:0;
+    }
+    .post-card h2,
+    .post-card h2 a {
+      color:#eaf5f8 !important;
+      text-shadow:0 1px 18px rgba(0,0,0,.18);
+    }
+    .post-card p {
+      color:#aebdd0 !important;
+    }
+    .post-card .meta {
+      color:#6ff4e7 !important;
+    }
+    .post-card .readmore {
+      color:#00e5c3 !important;
+    }
+    .post-thumb {
+      background:
+        radial-gradient(circle at 25% 18%, rgba(0,229,195,.12), transparent 34%),
+        linear-gradient(135deg, rgba(12,24,35,.92), rgba(8,14,22,.78)) !important;
+    }
+    @media (max-width:900px) {
+      .post-card .post-summary {
+        border-left:0;
+        border-top:1px solid rgba(126,231,220,.13);
+      }
+    }
+
   </style>
 </head>
 <body>
