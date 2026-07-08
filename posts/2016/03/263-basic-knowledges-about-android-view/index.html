@@ -1201,6 +1201,98 @@
       }
     }
 
+
+    /* Palette option 1: obsidian black with refined teal glow. */
+    :root {
+      --author-bg:#070a0f;
+      --author-sidebar:rgba(8,13,20,.82);
+      --author-ink:#f6fbff;
+      --author-muted:#9fb2c4;
+      --author-line:rgba(126,231,220,.16);
+      --author-accent:#00e5c3;
+      --author-paper:rgba(9,16,25,.76);
+    }
+    body {
+      background:
+        radial-gradient(circle at 78% 8%, rgba(0,229,195,.24), transparent 29%),
+        radial-gradient(circle at 52% 42%, rgba(26,115,232,.13), transparent 34%),
+        radial-gradient(circle at 18% 88%, rgba(0,229,195,.11), transparent 30%),
+        linear-gradient(135deg,#05070b 0%,#07101a 48%,#070a0f 100%);
+    }
+    body::before {
+      opacity:.78;
+      background:
+        linear-gradient(rgba(0,229,195,.035) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,.022) 1px, transparent 1px);
+      background-size:44px 44px;
+    }
+    .bar,
+    .home-hero,
+    .post-card,
+    .single-head,
+    article,
+    .panel,
+    .about-hero,
+    .contact-panel {
+      background:
+        linear-gradient(180deg, rgba(255,255,255,.07), rgba(255,255,255,.026)),
+        linear-gradient(135deg, rgba(0,229,195,.075), rgba(26,115,232,.035) 44%, rgba(5,8,13,.68)),
+        rgba(7,13,21,.76);
+      border-color:rgba(126,231,220,.16);
+      box-shadow:
+        0 26px 90px rgba(0,0,0,.34),
+        inset 0 1px 0 rgba(255,255,255,.055);
+    }
+    .bar {
+      box-shadow:
+        0 30px 96px rgba(0,0,0,.42),
+        0 0 0 1px rgba(0,229,195,.035),
+        inset 0 1px 0 rgba(255,255,255,.07);
+    }
+    .brand {
+      color:#ffffff;
+      text-shadow:0 0 28px rgba(0,229,195,.22);
+    }
+    .brand::before {
+      border-color:rgba(240,255,252,.92);
+      box-shadow:
+        0 0 0 7px rgba(0,229,195,.09),
+        0 0 42px rgba(0,229,195,.18),
+        0 24px 70px rgba(0,0,0,.38);
+    }
+    nav {
+      background:rgba(0,229,195,.035);
+      border-color:rgba(126,231,220,.15);
+    }
+    nav a {
+      color:#d9f7f4;
+      border-color:rgba(126,231,220,.12);
+    }
+    nav a:hover {
+      background:rgba(0,229,195,.11);
+      color:#ffffff;
+    }
+    .hero-copy .eyebrow,
+    .about-hero .eyebrow,
+    .meta,
+    .archive-list time {
+      color:#75f4e7;
+    }
+    .readmore,
+    .hero-actions a,
+    .contact-link,
+    a {
+      color:#00e5c3;
+    }
+    .post-thumb,
+    .hero {
+      background:
+        radial-gradient(circle at 18% 12%, rgba(0,229,195,.16), transparent 34%),
+        linear-gradient(135deg, rgba(26,115,232,.08), rgba(255,255,255,.035)),
+        rgba(255,255,255,.04);
+      border-color:rgba(126,231,220,.15);
+    }
+
   </style>
 </head>
 <body>
