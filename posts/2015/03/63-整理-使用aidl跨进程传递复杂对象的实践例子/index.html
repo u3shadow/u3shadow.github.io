@@ -596,10 +596,404 @@
       .post-card h2 { font-size:23px; }
     }
 
+
+    /* Author-inspired theme: fixed writer sidebar and clean reading column. */
+    :root {
+      --author-bg:#f4f4f2;
+      --author-sidebar:#ffffff;
+      --author-ink:#222222;
+      --author-muted:#777777;
+      --author-line:#deded8;
+      --author-accent:#111111;
+      --author-paper:#ffffff;
+    }
+    body {
+      background:var(--author-bg);
+      color:var(--author-ink);
+      font-family:Georgia,"Times New Roman","Songti SC","SimSun",serif;
+      line-height:1.78;
+    }
+    header {
+      position:fixed;
+      inset:0 auto 0 0;
+      width:318px;
+      min-height:100vh;
+      background:var(--author-sidebar);
+      border-right:1px solid var(--author-line);
+      border-bottom:0;
+      color:var(--author-ink);
+      z-index:20;
+    }
+    .bar {
+      min-height:100vh;
+      width:100%;
+      max-width:none;
+      padding:54px 34px 42px;
+      display:flex;
+      flex-direction:column;
+      align-items:center;
+      justify-content:center;
+      text-align:center;
+      gap:0;
+    }
+    .brand {
+      display:flex;
+      flex-direction:column;
+      align-items:center;
+      gap:18px;
+      color:var(--author-ink);
+      font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Microsoft YaHei",sans-serif;
+      font-size:30px;
+      font-weight:800;
+      text-transform:uppercase;
+      letter-spacing:2px;
+    }
+    .brand::before {
+      content:"";
+      width:132px;
+      height:132px;
+      border-radius:50%;
+      background:
+        linear-gradient(135deg, rgba(255,255,255,.38), rgba(255,255,255,0)),
+        url("/assets/site/logo.png") center / cover no-repeat,
+        #111;
+      border:8px solid #f1f1ee;
+      box-shadow:0 10px 32px rgba(0,0,0,.12);
+    }
+    .brand::after { display:none; }
+    .site-bio {
+      max-width:220px;
+      margin:14px auto 28px;
+      color:var(--author-muted);
+      font-size:14px;
+      line-height:1.65;
+      font-style:italic;
+    }
+    nav {
+      width:100%;
+      display:flex;
+      flex-direction:column;
+      align-items:center;
+      gap:0;
+      padding:0;
+      border-top:1px solid var(--author-line);
+      border-bottom:1px solid var(--author-line);
+    }
+    nav a {
+      width:100%;
+      min-height:44px;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      color:#333;
+      border-bottom:1px solid var(--author-line);
+      font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Microsoft YaHei",sans-serif;
+      font-size:12px;
+      font-weight:800;
+      text-transform:uppercase;
+      letter-spacing:1.6px;
+    }
+    nav a:last-child { border-bottom:0; }
+    nav a::before { content:""; margin:0; }
+    nav a:hover { color:#000; background:#f6f6f3; }
+    main {
+      max-width:880px;
+      margin:0 0 0 318px;
+      padding:56px 56px 86px;
+    }
+    footer {
+      max-width:880px;
+      margin:0 0 0 318px;
+      padding:28px 56px;
+      color:var(--author-muted);
+      text-align:left;
+    }
+    .home-hero {
+      min-height:0;
+      margin:0 0 28px;
+      padding:0 0 28px;
+      background:transparent;
+      border:0;
+      box-shadow:none;
+      overflow:visible;
+    }
+    .home-hero img,
+    .home-hero::before { display:none; }
+    .hero-copy {
+      max-width:760px;
+      padding:0;
+      color:var(--author-ink);
+    }
+    .hero-copy .eyebrow,
+    .about-hero .eyebrow {
+      margin:0 0 12px;
+      color:var(--author-muted);
+      font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Microsoft YaHei",sans-serif;
+      font-size:12px;
+      font-style:normal;
+      font-weight:800;
+      text-transform:uppercase;
+      letter-spacing:1.8px;
+    }
+    .hero-copy h1 {
+      margin:0 0 14px;
+      color:var(--author-ink);
+      font-size:48px;
+      line-height:1.08;
+      text-transform:none;
+      letter-spacing:0;
+    }
+    .hero-copy p {
+      max-width:680px;
+      color:#555;
+      font-size:18px;
+    }
+    .hero-actions { margin-top:22px; gap:10px; }
+    .hero-actions a,
+    .contact-link,
+    .readmore {
+      min-height:0;
+      padding:0;
+      background:transparent;
+      color:var(--author-accent);
+      border:0;
+      text-decoration:none;
+      font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Microsoft YaHei",sans-serif;
+      font-size:12px;
+      font-weight:900;
+      text-transform:uppercase;
+      letter-spacing:1.4px;
+    }
+    .hero-actions a::after,
+    .contact-link::after,
+    .readmore::after { content:"  ->"; }
+    .hero-actions a.secondary { color:#555; background:transparent; border:0; }
+    .tracks-intro { display:none; }
+    .post-list {
+      display:block;
+      max-width:none;
+      margin:0;
+      background:transparent;
+      border:0;
+    }
+    .post-card {
+      display:block;
+      margin:0 0 42px;
+      padding:0 0 42px;
+      min-height:0;
+      background:transparent;
+      border:0;
+      border-bottom:1px solid var(--author-line);
+      box-shadow:none;
+      overflow:visible;
+    }
+    .post-card:nth-child(even) .post-thumb,
+    .post-card:nth-child(even) .post-summary { order:initial; }
+    .post-thumb {
+      width:100%;
+      margin:0 0 24px;
+      aspect-ratio:16 / 8.8;
+      min-height:0;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      background:#e9e9e4;
+      border:1px solid var(--author-line);
+      overflow:hidden;
+    }
+    .post-thumb img {
+      width:100%;
+      height:100%;
+      min-height:0;
+      object-fit:contain;
+      padding:12px;
+      filter:none;
+      transform:none;
+    }
+    .post-card:hover .post-thumb img {
+      transform:none;
+      filter:none;
+    }
+    .post-summary {
+      min-height:0;
+      padding:0;
+      display:block;
+      text-align:left;
+    }
+    .meta {
+      margin:0 0 12px;
+      color:var(--author-muted);
+      font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Microsoft YaHei",sans-serif;
+      font-size:12px;
+      font-weight:800;
+      text-transform:uppercase;
+      letter-spacing:1.2px;
+    }
+    .post-card h2 {
+      margin:0 0 16px;
+      font-size:34px;
+      line-height:1.18;
+      font-weight:700;
+      text-transform:none;
+      letter-spacing:0;
+    }
+    .post-card h2 a {
+      color:var(--author-ink);
+      text-decoration:none;
+    }
+    .post-card h2 a:hover { color:#666; }
+    .post-card .rule { display:none; }
+    .post-card p {
+      max-width:720px;
+      margin:0 0 18px;
+      color:#555;
+      font-size:17px;
+      -webkit-line-clamp:3;
+    }
+    .single-wrap,
+    .about-wrap {
+      max-width:760px;
+      margin:0;
+      padding:0;
+    }
+    .single-head,
+    article,
+    .panel,
+    .about-hero,
+    .contact-panel {
+      background:transparent;
+      border:0;
+      box-shadow:none;
+      padding:0;
+    }
+    .single-head {
+      margin:0 0 28px;
+      text-align:left;
+    }
+    h1.title,
+    .about-hero h1 {
+      margin:0 0 16px;
+      color:var(--author-ink);
+      font-size:46px;
+      line-height:1.12;
+      text-transform:none;
+      letter-spacing:0;
+    }
+    .title-rule { display:none; }
+    .hero {
+      margin:0 0 30px;
+      border:1px solid var(--author-line);
+      background:#e9e9e4;
+    }
+    .hero img {
+      width:100%;
+      max-height:none;
+      object-fit:contain;
+      padding:12px;
+    }
+    article {
+      color:#333;
+      font-size:18px;
+      line-height:1.86;
+    }
+    article p,
+    .about-hero p,
+    .contact-panel p { color:#444; }
+    article h2,
+    article h3,
+    .contact-panel h2,
+    .archive-list h2 {
+      color:var(--author-ink);
+      font-family:Georgia,"Times New Roman","Songti SC","SimSun",serif;
+      text-transform:none;
+      letter-spacing:0;
+    }
+    .archive-list ul {
+      list-style:none;
+      margin:0 0 32px;
+      padding:0;
+    }
+    .archive-list li {
+      display:grid;
+      grid-template-columns:76px 1fr;
+      gap:18px;
+      padding:12px 0;
+      border-bottom:1px solid var(--author-line);
+    }
+    .archive-list time {
+      color:var(--author-muted);
+      font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Microsoft YaHei",sans-serif;
+      font-size:12px;
+      font-weight:800;
+    }
+    .archive-list a {
+      color:var(--author-ink);
+      text-decoration:none;
+    }
+    .archive-list a:hover { color:#666; }
+    .about-grid {
+      display:grid;
+      grid-template-columns:1fr;
+      gap:0;
+      margin:26px 0;
+      border-top:1px solid var(--author-line);
+      border-bottom:1px solid var(--author-line);
+    }
+    .about-chip {
+      padding:16px 0;
+      background:transparent;
+      border:0;
+      border-bottom:1px solid var(--author-line);
+      color:#444;
+    }
+    .about-chip:last-child { border-bottom:0; }
+    .about-chip strong {
+      color:var(--author-ink);
+      font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Microsoft YaHei",sans-serif;
+      font-size:12px;
+      text-transform:uppercase;
+      letter-spacing:1.3px;
+    }
+    .contact-panel { margin-top:34px; }
+    pre, code { font-family:"SFMono-Regular",Consolas,"Liberation Mono",monospace; }
+    @media (max-width:900px) {
+      header {
+        position:relative;
+        width:auto;
+        min-height:0;
+        border-right:0;
+        border-bottom:1px solid var(--author-line);
+      }
+      .bar {
+        min-height:0;
+        padding:28px 22px 22px;
+      }
+      .brand::before {
+        width:86px;
+        height:86px;
+        border-width:6px;
+      }
+      .site-bio { margin-bottom:18px; }
+      nav { flex-direction:row; flex-wrap:wrap; justify-content:center; }
+      nav a { width:auto; min-height:38px; padding:0 14px; border-bottom:0; }
+      main,
+      footer {
+        max-width:none;
+        margin:0;
+        padding:34px 22px 56px;
+      }
+      footer { padding-top:0; }
+      .hero-copy h1 { font-size:38px; }
+      .post-card h2,
+      h1.title,
+      .about-hero h1 { font-size:32px; }
+      .post-thumb { aspect-ratio:16 / 10; }
+    }
+
   </style>
 </head>
 <body>
-<header><div class="bar"><a class="brand" href="/">u3coding</a><nav><a href="/">Home</a><a href="/archive/">Archive</a><a href="/about/">About</a><a href="/feed.xml">RSS</a></nav></div></header>
+<header><div class="bar"><a class="brand" href="/">u3coding</a><p class="site-bio">Android, AI, tooling, and engineering notes.</p><nav><a href="/">Home</a><a href="/archive/">Archive</a><a href="/about/">About</a><a href="/feed.xml">RSS</a></nav></div></header>
 
 <main><div class="single-wrap"><section class="single-head"><p class="eyebrow">未分类 · 文章 ID 63</p><h1 class="title">【整理】使用AIDL跨进程传递复杂对象的实践例子</h1><div class="title-rule"></div><div class="meta">发布于 2015-03-12 09:08 · 已迁移为静态页面</div></section><figure class="hero"><img src="/assets/images/fd66f291f307.png" alt="【整理】使用AIDL跨进程传递复杂对象的实践例子"></figure><article><p>首先定义对象类，并实现Parcelable接口，实现接口内的几个方法，看代码，Person.java</p>
 <div class="cnblogs_code">
