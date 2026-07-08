@@ -1186,6 +1186,21 @@
       .post-thumb { margin-bottom:18px; }
     }
 
+
+    /* Avatar refinement: original portrait, no overlay, closer face crop. */
+    .brand::before {
+      background-image:url("/assets/site/avatar.jpg");
+      background-position:center 38%;
+      background-size:128%;
+      background-repeat:no-repeat;
+    }
+    @media (max-width:900px) {
+      .brand::before {
+        background-size:130%;
+        background-position:center 38%;
+      }
+    }
+
   </style>
 </head>
 <body>
