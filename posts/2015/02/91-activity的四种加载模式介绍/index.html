@@ -1928,7 +1928,7 @@
   <link rel="stylesheet" href="/assets/site/editorial-portfolio.css">
 </head>
 <body>
-<header><div class="bar"><a class="brand" href="/">u3coding</a><p class="site-bio">Android, AI, tooling, and engineering notes.</p><nav><a href="/">Home</a><a href="/archive/">Archive</a><a href="/about/">About</a><a href="/feed.xml">RSS</a></nav></div></header>
+<header><div class="bar"><a class="brand" href="/">u3coding</a><p class="site-bio">Android, AI, tooling, and engineering notes.</p><nav><a href="/">首页</a><a href="/projects/">项目</a><a href="/articles/">文章</a><a href="/archive/">归档</a><a href="/about/">关于</a></nav></div></header>
 
 <main><div class="single-wrap"><section class="single-head"><p class="eyebrow">未分类 · 文章 ID 91</p><h1 class="title">activity的四种加载模式介绍</h1><div class="title-rule"></div><div class="meta">发布于 2015-02-26 11:15 · 已迁移为静态页面</div></section><article><p><strong>&nbsp; 四种加载模式的介绍：&nbsp;<br /><br />&nbsp;&nbsp; a) Standard : 系统默认模式，一次跳转即会生成一个新的实例；&nbsp;<br />&nbsp;&nbsp; b) SingleTop : 和 standard 类似，唯一的区别就是当跳转的对象是位于栈顶的activity时，程序将不会生成一个新的activity实例，而是直接跳到现在存于栈顶的那个activity实例；&nbsp;<br />&nbsp;&nbsp; c) SingleTask: singleTask 模式和后面的singleInstance 模式都只是创建一个实例；该模式下，无论调转的对象是不是位于栈顶的activity，程序都不会生成一个新的实例(前提是该栈中已经 存在了这个实例)；&nbsp;<br />&nbsp;&nbsp;&nbsp; 提示：一般不要将除开始页面的其他页面设置为singleTask 模式；&nbsp;<br />&nbsp;<br />&nbsp;&nbsp; d) SingleInstance: activity独占一个task（可以理解为进程），独占一个task 的activity 可以相当于是一个应用，这个应用与其他的activity是独立的，他有自己的上下文activity;&nbsp;<br /><br />&nbsp;&nbsp;&nbsp; 例如：现有三个activity,a1,a2,a3, a2设置为singleInstance 模式，那么调转关系如下：a1-a2-a3,&nbsp; 在 a3中按返回，由于a2 位于一个独立的task中，它不数据a3 的上下文activity ，所以此时将直接返回得到 a1 ，a1 再返回程序并没有结束，而是得到 a2 ， 再返回就结束了程序；&nbsp;</strong></p></article></div>
 </main>

@@ -1928,7 +1928,7 @@
   <link rel="stylesheet" href="/assets/site/editorial-portfolio.css">
 </head>
 <body>
-<header><div class="bar"><a class="brand" href="/">u3coding</a><p class="site-bio">Android, AI, tooling, and engineering notes.</p><nav><a href="/">Home</a><a href="/archive/">Archive</a><a href="/about/">About</a><a href="/feed.xml">RSS</a></nav></div></header>
+<header><div class="bar"><a class="brand" href="/">u3coding</a><p class="site-bio">Android, AI, tooling, and engineering notes.</p><nav><a href="/">首页</a><a href="/projects/">项目</a><a href="/articles/">文章</a><a href="/archive/">归档</a><a href="/about/">关于</a></nav></div></header>
 
 <main><div class="single-wrap"><section class="single-head"><p class="eyebrow">未分类 · 文章 ID 99</p><h1 class="title">Android中SQLite查询date类型字段出现有返回但是为错误值的情况</h1><div class="title-rule"></div><div class="meta">发布于 2015-02-23 12:41 · 已迁移为静态页面</div></section><article><p>　　出现该情况的原因是因为查询精度与数据库中存储精度不相同造成的，例如，查询精度为 YYYY-MM-DD 但是存储精度为 YYYY-MM-DD HH:MM:SS，就会出现该错误。</p>
 <p>　　更改查询精度为YYYY-MM-DD即可正确查询。</p></article></div>

@@ -1928,7 +1928,7 @@
   <link rel="stylesheet" href="/assets/site/editorial-portfolio.css">
 </head>
 <body>
-<header><div class="bar"><a class="brand" href="/">u3coding</a><p class="site-bio">Android, AI, tooling, and engineering notes.</p><nav><a href="/">Home</a><a href="/archive/">Archive</a><a href="/about/">About</a><a href="/feed.xml">RSS</a></nav></div></header>
+<header><div class="bar"><a class="brand" href="/">u3coding</a><p class="site-bio">Android, AI, tooling, and engineering notes.</p><nav><a href="/">首页</a><a href="/projects/">项目</a><a href="/articles/">文章</a><a href="/archive/">归档</a><a href="/about/">关于</a></nav></div></header>
 
 <main><div class="single-wrap"><section class="single-head"><p class="eyebrow">未分类 · 文章 ID 106</p><h1 class="title">【android】关于自己实现adapter后gridview中item无法被选中的解决方法</h1><div class="title-rule"></div><div class="meta">发布于 2015-02-07 15:34 · 已迁移为静态页面</div></section><article><p>有时候，自己继承实现了baseadapter将其赋给gridview之后，gridview会十分奇怪的无法选中内部的item.</p>
 <p>经过仔细研究，我发现是在继承的时候多复写了几个方法，解决方法就是，只保留其中几个重要的方法，其他的方法不要复写，尤其是不知道其作用的方法，千万不要OVERRIDE，否则会引发很多奇怪的错误</p></article></div>

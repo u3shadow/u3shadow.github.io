@@ -1928,7 +1928,7 @@
   <link rel="stylesheet" href="/assets/site/editorial-portfolio.css">
 </head>
 <body>
-<header><div class="bar"><a class="brand" href="/">u3coding</a><p class="site-bio">Android, AI, tooling, and engineering notes.</p><nav><a href="/">Home</a><a href="/archive/">Archive</a><a href="/about/">About</a><a href="/feed.xml">RSS</a></nav></div></header>
+<header><div class="bar"><a class="brand" href="/">u3coding</a><p class="site-bio">Android, AI, tooling, and engineering notes.</p><nav><a href="/">首页</a><a href="/projects/">项目</a><a href="/articles/">文章</a><a href="/archive/">归档</a><a href="/about/">关于</a></nav></div></header>
 
 <main><div class="single-wrap"><section class="single-head"><p class="eyebrow">技术文章 · 文章 ID 692</p><h1 class="title">项目的改造——RemoveButterKnife插件代码的重构</h1><div class="title-rule"></div><div class="meta">发布于 2022-10-08 14:57 · 已迁移为静态页面</div></section><figure class="hero"><img src="/assets/images/e142317ad466.png" alt="项目的改造——RemoveButterKnife插件代码的重构"></figure><article><h2 id="h2-u524Du8A00">前言</h2><p>这篇文章记述了我的插件RemoveButterKnife的代码改进过程以及思路，关于插件，各位可以看<a href="https://github.com/u3shadow/RemoveButterKnife">RemoveButterKnife代码库</a>，关于文章，可以看<a href="http://www.u3coding.com/2016/06/24/androidstudio-plugin-removebutterknife-di/">构思到实现RemoveButterKnife</a></p>
 <h2 id="h2-u539Fu56E0">原因</h2><p>近期想给原来的插件RemoveButterKnife加入一些新的功能，发现以前的代码没有使用任何的设计模式，全部功能都写在一起，对于新功能的添加来说十分糟糕。趁此机会重构了一下代码，在此记录过程。</p>

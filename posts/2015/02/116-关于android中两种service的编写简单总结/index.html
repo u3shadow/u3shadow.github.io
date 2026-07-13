@@ -1928,7 +1928,7 @@
   <link rel="stylesheet" href="/assets/site/editorial-portfolio.css">
 </head>
 <body>
-<header><div class="bar"><a class="brand" href="/">u3coding</a><p class="site-bio">Android, AI, tooling, and engineering notes.</p><nav><a href="/">Home</a><a href="/archive/">Archive</a><a href="/about/">About</a><a href="/feed.xml">RSS</a></nav></div></header>
+<header><div class="bar"><a class="brand" href="/">u3coding</a><p class="site-bio">Android, AI, tooling, and engineering notes.</p><nav><a href="/">首页</a><a href="/projects/">项目</a><a href="/articles/">文章</a><a href="/archive/">归档</a><a href="/about/">关于</a></nav></div></header>
 
 <main><div class="single-wrap"><section class="single-head"><p class="eyebrow">未分类 · 文章 ID 116</p><h1 class="title">关于android中两种service的编写简单总结</h1><div class="title-rule"></div><div class="meta">发布于 2015-02-02 13:09 · 已迁移为静态页面</div></section><article><p>1.startservice (两种方法，继承service类或者继承intentservice 类)</p>
 <p>继承service类，在onstartcommend重载方法中实现业务逻辑的处理，如果耗时过长最好新开一个线程，因为默认是在程序的主线程中，会造成阻塞等问题。</p>
