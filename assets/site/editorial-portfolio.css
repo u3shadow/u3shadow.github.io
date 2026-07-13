@@ -56,9 +56,9 @@ main,footer{width:min(1220px,calc(100% - 48px))!important;max-width:none!importa
 
 /* Use the same wide editorial canvas as the 16:9 reference artwork. */
 @media(min-width:1440px){
-  .home-ref{width:min(1540px,calc(100% - 96px))!important}
-  .home-ref-page .bar{width:min(1540px,calc(100% - 96px))!important}
-  .ref-footer{padding-left:max(48px,calc((100% - 1540px)/2))!important;padding-right:max(48px,calc((100% - 1540px)/2))!important}
+  .home-ref{width:min(1680px,calc(100% - 64px))!important}
+  .home-ref-page .bar{width:min(1680px,calc(100% - 64px))!important}
+  .ref-footer{padding-left:max(32px,calc((100% - 1680px)/2))!important;padding-right:max(32px,calc((100% - 1680px)/2))!important}
   .ref-hero{grid-template-columns:45% 55%;min-height:454px;padding-top:35px;padding-bottom:26px}
   .ref-hero h1{font-size:41px!important}
   .ref-lead{max-width:570px;font-size:14px!important}
@@ -71,6 +71,9 @@ main,footer{width:min(1220px,calc(100% - 48px))!important;max-width:none!importa
   .ref-focus-grid>div{min-height:91px;padding:17px 15px}
   .ref-updates,.ref-about{height:212px}.ref-footer{min-height:96px!important}
 }
+
+/* Full article index: every exported post remains directly reachable. */
+.article-index-page{max-width:1040px!important;margin:0 auto!important}.article-index-toolbar{display:flex;gap:10px;align-items:center;margin:-14px 0 22px}.article-index-toolbar a,.article-index-toolbar span{padding:5px 11px;border:1px solid var(--line);border-radius:14px;background:#fff;color:#536269;text-decoration:none;font-size:11px}.article-index-toolbar span{margin-left:auto;color:var(--green);background:var(--pale)}.article-index-list .archive-list{display:block!important}.article-index-list .archive-list h2{font-size:22px!important}.article-index-list .archive-list li{font-size:14px!important}.article-index-list .archive-list a{color:#243840!important}
 
 /* Article readability: the legacy post markup contains several pale inline tones. */
 .single-wrap article,
@@ -92,6 +95,9 @@ main,footer{width:min(1220px,calc(100% - 48px))!important;max-width:none!importa
 .single-wrap article blockquote{color:#2c4540!important}
 .single-wrap article pre,
 .single-wrap article pre code{color:#e6f1ec!important}
+
+/* Increase supporting text on the homepage without disturbing hierarchy. */
+.home-ref .ref-stats span{font-size:11px}.home-ref .ref-project>p{font-size:12px}.home-ref .ref-project i{font-size:10px}.home-ref .project-banner small{font-size:12px}.home-ref .ref-post-grid p{font-size:11px}.home-ref .ref-post-grid small{font-size:10px}.home-ref .ref-focus-grid span{font-size:10px}.home-ref .ref-updates li,.home-ref .ref-updates em,.home-ref .ref-updates time{font-size:10px}.home-ref .ref-about span,.home-ref .ref-about p{font-size:11px}
 
 /* Final homepage lower-content calibration. */
 .home-ref-page .brand:before{border-radius:0!important;clip-path:polygon(25% 0,75% 0,100% 50%,75% 100%,25% 100%,0 50%)!important;transform:none!important}
