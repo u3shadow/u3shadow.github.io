@@ -1925,6 +1925,7 @@
     }
 
   </style>
+  <link rel="stylesheet" href="/assets/site/editorial-portfolio.css">
 </head>
 <body>
 <header><div class="bar"><a class="brand" href="/">u3coding</a><p class="site-bio">Android, AI, tooling, and engineering notes.</p><nav><a href="/">Home</a><a href="/archive/">Archive</a><a href="/about/">About</a><a href="/feed.xml">RSS</a></nav></div></header>
@@ -1932,15 +1933,37 @@
   <section class="home-hero">
     <img src="/assets/site/tech-hero.png" alt="u3coding technology banner">
     <div class="hero-copy">
-      <p class="eyebrow">Personal Technical Archive</p>
-      <h1>u3coding</h1>
+      <p class="eyebrow">Android Engineer / AI Builder</p>
+      <h1>Build useful things.<br>Write down why.</h1>
       <p>记录 Android、AI 工具、工程实践和那些真正解决问题的开发细节。</p>
       <div class="hero-actions">
-        <a href="#latest-posts">Latest Notes</a>
+        <a href="#projects">View Projects</a>
         <a class="secondary" href="/about/">About Me</a>
       </div>
     </div>
   </section>
+  <section id="projects" class="home-section">
+    <div class="section-heading">
+      <div><p class="section-kicker">Selected work</p><h2>代表项目</h2></div>
+      <p>围绕 Android、端侧智能与工程效率，把复杂能力做成真正可用的产品。</p>
+    </div>
+    <div class="project-grid">
+      <a class="project-card featured" href="/posts/2026/04/711-从手动配置到自然语言生成规则-一个-android-ai-工具的重构实录/">
+        <span class="project-no">01 / FEATURED</span><h3>ShaverAI</h3><p>从自然语言理解到结构化规则生成，再到 Android 设备能力的本地执行。</p><div class="project-tags"><span>Kotlin</span><span>AI Agent</span><span>Rule Engine</span><span>RAG</span></div>
+      </a>
+      <a class="project-card" href="/posts/2022/10/691-androidstudio插件开发-removebutterknife从构思到实现/">
+        <span class="project-no">02 / TOOLING</span><h3>RemoveButterKnife</h3><p>面向旧项目迁移的 Android Studio 自动化重构插件。</p><div class="project-tags"><span>IDE Plugin</span><span>AST</span></div>
+      </a>
+      <a class="project-card" href="/posts/2022/10/698-android中使用aspectj进行用户操作路径跟踪与日志搜集/">
+        <span class="project-no">03 / ENGINEERING</span><h3>稳定性工具链</h3><p>从行为追踪到本地日志，让线上问题更容易复现和定位。</p><div class="project-tags"><span>AspectJ</span><span>Observability</span></div>
+      </a>
+    </div>
+  </section>
+  <section class="home-section latest-shell">
+    <div class="section-heading">
+      <div><p class="section-kicker">Latest writing</p><h2>近期文章</h2></div>
+      <p>Android、AI 应用与工程实践中的真实问题、选择和实现细节。</p>
+    </div>
 <section id="latest-posts" class="post-list"><article class="post-card">
   <a class="post-thumb" href="/posts/2026/04/711-从手动配置到自然语言生成规则-一个-android-ai-工具的重构实录/"><img src="/assets/site/hero-modern.png" alt="从手动配置到自然语言生成规则：一个 Android AI 工具的重构实录"></a>
   <div class="post-summary">
@@ -2241,6 +2264,7 @@
     <a class="readmore" href="/posts/2016/11/550-w4-neural-network-representation/">Read the Post</a>
   </div>
 </article></section>
+  </section>
 </main>
 <footer>Generated from local Z-Blog backup for GitHub Pages.</footer>
 <script>
