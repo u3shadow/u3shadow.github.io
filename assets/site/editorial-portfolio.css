@@ -54,6 +54,24 @@ main,footer{width:min(1220px,calc(100% - 48px))!important;max-width:none!importa
   .ref-section{margin-top:24px}
 }
 
+/* Use the same wide editorial canvas as the 16:9 reference artwork. */
+@media(min-width:1440px){
+  .home-ref{width:min(1540px,calc(100% - 96px))!important}
+  .home-ref-page .bar{width:min(1540px,calc(100% - 96px))!important}
+  .ref-footer{padding-left:max(48px,calc((100% - 1540px)/2))!important;padding-right:max(48px,calc((100% - 1540px)/2))!important}
+  .ref-hero{grid-template-columns:45% 55%;min-height:454px;padding-top:35px;padding-bottom:26px}
+  .ref-hero h1{font-size:41px!important}
+  .ref-lead{max-width:570px;font-size:14px!important}
+  .ref-actions{margin-top:26px}.ref-stats{margin-top:37px}
+  .ref-app-stage{height:385px}
+  .ref-desktop{right:70px;top:9px;width:590px;height:365px;font-size:9px}
+  .ref-phone{top:51px;right:7px;transform:scale(1.13);transform-origin:right top}
+  .project-banner{height:104px}.ref-project{min-height:212px}.ref-project>p{height:50px;font-size:12px}.project-banner strong{font-size:19px}
+  .ref-post-grid>a{height:202px}.ref-post-grid img{height:104px}.ref-post-grid b{font-size:14px}
+  .ref-focus-grid>div{min-height:91px;padding:17px 15px}
+  .ref-updates,.ref-about{height:212px}.ref-footer{min-height:96px!important}
+}
+
 /* Final homepage lower-content calibration. */
 .home-ref-page .brand:before{border-radius:0!important;clip-path:polygon(25% 0,75% 0,100% 50%,75% 100%,25% 100%,0 50%)!important;transform:none!important}
 @media(min-width:901px){
