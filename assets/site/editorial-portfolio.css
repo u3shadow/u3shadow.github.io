@@ -56,20 +56,20 @@ main,footer{width:min(1220px,calc(100% - 48px))!important;max-width:none!importa
 
 /* Use the same wide editorial canvas as the 16:9 reference artwork. */
 @media(min-width:1440px){
-  .home-ref{width:min(1680px,calc(100% - 64px))!important}
-  .home-ref-page .bar{width:min(1680px,calc(100% - 64px))!important}
-  .ref-footer{padding-left:max(32px,calc((100% - 1680px)/2))!important;padding-right:max(32px,calc((100% - 1680px)/2))!important}
-  .ref-hero{grid-template-columns:45% 55%;min-height:454px;padding-top:35px;padding-bottom:26px}
-  .ref-hero h1{font-size:41px!important}
-  .ref-lead{max-width:570px;font-size:14px!important}
+  .home-ref{width:min(1480px,calc(100% - 72px))!important}
+  .home-ref-page .bar{width:min(1480px,calc(100% - 72px))!important}
+  .ref-footer{padding-left:max(36px,calc((100% - 1480px)/2))!important;padding-right:max(36px,calc((100% - 1480px)/2))!important}
+  .ref-hero{grid-template-columns:minmax(520px,46%) minmax(560px,54%);min-height:430px;padding-top:29px;padding-bottom:22px}
+  .ref-hero h1{font-size:39px!important}
+  .ref-lead{max-width:520px;font-size:14px!important}
   .ref-actions{margin-top:26px}.ref-stats{margin-top:37px}
-  .ref-app-stage{height:385px}
-  .ref-desktop{right:70px;top:9px;width:590px;height:365px;font-size:9px}
-  .ref-phone{top:51px;right:7px;transform:scale(1.13);transform-origin:right top}
-  .project-banner{height:104px}.ref-project{min-height:212px}.ref-project>p{height:50px;font-size:12px}.project-banner strong{font-size:19px}
-  .ref-post-grid>a{height:202px}.ref-post-grid img{height:104px}.ref-post-grid b{font-size:14px}
-  .ref-focus-grid>div{min-height:91px;padding:17px 15px}
-  .ref-updates,.ref-about{height:212px}.ref-footer{min-height:96px!important}
+  .ref-app-stage{height:360px;max-width:660px;justify-self:end;width:100%}
+  .ref-desktop{right:48px;top:5px;width:535px;height:334px;font-size:9px}
+  .ref-phone{top:45px;right:0;transform:scale(1.04);transform-origin:right top}
+  .project-banner{height:96px}.ref-project{min-height:200px}.ref-project>p{height:48px;font-size:12px}.project-banner strong{font-size:18px}
+  .ref-post-grid>a{height:190px}.ref-post-grid img{height:96px}.ref-post-grid b{font-size:14px}
+  .ref-focus-grid>div{min-height:86px;padding:15px 13px}
+  .ref-updates,.ref-about{height:202px}.ref-footer{min-height:92px!important}
 }
 
 /* Full article index: every exported post remains directly reachable. */
@@ -116,3 +116,11 @@ main,footer{width:min(1220px,calc(100% - 48px))!important;max-width:none!importa
   .ref-about nav a{min-height:22px!important;width:22px!important}
   .ref-footer{min-height:88px!important}
 }
+
+/* Permanent dark theme: preserve layout while replacing only visual tokens. */
+:root{--bg:#08141b;--paper:#10232b;--ink:#edf5f2;--muted:#a4b7b4;--line:#23424a;--green:#35bd70;--green2:#65d990;--pale:#142c33;--dark:#050d12;--shadow:0 14px 34px rgba(0,0,0,.24)}
+html,body{background:#08141b!important;color:var(--ink)!important}body{background-image:radial-gradient(circle at 82% 10%,rgba(41,162,102,.12),transparent 25%),linear-gradient(180deg,#08141b 0%,#09171d 100%)!important}header{background:rgba(8,20,27,.95)!important;border-bottom-color:#203d45!important}.bar:after{color:#dce9e4!important}.brand,.page-title h1,.section-heading h2,.ref-heading h2,.ref-updates h2,.ref-about h2,.single-head h1.title{color:#eff7f4!important}.brand:before{background:#10232b!important}nav a{color:#c3d1ce!important}nav a:hover{color:var(--green)!important}.page-title p,.ref-lead,.ref-about p,.ref-about span,.about-hero p,.contact-panel p{color:#a7bab6!important}
+.ui-card,.post-card,.project-card,.ref-project,.ref-post-grid>a,.ref-focus-grid>div,.ref-updates,.ref-about,.archive-list h2,.archive-list ul,.single-wrap article,.about-hero,.contact-panel,.about-chip{background:#10232b!important;border-color:#23424a!important;box-shadow:var(--shadow)!important}.project-card h3,.post-card h2 a,.ref-project>p,.ref-post-grid b,.ref-focus-grid b,.ref-updates li a,.archive-list a,.article-index-list .archive-list a{color:#dce8e5!important}.project-card p,.post-card p,.ref-post-grid p,.ref-focus-grid span,.ref-updates time,.ref-updates em,.meta,.archive-list time,.article-index-toolbar a,.article-index-toolbar span{color:#9fb2af!important}
+.tag,.project-tags span,.ref-project i,.article-index-toolbar a,.article-index-toolbar span{background:#142b33!important;border-color:#2a4d54!important;color:#b4cbc3!important}.article-index-toolbar span{color:#77dfa0!important}.ref-badge,.single-head .eyebrow{background:#153229!important;color:#76e19f!important}.ref-hero h1{color:#eff7f4!important}.ref-stats strong,.ref-stats span{color:#e3efeb!important}.ref-stats i{border-color:#2a4d54!important;color:#62d88e!important}.ref-secondary{background:#142b33!important;border-color:#2b4b52!important;color:#e3efeb!important}.ref-project footer{background:transparent!important}.ref-project footer:before{display:none!important}.ref-project,.ref-post-grid>a{box-shadow:0 12px 28px rgba(0,0,0,.2)!important}.project-banner{filter:saturate(.8) brightness(.86)}
+.page-shell,.home-ref{background:transparent!important}.projects-feature{background:linear-gradient(135deg,#0b2630,#06131a)!important}.sidebar .ui-card{background:#10232b!important}.about-hero:before,.contact-panel:before{filter:none}.single-visual,.hero{background:#10232b!important;border-color:#2a4d54!important}.single-wrap article{color:#d8e6e1!important}.single-wrap article p,.single-wrap article li,.single-wrap article td,.single-wrap article dd{color:#d1dfda!important}.single-wrap article strong,.single-wrap article b,.single-wrap article h1,.single-wrap article h2,.single-wrap article h3,.single-wrap article h4{color:#f2f8f6!important}.single-wrap article a{color:#72dc9d!important;text-decoration-color:rgba(114,220,157,.42)!important}.single-wrap article figcaption,.single-wrap article small,.single-wrap article .caption,.single-wrap article .note{color:#9fb2af!important}.single-wrap article blockquote{background:#142b33!important;border-left-color:#40c978!important;color:#d5e7e0!important}.single-wrap article :not(pre)>code{background:#142b33!important;color:#7ce0a4!important}article pre{background:#050d12!important;border:1px solid #24434a}article pre,article pre code{color:#e5f1ec!important}
+footer,.ref-footer{background:#050d12!important;color:#a8bab5!important}.ref-footer{background:linear-gradient(110deg,#050d12,#08212a 64%,#06141a)!important}.ref-footer strong{color:#f2f8f6!important}.ref-footer nav a{color:#c6d4d0!important}.ref-footer p{color:#afc1bc!important}
