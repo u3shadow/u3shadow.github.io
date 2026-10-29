@@ -5,7 +5,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="description" content="没有cicd之前我们都是怎么做的 相信做安卓开发的都做过这些事 手动运行单元测试，根据报错改代码 检查代码风格，根据报错改代码 构建apk包，发给测试，有时候还得打很多个 接收测试的反馈，改bug， 重复之前的步骤 把apk放到ftp或者其他地方去发布 是不是想到这一套流程，头都大了，虽然每一步都不难，但是连起来都手工操作就很繁琐 像这些手动流程固定的事，我...">
   <title>Android项目cicd流程总结（使用jenkins） - u3coding</title>
-  <link rel="canonical" href="https://u3.github.io/posts/2023/04/702-android项目cicd流程总结-使用jenkins/">
   <style>
 
     :root {
@@ -1925,12 +1924,26 @@
     }
 
   </style>
-  <link rel="stylesheet" href="/assets/site/editorial-portfolio.css?v=dark-1">
-</head>
-<body>
-<header><div class="bar"><a class="brand" href="/">u3coding</a><p class="site-bio">Android, AI, tooling, and engineering notes.</p><nav><a href="/">首页</a><a href="/projects/">项目</a><a href="/articles/">文章</a><a href="/archive/">归档</a><a href="/about/">关于</a></nav></div></header>
+  <link rel="stylesheet" href="/assets/site/editorial-portfolio.css?v=20261029-1">
+<!-- site-common -->
+<link rel="canonical" href="https://u3shadow.github.io/posts/2023/04/702-android项目cicd流程总结-使用jenkins/">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="u3coding"><meta property="og:title" content="Android项目cicd流程总结（使用jenkins） - u3coding">
+<meta property="og:description" content="没有cicd之前我们都是怎么做的 相信做安卓开发的都做过这些事 手动运行单元测试，根据报错改代码 检查代码风格，根据报错改代码 构建apk包，发给测试，有时候还得打很多个 接收测试的反馈，改bug， 重复之前的步骤 把apk放到ftp或者其他地方去发布 是不是想到这一套流程，头都大了，虽然每一步都不难，但是连起来都手工操作就很繁琐 像这些手动流程固定的事，我..."><meta property="og:url" content="https://u3shadow.github.io/posts/2023/04/702-android项目cicd流程总结-使用jenkins/">
+<meta property="og:image" content="https://u3shadow.github.io/assets/site/banner.png">
+<script>document.documentElement.classList.add('js');try{document.documentElement.dataset.theme=localStorage.getItem('u3-theme')==='light'?'light':'dark'}catch{document.documentElement.dataset.theme='dark'}</script>
+<link rel="stylesheet" href="/assets/site/site-theme.css?v=20261029-1">
+<script defer src="/assets/site/site.js?v=20261029-1"></script>
 
-<main><div class="single-wrap"><section class="single-head"><p class="eyebrow">技术文章 · 文章 ID 702</p><h1 class="title">Android项目cicd流程总结（使用jenkins）</h1><div class="title-rule"></div><div class="meta">发布于 2023-04-21 16:59 · 已迁移为静态页面</div></section><figure class="hero"><img src="/assets/images/451d9e87e228.png" alt="Android项目cicd流程总结（使用jenkins）"></figure><article><h2 id="h2--cicd-">没有cicd之前我们都是怎么做的</h2><p>相信做安卓开发的都做过这些事</p>
+<!-- /site-common -->
+</head>
+<body><a class="skip-link" href="#main-content">跳至正文</a><header><div class="bar"><a class="brand" href="/">u3coding</a>
+<nav class="primary-nav" id="primary-navigation" aria-label="主导航"><a href="/">首页</a><a href="/projects/">项目</a><a href="/articles/" class="active" aria-current="page">文章</a><a href="/archive/">归档</a><a href="/about/">关于</a></nav>
+<div class="header-tools"><a class="icon-button" href="/articles/#search" aria-label="搜索文章" title="搜索文章"><span class="icon icon-search" aria-hidden="true"></span></a>
+<button type="button" class="icon-button" data-theme-toggle aria-label="切换浅色主题" title="切换浅色主题"><span class="icon icon-sun" aria-hidden="true"></span></button>
+<button type="button" class="icon-button menu-toggle" data-menu-toggle aria-controls="primary-navigation" aria-expanded="false" aria-label="展开导航" title="导航菜单"><span class="icon icon-menu" aria-hidden="true"></span></button></div></div></header>
+
+<main id="main-content"><div class="single-wrap"><section class="single-head"><p class="eyebrow">技术文章 · 文章 ID 702</p><h1 class="title">Android项目cicd流程总结（使用jenkins）</h1><div class="title-rule"></div><div class="meta">发布于 2023-04-21 16:59 · 已迁移为静态页面</div></section><figure class="hero"><img src="/assets/images/451d9e87e228.png" alt="Android项目cicd流程总结（使用jenkins）"></figure><article><h2 id="h2--cicd-">没有cicd之前我们都是怎么做的</h2><p>相信做安卓开发的都做过这些事</p>
 <ol>
 <li>手动运行单元测试，根据报错改代码</li><li>检查代码风格，根据报错改代码</li><li>构建apk包，发给测试，有时候还得打很多个</li><li>接收测试的反馈，改bug，</li><li>重复之前的步骤</li><li>把apk放到ftp或者其他地方去发布</li></ol>
 <p>是不是想到这一套流程，头都大了，虽然每一步都不难，但是连起来都手工操作就很繁琐</p>
@@ -1942,7 +1955,7 @@
 <p>今天我们来通过jenkins来实现上面的几个步骤</p>
 <h2 id="h2--jenkins">安装配置jenkins</h2><p>本文讨论的主要是在windows环境下安装jenkins</p>
 <ol>
-<li>从jenkins官网下载对应的安装包即可</li><li>安装过程很简单但是需要提供一个账号，就像下图显示的界面，这个账号需要有权限<br><img loading="lazy"  src="/assets/images/451d9e87e228.png" alt=""><br>打开开始菜单，搜索<code>本地安全策略</code>，选择<code>本地策略</code>、<code>用户权限分配</code>，在右侧的策略中找到<code>作为服务登录</code>，双击打开。点击<code>添加用户或组</code>，在输入框中填入你的账户的名字，单击<code>检查名称</code>，如果加上了下划线，则说明没有问题，如果输入的用户不存在，则会跳出来一个<code>找不到名称</code>的对话框。<br><img loading="lazy"  src="/assets/images/46cc96252703.png" alt=""></li></ol>
+<li>从jenkins官网下载对应的安装包即可</li><li>安装过程很简单但是需要提供一个账号，就像下图显示的界面，这个账号需要有权限<br><img loading="lazy"  src="/assets/images/451d9e87e228.png" alt="文章配图：Android项目cicd流程总结（使用jenkins）"><br>打开开始菜单，搜索<code>本地安全策略</code>，选择<code>本地策略</code>、<code>用户权限分配</code>，在右侧的策略中找到<code>作为服务登录</code>，双击打开。点击<code>添加用户或组</code>，在输入框中填入你的账户的名字，单击<code>检查名称</code>，如果加上了下划线，则说明没有问题，如果输入的用户不存在，则会跳出来一个<code>找不到名称</code>的对话框。<br><img loading="lazy"  src="/assets/images/46cc96252703.png" alt="文章配图：Android项目cicd流程总结（使用jenkins）"></li></ol>
 <p>这里需要注意一点，windows家庭版默认是没有本地安全策略的，需要用一些技巧把它开启，如下：</p>
 <pre><code>1.  在桌面上单击右键，选择“新建”-&gt;“文本文档”。
 
@@ -1987,20 +2000,20 @@ start ms-settings:speech-microphoneprivacysettings
 <li>修改默认根地址到其他盘符</li></ol>
 <p>默认情况下，jenkins的主目录都是在c盘，如果这样，我们使用中产生的数据都是在c盘，用过windows的都知道，数据放在c盘是很危险也是很让人不爽的一件事，我们可以通过修改jenkins的主目录方法来把数据放到其他盘</p>
 <p>  在成功安装了jenkins并解锁之后，我们可以配置环境变量JENKINS_HOME，地址就是我们想改的目录，</p>
-<p><img loading="lazy"  src="/assets/images/564fbb88d1d3.png" alt=""><br> 然后修改jenkins.xml</p>
+<p><img loading="lazy"  src="/assets/images/564fbb88d1d3.png" alt="文章配图：Android项目cicd流程总结（使用jenkins）"><br> 然后修改jenkins.xml</p>
 <pre><code>    &lt;env name=&quot;JENKINS_HOME&quot; value=&quot;%LocalAppData%\Jenkins.jenkins&quot;/&gt;</code></pre><p>改为</p>
 <pre><code>    &lt;env name=&quot;JENKINS_HOME&quot; value=&quot;E:\jenkins&quot;/&gt;</code></pre><ol start="4">
 <li>配置常用的插件<br>在第一次启动jenkins的时候，会让你选择安装哪些插件，这时候直接选择推荐的插件就好，包含了一些常用插件，比如git等等，如下图</li></ol>
-<figure><img loading="lazy"  src="/assets/images/6117cb6d58bd.png" alt=""></figure>
+<figure><img loading="lazy"  src="/assets/images/6117cb6d58bd.png" alt="文章配图：Android项目cicd流程总结（使用jenkins）"></figure>
 <h2 id="h2--android-">配置针对于android的环境</h2><ol>
-<li><p>android sdk 见下图<br><img loading="lazy"  src="/assets/images/7b0050327bb4.png" alt=""></p>
+<li><p>android sdk 见下图<br><img loading="lazy"  src="/assets/images/7b0050327bb4.png" alt="文章配图：Android项目cicd流程总结（使用jenkins）"></p>
 </li><li><p>gradle – Dashboard -&gt; Manage Jenkins -&gt; Global Tool  Configuration中的Gradle配置gradle路径即可</p>
 </li><li><p>jdk – Dashboard -&gt; Manage Jenkins -&gt; Global Tool  Configuration中的JDK配置jdk路径即可</p>
 </li><li><p>git – Dashboard -&gt; Manage Jenkins -&gt; Global Tool  Configuration中的Git installations配置git路径即可</p>
 <h2 id="h2--android-job-">配置Android的具体job信息</h2><p>新建一个freestyle的item，在里面做以下几步：</p>
 </li><li><p>配置git仓库地址以及构建分支</p>
-</li><li><p>设置构建触发器（定时构建） –  找到构建触发器，勾选build periodically,在编辑框里按照规则设置构建时间，在某天的某个时段自动构建，比如45 9-15/2 * * 1-5，虽然可以提交一次就构建一次，但是不建议这么做。构建表达式的规则见下图，可以根据自己的需要写表达式。<br><img loading="lazy"  src="/assets/images/3107f1cc0631.png" alt=""></p>
-</li><li><p>添加构建步骤，打包出apk，如下图在build step中触发<br><img loading="lazy"  src="/assets/images/13cf8f3f404c.png" alt=""></p>
+</li><li><p>设置构建触发器（定时构建） –  找到构建触发器，勾选build periodically,在编辑框里按照规则设置构建时间，在某天的某个时段自动构建，比如45 9-15/2 * * 1-5，虽然可以提交一次就构建一次，但是不建议这么做。构建表达式的规则见下图，可以根据自己的需要写表达式。<br><img loading="lazy"  src="/assets/images/3107f1cc0631.png" alt="文章配图：Android项目cicd流程总结（使用jenkins）"></p>
+</li><li><p>添加构建步骤，打包出apk，如下图在build step中触发<br><img loading="lazy"  src="/assets/images/13cf8f3f404c.png" alt="文章配图：Android项目cicd流程总结（使用jenkins）"></p>
 </li><li><p>配置构建后步骤，自动把apk包上传到ftp或者其他地方</p>
 <p> 在Jenkins的项目中，选择“构建”-&gt;“增加构建步骤”-&gt;“执行shell”或“执行Windows批处理命令”<br>一个上传ftp的例子</p>
 <pre><code>ftp -n &lt;&lt;EOF
@@ -2017,23 +2030,23 @@ EOF</code></pre></li></ol>
 <h2 id="h2-u914Du7F6Eu5355u5143u6D4Bu8BD5u548Cu4EE3u7801u68C0u67E5">配置单元测试和代码检查</h2><p>我们还需要在运行前执行代码lint检查和单元测试，也需要配插件，插件名字是JUnit和Warnings Next Generation</p>
 <ol>
 <li>参考上面 配置Android的具体job信息 中的配置，添加lint和单元测试的任务</li><li>配置单元测试插件和lint插件，主要指定报告文件的位置,见下图</li></ol>
-<figure><img loading="lazy"  src="/assets/images/d19e1e8c26ce.png" alt=""></figure>
-<figure><img loading="lazy"  src="/assets/images/e43b09da4f3b.png" alt=""></figure>
+<figure><img loading="lazy"  src="/assets/images/d19e1e8c26ce.png" alt="文章配图：Android项目cicd流程总结（使用jenkins）"></figure>
+<figure><img loading="lazy"  src="/assets/images/e43b09da4f3b.png" alt="文章配图：Android项目cicd流程总结（使用jenkins）"></figure>
 <ol start="3">
 <li>把单元测试的结果放到邮件的附件中去，配置见下图,也可以放些别的东西</li></ol>
-<figure><img loading="lazy"  src="/assets/images/488eedf03256.png" alt=""></figure>
+<figure><img loading="lazy"  src="/assets/images/488eedf03256.png" alt="文章配图：Android项目cicd流程总结（使用jenkins）"></figure>
 <h2 id="h2--docker-">一劳永逸，使用docker把上面的配置做到随时随地使用</h2><p>上面的步骤完成之后，我们就能自动构建，上传apk什么的了，但是每次换台机器我们都得再配一次，想下就很累，这时候我们就可以用docker，创建一个容器，把上面这些操作放在容器里面，在新环境里面拉个镜像，创建容器跑起来，就ok啦，关于怎么用docker，就需要大家自己去搜索学习了</p>
-<p>最后放张图吧，jenkins真好用啊<br><img loading="lazy"  src="/assets/images/e24fe39d8525.png" alt=""></p></article></div>
+<p>最后放张图吧，jenkins真好用啊<br><img loading="lazy"  src="/assets/images/e24fe39d8525.png" alt="文章配图：Android项目cicd流程总结（使用jenkins）"></p></article></div>
 </main>
-
-<footer>Generated from local Z-Blog backup for GitHub Pages.</footer>
+<footer class="ref-footer"><div><strong>u3coding</strong><small>© 2014–2026 u3coding</small></div>
+<nav aria-label="页脚导航"><a href="/">首页</a><a href="/projects/">项目</a><a href="/articles/">文章</a><a href="/archive/">归档</a><a href="/about/">关于</a></nav><p><a href="https://github.com/u3shadow">GitHub</a><a href="/feed.xml">RSS</a><a href="#main-content" aria-label="返回正文顶部">↑</a></p></footer>
 <script>
   document.querySelectorAll("img").forEach((img) => {
     const replaceMissingImage = () => {
       const box = document.createElement("div");
       box.className = "image-missing";
       const src = img.currentSrc || img.src || img.getAttribute("src") || "";
-      box.innerHTML = `<strong>Image unavailable</strong><span>This image could not be loaded from the static backup.</span><br><a href="${src}" target="_blank" rel="noreferrer">Open original image URL</a>`;
+      box.innerHTML = `<strong>Image unavailable</strong><span>This image could not be loaded from the static backup.</span><br><a href="${src}" target="_blank" rel="noopener noreferrer">Open original image URL</a>`;
       img.replaceWith(box);
     };
     img.addEventListener("error", replaceMissingImage, { once: true });

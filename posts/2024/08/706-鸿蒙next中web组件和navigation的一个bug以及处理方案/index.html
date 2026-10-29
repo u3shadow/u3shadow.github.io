@@ -5,7 +5,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="description" content="问题现象 在这种情况下，把controller从上层传递到最底层的web页面，用它来打开网页 刚开始一切正常，但是需要执行一些js的时候，就会出现controller未绑定的提示 特别是在连续打开好几个页面之后，从最顶部页面返回，在中间的页面就会出现该问题 例如a-b-c-d,此时从d返回c,再在c页面使用controller执行js方法，就会出现contr...">
   <title>鸿蒙next中web组件和navigation的一个bug以及处理方案 - u3coding</title>
-  <link rel="canonical" href="https://u3.github.io/posts/2024/08/706-鸿蒙next中web组件和navigation的一个bug以及处理方案/">
   <style>
 
     :root {
@@ -1925,17 +1924,31 @@
     }
 
   </style>
-  <link rel="stylesheet" href="/assets/site/editorial-portfolio.css?v=dark-1">
-</head>
-<body>
-<header><div class="bar"><a class="brand" href="/">u3coding</a><p class="site-bio">Android, AI, tooling, and engineering notes.</p><nav><a href="/">首页</a><a href="/projects/">项目</a><a href="/articles/">文章</a><a href="/archive/">归档</a><a href="/about/">关于</a></nav></div></header>
+  <link rel="stylesheet" href="/assets/site/editorial-portfolio.css?v=20261029-1">
+<!-- site-common -->
+<link rel="canonical" href="https://u3shadow.github.io/posts/2024/08/706-鸿蒙next中web组件和navigation的一个bug以及处理方案/">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="u3coding"><meta property="og:title" content="鸿蒙next中web组件和navigation的一个bug以及处理方案 - u3coding">
+<meta property="og:description" content="问题现象 在这种情况下，把controller从上层传递到最底层的web页面，用它来打开网页 刚开始一切正常，但是需要执行一些js的时候，就会出现controller未绑定的提示 特别是在连续打开好几个页面之后，从最顶部页面返回，在中间的页面就会出现该问题 例如a-b-c-d,此时从d返回c,再在c页面使用controller执行js方法，就会出现contr..."><meta property="og:url" content="https://u3shadow.github.io/posts/2024/08/706-鸿蒙next中web组件和navigation的一个bug以及处理方案/">
+<meta property="og:image" content="https://u3shadow.github.io/assets/site/banner.png">
+<script>document.documentElement.classList.add('js');try{document.documentElement.dataset.theme=localStorage.getItem('u3-theme')==='light'?'light':'dark'}catch{document.documentElement.dataset.theme='dark'}</script>
+<link rel="stylesheet" href="/assets/site/site-theme.css?v=20261029-1">
+<script defer src="/assets/site/site.js?v=20261029-1"></script>
 
-<main><div class="single-wrap"><section class="single-head"><p class="eyebrow">技术文章 · 文章 ID 706</p><h1 class="title">鸿蒙next中web组件和navigation的一个bug以及处理方案</h1><div class="title-rule"></div><div class="meta">发布于 2024-08-30 16:10 · 已迁移为静态页面</div></section><figure class="hero"><img src="/assets/images/77671fc1a44b.png" alt="鸿蒙next中web组件和navigation的一个bug以及处理方案"></figure><article><h2 id="h2-u95EEu9898u73B0u8C61">问题现象</h2><p>在这种情况下，把controller从上层传递到最底层的web页面，用它来打开网页</p>
+<!-- /site-common -->
+</head>
+<body><a class="skip-link" href="#main-content">跳至正文</a><header><div class="bar"><a class="brand" href="/">u3coding</a>
+<nav class="primary-nav" id="primary-navigation" aria-label="主导航"><a href="/">首页</a><a href="/projects/">项目</a><a href="/articles/" class="active" aria-current="page">文章</a><a href="/archive/">归档</a><a href="/about/">关于</a></nav>
+<div class="header-tools"><a class="icon-button" href="/articles/#search" aria-label="搜索文章" title="搜索文章"><span class="icon icon-search" aria-hidden="true"></span></a>
+<button type="button" class="icon-button" data-theme-toggle aria-label="切换浅色主题" title="切换浅色主题"><span class="icon icon-sun" aria-hidden="true"></span></button>
+<button type="button" class="icon-button menu-toggle" data-menu-toggle aria-controls="primary-navigation" aria-expanded="false" aria-label="展开导航" title="导航菜单"><span class="icon icon-menu" aria-hidden="true"></span></button></div></div></header>
+
+<main id="main-content"><div class="single-wrap"><section class="single-head"><p class="eyebrow">技术文章 · 文章 ID 706</p><h1 class="title">鸿蒙next中web组件和navigation的一个bug以及处理方案</h1><div class="title-rule"></div><div class="meta">发布于 2024-08-30 16:10 · 已迁移为静态页面</div></section><figure class="hero"><img src="/assets/images/77671fc1a44b.png" alt="鸿蒙next中web组件和navigation的一个bug以及处理方案"></figure><article><h2 id="h2-u95EEu9898u73B0u8C61">问题现象</h2><p>在这种情况下，把controller从上层传递到最底层的web页面，用它来打开网页</p>
 <p>刚开始一切正常，但是需要执行一些js的时候，就会出现controller未绑定的提示</p>
 <p>特别是在连续打开好几个页面之后，从最顶部页面返回，在中间的页面就会出现该问题</p>
 <p>例如a-b-c-d,此时从d返回c,再在c页面使用controller执行js方法，就会出现controller未绑定到webview的提示</p>
 <p>但是此时，controller肯定是绑定过的，出现该问题是不合理的。</p>
-<h2 id="h2-u73B0u8C61u62A5u9519">现象报错</h2><figure><img loading="lazy"  src="/assets/images/77671fc1a44b.png" alt=""></figure>
+<h2 id="h2-u73B0u8C61u62A5u9519">现象报错</h2><figure><img loading="lazy"  src="/assets/images/77671fc1a44b.png" alt="文章配图：鸿蒙next中web组件和navigation的一个bug以及处理方案"></figure>
 <h2 id="h2-u7B80u8981u4EE3u7801">简要代码</h2><p>homepage</p>
 <pre><code>  -HomeNavigation
 </code></pre><p>homenavigation</p>
@@ -1967,15 +1980,15 @@ export let controllers:HashMap&lt;string,web_webview.WebviewController&gt; = new
 <h2 id="h2-u95EEu9898u672Cu8D28">问题本质</h2><p>该问题的本质还是鸿蒙next系统在传递controller的过程中，该对象的绑定状态会丢失，判定为一个系统bug，需要等后续修复。</p>
 <p><strong>本文正在参加华为鸿蒙有奖征文征文活动</strong></p></article></div>
 </main>
-
-<footer>Generated from local Z-Blog backup for GitHub Pages.</footer>
+<footer class="ref-footer"><div><strong>u3coding</strong><small>© 2014–2026 u3coding</small></div>
+<nav aria-label="页脚导航"><a href="/">首页</a><a href="/projects/">项目</a><a href="/articles/">文章</a><a href="/archive/">归档</a><a href="/about/">关于</a></nav><p><a href="https://github.com/u3shadow">GitHub</a><a href="/feed.xml">RSS</a><a href="#main-content" aria-label="返回正文顶部">↑</a></p></footer>
 <script>
   document.querySelectorAll("img").forEach((img) => {
     const replaceMissingImage = () => {
       const box = document.createElement("div");
       box.className = "image-missing";
       const src = img.currentSrc || img.src || img.getAttribute("src") || "";
-      box.innerHTML = `<strong>Image unavailable</strong><span>This image could not be loaded from the static backup.</span><br><a href="${src}" target="_blank" rel="noreferrer">Open original image URL</a>`;
+      box.innerHTML = `<strong>Image unavailable</strong><span>This image could not be loaded from the static backup.</span><br><a href="${src}" target="_blank" rel="noopener noreferrer">Open original image URL</a>`;
       img.replaceWith(box);
     };
     img.addEventListener("error", replaceMissingImage, { once: true });

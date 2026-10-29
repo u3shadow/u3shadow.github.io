@@ -5,7 +5,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="description" content="什么是Paging3 Paging 库可帮助您加载和显示来自本地存储或网络中更大的数据集中的数据页面。此方法可让您的应用更高效地利用网络带宽和系统资源。Paging 库的组件旨在契合推荐的 Android 应用架构，流畅集成其他 Jetpack 组件，并提供一流的 Kotlin 支持。 以上来自安卓官网，简单点来说，就是帮你处理列表分页加载工作的一个官方框架...">
   <title>跟我一起玩Paging3 - u3coding</title>
-  <link rel="canonical" href="https://u3.github.io/posts/2022/10/699-跟我一起玩paging3/">
   <style>
 
     :root {
@@ -1925,12 +1924,26 @@
     }
 
   </style>
-  <link rel="stylesheet" href="/assets/site/editorial-portfolio.css?v=dark-1">
-</head>
-<body>
-<header><div class="bar"><a class="brand" href="/">u3coding</a><p class="site-bio">Android, AI, tooling, and engineering notes.</p><nav><a href="/">首页</a><a href="/projects/">项目</a><a href="/articles/">文章</a><a href="/archive/">归档</a><a href="/about/">关于</a></nav></div></header>
+  <link rel="stylesheet" href="/assets/site/editorial-portfolio.css?v=20261029-1">
+<!-- site-common -->
+<link rel="canonical" href="https://u3shadow.github.io/posts/2022/10/699-跟我一起玩paging3/">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="u3coding"><meta property="og:title" content="跟我一起玩Paging3 - u3coding">
+<meta property="og:description" content="什么是Paging3 Paging 库可帮助您加载和显示来自本地存储或网络中更大的数据集中的数据页面。此方法可让您的应用更高效地利用网络带宽和系统资源。Paging 库的组件旨在契合推荐的 Android 应用架构，流畅集成其他 Jetpack 组件，并提供一流的 Kotlin 支持。 以上来自安卓官网，简单点来说，就是帮你处理列表分页加载工作的一个官方框架..."><meta property="og:url" content="https://u3shadow.github.io/posts/2022/10/699-跟我一起玩paging3/">
+<meta property="og:image" content="https://u3shadow.github.io/assets/site/banner.png">
+<script>document.documentElement.classList.add('js');try{document.documentElement.dataset.theme=localStorage.getItem('u3-theme')==='light'?'light':'dark'}catch{document.documentElement.dataset.theme='dark'}</script>
+<link rel="stylesheet" href="/assets/site/site-theme.css?v=20261029-1">
+<script defer src="/assets/site/site.js?v=20261029-1"></script>
 
-<main><div class="single-wrap"><section class="single-head"><p class="eyebrow">技术文章 · 文章 ID 699</p><h1 class="title">跟我一起玩Paging3</h1><div class="title-rule"></div><div class="meta">发布于 2022-10-08 15:02 · 已迁移为静态页面</div></section><figure class="hero"><img src="/assets/images/13ed647123e1.png" alt="跟我一起玩Paging3"></figure><article><h2 id="h2--paging3">什么是Paging3</h2><blockquote>
+<!-- /site-common -->
+</head>
+<body><a class="skip-link" href="#main-content">跳至正文</a><header><div class="bar"><a class="brand" href="/">u3coding</a>
+<nav class="primary-nav" id="primary-navigation" aria-label="主导航"><a href="/">首页</a><a href="/projects/">项目</a><a href="/articles/" class="active" aria-current="page">文章</a><a href="/archive/">归档</a><a href="/about/">关于</a></nav>
+<div class="header-tools"><a class="icon-button" href="/articles/#search" aria-label="搜索文章" title="搜索文章"><span class="icon icon-search" aria-hidden="true"></span></a>
+<button type="button" class="icon-button" data-theme-toggle aria-label="切换浅色主题" title="切换浅色主题"><span class="icon icon-sun" aria-hidden="true"></span></button>
+<button type="button" class="icon-button menu-toggle" data-menu-toggle aria-controls="primary-navigation" aria-expanded="false" aria-label="展开导航" title="导航菜单"><span class="icon icon-menu" aria-hidden="true"></span></button></div></div></header>
+
+<main id="main-content"><div class="single-wrap"><section class="single-head"><p class="eyebrow">技术文章 · 文章 ID 699</p><h1 class="title">跟我一起玩Paging3</h1><div class="title-rule"></div><div class="meta">发布于 2022-10-08 15:02 · 已迁移为静态页面</div></section><figure class="hero"><img src="/assets/images/13ed647123e1.png" alt="跟我一起玩Paging3"></figure><article><h2 id="h2--paging3">什么是Paging3</h2><blockquote>
 <p>Paging 库可帮助您加载和显示来自本地存储或网络中更大的数据集中的数据页面。此方法可让您的应用更高效地利用网络带宽和系统资源。Paging 库的组件旨在契合推荐的 Android 应用架构，流畅集成其他 Jetpack 组件，并提供一流的 Kotlin 支持。<br>以上来自安卓官网，简单点来说，就是帮你处理列表分页加载工作的一个官方框架，从名字也能看出来。而且已经到达了第三个版本，paging3。</p>
 </blockquote>
 <h2 id="h2--paging3">如何使用Paging3</h2><p>使用paging3总共有以下几个步骤</p>
@@ -1943,17 +1956,17 @@
 <p>但是在换之前，我这里先提几条使用paging3容易遇到的坑，帮助大家综合考量是不是真的要去使用这个工具框架。</p>
 <ol>
 <li>对数据源有一定要求，有时候会提示indexoutofbounds，这种情况需要检查你提供的数据源，而不是adapter</li><li>使用paging3官方教程上需要继承PagingDataAdapter，这个问题可以通过装饰模式来解决，具体可以参考<a href="https://juejin.cn/post/6936889079393058847">这篇文章</a></li><li>paging3的pagingdataadapter虽然提供了refresh方法，但是调用之后数据源并没有获得通知，需要手动调用一次notifyDataSetChanged再去调用refresh才能让列表刷新之后继续触发分页加载，这是一个已知的bug，希望后期得到解决</li><li>paging3的列表中由于写法的原因，对于多种不同item的展示存在一定困难性，如果现在已经有多item逻辑的话，修改起来比较麻烦<h2 id="h2-paging3-">Paging3的原理分析</h2>关于paging3的原理，网上的文章已经很多了，相信大家也不想看到我再重复长篇大论，这里放一张官方架构图给大家</li></ol>
-<p><img loading="lazy"  src="/assets/images/13ed647123e1.png" alt=""><br>简单的总结一下原理就是，数据源把数据放入pager，pager使用flow（kotlin协程提供的对标rxjava的工具）将数据传递到adapter并处理和维护页数，adapter里面再使用DiffUtil.ItemCallback结合上自身的一些api对新来的数据做比对，再进行数据的处理，最后反应到页面上。</p></article></div>
+<p><img loading="lazy"  src="/assets/images/13ed647123e1.png" alt="文章配图：跟我一起玩Paging3"><br>简单的总结一下原理就是，数据源把数据放入pager，pager使用flow（kotlin协程提供的对标rxjava的工具）将数据传递到adapter并处理和维护页数，adapter里面再使用DiffUtil.ItemCallback结合上自身的一些api对新来的数据做比对，再进行数据的处理，最后反应到页面上。</p></article></div>
 </main>
-
-<footer>Generated from local Z-Blog backup for GitHub Pages.</footer>
+<footer class="ref-footer"><div><strong>u3coding</strong><small>© 2014–2026 u3coding</small></div>
+<nav aria-label="页脚导航"><a href="/">首页</a><a href="/projects/">项目</a><a href="/articles/">文章</a><a href="/archive/">归档</a><a href="/about/">关于</a></nav><p><a href="https://github.com/u3shadow">GitHub</a><a href="/feed.xml">RSS</a><a href="#main-content" aria-label="返回正文顶部">↑</a></p></footer>
 <script>
   document.querySelectorAll("img").forEach((img) => {
     const replaceMissingImage = () => {
       const box = document.createElement("div");
       box.className = "image-missing";
       const src = img.currentSrc || img.src || img.getAttribute("src") || "";
-      box.innerHTML = `<strong>Image unavailable</strong><span>This image could not be loaded from the static backup.</span><br><a href="${src}" target="_blank" rel="noreferrer">Open original image URL</a>`;
+      box.innerHTML = `<strong>Image unavailable</strong><span>This image could not be loaded from the static backup.</span><br><a href="${src}" target="_blank" rel="noopener noreferrer">Open original image URL</a>`;
       img.replaceWith(box);
     };
     img.addEventListener("error", replaceMissingImage, { once: true });

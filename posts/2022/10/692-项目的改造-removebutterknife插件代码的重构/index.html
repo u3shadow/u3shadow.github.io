@@ -5,7 +5,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="description" content="前言 这篇文章记述了我的插件RemoveButterKnife的代码改进过程以及思路，关于插件，各位可以看 RemoveButterKnife代码库 ，关于文章，可以看 构思到实现RemoveButterKnife 原因 近期想给原来的插件RemoveButterKnife加入一些新的功能，发现以前的代码没有使用任何的设计模式，全部功能都写在一起，对于新功能...">
   <title>项目的改造——RemoveButterKnife插件代码的重构 - u3coding</title>
-  <link rel="canonical" href="https://u3.github.io/posts/2022/10/692-项目的改造-removebutterknife插件代码的重构/">
   <style>
 
     :root {
@@ -1925,12 +1924,26 @@
     }
 
   </style>
-  <link rel="stylesheet" href="/assets/site/editorial-portfolio.css?v=dark-1">
-</head>
-<body>
-<header><div class="bar"><a class="brand" href="/">u3coding</a><p class="site-bio">Android, AI, tooling, and engineering notes.</p><nav><a href="/">首页</a><a href="/projects/">项目</a><a href="/articles/">文章</a><a href="/archive/">归档</a><a href="/about/">关于</a></nav></div></header>
+  <link rel="stylesheet" href="/assets/site/editorial-portfolio.css?v=20261029-1">
+<!-- site-common -->
+<link rel="canonical" href="https://u3shadow.github.io/posts/2022/10/692-项目的改造-removebutterknife插件代码的重构/">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="u3coding"><meta property="og:title" content="项目的改造——RemoveButterKnife插件代码的重构 - u3coding">
+<meta property="og:description" content="前言 这篇文章记述了我的插件RemoveButterKnife的代码改进过程以及思路，关于插件，各位可以看 RemoveButterKnife代码库 ，关于文章，可以看 构思到实现RemoveButterKnife 原因 近期想给原来的插件RemoveButterKnife加入一些新的功能，发现以前的代码没有使用任何的设计模式，全部功能都写在一起，对于新功能..."><meta property="og:url" content="https://u3shadow.github.io/posts/2022/10/692-项目的改造-removebutterknife插件代码的重构/">
+<meta property="og:image" content="https://u3shadow.github.io/assets/site/banner.png">
+<script>document.documentElement.classList.add('js');try{document.documentElement.dataset.theme=localStorage.getItem('u3-theme')==='light'?'light':'dark'}catch{document.documentElement.dataset.theme='dark'}</script>
+<link rel="stylesheet" href="/assets/site/site-theme.css?v=20261029-1">
+<script defer src="/assets/site/site.js?v=20261029-1"></script>
 
-<main><div class="single-wrap"><section class="single-head"><p class="eyebrow">技术文章 · 文章 ID 692</p><h1 class="title">项目的改造——RemoveButterKnife插件代码的重构</h1><div class="title-rule"></div><div class="meta">发布于 2022-10-08 14:57 · 已迁移为静态页面</div></section><figure class="hero"><img src="/assets/images/e142317ad466.png" alt="项目的改造——RemoveButterKnife插件代码的重构"></figure><article><h2 id="h2-u524Du8A00">前言</h2><p>这篇文章记述了我的插件RemoveButterKnife的代码改进过程以及思路，关于插件，各位可以看<a href="https://github.com/u3shadow/RemoveButterKnife">RemoveButterKnife代码库</a>，关于文章，可以看<a href="http://www.u3coding.com/2016/06/24/androidstudio-plugin-removebutterknife-di/">构思到实现RemoveButterKnife</a></p>
+<!-- /site-common -->
+</head>
+<body><a class="skip-link" href="#main-content">跳至正文</a><header><div class="bar"><a class="brand" href="/">u3coding</a>
+<nav class="primary-nav" id="primary-navigation" aria-label="主导航"><a href="/">首页</a><a href="/projects/">项目</a><a href="/articles/" class="active" aria-current="page">文章</a><a href="/archive/">归档</a><a href="/about/">关于</a></nav>
+<div class="header-tools"><a class="icon-button" href="/articles/#search" aria-label="搜索文章" title="搜索文章"><span class="icon icon-search" aria-hidden="true"></span></a>
+<button type="button" class="icon-button" data-theme-toggle aria-label="切换浅色主题" title="切换浅色主题"><span class="icon icon-sun" aria-hidden="true"></span></button>
+<button type="button" class="icon-button menu-toggle" data-menu-toggle aria-controls="primary-navigation" aria-expanded="false" aria-label="展开导航" title="导航菜单"><span class="icon icon-menu" aria-hidden="true"></span></button></div></div></header>
+
+<main id="main-content"><div class="single-wrap"><section class="single-head"><p class="eyebrow">技术文章 · 文章 ID 692</p><h1 class="title">项目的改造——RemoveButterKnife插件代码的重构</h1><div class="title-rule"></div><div class="meta">发布于 2022-10-08 14:57 · 已迁移为静态页面</div></section><figure class="hero"><img src="/assets/images/e142317ad466.png" alt="项目的改造——RemoveButterKnife插件代码的重构"></figure><article><h2 id="h2-u524Du8A00">前言</h2><p>这篇文章记述了我的插件RemoveButterKnife的代码改进过程以及思路，关于插件，各位可以看<a href="https://github.com/u3shadow/RemoveButterKnife">RemoveButterKnife代码库</a>，关于文章，可以看<a href="http://www.u3coding.com/2016/06/24/androidstudio-plugin-removebutterknife-di/">构思到实现RemoveButterKnife</a></p>
 <h2 id="h2-u539Fu56E0">原因</h2><p>近期想给原来的插件RemoveButterKnife加入一些新的功能，发现以前的代码没有使用任何的设计模式，全部功能都写在一起，对于新功能的添加来说十分糟糕。趁此机会重构了一下代码，在此记录过程。</p>
 <h2 id="h2-u5177u4F53u6B65u9AA4">具体步骤</h2><p>插件主要分为三个部分</p>
 <ol>
@@ -2088,19 +2101,19 @@
             codeContext.executeStrategy(mClass,mFactory);
     }
 }</code></pre><h2 id="h2-u5BF9u6BD4">对比</h2><p>我们可以从重构前/后的目录结构来对比重构的效果</p>
-<p>重构之前<br><img loading="lazy"  src="/assets/images/e142317ad466.png" alt="undefined" title="undefined"></p>
-<p>重构之后<br><img loading="lazy"  src="/assets/images/a959291a2d6b.png" alt="undefined" title="undefined"></p>
+<p>重构之前<br><img loading="lazy"  src="/assets/images/e142317ad466.png" title="undefined" alt="文章配图：项目的改造——RemoveButterKnife插件代码的重构"></p>
+<p>重构之后<br><img loading="lazy"  src="/assets/images/a959291a2d6b.png" title="undefined" alt="文章配图：项目的改造——RemoveButterKnife插件代码的重构"></p>
 <p>可能会有人问了，重构后感觉复杂了很多，但是从逻辑的维度上来说，一个熟悉设计模式的程序员可以很快/方便的阅读重构后的代码，而重构前的代码虽然看起来文件少，但是所有逻辑都在一个文件中，往往会让人无法阅读/理解</p></article></div>
 </main>
-
-<footer>Generated from local Z-Blog backup for GitHub Pages.</footer>
+<footer class="ref-footer"><div><strong>u3coding</strong><small>© 2014–2026 u3coding</small></div>
+<nav aria-label="页脚导航"><a href="/">首页</a><a href="/projects/">项目</a><a href="/articles/">文章</a><a href="/archive/">归档</a><a href="/about/">关于</a></nav><p><a href="https://github.com/u3shadow">GitHub</a><a href="/feed.xml">RSS</a><a href="#main-content" aria-label="返回正文顶部">↑</a></p></footer>
 <script>
   document.querySelectorAll("img").forEach((img) => {
     const replaceMissingImage = () => {
       const box = document.createElement("div");
       box.className = "image-missing";
       const src = img.currentSrc || img.src || img.getAttribute("src") || "";
-      box.innerHTML = `<strong>Image unavailable</strong><span>This image could not be loaded from the static backup.</span><br><a href="${src}" target="_blank" rel="noreferrer">Open original image URL</a>`;
+      box.innerHTML = `<strong>Image unavailable</strong><span>This image could not be loaded from the static backup.</span><br><a href="${src}" target="_blank" rel="noopener noreferrer">Open original image URL</a>`;
       img.replaceWith(box);
     };
     img.addEventListener("error", replaceMissingImage, { once: true });

@@ -5,7 +5,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="description" content="ReomveButterKnife插件 这是一个用于移除代码中对ButterKnife使用的AS插件，接下来我们将从头开始讲讲AS插件开发和这个插件的开发过程 地址是&lt;a href=&quot;https://github.com/u3shadow/RemoveButterKnife&quot; target=&quot;_blank&quot;&gt;RemoveButterKnife&lt;/a&gt; &lt;a...">
   <title>AndroidStudio插件开发——RemoveButterKnife从构思到实现 - u3coding</title>
-  <link rel="canonical" href="https://u3.github.io/posts/2022/10/691-androidstudio插件开发-removebutterknife从构思到实现/">
   <style>
 
     :root {
@@ -1925,16 +1924,30 @@
     }
 
   </style>
-  <link rel="stylesheet" href="/assets/site/editorial-portfolio.css?v=dark-1">
-</head>
-<body>
-<header><div class="bar"><a class="brand" href="/">u3coding</a><p class="site-bio">Android, AI, tooling, and engineering notes.</p><nav><a href="/">首页</a><a href="/projects/">项目</a><a href="/articles/">文章</a><a href="/archive/">归档</a><a href="/about/">关于</a></nav></div></header>
+  <link rel="stylesheet" href="/assets/site/editorial-portfolio.css?v=20261029-1">
+<!-- site-common -->
+<link rel="canonical" href="https://u3shadow.github.io/posts/2022/10/691-androidstudio插件开发-removebutterknife从构思到实现/">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="u3coding"><meta property="og:title" content="AndroidStudio插件开发——RemoveButterKnife从构思到实现 - u3coding">
+<meta property="og:description" content="ReomveButterKnife插件 这是一个用于移除代码中对ButterKnife使用的AS插件，接下来我们将从头开始讲讲AS插件开发和这个插件的开发过程 地址是 RemoveButterKnife"><meta property="og:url" content="https://u3shadow.github.io/posts/2022/10/691-androidstudio插件开发-removebutterknife从构思到实现/">
+<meta property="og:image" content="https://u3shadow.github.io/assets/site/banner.png">
+<script>document.documentElement.classList.add('js');try{document.documentElement.dataset.theme=localStorage.getItem('u3-theme')==='light'?'light':'dark'}catch{document.documentElement.dataset.theme='dark'}</script>
+<link rel="stylesheet" href="/assets/site/site-theme.css?v=20261029-1">
+<script defer src="/assets/site/site.js?v=20261029-1"></script>
 
-<main><div class="single-wrap"><section class="single-head"><p class="eyebrow">技术文章 · 文章 ID 691</p><h1 class="title">AndroidStudio插件开发——RemoveButterKnife从构思到实现</h1><div class="title-rule"></div><div class="meta">发布于 2022-10-08 14:56 · 已迁移为静态页面</div></section><figure class="hero"><img src="/assets/images/1a133fd21363.png" alt="AndroidStudio插件开发——RemoveButterKnife从构思到实现"></figure><article><h2 id="h2-reomvebutterknife-">ReomveButterKnife插件</h2><p>这是一个用于移除代码中对ButterKnife使用的AS插件，接下来我们将从头开始讲讲AS插件开发和这个插件的开发过程<br>地址是&lt;a href=&quot;https://github.com/u3shadow/RemoveButterKnife&quot; target=&quot;_blank&quot;&gt;RemoveButterKnife&lt;/a&gt;<br><img loading="lazy"  src="/assets/images/1a133fd21363.png" alt="undefined" title="undefined"></p>
+<!-- /site-common -->
+</head>
+<body><a class="skip-link" href="#main-content">跳至正文</a><header><div class="bar"><a class="brand" href="/">u3coding</a>
+<nav class="primary-nav" id="primary-navigation" aria-label="主导航"><a href="/">首页</a><a href="/projects/">项目</a><a href="/articles/" class="active" aria-current="page">文章</a><a href="/archive/">归档</a><a href="/about/">关于</a></nav>
+<div class="header-tools"><a class="icon-button" href="/articles/#search" aria-label="搜索文章" title="搜索文章"><span class="icon icon-search" aria-hidden="true"></span></a>
+<button type="button" class="icon-button" data-theme-toggle aria-label="切换浅色主题" title="切换浅色主题"><span class="icon icon-sun" aria-hidden="true"></span></button>
+<button type="button" class="icon-button menu-toggle" data-menu-toggle aria-controls="primary-navigation" aria-expanded="false" aria-label="展开导航" title="导航菜单"><span class="icon icon-menu" aria-hidden="true"></span></button></div></div></header>
+
+<main id="main-content"><div class="single-wrap"><section class="single-head"><p class="eyebrow">技术文章 · 文章 ID 691</p><h1 class="title">AndroidStudio插件开发——RemoveButterKnife从构思到实现</h1><div class="title-rule"></div><div class="meta">发布于 2022-10-08 14:56 · 已迁移为静态页面</div></section><figure class="hero"><img src="/assets/images/1a133fd21363.png" alt="AndroidStudio插件开发——RemoveButterKnife从构思到实现"></figure><article><h2 id="h2-reomvebutterknife-">ReomveButterKnife插件</h2><p>这是一个用于移除代码中对ButterKnife使用的AS插件，接下来我们将从头开始讲讲AS插件开发和这个插件的开发过程<br>地址是&lt;a href=&quot;https://github.com/u3shadow/RemoveButterKnife&quot; target=&quot;_blank&quot;&gt;RemoveButterKnife&lt;/a&gt;<br><img loading="lazy"  src="/assets/images/1a133fd21363.png" title="undefined" alt="文章配图：AndroidStudio插件开发——RemoveButterKnife从构思到实现"></p>
 <h2 id="h2--androidstudio-">什么是AndroidStudio插件</h2><p>相信能开始阅读这篇文章的朋友都是从事，或者有兴趣从事Android开发的，那么，我们现在最常用的开发工具无疑就是AndroidStudio了。</p>
 <p>那么，什么又是AndroidStudio插件呢？</p>
 <p>AndroidStudio虽然是Google公司推出的一款很方便的开发环境，但是在实际的使用中，还是有一些功能是我们需要而它没有的，比如对vim输入方式的支持，这时候，就需要我们在它上面安装各种各样的插件来获得这些额外的功能了。</p>
-<p>通常我们可以在AndroidStudio的右上角找到一个小小的放大镜，点击它，然后搜索plugin，就可以找到插件搜索的界面了，在这里，我们可以搜索到自己想要的插件，当然，这些插件得上传到插件库里才行，这个后面会讲到。<br><img loading="lazy"  src="/assets/images/e0c5c8c36077.png" alt="undefined" title="undefined"><br><img loading="lazy"  src="/assets/images/7926562dddf2.png" alt="undefined" title="undefined"></p>
+<p>通常我们可以在AndroidStudio的右上角找到一个小小的放大镜，点击它，然后搜索plugin，就可以找到插件搜索的界面了，在这里，我们可以搜索到自己想要的插件，当然，这些插件得上传到插件库里才行，这个后面会讲到。<br><img loading="lazy"  src="/assets/images/e0c5c8c36077.png" title="undefined" alt="文章配图：AndroidStudio插件开发——RemoveButterKnife从构思到实现"><br><img loading="lazy"  src="/assets/images/7926562dddf2.png" title="undefined" alt="文章配图：AndroidStudio插件开发——RemoveButterKnife从构思到实现"></p>
 <h2 id="h2-androidstudio-">AndroidStudio插件应该怎么用</h2><p>现在，我们装好了插件，该怎么用呢？这就要视插件的功能而定了，比如，用于支持vim输入的插件————IdeaVim，装上我们就可以开始使用，我们就能在AS里面使用Vim的快捷键和操作了，非常的厉害呢。</p>
 <h2 id="h2-removebutterknife-">RemoveButterKnife插件的设计目的</h2><p>相信大家都听说过大名鼎鼎的ButterKnife,一款用于通过注解绑定View的第三方库，我们一旦用了它，就可以不用写长长的findViewById语句了，用几个注解就可以绑定。</p>
 <p>再配合上AS插件——android butterknife zelezny一起使用，直接从布局自动生成相应的butterknife注解到你的代码里，真是太愉快了。</p>
@@ -1943,14 +1956,14 @@
 <p>2.当我们有一些非常棒的代码需要拿到其他项目使用，但是我们发现，那个项目对第三方库的使用是有限制的，我们不能使用butterknife，这时候，我们又得从注解改回findviewbyid</p>
 <p><strong>针对上面的两种情况，如果view比较少还好说，如果有几十个view，那么我们一个个的手动删除注解，写findviewbyid语句，简直是一场噩梦（别问我为什么知道这是噩梦）</strong></p>
 <p>所以，这种有规律又重复简单的工作为什么不能用一个插件来实现呢？于是RemoveButterKnife的想法就出现在了笔者脑海中。</p>
-<figure><img loading="lazy"  src="/assets/images/7c307f0709ee.gif" alt="undefined" title="undefined"></figure>
+<figure><img loading="lazy"  src="/assets/images/7c307f0709ee.gif" title="undefined" alt="文章配图：AndroidStudio插件开发——RemoveButterKnife从构思到实现"></figure>
 <h2 id="h2-u5F00u53D1u63D2u4EF6u524Du7684u51C6u5907u5DE5u4F5C">开发插件前的准备工作</h2><p>1.要开发插件，我们需要一些工具，由于AS是基于Idea开发的，其实我们开发的插件也是一个idea插件，我们需要去下载一个idea的社区版本，大家只要搜索IntelliJ Idea就可以找到了。</p>
 <p>2.既然是用java做插件开发，肯定要设置好jdk，这个网上的资料更多，大家可以自行搜索。</p>
 <p>有了以上两点，我们的工具就准备完毕了，就可以开始写了。</p>
 <h2 id="h2--101">插件开发101</h2><p>有了想法和工具，我们就可以开始编码了，但是，插件该怎么写呢？</p>
-<p>其实，插件就是一种项目类型，我们新建项目的时候就会发现，有plugin这个类型，我们就新建一个这个类型的项目，中途会选择idea sdk,如果没有我们就新建一个（点击new 然后选择你的idea安装目录就可以了）<br><img loading="lazy"  src="/assets/images/5c7115d68b86.png" alt="undefined" title="undefined"></p>
-<p>现在，我们有了插件项目了，我们点击src目录，这就是我们存放代码的地方，右键，新建一个Action<br><img loading="lazy"  src="/assets/images/4c48a5151666.png" alt="undefined" title="undefined"></p>
-<p>这里会填写一些信息<br><img loading="lazy"  src="/assets/images/bba9cfcfcb16.png" alt="undefined" title="undefined"></p>
+<p>其实，插件就是一种项目类型，我们新建项目的时候就会发现，有plugin这个类型，我们就新建一个这个类型的项目，中途会选择idea sdk,如果没有我们就新建一个（点击new 然后选择你的idea安装目录就可以了）<br><img loading="lazy"  src="/assets/images/5c7115d68b86.png" title="undefined" alt="文章配图：AndroidStudio插件开发——RemoveButterKnife从构思到实现"></p>
+<p>现在，我们有了插件项目了，我们点击src目录，这就是我们存放代码的地方，右键，新建一个Action<br><img loading="lazy"  src="/assets/images/4c48a5151666.png" title="undefined" alt="文章配图：AndroidStudio插件开发——RemoveButterKnife从构思到实现"></p>
+<p>这里会填写一些信息<br><img loading="lazy"  src="/assets/images/bba9cfcfcb16.png" title="undefined" alt="文章配图：AndroidStudio插件开发——RemoveButterKnife从构思到实现"></p>
 <p>完成创建之后，我们的类代码是这样的</p>
 <p>&lt;pre class=&quot;lang:default decode:true &quot; &gt;import com.intellij.openapi.actionSystem.AnAction;<br>import com.intellij.openapi.actionSystem.AnActionEvent;<br><br>public class test extends AnAction {<br><br>    <a href="https://github.com/Override" title="&#64;Override" class="at-link">@Override</a><br>    public void actionPerformed(AnActionEvent e) {<br>        // TODO: insert action logic here<br>    }<br>}&lt;/pre&gt; 
 
@@ -1964,8 +1977,8 @@
 <p>4.生成findviewbyid语句</p>
 <p>5.删除ButterKnife.inject（this）等方法的使用语句</p>
 <p>说完了功能，我们来看一个简单的对比例子，来说明到底是怎样的效果</p>
-<p>整容前：<br><img loading="lazy"  src="/assets/images/f7f3048f23af.png" alt="undefined" title="undefined"></p>
-<p>整容后：<br><img loading="lazy"  src="/assets/images/e8f5fb81553f.png" alt="undefined" title="undefined"></p>
+<p>整容前：<br><img loading="lazy"  src="/assets/images/f7f3048f23af.png" title="undefined" alt="文章配图：AndroidStudio插件开发——RemoveButterKnife从构思到实现"></p>
+<p>整容后：<br><img loading="lazy"  src="/assets/images/e8f5fb81553f.png" title="undefined" alt="文章配图：AndroidStudio插件开发——RemoveButterKnife从构思到实现"></p>
 <h2 id="h2-u5177u4F53u5B9Eu73B0u601Du8DEF">具体实现思路</h2><p>有了上面的功能分析和效果图，想必大家都有了一个比较清晰的了解了，那么我们来从代码层面分析如何实现。</p>
 <p>1.由于import语句都是固定的，我们可以直接匹配，记录行号</p>
 <p>2.因为注解语句有很多种，我们可能需要正则表达式去匹配，并提取id和view的名字信息，并生成一个map,用来对应id和名字以及view的类型，当然，也记录下注解的行号</p>
@@ -1976,19 +1989,19 @@
 <p>1.MainAction         ————  主要用于扫描匹配，记录行号，生成id和name的map</p>
 <p>2.DeleteAction       ————  主要用于删除记录下行号的代码</p>
 <p>3.FindViewByIdWriter ————  用于生成findviewbyid代码</p>
-<p>具体的代码可以在github上面找到<br>地址是&lt;a href=&quot;https://github.com/u3shadow/RemoveButterKnife&quot; target=&quot;_blank&quot;&gt;RemoveButterKnife&lt;/a&gt;<br><img loading="lazy"  src="/assets/images/fa8c7db5f238.png" alt="undefined" title="undefined"></p>
+<p>具体的代码可以在github上面找到<br>地址是&lt;a href=&quot;https://github.com/u3shadow/RemoveButterKnife&quot; target=&quot;_blank&quot;&gt;RemoveButterKnife&lt;/a&gt;<br><img loading="lazy"  src="/assets/images/fa8c7db5f238.png" title="undefined" alt="文章配图：AndroidStudio插件开发——RemoveButterKnife从构思到实现"></p>
 <p>在代码中，使用了一些idea提供的api来获取当前编辑文件的内容，并编辑，这些api都很简单，各位如果想查询的话可以到idea的支持页面上进行查找.</p>
 <h2 id="h2-u628Au4F60u7684u63D2u4EF6u53D1u5E03u51FAu53BB">把你的插件发布出去</h2><p>你可以把你的插件发布到仓库里面去，这样就能在IDE里面找到它了，方法很简单，登陆仓库地址然后注册账号，发布插件等待通过审核即可。<br>&lt;a href=&quot;https://plugins.jetbrains.com/?idea&quot; target=&quot;_blank&quot;&gt;仓库地址&lt;/a&gt;</p></article></div>
 </main>
-
-<footer>Generated from local Z-Blog backup for GitHub Pages.</footer>
+<footer class="ref-footer"><div><strong>u3coding</strong><small>© 2014–2026 u3coding</small></div>
+<nav aria-label="页脚导航"><a href="/">首页</a><a href="/projects/">项目</a><a href="/articles/">文章</a><a href="/archive/">归档</a><a href="/about/">关于</a></nav><p><a href="https://github.com/u3shadow">GitHub</a><a href="/feed.xml">RSS</a><a href="#main-content" aria-label="返回正文顶部">↑</a></p></footer>
 <script>
   document.querySelectorAll("img").forEach((img) => {
     const replaceMissingImage = () => {
       const box = document.createElement("div");
       box.className = "image-missing";
       const src = img.currentSrc || img.src || img.getAttribute("src") || "";
-      box.innerHTML = `<strong>Image unavailable</strong><span>This image could not be loaded from the static backup.</span><br><a href="${src}" target="_blank" rel="noreferrer">Open original image URL</a>`;
+      box.innerHTML = `<strong>Image unavailable</strong><span>This image could not be loaded from the static backup.</span><br><a href="${src}" target="_blank" rel="noopener noreferrer">Open original image URL</a>`;
       img.replaceWith(box);
     };
     img.addEventListener("error", replaceMissingImage, { once: true });

@@ -5,7 +5,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="description" content="先说结论，使用AI 驱动的 Wi-Fi 场景规则生成与执行系统，大幅简化了工具类App的配置使用门槛 原版配置 AI化后的配置 值得重点讲的 5 个问题 规则输入方式怎么从表单升级成自然语言 模型怎么从“会回答”变成“会产出结构化规则” 普通聊天和规则生成为什么必须分流 规则运行为什么要独立成 RuleEngine 规则为什么必须持久化，而不能只存在内存里...">
   <title>从手动配置到自然语言生成规则：一个 Android AI 工具的重构实录 - u3coding</title>
-  <link rel="canonical" href="https://u3.github.io/posts/2026/04/711-从手动配置到自然语言生成规则-一个-android-ai-工具的重构实录/">
   <style>
 
     :root {
@@ -1925,13 +1924,27 @@
     }
 
   </style>
-  <link rel="stylesheet" href="/assets/site/editorial-portfolio.css?v=dark-1">
+  <link rel="stylesheet" href="/assets/site/editorial-portfolio.css?v=20261029-1">
+<!-- site-common -->
+<link rel="canonical" href="https://u3shadow.github.io/posts/2026/04/711-从手动配置到自然语言生成规则-一个-android-ai-工具的重构实录/">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="u3coding"><meta property="og:title" content="从手动配置到自然语言生成规则：一个 Android AI 工具的重构实录 - u3coding">
+<meta property="og:description" content="先说结论，使用AI 驱动的 Wi-Fi 场景规则生成与执行系统，大幅简化了工具类App的配置使用门槛 原版配置 AI化后的配置 值得重点讲的 5 个问题 规则输入方式怎么从表单升级成自然语言 模型怎么从“会回答”变成“会产出结构化规则” 普通聊天和规则生成为什么必须分流 规则运行为什么要独立成 RuleEngine 规则为什么必须持久化，而不能只存在内存里..."><meta property="og:url" content="https://u3shadow.github.io/posts/2026/04/711-从手动配置到自然语言生成规则-一个-android-ai-工具的重构实录/">
+<meta property="og:image" content="https://u3shadow.github.io/assets/site/banner.png">
+<script>document.documentElement.classList.add('js');try{document.documentElement.dataset.theme=localStorage.getItem('u3-theme')==='light'?'light':'dark'}catch{document.documentElement.dataset.theme='dark'}</script>
+<link rel="stylesheet" href="/assets/site/site-theme.css?v=20261029-1">
+<script defer src="/assets/site/site.js?v=20261029-1"></script>
+<script type="module" src="/assets/site/diagrams.js?v=20261029-1"></script>
+<!-- /site-common -->
 </head>
-<body>
-<header><div class="bar"><a class="brand" href="/">u3coding</a><p class="site-bio">Android, AI, tooling, and engineering notes.</p><nav><a href="/">首页</a><a href="/projects/">项目</a><a href="/articles/">文章</a><a href="/archive/">归档</a><a href="/about/">关于</a></nav></div></header>
+<body><a class="skip-link" href="#main-content">跳至正文</a><header><div class="bar"><a class="brand" href="/">u3coding</a>
+<nav class="primary-nav" id="primary-navigation" aria-label="主导航"><a href="/">首页</a><a href="/projects/">项目</a><a href="/articles/" class="active" aria-current="page">文章</a><a href="/archive/">归档</a><a href="/about/">关于</a></nav>
+<div class="header-tools"><a class="icon-button" href="/articles/#search" aria-label="搜索文章" title="搜索文章"><span class="icon icon-search" aria-hidden="true"></span></a>
+<button type="button" class="icon-button" data-theme-toggle aria-label="切换浅色主题" title="切换浅色主题"><span class="icon icon-sun" aria-hidden="true"></span></button>
+<button type="button" class="icon-button menu-toggle" data-menu-toggle aria-controls="primary-navigation" aria-expanded="false" aria-label="展开导航" title="导航菜单"><span class="icon icon-menu" aria-hidden="true"></span></button></div></div></header>
 
-<main><div class="single-wrap"><section class="single-head"><p class="eyebrow">技术文章 · 文章 ID 711</p><h1 class="title">从手动配置到自然语言生成规则：一个 Android AI 工具的重构实录</h1><div class="title-rule"></div><div class="meta">发布于 2026-04-22 13:43 · 已迁移为静态页面</div></section><figure class="single-visual"><img src="/assets/images/711-cover.webp" alt="从手动配置到自然语言生成规则：一个 Android AI 工具的重构实录"></figure><article><figure><img src="/assets/images/711-cover.webp" alt="从手动配置到自然语言生成规则：一个 Android AI 工具的重构实录"><figcaption>从手动配置到自然语言生成规则：Android AI 工具重构概览</figcaption></figure>
-<h1 id="h1--ai-wi-fi-app-">先说结论，使用AI 驱动的 Wi-Fi 场景规则生成与执行系统，大幅简化了工具类App的配置使用门槛</h1><p>原版配置<br></p>
+<main id="main-content"><div class="single-wrap"><section class="single-head"><p class="eyebrow">技术文章 · 文章 ID 711</p><h1 class="title">从手动配置到自然语言生成规则：一个 Android AI 工具的重构实录</h1><div class="title-rule"></div><div class="meta">发布于 2026-04-22 13:43 · 已迁移为静态页面</div></section><figure class="single-visual"><img src="/assets/images/711-cover.webp" alt="从手动配置到自然语言生成规则：一个 Android AI 工具的重构实录"></figure><article><figure><img src="/assets/images/711-cover.webp" alt="从手动配置到自然语言生成规则：一个 Android AI 工具的重构实录"><figcaption>从手动配置到自然语言生成规则：Android AI 工具重构概览</figcaption></figure>
+<h2 id="h1--ai-wi-fi-app-">先说结论，使用AI 驱动的 Wi-Fi 场景规则生成与执行系统，大幅简化了工具类App的配置使用门槛</h2><p>原版配置<br></p>
 <figure><img src="/assets/images/711-original-config.webp" alt="原版手动配置界面"><figcaption>原版配置：需要手动选择场景和各项开关/数值</figcaption></figure>
 <p>AI化后的配置<br></p>
 <figure><img src="/assets/images/711-ai-config.webp" alt="AI 化后的配置界面"><figcaption>AI 化后的配置：通过自然语言生成并保存规则</figcaption></figure>
@@ -2107,15 +2120,15 @@ P --&gt; Q[写回指令上下文]
 </blockquote>
 <p><a href="https://github.com/u3shadow/ShaverAI.git">完整的代码可以点这里移步我的github查看</a></p></article></div>
 </main>
-
-<footer>Generated from local Z-Blog backup for GitHub Pages.</footer>
+<footer class="ref-footer"><div><strong>u3coding</strong><small>© 2014–2026 u3coding</small></div>
+<nav aria-label="页脚导航"><a href="/">首页</a><a href="/projects/">项目</a><a href="/articles/">文章</a><a href="/archive/">归档</a><a href="/about/">关于</a></nav><p><a href="https://github.com/u3shadow">GitHub</a><a href="/feed.xml">RSS</a><a href="#main-content" aria-label="返回正文顶部">↑</a></p></footer>
 <script>
   document.querySelectorAll("img").forEach((img) => {
     const replaceMissingImage = () => {
       const box = document.createElement("div");
       box.className = "image-missing";
       const src = img.currentSrc || img.src || img.getAttribute("src") || "";
-      box.innerHTML = `<strong>Image unavailable</strong><span>This image could not be loaded from the static backup.</span><br><a href="${src}" target="_blank" rel="noreferrer">Open original image URL</a>`;
+      box.innerHTML = `<strong>Image unavailable</strong><span>This image could not be loaded from the static backup.</span><br><a href="${src}" target="_blank" rel="noopener noreferrer">Open original image URL</a>`;
       img.replaceWith(box);
     };
     img.addEventListener("error", replaceMissingImage, { once: true });
@@ -2123,33 +2136,7 @@ P --&gt; Q[写回指令上下文]
   });
 </script>
 
-<script type="module">
-  import mermaid from "https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.esm.min.mjs";
-  mermaid.initialize({
-    startOnLoad: false,
-    securityLevel: "loose",
-    theme: "base",
-    themeVariables: {
-      primaryColor: "#e8f6f3",
-      primaryTextColor: "#1f2937",
-      primaryBorderColor: "#0f766e",
-      lineColor: "#64748b",
-      tertiaryColor: "#f8fafc",
-      fontFamily: "-apple-system, BlinkMacSystemFont, Segoe UI, PingFang SC, Microsoft YaHei, sans-serif"
-    }
-  });
-  document.querySelectorAll("pre > code.language-mermaid").forEach((code, index) => {
-    const wrapper = document.createElement("div");
-    wrapper.className = "mermaid-wrap";
-    const graph = document.createElement("div");
-    graph.className = "mermaid";
-    graph.id = `mermaid-${index + 1}`;
-    graph.textContent = code.textContent.trim();
-    wrapper.appendChild(graph);
-    code.closest("pre").replaceWith(wrapper);
-  });
-  await mermaid.run({ querySelector: ".mermaid" });
-</script>
+
 
 </body>
 </html>

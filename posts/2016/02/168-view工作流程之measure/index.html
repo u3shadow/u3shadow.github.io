@@ -5,7 +5,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="description" content="view的几个工作流程 measure 负责测量控件以及子控件的尺寸信息 layout 负责布局 draw 负责绘制 measure流程的分类 我们知道，view可以分为两种类型，view以及viewgroup。 view的典型例子就是我们常见的TextView, ImageView等， viewgroup指拥有子元素的布局，常见的就是我们熟悉的各种layo...">
   <title>View工作流程之Measure - u3coding</title>
-  <link rel="canonical" href="https://u3.github.io/posts/2016/02/168-view工作流程之measure/">
   <style>
 
     :root {
@@ -1925,12 +1924,26 @@
     }
 
   </style>
-  <link rel="stylesheet" href="/assets/site/editorial-portfolio.css?v=dark-1">
-</head>
-<body>
-<header><div class="bar"><a class="brand" href="/">u3coding</a><p class="site-bio">Android, AI, tooling, and engineering notes.</p><nav><a href="/">首页</a><a href="/projects/">项目</a><a href="/articles/">文章</a><a href="/archive/">归档</a><a href="/about/">关于</a></nav></div></header>
+  <link rel="stylesheet" href="/assets/site/editorial-portfolio.css?v=20261029-1">
+<!-- site-common -->
+<link rel="canonical" href="https://u3shadow.github.io/posts/2016/02/168-view工作流程之measure/">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="u3coding"><meta property="og:title" content="View工作流程之Measure - u3coding">
+<meta property="og:description" content="view的几个工作流程 measure 负责测量控件以及子控件的尺寸信息 layout 负责布局 draw 负责绘制 measure流程的分类 我们知道，view可以分为两种类型，view以及viewgroup。 view的典型例子就是我们常见的TextView, ImageView等， viewgroup指拥有子元素的布局，常见的就是我们熟悉的各种layo..."><meta property="og:url" content="https://u3shadow.github.io/posts/2016/02/168-view工作流程之measure/">
+<meta property="og:image" content="https://u3shadow.github.io/assets/site/banner.png">
+<script>document.documentElement.classList.add('js');try{document.documentElement.dataset.theme=localStorage.getItem('u3-theme')==='light'?'light':'dark'}catch{document.documentElement.dataset.theme='dark'}</script>
+<link rel="stylesheet" href="/assets/site/site-theme.css?v=20261029-1">
+<script defer src="/assets/site/site.js?v=20261029-1"></script>
 
-<main><div class="single-wrap"><section class="single-head"><p class="eyebrow">未分类 · 文章 ID 168</p><h1 class="title">View工作流程之Measure</h1><div class="title-rule"></div><div class="meta">发布于 2016-02-16 11:29 · 已迁移为静态页面</div></section><figure class="hero"><img src="/assets/images/5560158ebd5b.png" alt="View工作流程之Measure"></figure><article><h1>view的几个工作流程</h1>
+<!-- /site-common -->
+</head>
+<body><a class="skip-link" href="#main-content">跳至正文</a><header><div class="bar"><a class="brand" href="/">u3coding</a>
+<nav class="primary-nav" id="primary-navigation" aria-label="主导航"><a href="/">首页</a><a href="/projects/">项目</a><a href="/articles/" class="active" aria-current="page">文章</a><a href="/archive/">归档</a><a href="/about/">关于</a></nav>
+<div class="header-tools"><a class="icon-button" href="/articles/#search" aria-label="搜索文章" title="搜索文章"><span class="icon icon-search" aria-hidden="true"></span></a>
+<button type="button" class="icon-button" data-theme-toggle aria-label="切换浅色主题" title="切换浅色主题"><span class="icon icon-sun" aria-hidden="true"></span></button>
+<button type="button" class="icon-button menu-toggle" data-menu-toggle aria-controls="primary-navigation" aria-expanded="false" aria-label="展开导航" title="导航菜单"><span class="icon icon-menu" aria-hidden="true"></span></button></div></div></header>
+
+<main id="main-content"><div class="single-wrap"><section class="single-head"><p class="eyebrow">未分类 · 文章 ID 168</p><h1 class="title">View工作流程之Measure</h1><div class="title-rule"></div><div class="meta">发布于 2016-02-16 11:29 · 已迁移为静态页面</div></section><figure class="hero"><img src="/assets/images/5560158ebd5b.png" alt="View工作流程之Measure"></figure><article><h2>view的几个工作流程</h2>
 
 <ul>
 <li>measure 负责测量控件以及子控件的尺寸信息</li>
@@ -1938,7 +1951,7 @@
 <li>draw 负责绘制</li>
 </ul>
 
-<h1>measure流程的分类</h1>
+<h2>measure流程的分类</h2>
 
 我们知道，view可以分为两种类型，view以及viewgroup。
 
@@ -1947,7 +1960,7 @@ viewgroup指拥有子元素的布局，常见的就是我们熟悉的各种layou
 
 根据类型的不同，其measure流程也有不同。
 
-<h1>View的measure流程</h1>
+<h2>View的measure流程</h2>
 
 首先会调用view内部一个名叫measure的final方法，这个方法由于是final的，我们不能复写，但是其中调用了一个名叫onMeasure的方法，这是我们可以复写的。
 
@@ -1966,13 +1979,13 @@ setMeasureDimension方法会根据spaceMode和spacSize来确定大小，这两�
 
 如何获取默认值呢？这根据View的类型有所不同，有的View有默认值，有的View没有，正如书上所讲的一个例子，ShapeDrawable没有默认值，而BitmapDrawable有默认值。
 
-<h1>ViewGroup的measure流程</h1>
+<h2>ViewGroup的measure流程</h2>
 
 在ViewGroup中，并没有重写onMeasure方法，但是有一个measureChildren方法，在该方法中会对每一个子元素进行measure。
 
 在不同的ViewGroup子类中由于布局方式不同，所以onMeasure的实现也有所不同，所以ViewGroup并未对onMeasure方法做统一的实现。
 
-<h1>measure过程和activity的生命周期并不是同步的</h1>
+<h2>measure过程和activity的生命周期并不是同步的</h2>
 
 由于measure的过程和activity的生命周期并不是同步的，所以我们用一般的方法是不能在view还没有measure完毕之前在activity中获取其高度等信息的，如何解决呢，这里作者给出了四种方法。
 
@@ -1981,15 +1994,15 @@ setMeasureDimension方法会根据spaceMode和spacSize来确定大小，这两�
 3.ViewTreeObserver的回调onGlobalLayout()方法
 4.在View.measure中测量，但是此方法受到layoutparam的限制，在match_parent时无法使用</article></div>
 </main>
-
-<footer>Generated from local Z-Blog backup for GitHub Pages.</footer>
+<footer class="ref-footer"><div><strong>u3coding</strong><small>© 2014–2026 u3coding</small></div>
+<nav aria-label="页脚导航"><a href="/">首页</a><a href="/projects/">项目</a><a href="/articles/">文章</a><a href="/archive/">归档</a><a href="/about/">关于</a></nav><p><a href="https://github.com/u3shadow">GitHub</a><a href="/feed.xml">RSS</a><a href="#main-content" aria-label="返回正文顶部">↑</a></p></footer>
 <script>
   document.querySelectorAll("img").forEach((img) => {
     const replaceMissingImage = () => {
       const box = document.createElement("div");
       box.className = "image-missing";
       const src = img.currentSrc || img.src || img.getAttribute("src") || "";
-      box.innerHTML = `<strong>Image unavailable</strong><span>This image could not be loaded from the static backup.</span><br><a href="${src}" target="_blank" rel="noreferrer">Open original image URL</a>`;
+      box.innerHTML = `<strong>Image unavailable</strong><span>This image could not be loaded from the static backup.</span><br><a href="${src}" target="_blank" rel="noopener noreferrer">Open original image URL</a>`;
       img.replaceWith(box);
     };
     img.addEventListener("error", replaceMissingImage, { once: true });

@@ -5,7 +5,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="description" content="需求分析与实现规划 引子 前段时间看到了豆瓣FM的音乐播放界面，有一个环形的进度条，非常的好看，于是想了想，为什么不自己做一个呢，于是就开始了自定义的过程 豆瓣FM的播放界面如下图： 功能分析 虽然功能比较简单，但是仍然需要仔细分析 1.图标外还有一圈圆圈，可以设置宽度 2.圆形进度条和进度条底部，可以设置宽度，颜色等 3.内部有一个圆形图片，可旋转 实现思...">
   <title>自定义View实践——环形进度条的设计与实现分析 - u3coding</title>
-  <link rel="canonical" href="https://u3.github.io/posts/2016/03/293-自定义view实践-环形进度条的设计与实现分析/">
   <style>
 
     :root {
@@ -1925,18 +1924,32 @@
     }
 
   </style>
-  <link rel="stylesheet" href="/assets/site/editorial-portfolio.css?v=dark-1">
-</head>
-<body>
-<header><div class="bar"><a class="brand" href="/">u3coding</a><p class="site-bio">Android, AI, tooling, and engineering notes.</p><nav><a href="/">首页</a><a href="/projects/">项目</a><a href="/articles/">文章</a><a href="/archive/">归档</a><a href="/about/">关于</a></nav></div></header>
+  <link rel="stylesheet" href="/assets/site/editorial-portfolio.css?v=20261029-1">
+<!-- site-common -->
+<link rel="canonical" href="https://u3shadow.github.io/posts/2016/03/293-自定义view实践-环形进度条的设计与实现分析/">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="u3coding"><meta property="og:title" content="自定义View实践——环形进度条的设计与实现分析 - u3coding">
+<meta property="og:description" content="需求分析与实现规划 引子 前段时间看到了豆瓣FM的音乐播放界面，有一个环形的进度条，非常的好看，于是想了想，为什么不自己做一个呢，于是就开始了自定义的过程 豆瓣FM的播放界面如下图： 功能分析 虽然功能比较简单，但是仍然需要仔细分析 1.图标外还有一圈圆圈，可以设置宽度 2.圆形进度条和进度条底部，可以设置宽度，颜色等 3.内部有一个圆形图片，可旋转 实现思..."><meta property="og:url" content="https://u3shadow.github.io/posts/2016/03/293-自定义view实践-环形进度条的设计与实现分析/">
+<meta property="og:image" content="https://u3shadow.github.io/assets/site/banner.png">
+<script>document.documentElement.classList.add('js');try{document.documentElement.dataset.theme=localStorage.getItem('u3-theme')==='light'?'light':'dark'}catch{document.documentElement.dataset.theme='dark'}</script>
+<link rel="stylesheet" href="/assets/site/site-theme.css?v=20261029-1">
+<script defer src="/assets/site/site.js?v=20261029-1"></script>
 
-<main><div class="single-wrap"><section class="single-head"><p class="eyebrow">未分类 · 文章 ID 293</p><h1 class="title">自定义View实践——环形进度条的设计与实现分析</h1><div class="title-rule"></div><div class="meta">发布于 2016-03-22 17:34 · 已迁移为静态页面</div></section><figure class="hero"><img src="/assets/images/bbb47a670a51.png" alt="自定义View实践——环形进度条的设计与实现分析"></figure><article><h2>需求分析与实现规划</h2>
+<!-- /site-common -->
+</head>
+<body><a class="skip-link" href="#main-content">跳至正文</a><header><div class="bar"><a class="brand" href="/">u3coding</a>
+<nav class="primary-nav" id="primary-navigation" aria-label="主导航"><a href="/">首页</a><a href="/projects/">项目</a><a href="/articles/" class="active" aria-current="page">文章</a><a href="/archive/">归档</a><a href="/about/">关于</a></nav>
+<div class="header-tools"><a class="icon-button" href="/articles/#search" aria-label="搜索文章" title="搜索文章"><span class="icon icon-search" aria-hidden="true"></span></a>
+<button type="button" class="icon-button" data-theme-toggle aria-label="切换浅色主题" title="切换浅色主题"><span class="icon icon-sun" aria-hidden="true"></span></button>
+<button type="button" class="icon-button menu-toggle" data-menu-toggle aria-controls="primary-navigation" aria-expanded="false" aria-label="展开导航" title="导航菜单"><span class="icon icon-menu" aria-hidden="true"></span></button></div></div></header>
+
+<main id="main-content"><div class="single-wrap"><section class="single-head"><p class="eyebrow">未分类 · 文章 ID 293</p><h1 class="title">自定义View实践——环形进度条的设计与实现分析</h1><div class="title-rule"></div><div class="meta">发布于 2016-03-22 17:34 · 已迁移为静态页面</div></section><figure class="hero"><img src="/assets/images/bbb47a670a51.png" alt="自定义View实践——环形进度条的设计与实现分析"></figure><article><h2>需求分析与实现规划</h2>
 
 <h3>引子</h3>
 
 前段时间看到了豆瓣FM的音乐播放界面，有一个环形的进度条，非常的好看，于是想了想，为什么不自己做一个呢，于是就开始了自定义的过程
 豆瓣FM的播放界面如下图：
-<img loading="lazy"  src="/assets/images/bbb47a670a51.png" alt="" width = "400" height = "300"/>
+<img loading="lazy"  src="/assets/images/bbb47a670a51.png" width = "400" height = "300"/ alt="文章配图：自定义View实践——环形进度条的设计与实现分析">
 
 <h3>功能分析</h3>
 
@@ -1971,7 +1984,7 @@
 说了这么多，那么最后的效果是怎样的呢？毕竟空口无凭，在进入代码展示的环节之前还是看看最后的效果吧。
 这是我自己做的一个定时锁屏的项目，地址是<a href="https://github.com/u3shadow/DontDistraction">这里是地址</a>
 这是这个项目运行锁屏的时候的动图（大家都喜欢动图）
-<img loading="lazy"  src="/assets/images/0d23d41c2651.gif" alt="" />
+<img loading="lazy"  src="/assets/images/0d23d41c2651.gif" / alt="文章配图：自定义View实践——环形进度条的设计与实现分析">
 
 <h2>代码实现</h2>
 
@@ -2247,15 +2260,15 @@ MyProgress
 3.对于自定义View中几个关键点的坐标，应该用一个比较简单易懂的表达式表示，否则做到后期会搞混淆，而陷入坐标的泥潭之中
 4.某些看起来很厉害的效果只要合理分析，分步实现，并不会很难</article></div>
 </main>
-
-<footer>Generated from local Z-Blog backup for GitHub Pages.</footer>
+<footer class="ref-footer"><div><strong>u3coding</strong><small>© 2014–2026 u3coding</small></div>
+<nav aria-label="页脚导航"><a href="/">首页</a><a href="/projects/">项目</a><a href="/articles/">文章</a><a href="/archive/">归档</a><a href="/about/">关于</a></nav><p><a href="https://github.com/u3shadow">GitHub</a><a href="/feed.xml">RSS</a><a href="#main-content" aria-label="返回正文顶部">↑</a></p></footer>
 <script>
   document.querySelectorAll("img").forEach((img) => {
     const replaceMissingImage = () => {
       const box = document.createElement("div");
       box.className = "image-missing";
       const src = img.currentSrc || img.src || img.getAttribute("src") || "";
-      box.innerHTML = `<strong>Image unavailable</strong><span>This image could not be loaded from the static backup.</span><br><a href="${src}" target="_blank" rel="noreferrer">Open original image URL</a>`;
+      box.innerHTML = `<strong>Image unavailable</strong><span>This image could not be loaded from the static backup.</span><br><a href="${src}" target="_blank" rel="noopener noreferrer">Open original image URL</a>`;
       img.replaceWith(box);
     };
     img.addEventListener("error", replaceMissingImage, { once: true });

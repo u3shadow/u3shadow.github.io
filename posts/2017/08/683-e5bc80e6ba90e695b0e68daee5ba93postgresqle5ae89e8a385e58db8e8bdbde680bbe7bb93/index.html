@@ -5,7 +5,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="description" content="What Postgresql 一个开源数据库，类似mysql,由于mysql被收购了，这个数据库正被越来越多的使用 怎么安装？ 安装非常简单，但是安装过后的初始化还是有点麻烦，具体可以看 这篇文章 为什么要卸载？ 安装好之后，如果你很倒霉的话，会遇到postgresql服务怎么都启动不了，输入psql指令显示没有服务的情况。 这时候，我们首先会使用apt-...">
   <title>开源数据库Postgresql安装/卸载总结 - u3coding</title>
-  <link rel="canonical" href="https://u3.github.io/posts/2017/08/683-e5bc80e6ba90e695b0e68daee5ba93postgresqle5ae89e8a385e58db8e8bdbde680bbe7bb93/">
   <style>
 
     :root {
@@ -1925,23 +1924,37 @@
     }
 
   </style>
-  <link rel="stylesheet" href="/assets/site/editorial-portfolio.css?v=dark-1">
-</head>
-<body>
-<header><div class="bar"><a class="brand" href="/">u3coding</a><p class="site-bio">Android, AI, tooling, and engineering notes.</p><nav><a href="/">首页</a><a href="/projects/">项目</a><a href="/articles/">文章</a><a href="/archive/">归档</a><a href="/about/">关于</a></nav></div></header>
+  <link rel="stylesheet" href="/assets/site/editorial-portfolio.css?v=20261029-1">
+<!-- site-common -->
+<link rel="canonical" href="https://u3shadow.github.io/posts/2017/08/683-e5bc80e6ba90e695b0e68daee5ba93postgresqle5ae89e8a385e58db8e8bdbde680bbe7bb93/">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="u3coding"><meta property="og:title" content="开源数据库Postgresql安装/卸载总结 - u3coding">
+<meta property="og:description" content="What Postgresql 一个开源数据库，类似mysql,由于mysql被收购了，这个数据库正被越来越多的使用 怎么安装？ 安装非常简单，但是安装过后的初始化还是有点麻烦，具体可以看 这篇文章 为什么要卸载？ 安装好之后，如果你很倒霉的话，会遇到postgresql服务怎么都启动不了，输入psql指令显示没有服务的情况。 这时候，我们首先会使用apt-..."><meta property="og:url" content="https://u3shadow.github.io/posts/2017/08/683-e5bc80e6ba90e695b0e68daee5ba93postgresqle5ae89e8a385e58db8e8bdbde680bbe7bb93/">
+<meta property="og:image" content="https://u3shadow.github.io/assets/site/banner.png">
+<script>document.documentElement.classList.add('js');try{document.documentElement.dataset.theme=localStorage.getItem('u3-theme')==='light'?'light':'dark'}catch{document.documentElement.dataset.theme='dark'}</script>
+<link rel="stylesheet" href="/assets/site/site-theme.css?v=20261029-1">
+<script defer src="/assets/site/site.js?v=20261029-1"></script>
 
-<main><div class="single-wrap"><section class="single-head"><p class="eyebrow">技术文章 · 文章 ID 683</p><h1 class="title">开源数据库Postgresql安装/卸载总结</h1><div class="title-rule"></div><div class="meta">发布于 2017-08-27 18:24 · 已迁移为静态页面</div></section><article><h2 id="h2-what-postgresql">What Postgresql</h2><h2 id="h2--mysql-mysql-">一个开源数据库，类似mysql,由于mysql被收购了，这个数据库正被越来越多的使用 怎么安装？</h2><h2 id="h2--">安装非常简单，但是安装过后的初始化还是有点麻烦，具体可以看<a href="http://www.ruanyifeng.com/blog/2013/12/getting_started_with_postgresql.html">这篇文章</a>为什么要卸载？</h2><h2 id="h2--postgresql-psql-apt-get-remove-postgresql-">安装好之后，如果你很倒霉的话，会遇到postgresql服务怎么都启动不了，输入psql指令显示没有服务的情况。 这时候，我们首先会使用apt-get remove postgresql删除软件，再重装，可不幸的是，这样是不行的！ 怎么彻底删除？</h2><p>遇到这种奇怪问题的不只一个人，所以我再stackoverflow找到了答案，下面就搬运过来，记录一下。 步骤如下 ```</p>
+<!-- /site-common -->
+</head>
+<body><a class="skip-link" href="#main-content">跳至正文</a><header><div class="bar"><a class="brand" href="/">u3coding</a>
+<nav class="primary-nav" id="primary-navigation" aria-label="主导航"><a href="/">首页</a><a href="/projects/">项目</a><a href="/articles/" class="active" aria-current="page">文章</a><a href="/archive/">归档</a><a href="/about/">关于</a></nav>
+<div class="header-tools"><a class="icon-button" href="/articles/#search" aria-label="搜索文章" title="搜索文章"><span class="icon icon-search" aria-hidden="true"></span></a>
+<button type="button" class="icon-button" data-theme-toggle aria-label="切换浅色主题" title="切换浅色主题"><span class="icon icon-sun" aria-hidden="true"></span></button>
+<button type="button" class="icon-button menu-toggle" data-menu-toggle aria-controls="primary-navigation" aria-expanded="false" aria-label="展开导航" title="导航菜单"><span class="icon icon-menu" aria-hidden="true"></span></button></div></div></header>
+
+<main id="main-content"><div class="single-wrap"><section class="single-head"><p class="eyebrow">技术文章 · 文章 ID 683</p><h1 class="title">开源数据库Postgresql安装/卸载总结</h1><div class="title-rule"></div><div class="meta">发布于 2017-08-27 18:24 · 已迁移为静态页面</div></section><article><h2 id="h2-what-postgresql">What Postgresql</h2><h2 id="h2--mysql-mysql-">一个开源数据库，类似mysql,由于mysql被收购了，这个数据库正被越来越多的使用 怎么安装？</h2><h2 id="h2--">安装非常简单，但是安装过后的初始化还是有点麻烦，具体可以看<a href="http://www.ruanyifeng.com/blog/2013/12/getting_started_with_postgresql.html">这篇文章</a>为什么要卸载？</h2><h2 id="h2--postgresql-psql-apt-get-remove-postgresql-">安装好之后，如果你很倒霉的话，会遇到postgresql服务怎么都启动不了，输入psql指令显示没有服务的情况。 这时候，我们首先会使用apt-get remove postgresql删除软件，再重装，可不幸的是，这样是不行的！ 怎么彻底删除？</h2><p>遇到这种奇怪问题的不只一个人，所以我再stackoverflow找到了答案，下面就搬运过来，记录一下。 步骤如下 ```</p>
 <p>&lt;pre class=&quot;lang:default decode:true &quot;&gt;1.apt-get --purge remove postgresql* //删除软件本体<br>2.rm -r /etc/postgresql/ //删除配置文件<br>3.rm -r /etc/postgresql-common/ //同上<br>4.rm -r /var/lib/postgresql/ //同上<br>5.userdel -r postgres //删除软件自动创建的用户<br>6.groupdel postgres //删除其用户组<br>```<br><br>经过上述的步骤，我们终于彻底的删除了postgresql，我们就可以放心的重新安装啦！</p></article></div>
 </main>
-
-<footer>Generated from local Z-Blog backup for GitHub Pages.</footer>
+<footer class="ref-footer"><div><strong>u3coding</strong><small>© 2014–2026 u3coding</small></div>
+<nav aria-label="页脚导航"><a href="/">首页</a><a href="/projects/">项目</a><a href="/articles/">文章</a><a href="/archive/">归档</a><a href="/about/">关于</a></nav><p><a href="https://github.com/u3shadow">GitHub</a><a href="/feed.xml">RSS</a><a href="#main-content" aria-label="返回正文顶部">↑</a></p></footer>
 <script>
   document.querySelectorAll("img").forEach((img) => {
     const replaceMissingImage = () => {
       const box = document.createElement("div");
       box.className = "image-missing";
       const src = img.currentSrc || img.src || img.getAttribute("src") || "";
-      box.innerHTML = `<strong>Image unavailable</strong><span>This image could not be loaded from the static backup.</span><br><a href="${src}" target="_blank" rel="noreferrer">Open original image URL</a>`;
+      box.innerHTML = `<strong>Image unavailable</strong><span>This image could not be loaded from the static backup.</span><br><a href="${src}" target="_blank" rel="noopener noreferrer">Open original image URL</a>`;
       img.replaceWith(box);
     };
     img.addEventListener("error", replaceMissingImage, { once: true });

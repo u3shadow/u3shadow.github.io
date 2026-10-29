@@ -5,7 +5,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="description" content="SVM支持向量机 支持向量机是一种监督学习算法，有时比现有算法更加简洁高效。 回顾一下逻辑回归的代价函数 注意展开后的第一项 当 θTx远远大于1的时候，此项接近于0 当 θTx远远小于1的时候，我们可以用一条直线来替代sigmoid曲线，最终图形如下 对于第二项，我们的标尺是-1 小于等于-1的时候是0，大于等于-1的时候是一条直线，如下图 Kernels...">
   <title>[W7]优化目标 - u3coding</title>
-  <link rel="canonical" href="https://u3.github.io/posts/2016/11/587-w7optimization-objective/">
   <style>
 
     :root {
@@ -1925,26 +1924,40 @@
     }
 
   </style>
-  <link rel="stylesheet" href="/assets/site/editorial-portfolio.css?v=dark-1">
-</head>
-<body>
-<header><div class="bar"><a class="brand" href="/">u3coding</a><p class="site-bio">Android, AI, tooling, and engineering notes.</p><nav><a href="/">首页</a><a href="/projects/">项目</a><a href="/articles/">文章</a><a href="/archive/">归档</a><a href="/about/">关于</a></nav></div></header>
+  <link rel="stylesheet" href="/assets/site/editorial-portfolio.css?v=20261029-1">
+<!-- site-common -->
+<link rel="canonical" href="https://u3shadow.github.io/posts/2016/11/587-w7optimization-objective/">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="u3coding"><meta property="og:title" content="[W7]优化目标 - u3coding">
+<meta property="og:description" content="SVM支持向量机 支持向量机是一种监督学习算法，有时比现有算法更加简洁高效。 回顾一下逻辑回归的代价函数 注意展开后的第一项 当 θTx远远大于1的时候，此项接近于0 当 θTx远远小于1的时候，我们可以用一条直线来替代sigmoid曲线，最终图形如下 对于第二项，我们的标尺是-1 小于等于-1的时候是0，大于等于-1的时候是一条直线，如下图 Kernels..."><meta property="og:url" content="https://u3shadow.github.io/posts/2016/11/587-w7optimization-objective/">
+<meta property="og:image" content="https://u3shadow.github.io/assets/site/banner.png">
+<script>document.documentElement.classList.add('js');try{document.documentElement.dataset.theme=localStorage.getItem('u3-theme')==='light'?'light':'dark'}catch{document.documentElement.dataset.theme='dark'}</script>
+<link rel="stylesheet" href="/assets/site/site-theme.css?v=20261029-1">
+<script defer src="/assets/site/site.js?v=20261029-1"></script>
 
-<main><div class="single-wrap"><section class="single-head"><p class="eyebrow">未分类 · 文章 ID 587</p><h1 class="title">[W7]优化目标</h1><div class="title-rule"></div><div class="meta">发布于 2016-11-29 15:49 · 已迁移为静态页面</div></section><figure class="hero"><img src="/assets/images/21b8ed6b46b2.png" alt="[W7]优化目标"></figure><article><h2>SVM支持向量机</h2>
+<!-- /site-common -->
+</head>
+<body><a class="skip-link" href="#main-content">跳至正文</a><header><div class="bar"><a class="brand" href="/">u3coding</a>
+<nav class="primary-nav" id="primary-navigation" aria-label="主导航"><a href="/">首页</a><a href="/projects/">项目</a><a href="/articles/" class="active" aria-current="page">文章</a><a href="/archive/">归档</a><a href="/about/">关于</a></nav>
+<div class="header-tools"><a class="icon-button" href="/articles/#search" aria-label="搜索文章" title="搜索文章"><span class="icon icon-search" aria-hidden="true"></span></a>
+<button type="button" class="icon-button" data-theme-toggle aria-label="切换浅色主题" title="切换浅色主题"><span class="icon icon-sun" aria-hidden="true"></span></button>
+<button type="button" class="icon-button menu-toggle" data-menu-toggle aria-controls="primary-navigation" aria-expanded="false" aria-label="展开导航" title="导航菜单"><span class="icon icon-menu" aria-hidden="true"></span></button></div></div></header>
+
+<main id="main-content"><div class="single-wrap"><section class="single-head"><p class="eyebrow">未分类 · 文章 ID 587</p><h1 class="title">[W7]优化目标</h1><div class="title-rule"></div><div class="meta">发布于 2016-11-29 15:49 · 已迁移为静态页面</div></section><figure class="hero"><img src="/assets/images/21b8ed6b46b2.png" alt="[W7]优化目标"></figure><article><h2>SVM支持向量机</h2>
 
 支持向量机是一种监督学习算法，有时比现有算法更加简洁高效。
 回顾一下逻辑回归的代价函数
 
 <blockquote>
-  <a href="https://www.u3blog.xyz/zb_users/upload/2016/11/逻辑回归代价函数展开.png"><img loading="lazy"  src="/assets/images/21b8ed6b46b2.png" alt="%e9%80%bb%e8%be%91%e5%9b%9e%e5%bd%92%e4%bb%a3%e4%bb%b7%e5%87%bd%e6%95%b0%e5%b1%95%e5%bc%80" class="alignnone size-full wp-image-589" /></a>
+  <a href="/assets/images/21b8ed6b46b2.png"><img loading="lazy"  src="/assets/images/21b8ed6b46b2.png" alt="%e9%80%bb%e8%be%91%e5%9b%9e%e5%bd%92%e4%bb%a3%e4%bb%b7%e5%87%bd%e6%95%b0%e5%b1%95%e5%bc%80" class="alignnone size-full wp-image-589" /></a>
   注意展开后的第一项
-  <a href="https://www.u3blog.xyz/zb_users/upload/2016/11/展开后第一项.png"><img loading="lazy"  src="/assets/images/7bb640f9f7c2.png" alt="%e5%b1%95%e5%bc%80%e5%90%8e%e7%ac%ac%e4%b8%80%e9%a1%b9" class="alignnone size-full wp-image-590" /></a>
+  <a href="/assets/images/7bb640f9f7c2.png"><img loading="lazy"  src="/assets/images/7bb640f9f7c2.png" alt="%e5%b1%95%e5%bc%80%e5%90%8e%e7%ac%ac%e4%b8%80%e9%a1%b9" class="alignnone size-full wp-image-590" /></a>
   当 θTx远远大于1的时候，此项接近于0
   当 θTx远远小于1的时候，我们可以用一条直线来替代sigmoid曲线，最终图形如下
-  <a href="https://www.u3blog.xyz/zb_users/upload/2016/11/优化第一项.png"><img loading="lazy"  src="/assets/images/008996e25b5b.png" alt="%e4%bc%98%e5%8c%96%e7%ac%ac%e4%b8%80%e9%a1%b9" class="alignnone size-full wp-image-591" /></a>
+  <a href="/assets/images/008996e25b5b.png"><img loading="lazy"  src="/assets/images/008996e25b5b.png" alt="%e4%bc%98%e5%8c%96%e7%ac%ac%e4%b8%80%e9%a1%b9" class="alignnone size-full wp-image-591" /></a>
   对于第二项，我们的标尺是-1
   小于等于-1的时候是0，大于等于-1的时候是一条直线，如下图
-  <a href="https://www.u3blog.xyz/zb_users/upload/2016/11/优化第二项.png"><img loading="lazy"  src="/assets/images/4b19fb92987e.png" alt="%e4%bc%98%e5%8c%96%e7%ac%ac%e4%ba%8c%e9%a1%b9" class="alignnone size-full wp-image-592" /></a>
+  <a href="/assets/images/4b19fb92987e.png"><img loading="lazy"  src="/assets/images/4b19fb92987e.png" alt="%e4%bc%98%e5%8c%96%e7%ac%ac%e4%ba%8c%e9%a1%b9" class="alignnone size-full wp-image-592" /></a>
 </blockquote>
 
 <h2>KernelsI</h2>
@@ -1954,7 +1967,7 @@ Kernels 允许我们在SVM上创建复杂的，非线性的算法
 例如，高斯kernel如下
 
 <blockquote>
-  <a href="https://www.u3blog.xyz/zb_users/upload/2016/11/高斯kernel.png"><img loading="lazy"  src="/assets/images/d28e0fe959b4.png" alt="%e9%ab%98%e6%96%afkernel" class="alignnone size-full wp-image-593" /></a>
+  <a href="/assets/images/d28e0fe959b4.png"><img loading="lazy"  src="/assets/images/d28e0fe959b4.png" alt="%e9%ab%98%e6%96%afkernel" class="alignnone size-full wp-image-593" /></a>
   当x与l接近时，fi ≈ 1
   当与l远离时，fi ≈ 0
 </blockquote>
@@ -1964,7 +1977,7 @@ Kernels 允许我们在SVM上创建复杂的，非线性的算法
 有了高斯Kernels，我们就知道了kernels算法，那么我们的优化目标就可以用下面公式来表达了
 
 <blockquote>
-  <a href="https://www.u3blog.xyz/zb_users/upload/2016/11/kernels优化目标.png"><img loading="lazy"  src="/assets/images/5640d488ad6f.png" alt="kernels%e4%bc%98%e5%8c%96%e7%9b%ae%e6%a0%87" class="alignnone size-full wp-image-595" /></a>
+  <a href="/assets/images/5640d488ad6f.png"><img loading="lazy"  src="/assets/images/5640d488ad6f.png" alt="kernels%e4%bc%98%e5%8c%96%e7%9b%ae%e6%a0%87" class="alignnone size-full wp-image-595" /></a>
 </blockquote>
 
 <h2>选择SVM的参数</h2>
@@ -1991,15 +2004,15 @@ Kernels 允许我们在SVM上创建复杂的，非线性的算法
 如果n很小m很大，使用逻辑回归
 如果n很小m适中，使用高斯Kernel的SVM</article></div>
 </main>
-
-<footer>Generated from local Z-Blog backup for GitHub Pages.</footer>
+<footer class="ref-footer"><div><strong>u3coding</strong><small>© 2014–2026 u3coding</small></div>
+<nav aria-label="页脚导航"><a href="/">首页</a><a href="/projects/">项目</a><a href="/articles/">文章</a><a href="/archive/">归档</a><a href="/about/">关于</a></nav><p><a href="https://github.com/u3shadow">GitHub</a><a href="/feed.xml">RSS</a><a href="#main-content" aria-label="返回正文顶部">↑</a></p></footer>
 <script>
   document.querySelectorAll("img").forEach((img) => {
     const replaceMissingImage = () => {
       const box = document.createElement("div");
       box.className = "image-missing";
       const src = img.currentSrc || img.src || img.getAttribute("src") || "";
-      box.innerHTML = `<strong>Image unavailable</strong><span>This image could not be loaded from the static backup.</span><br><a href="${src}" target="_blank" rel="noreferrer">Open original image URL</a>`;
+      box.innerHTML = `<strong>Image unavailable</strong><span>This image could not be loaded from the static backup.</span><br><a href="${src}" target="_blank" rel="noopener noreferrer">Open original image URL</a>`;
       img.replaceWith(box);
     };
     img.addEventListener("error", replaceMissingImage, { once: true });

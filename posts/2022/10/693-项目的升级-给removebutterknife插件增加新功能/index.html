@@ -5,7 +5,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="description" content="前言 经过项目的初步编写和进一步改造，RemoveButterKnife插件终于也有模有样了，但是，功能上仅仅支持Activity/Fragment的BindView注解。 关于编写和优化的过程可以看下面两篇文章 项目构造RemoveButterKnife 项目改进-重构RemoveButterKnife 当然，这里也附上这个项目的 github地址 为了让...">
   <title>项目的升级-给RemoveButterKnife插件增加新功能 - u3coding</title>
-  <link rel="canonical" href="https://u3.github.io/posts/2022/10/693-项目的升级-给removebutterknife插件增加新功能/">
   <style>
 
     :root {
@@ -1925,19 +1924,33 @@
     }
 
   </style>
-  <link rel="stylesheet" href="/assets/site/editorial-portfolio.css?v=dark-1">
-</head>
-<body>
-<header><div class="bar"><a class="brand" href="/">u3coding</a><p class="site-bio">Android, AI, tooling, and engineering notes.</p><nav><a href="/">首页</a><a href="/projects/">项目</a><a href="/articles/">文章</a><a href="/archive/">归档</a><a href="/about/">关于</a></nav></div></header>
+  <link rel="stylesheet" href="/assets/site/editorial-portfolio.css?v=20261029-1">
+<!-- site-common -->
+<link rel="canonical" href="https://u3shadow.github.io/posts/2022/10/693-项目的升级-给removebutterknife插件增加新功能/">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="u3coding"><meta property="og:title" content="项目的升级-给RemoveButterKnife插件增加新功能 - u3coding">
+<meta property="og:description" content="前言 经过项目的初步编写和进一步改造，RemoveButterKnife插件终于也有模有样了，但是，功能上仅仅支持Activity/Fragment的BindView注解。 关于编写和优化的过程可以看下面两篇文章 项目构造RemoveButterKnife 项目改进-重构RemoveButterKnife 当然，这里也附上这个项目的 github地址 为了让..."><meta property="og:url" content="https://u3shadow.github.io/posts/2022/10/693-项目的升级-给removebutterknife插件增加新功能/">
+<meta property="og:image" content="https://u3shadow.github.io/assets/site/banner.png">
+<script>document.documentElement.classList.add('js');try{document.documentElement.dataset.theme=localStorage.getItem('u3-theme')==='light'?'light':'dark'}catch{document.documentElement.dataset.theme='dark'}</script>
+<link rel="stylesheet" href="/assets/site/site-theme.css?v=20261029-1">
+<script defer src="/assets/site/site.js?v=20261029-1"></script>
 
-<main><div class="single-wrap"><section class="single-head"><p class="eyebrow">技术文章 · 文章 ID 693</p><h1 class="title">项目的升级-给RemoveButterKnife插件增加新功能</h1><div class="title-rule"></div><div class="meta">发布于 2022-10-08 14:57 · 已迁移为静态页面</div></section><figure class="hero"><img src="/assets/images/1dc8b8628d79.png" alt="项目的升级-给RemoveButterKnife插件增加新功能"></figure><article><h2 id="h2-u524Du8A00">前言</h2><p>经过项目的初步编写和进一步改造，RemoveButterKnife插件终于也有模有样了，但是，功能上仅仅支持Activity/Fragment的BindView注解。</p>
+<!-- /site-common -->
+</head>
+<body><a class="skip-link" href="#main-content">跳至正文</a><header><div class="bar"><a class="brand" href="/">u3coding</a>
+<nav class="primary-nav" id="primary-navigation" aria-label="主导航"><a href="/">首页</a><a href="/projects/">项目</a><a href="/articles/" class="active" aria-current="page">文章</a><a href="/archive/">归档</a><a href="/about/">关于</a></nav>
+<div class="header-tools"><a class="icon-button" href="/articles/#search" aria-label="搜索文章" title="搜索文章"><span class="icon icon-search" aria-hidden="true"></span></a>
+<button type="button" class="icon-button" data-theme-toggle aria-label="切换浅色主题" title="切换浅色主题"><span class="icon icon-sun" aria-hidden="true"></span></button>
+<button type="button" class="icon-button menu-toggle" data-menu-toggle aria-controls="primary-navigation" aria-expanded="false" aria-label="展开导航" title="导航菜单"><span class="icon icon-menu" aria-hidden="true"></span></button></div></div></header>
+
+<main id="main-content"><div class="single-wrap"><section class="single-head"><p class="eyebrow">技术文章 · 文章 ID 693</p><h1 class="title">项目的升级-给RemoveButterKnife插件增加新功能</h1><div class="title-rule"></div><div class="meta">发布于 2022-10-08 14:57 · 已迁移为静态页面</div></section><figure class="hero"><img src="/assets/images/1dc8b8628d79.png" alt="项目的升级-给RemoveButterKnife插件增加新功能"></figure><article><h2 id="h2-u524Du8A00">前言</h2><p>经过项目的初步编写和进一步改造，RemoveButterKnife插件终于也有模有样了，但是，功能上仅仅支持Activity/Fragment的BindView注解。</p>
 <p>关于编写和优化的过程可以看下面两篇文章<br><a href="http://www.u3coding.com/2016/06/24/androidstudio-plugin-removebutterknife-di/">项目构造RemoveButterKnife</a></p>
 <p><a href="http://www.u3coding.com/2018/12/20/rebuild-removebutterknife/">项目改进-重构RemoveButterKnife</a></p>
 <p>当然，这里也附上这个项目的<a href="https://github.com/u3shadow/RemoveButterKnife">github地址</a></p>
 <p>为了让插件支持更加彻底，我们还要支持组合自定义view以及viewholder中使用butterknife的情况，当然，我们也要支持OnClick注解以及一些其他的使用场景。</p>
 <h2 id="h2--">要增加哪些功能？</h2><p>首先要确定需要增加哪些功能点，功能点的更新如下</p>
 <ol>
-<li>增加对多moudle时的R2.id.xxx的支持</li><li>增加对OnClick注解的支持</li><li>增加对viewholder和自定义组合view的支持<h2 id="h2-u786Eu5B9Au589Eu52A0u529Fu80FDu7684u5148u540Eu987Au5E8F">确定增加功能的先后顺序</h2>审阅我们的功能，发现1号功能是比较容易的，所以我们把1号定为优先<br>再次思考发现，2，3号功能之间存在关联性，即，3号功能提及的支持种类中也要支持Onclick注解的形式。<br>所以确定开发顺序为1-&gt;3-&gt;2<h2 id="h2-u529Fu80FDu62C6u5206">功能拆分</h2>在这里我们使用github提供的project功能，具体分解如下<br><img loading="lazy"  src="/assets/images/1dc8b8628d79.png" alt="undefined" title="undefined"><br>可以看到，我们分为了todo,doing,done三个部分，而且把每个任务都细分为了几个步骤，这样我们就可以在开发某一功能时保持专注，而不需要东写一点西写一点了<h2 id="h2-u5177u4F53u529Fu80FDu5F00u53D1">具体功能开发</h2><h3 id="h3-1-r2-id-xxxx-">1.对R2.id.xxxx的支持</h3>由于我们原来的代码中寻找匹配使用的是正则表达式，如下<pre><code>String pattern = &quot;^@(BindView|InjectView|Bind)\\((R.id.*)|(R2.id.*)\\)$&quot;;
+<li>增加对多moudle时的R2.id.xxx的支持</li><li>增加对OnClick注解的支持</li><li>增加对viewholder和自定义组合view的支持<h2 id="h2-u786Eu5B9Au589Eu52A0u529Fu80FDu7684u5148u540Eu987Au5E8F">确定增加功能的先后顺序</h2>审阅我们的功能，发现1号功能是比较容易的，所以我们把1号定为优先<br>再次思考发现，2，3号功能之间存在关联性，即，3号功能提及的支持种类中也要支持Onclick注解的形式。<br>所以确定开发顺序为1-&gt;3-&gt;2<h2 id="h2-u529Fu80FDu62C6u5206">功能拆分</h2>在这里我们使用github提供的project功能，具体分解如下<br><img loading="lazy"  src="/assets/images/1dc8b8628d79.png" title="undefined" alt="文章配图：项目的升级-给RemoveButterKnife插件增加新功能"><br>可以看到，我们分为了todo,doing,done三个部分，而且把每个任务都细分为了几个步骤，这样我们就可以在开发某一功能时保持专注，而不需要东写一点西写一点了<h2 id="h2-u5177u4F53u529Fu80FDu5F00u53D1">具体功能开发</h2><h3 id="h3-1-r2-id-xxxx-">1.对R2.id.xxxx的支持</h3>由于我们原来的代码中寻找匹配使用的是正则表达式，如下<pre><code>String pattern = &quot;^@(BindView|InjectView|Bind)\\((R.id.*)|(R2.id.*)\\)$&quot;;
 Pattern r = Pattern.compile(pattern);</code></pre>可以看到，我们的代码已经添加了对R2.id.xxx的支持，只需要给正则表达式增加一个条件。<br>最后，我们给这个功能添加上unit test，就可以完成对功能1的开发<h3 id="h3-2-view-viewholder-">2.对自定义view和viewholder的支持</h3>首先，我们要判别一个类到底是自定义view还是viewholder,对于activity和fragment很简单，因为初始函数是不同的，一个是oncreate,一个是oncreateview，但是由于增加了支持种类，老办法就行不通了，这时我们需要使用idea的sdk来进行判断，代码如下<pre><code>GenCodeContext codeContext = new GenCodeContext(mClass, mFactory);
      String type = mClass.getSuperClassType().toString();
          if (type.contains(&quot;Activity&quot;)){
@@ -1972,7 +1985,7 @@ Pattern r = Pattern.compile(pattern);</code></pre>可以看到，我们的代码
          }
      }
      return result;
- }</code></pre>那么，既然能够识别和找到哪里插入代码了，我们的类型支持也就水到渠成了。<br>在类型支持的时候，我们使用了策略模式，这样根据类型不同，设置不同的策略就可以方便的进行处理。<br>目录结构如下<br><img loading="lazy"  src="/assets/images/8d69c88294ef.png" alt="undefined" title="undefined"><h3 id="h3-3-onclick-">3.对onclick注解的支持</h3>我们对onclick的处理分以下几步</li><li>寻找注解</li><li>分析注解信息并保持</li><li>根据保存信息生成代码并插入<h4 id="h4-1-">1.寻找注解</h4>使用正则表达式很容易找到，这里不再重复贴代码<h4 id="h4-2-">2.分析注解信息并保存</h4>onclick注解有几种情况</li><li>单id/多id的绑定</li><li>点击函数是否有参数的情况<br>我们要获取的信息有以下几个</li><li>绑定的id列表</li><li>点击函数的名称，是否有参数，参数的类型<br>针对第二点，我们使用一个对象将其封装起来<br>保存获取信息我们使用一个Map&lt;&gt;来进行<br>代码：<pre><code><a href="https://github.com/Override" title="&#64;Override" class="at-link">@Override</a>
+ }</code></pre>那么，既然能够识别和找到哪里插入代码了，我们的类型支持也就水到渠成了。<br>在类型支持的时候，我们使用了策略模式，这样根据类型不同，设置不同的策略就可以方便的进行处理。<br>目录结构如下<br><img loading="lazy"  src="/assets/images/8d69c88294ef.png" title="undefined" alt="文章配图：项目的升级-给RemoveButterKnife插件增加新功能"><h3 id="h3-3-onclick-">3.对onclick注解的支持</h3>我们对onclick的处理分以下几步</li><li>寻找注解</li><li>分析注解信息并保持</li><li>根据保存信息生成代码并插入<h4 id="h4-1-">1.寻找注解</h4>使用正则表达式很容易找到，这里不再重复贴代码<h4 id="h4-2-">2.分析注解信息并保存</h4>onclick注解有几种情况</li><li>单id/多id的绑定</li><li>点击函数是否有参数的情况<br>我们要获取的信息有以下几个</li><li>绑定的id列表</li><li>点击函数的名称，是否有参数，参数的类型<br>针对第二点，我们使用一个对象将其封装起来<br>保存获取信息我们使用一个Map&lt;&gt;来进行<br>代码：<pre><code><a href="https://github.com/Override" title="&#64;Override" class="at-link">@Override</a>
  public void process() {
      String pattern = &quot;^<a href="https://github.com/OnClick" title="&#64;OnClick" class="at-link">@OnClick</a>\\(\\{*(R.id.*,|R.id.*|R2.id.*|R2.id.*,)+\\}*\\)$&quot;;
      Pattern r = Pattern.compile(pattern);
@@ -2006,15 +2019,15 @@ protected String getOnClickCode(StringBuilder methodString, String id) {
 <p>还有一点值得一提，在做项目的时候第一步永远是总体构思，第二部是具体拆分，写代码这件事的优先级并没有那么高，容易犯的一个问题就是一提到某个功能马上就开始写具体代码，这样的结果往往费力不讨好，有一个明确的功能拆分和行进步骤会极大的增强开发体验。</p>
 <p>至此，RemoveButterKnife系列文章就告一段落了，这几篇文章的目的不仅仅是记录开发RemoveButterKnife插件中的思路和遇到的问题，更重要的是总结了作者我开发软件项目的一个历程，而把这些写下来的过程，也是巩固这段历程的重要步骤。</p></article></div>
 </main>
-
-<footer>Generated from local Z-Blog backup for GitHub Pages.</footer>
+<footer class="ref-footer"><div><strong>u3coding</strong><small>© 2014–2026 u3coding</small></div>
+<nav aria-label="页脚导航"><a href="/">首页</a><a href="/projects/">项目</a><a href="/articles/">文章</a><a href="/archive/">归档</a><a href="/about/">关于</a></nav><p><a href="https://github.com/u3shadow">GitHub</a><a href="/feed.xml">RSS</a><a href="#main-content" aria-label="返回正文顶部">↑</a></p></footer>
 <script>
   document.querySelectorAll("img").forEach((img) => {
     const replaceMissingImage = () => {
       const box = document.createElement("div");
       box.className = "image-missing";
       const src = img.currentSrc || img.src || img.getAttribute("src") || "";
-      box.innerHTML = `<strong>Image unavailable</strong><span>This image could not be loaded from the static backup.</span><br><a href="${src}" target="_blank" rel="noreferrer">Open original image URL</a>`;
+      box.innerHTML = `<strong>Image unavailable</strong><span>This image could not be loaded from the static backup.</span><br><a href="${src}" target="_blank" rel="noopener noreferrer">Open original image URL</a>`;
       img.replaceWith(box);
     };
     img.addEventListener("error", replaceMissingImage, { once: true });

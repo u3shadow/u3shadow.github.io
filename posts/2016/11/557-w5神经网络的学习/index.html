@@ -5,7 +5,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="description" content="代价函数 首先需要定义几个变量 L = 这个神经网络的总层数 sl= 第L层的单元数量 K = 输出层的单元数量 在神经网络中，我们的输出节点不止一个，我们用hΘ(x)k 来表示第k个输出 还记得逻辑回归的代价函数吗？ 对于神经网络来说，代价函数更加复杂一些 反向传播算法 反向传播算法是一种用于最小化代价函数的算法，正如我们在逻辑回归问题中使用的梯度下降算法...">
   <title>[W5]神经网络的学习 - u3coding</title>
-  <link rel="canonical" href="https://u3.github.io/posts/2016/11/557-w5神经网络的学习/">
   <style>
 
     :root {
@@ -1925,12 +1924,26 @@
     }
 
   </style>
-  <link rel="stylesheet" href="/assets/site/editorial-portfolio.css?v=dark-1">
-</head>
-<body>
-<header><div class="bar"><a class="brand" href="/">u3coding</a><p class="site-bio">Android, AI, tooling, and engineering notes.</p><nav><a href="/">首页</a><a href="/projects/">项目</a><a href="/articles/">文章</a><a href="/archive/">归档</a><a href="/about/">关于</a></nav></div></header>
+  <link rel="stylesheet" href="/assets/site/editorial-portfolio.css?v=20261029-1">
+<!-- site-common -->
+<link rel="canonical" href="https://u3shadow.github.io/posts/2016/11/557-w5神经网络的学习/">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="u3coding"><meta property="og:title" content="[W5]神经网络的学习 - u3coding">
+<meta property="og:description" content="代价函数 首先需要定义几个变量 L = 这个神经网络的总层数 sl= 第L层的单元数量 K = 输出层的单元数量 在神经网络中，我们的输出节点不止一个，我们用hΘ(x)k 来表示第k个输出 还记得逻辑回归的代价函数吗？ 对于神经网络来说，代价函数更加复杂一些 反向传播算法 反向传播算法是一种用于最小化代价函数的算法，正如我们在逻辑回归问题中使用的梯度下降算法..."><meta property="og:url" content="https://u3shadow.github.io/posts/2016/11/557-w5神经网络的学习/">
+<meta property="og:image" content="https://u3shadow.github.io/assets/site/banner.png">
+<script>document.documentElement.classList.add('js');try{document.documentElement.dataset.theme=localStorage.getItem('u3-theme')==='light'?'light':'dark'}catch{document.documentElement.dataset.theme='dark'}</script>
+<link rel="stylesheet" href="/assets/site/site-theme.css?v=20261029-1">
+<script defer src="/assets/site/site.js?v=20261029-1"></script>
 
-<main><div class="single-wrap"><section class="single-head"><p class="eyebrow">未分类 · 文章 ID 557</p><h1 class="title">[W5]神经网络的学习</h1><div class="title-rule"></div><div class="meta">发布于 2016-11-22 15:24 · 已迁移为静态页面</div></section><figure class="hero"><img src="/assets/images/d2125e1a1bb6.png" alt="[W5]神经网络的学习"></figure><article><h2>代价函数</h2>
+<!-- /site-common -->
+</head>
+<body><a class="skip-link" href="#main-content">跳至正文</a><header><div class="bar"><a class="brand" href="/">u3coding</a>
+<nav class="primary-nav" id="primary-navigation" aria-label="主导航"><a href="/">首页</a><a href="/projects/">项目</a><a href="/articles/" class="active" aria-current="page">文章</a><a href="/archive/">归档</a><a href="/about/">关于</a></nav>
+<div class="header-tools"><a class="icon-button" href="/articles/#search" aria-label="搜索文章" title="搜索文章"><span class="icon icon-search" aria-hidden="true"></span></a>
+<button type="button" class="icon-button" data-theme-toggle aria-label="切换浅色主题" title="切换浅色主题"><span class="icon icon-sun" aria-hidden="true"></span></button>
+<button type="button" class="icon-button menu-toggle" data-menu-toggle aria-controls="primary-navigation" aria-expanded="false" aria-label="展开导航" title="导航菜单"><span class="icon icon-menu" aria-hidden="true"></span></button></div></div></header>
+
+<main id="main-content"><div class="single-wrap"><section class="single-head"><p class="eyebrow">未分类 · 文章 ID 557</p><h1 class="title">[W5]神经网络的学习</h1><div class="title-rule"></div><div class="meta">发布于 2016-11-22 15:24 · 已迁移为静态页面</div></section><figure class="hero"><img src="/assets/images/d2125e1a1bb6.png" alt="[W5]神经网络的学习"></figure><article><h2>代价函数</h2>
 
 首先需要定义几个变量
 L = 这个神经网络的总层数
@@ -1940,9 +1953,9 @@ K = 输出层的单元数量
 还记得逻辑回归的代价函数吗？
 
 <blockquote>
-  <a href="https://www.u3blog.xyz/zb_users/upload/2016/11/QQ截图20161118172859.png"><img loading="lazy"  src="/assets/images/d2125e1a1bb6.png" alt="逻辑回归代价" class="alignnone size-full wp-image-546" /></a>
+  <a href="/assets/images/d2125e1a1bb6.png"><img loading="lazy"  src="/assets/images/d2125e1a1bb6.png" alt="逻辑回归代价" class="alignnone size-full wp-image-546" /></a>
   对于神经网络来说，代价函数更加复杂一些
-  <a href="https://www.u3blog.xyz/zb_users/upload/2016/11/神经网络代价函数.png"><img loading="lazy"  src="/assets/images/10f96c1f80d8.png" alt="%e7%a5%9e%e7%bb%8f%e7%bd%91%e7%bb%9c%e4%bb%a3%e4%bb%b7%e5%87%bd%e6%95%b0" class="alignnone size-full wp-image-560" /></a>
+  <a href="/assets/images/10f96c1f80d8.png"><img loading="lazy"  src="/assets/images/10f96c1f80d8.png" alt="%e7%a5%9e%e7%bb%8f%e7%bd%91%e7%bb%9c%e4%bb%a3%e4%bb%b7%e5%87%bd%e6%95%b0" class="alignnone size-full wp-image-560" /></a>
 </blockquote>
 
 <h2>反向传播算法</h2>
@@ -1951,18 +1964,18 @@ K = 输出层的单元数量
 引入一个新概念，error，
 
 <blockquote>
-  <a href="https://www.u3blog.xyz/zb_users/upload/2016/11/反向传播error.png"><img loading="lazy"  src="/assets/images/6cee28c14f6a.png" alt="%e5%8f%8d%e5%90%91%e4%bc%a0%e6%92%aderror" class="alignnone size-full wp-image-562" /></a>
+  <a href="/assets/images/6cee28c14f6a.png"><img loading="lazy"  src="/assets/images/6cee28c14f6a.png" alt="%e5%8f%8d%e5%90%91%e4%bc%a0%e6%92%aderror" class="alignnone size-full wp-image-562" /></a>
   代表了第l层第j个节点的误差值。
   对于输出节点来说，我们可以通过下面公式计算error
-  <a href="https://www.u3blog.xyz/zb_users/upload/2016/11/输出节点的error.png"><img loading="lazy"  src="/assets/images/20d1114661d0.png" alt="%e8%be%93%e5%87%ba%e8%8a%82%e7%82%b9%e7%9a%84error" class="alignnone size-full wp-image-563" /></a>
+  <a href="/assets/images/20d1114661d0.png"><img loading="lazy"  src="/assets/images/20d1114661d0.png" alt="%e8%be%93%e5%87%ba%e8%8a%82%e7%82%b9%e7%9a%84error" class="alignnone size-full wp-image-563" /></a>
   对于输出层之外的节点误差，我们可以用下面公式来计算
-  <a href="https://www.u3blog.xyz/zb_users/upload/2016/11/非输出层误差计算.png"><img loading="lazy"  src="/assets/images/2ec986219b71.png" alt="%e9%9d%9e%e8%be%93%e5%87%ba%e5%b1%82%e8%af%af%e5%b7%ae%e8%ae%a1%e7%ae%97" class="alignnone size-full wp-image-565" /></a>
+  <a href="/assets/images/2ec986219b71.png"><img loading="lazy"  src="/assets/images/2ec986219b71.png" alt="%e9%9d%9e%e8%be%93%e5%87%ba%e5%b1%82%e8%af%af%e5%b7%ae%e8%ae%a1%e7%ae%97" class="alignnone size-full wp-image-565" /></a>
   关于公式里的.<em>和g，意义如下
   1..</em>用于矩阵运算，将对应位置的每个元素相称，两个矩阵必须同样的大小
   2.g也可以被写成
-  <a href="https://www.u3blog.xyz/zb_users/upload/2016/11/反向传播的g.png"><img loading="lazy"  src="/assets/images/4ffba8ec5296.png" alt="%e5%8f%8d%e5%90%91%e4%bc%a0%e6%92%ad%e7%9a%84g" class="alignnone size-full wp-image-566" /></a>
+  <a href="/assets/images/4ffba8ec5296.png"><img loading="lazy"  src="/assets/images/4ffba8ec5296.png" alt="%e5%8f%8d%e5%90%91%e4%bc%a0%e6%92%ad%e7%9a%84g" class="alignnone size-full wp-image-566" /></a>
   所以，误差计算公式也可以表达如下
-  <a href="https://www.u3blog.xyz/zb_users/upload/2016/11/误差计算公式的另一种表达.png"><img loading="lazy"  src="/assets/images/2e4b3443f4fb.png" alt="%e8%af%af%e5%b7%ae%e8%ae%a1%e7%ae%97%e5%85%ac%e5%bc%8f%e7%9a%84%e5%8f%a6%e4%b8%80%e7%a7%8d%e8%a1%a8%e8%be%be" class="alignnone size-full wp-image-567" /></a>
+  <a href="/assets/images/2e4b3443f4fb.png"><img loading="lazy"  src="/assets/images/2e4b3443f4fb.png" alt="%e8%af%af%e5%b7%ae%e8%ae%a1%e7%ae%97%e5%85%ac%e5%bc%8f%e7%9a%84%e5%8f%a6%e4%b8%80%e7%a7%8d%e8%a1%a8%e8%be%be" class="alignnone size-full wp-image-567" /></a>
 </blockquote>
 
 <h3>算法流程</h3>
@@ -1970,18 +1983,18 @@ K = 输出层的单元数量
 有了上面的背景知识，我们就可以看看这个算法到底是怎样的流程了，如下图
 
 <blockquote>
-  <a href="https://www.u3blog.xyz/zb_users/upload/2016/11/反向传播算法流程.png"><img loading="lazy"  src="/assets/images/245e0ce22d3a.png" alt="%e5%8f%8d%e5%90%91%e4%bc%a0%e6%92%ad%e7%ae%97%e6%b3%95%e6%b5%81%e7%a8%8b" class="alignnone size-full wp-image-568" /></a>
+  <a href="/assets/images/245e0ce22d3a.png"><img loading="lazy"  src="/assets/images/245e0ce22d3a.png" alt="%e5%8f%8d%e5%90%91%e4%bc%a0%e6%92%ad%e7%ae%97%e6%b3%95%e6%b5%81%e7%a8%8b" class="alignnone size-full wp-image-568" /></a>
 </blockquote></article></div>
 </main>
-
-<footer>Generated from local Z-Blog backup for GitHub Pages.</footer>
+<footer class="ref-footer"><div><strong>u3coding</strong><small>© 2014–2026 u3coding</small></div>
+<nav aria-label="页脚导航"><a href="/">首页</a><a href="/projects/">项目</a><a href="/articles/">文章</a><a href="/archive/">归档</a><a href="/about/">关于</a></nav><p><a href="https://github.com/u3shadow">GitHub</a><a href="/feed.xml">RSS</a><a href="#main-content" aria-label="返回正文顶部">↑</a></p></footer>
 <script>
   document.querySelectorAll("img").forEach((img) => {
     const replaceMissingImage = () => {
       const box = document.createElement("div");
       box.className = "image-missing";
       const src = img.currentSrc || img.src || img.getAttribute("src") || "";
-      box.innerHTML = `<strong>Image unavailable</strong><span>This image could not be loaded from the static backup.</span><br><a href="${src}" target="_blank" rel="noreferrer">Open original image URL</a>`;
+      box.innerHTML = `<strong>Image unavailable</strong><span>This image could not be loaded from the static backup.</span><br><a href="${src}" target="_blank" rel="noopener noreferrer">Open original image URL</a>`;
       img.replaceWith(box);
     };
     img.addEventListener("error", replaceMissingImage, { once: true });

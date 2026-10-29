@@ -5,7 +5,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="description" content="首先，我们来看看遇到问题的图片 遇到的问题是，当点击输入框之后，输入法会切到红线的位置，理想状态应该是在绿线位置 那么，是什么原因造成的呢？ 问题其实很简单，是因为drawableleft图片比该输入框的文字高度要高，而输入法弹出的时候计算的是文字的高度，而不是整个输入框的高度。 所以，会从绿线切到红线。 如何解决呢？ 有两种方法，第一把左侧图片的高度降低，...">
   <title>Android输入法部分遮挡UI的问题（与EditText框相切） - u3coding</title>
-  <link rel="canonical" href="https://u3.github.io/posts/2015/05/38-android输入法部分遮挡ui的问题-与edittext框相切/">
   <style>
 
     :root {
@@ -1925,13 +1924,27 @@
     }
 
   </style>
-  <link rel="stylesheet" href="/assets/site/editorial-portfolio.css?v=dark-1">
-</head>
-<body>
-<header><div class="bar"><a class="brand" href="/">u3coding</a><p class="site-bio">Android, AI, tooling, and engineering notes.</p><nav><a href="/">首页</a><a href="/projects/">项目</a><a href="/articles/">文章</a><a href="/archive/">归档</a><a href="/about/">关于</a></nav></div></header>
+  <link rel="stylesheet" href="/assets/site/editorial-portfolio.css?v=20261029-1">
+<!-- site-common -->
+<link rel="canonical" href="https://u3shadow.github.io/posts/2015/05/38-android输入法部分遮挡ui的问题-与edittext框相切/">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="u3coding"><meta property="og:title" content="Android输入法部分遮挡UI的问题（与EditText框相切） - u3coding">
+<meta property="og:description" content="首先，我们来看看遇到问题的图片 遇到的问题是，当点击输入框之后，输入法会切到红线的位置，理想状态应该是在绿线位置 那么，是什么原因造成的呢？ 问题其实很简单，是因为drawableleft图片比该输入框的文字高度要高，而输入法弹出的时候计算的是文字的高度，而不是整个输入框的高度。 所以，会从绿线切到红线。 如何解决呢？ 有两种方法，第一把左侧图片的高度降低，..."><meta property="og:url" content="https://u3shadow.github.io/posts/2015/05/38-android输入法部分遮挡ui的问题-与edittext框相切/">
+<meta property="og:image" content="https://u3shadow.github.io/assets/site/banner.png">
+<script>document.documentElement.classList.add('js');try{document.documentElement.dataset.theme=localStorage.getItem('u3-theme')==='light'?'light':'dark'}catch{document.documentElement.dataset.theme='dark'}</script>
+<link rel="stylesheet" href="/assets/site/site-theme.css?v=20261029-1">
+<script defer src="/assets/site/site.js?v=20261029-1"></script>
 
-<main><div class="single-wrap"><section class="single-head"><p class="eyebrow">未分类 · 文章 ID 38</p><h1 class="title">Android输入法部分遮挡UI的问题（与EditText框相切）</h1><div class="title-rule"></div><div class="meta">发布于 2015-05-07 10:20 · 已迁移为静态页面</div></section><figure class="hero"><img src="/assets/images/0842fbcf8084.png" alt="Android输入法部分遮挡UI的问题（与EditText框相切）"></figure><article><p>首先，我们来看看遇到问题的图片</p>
-<figure><img loading="lazy"  src="/assets/images/0842fbcf8084.png" alt="" /></figure>
+<!-- /site-common -->
+</head>
+<body><a class="skip-link" href="#main-content">跳至正文</a><header><div class="bar"><a class="brand" href="/">u3coding</a>
+<nav class="primary-nav" id="primary-navigation" aria-label="主导航"><a href="/">首页</a><a href="/projects/">项目</a><a href="/articles/" class="active" aria-current="page">文章</a><a href="/archive/">归档</a><a href="/about/">关于</a></nav>
+<div class="header-tools"><a class="icon-button" href="/articles/#search" aria-label="搜索文章" title="搜索文章"><span class="icon icon-search" aria-hidden="true"></span></a>
+<button type="button" class="icon-button" data-theme-toggle aria-label="切换浅色主题" title="切换浅色主题"><span class="icon icon-sun" aria-hidden="true"></span></button>
+<button type="button" class="icon-button menu-toggle" data-menu-toggle aria-controls="primary-navigation" aria-expanded="false" aria-label="展开导航" title="导航菜单"><span class="icon icon-menu" aria-hidden="true"></span></button></div></div></header>
+
+<main id="main-content"><div class="single-wrap"><section class="single-head"><p class="eyebrow">未分类 · 文章 ID 38</p><h1 class="title">Android输入法部分遮挡UI的问题（与EditText框相切）</h1><div class="title-rule"></div><div class="meta">发布于 2015-05-07 10:20 · 已迁移为静态页面</div></section><figure class="hero"><img src="/assets/images/0842fbcf8084.png" alt="Android输入法部分遮挡UI的问题（与EditText框相切）"></figure><article><p>首先，我们来看看遇到问题的图片</p>
+<figure><img loading="lazy"  src="/assets/images/0842fbcf8084.png" / alt="文章配图：Android输入法部分遮挡UI的问题（与EditText框相切）"></figure>
 <p>遇到的问题是，当点击输入框之后，输入法会切到红线的位置，理想状态应该是在绿线位置</p>
 <p>　　那么，是什么原因造成的呢？</p>
 <p>　　　　问题其实很简单，是因为drawableleft图片比该输入框的文字高度要高，而输入法弹出的时候计算的是文字的高度，而不是整个输入框的高度。</p>
@@ -1940,15 +1953,15 @@
 <p>　　　　有两种方法，第一把左侧图片的高度降低，降到比输入框的字体要小。</p>
 <p>　　　　第二，把输入框的字体调大，调到比图片的高度高，这样，我们的输入法就能出现在我们想要的位置了　</p></article></div>
 </main>
-
-<footer>Generated from local Z-Blog backup for GitHub Pages.</footer>
+<footer class="ref-footer"><div><strong>u3coding</strong><small>© 2014–2026 u3coding</small></div>
+<nav aria-label="页脚导航"><a href="/">首页</a><a href="/projects/">项目</a><a href="/articles/">文章</a><a href="/archive/">归档</a><a href="/about/">关于</a></nav><p><a href="https://github.com/u3shadow">GitHub</a><a href="/feed.xml">RSS</a><a href="#main-content" aria-label="返回正文顶部">↑</a></p></footer>
 <script>
   document.querySelectorAll("img").forEach((img) => {
     const replaceMissingImage = () => {
       const box = document.createElement("div");
       box.className = "image-missing";
       const src = img.currentSrc || img.src || img.getAttribute("src") || "";
-      box.innerHTML = `<strong>Image unavailable</strong><span>This image could not be loaded from the static backup.</span><br><a href="${src}" target="_blank" rel="noreferrer">Open original image URL</a>`;
+      box.innerHTML = `<strong>Image unavailable</strong><span>This image could not be loaded from the static backup.</span><br><a href="${src}" target="_blank" rel="noopener noreferrer">Open original image URL</a>`;
       img.replaceWith(box);
     };
     img.addEventListener("error", replaceMissingImage, { once: true });

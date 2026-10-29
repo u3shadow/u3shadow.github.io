@@ -5,7 +5,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="description" content="【问题背景】 最近在项目上需要用LOG来查看和定位一些信息，但是系统原生的LOG实在太乱，信息也不太多，比如调用行数，所在方法，所在类名，线程名称都没有。 【初步想法】 本着开源的精神，首先去GitHub上面搜寻了一番，果然发现了不少优秀的项目，经过对比，选定了，Logger和Timber 【遇到的问题】 毫无疑问，Logger和Timber都是非常优秀的项...">
   <title>自定义信息丰富的Android Log - u3coding</title>
-  <link rel="canonical" href="https://u3.github.io/posts/2015/12/26-自定义信息丰富的androidlog/">
   <style>
 
     :root {
@@ -1925,12 +1924,26 @@
     }
 
   </style>
-  <link rel="stylesheet" href="/assets/site/editorial-portfolio.css?v=dark-1">
-</head>
-<body>
-<header><div class="bar"><a class="brand" href="/">u3coding</a><p class="site-bio">Android, AI, tooling, and engineering notes.</p><nav><a href="/">首页</a><a href="/projects/">项目</a><a href="/articles/">文章</a><a href="/archive/">归档</a><a href="/about/">关于</a></nav></div></header>
+  <link rel="stylesheet" href="/assets/site/editorial-portfolio.css?v=20261029-1">
+<!-- site-common -->
+<link rel="canonical" href="https://u3shadow.github.io/posts/2015/12/26-自定义信息丰富的androidlog/">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="u3coding"><meta property="og:title" content="自定义信息丰富的Android Log - u3coding">
+<meta property="og:description" content="【问题背景】 最近在项目上需要用LOG来查看和定位一些信息，但是系统原生的LOG实在太乱，信息也不太多，比如调用行数，所在方法，所在类名，线程名称都没有。 【初步想法】 本着开源的精神，首先去GitHub上面搜寻了一番，果然发现了不少优秀的项目，经过对比，选定了，Logger和Timber 【遇到的问题】 毫无疑问，Logger和Timber都是非常优秀的项..."><meta property="og:url" content="https://u3shadow.github.io/posts/2015/12/26-自定义信息丰富的androidlog/">
+<meta property="og:image" content="https://u3shadow.github.io/assets/site/banner.png">
+<script>document.documentElement.classList.add('js');try{document.documentElement.dataset.theme=localStorage.getItem('u3-theme')==='light'?'light':'dark'}catch{document.documentElement.dataset.theme='dark'}</script>
+<link rel="stylesheet" href="/assets/site/site-theme.css?v=20261029-1">
+<script defer src="/assets/site/site.js?v=20261029-1"></script>
 
-<main><div class="single-wrap"><section class="single-head"><p class="eyebrow">未分类 · 文章 ID 26</p><h1 class="title">自定义信息丰富的Android Log</h1><div class="title-rule"></div><div class="meta">发布于 2015-12-02 07:01 · 已迁移为静态页面</div></section><figure class="hero"><img src="/assets/images/00df1043d727.jpg" alt="自定义信息丰富的Android Log"></figure><article>【问题背景】</p>
+<!-- /site-common -->
+</head>
+<body><a class="skip-link" href="#main-content">跳至正文</a><header><div class="bar"><a class="brand" href="/">u3coding</a>
+<nav class="primary-nav" id="primary-navigation" aria-label="主导航"><a href="/">首页</a><a href="/projects/">项目</a><a href="/articles/" class="active" aria-current="page">文章</a><a href="/archive/">归档</a><a href="/about/">关于</a></nav>
+<div class="header-tools"><a class="icon-button" href="/articles/#search" aria-label="搜索文章" title="搜索文章"><span class="icon icon-search" aria-hidden="true"></span></a>
+<button type="button" class="icon-button" data-theme-toggle aria-label="切换浅色主题" title="切换浅色主题"><span class="icon icon-sun" aria-hidden="true"></span></button>
+<button type="button" class="icon-button menu-toggle" data-menu-toggle aria-controls="primary-navigation" aria-expanded="false" aria-label="展开导航" title="导航菜单"><span class="icon icon-menu" aria-hidden="true"></span></button></div></div></header>
+
+<main id="main-content"><div class="single-wrap"><section class="single-head"><p class="eyebrow">未分类 · 文章 ID 26</p><h1 class="title">自定义信息丰富的Android Log</h1><div class="title-rule"></div><div class="meta">发布于 2015-12-02 07:01 · 已迁移为静态页面</div></section><figure class="hero"><img src="/assets/images/00df1043d727.jpg" alt="自定义信息丰富的Android Log"></figure><article>【问题背景】</p>
 
 &nbsp;
 
@@ -1958,7 +1971,7 @@
 
 举个例子，下面是Logger的正常输出，但是当我们搜索关键字test3的时候，就只会显示一行||test3,其他可爱的信息就丢失掉了
 
-<div class="image-missing"><strong>Image unavailable</strong><span>这张图片来自已经无法下载的外部链接，静态备份中没有原图。</span><br><a href="https://github.com/orhanobut/logger/raw/master/images/description.png" target="_blank" rel="noreferrer">查看原始链接</a></div>
+<div class="image-missing"><strong>Image unavailable</strong><span>这张图片来自已经无法下载的外部链接，静态备份中没有原图。</span><br><a href="https://github.com/orhanobut/logger/raw/master/images/description.png" target="_blank" rel="noopener noreferrer">查看原始链接</a></div>
 
 2.Timber的其他信息过少。
 
@@ -2037,7 +2050,7 @@ An element in a stack trace, as returned by Throwable.getStackTrace(). Each elem
 
 有了代码，让我们看看最终的效果
 
-<img loading="lazy"  src="/assets/images/00df1043d727.jpg" alt="" />
+<img loading="lazy"  src="/assets/images/00df1043d727.jpg" / alt="文章配图：自定义信息丰富的Android Log">
 
 可以看到，我们所需要的信息都被打印出来了，而且在同一行，虽然简答，但是却非常的实用，这样在我们搜索的时候，就可以看到更多的信息啦。
 
@@ -2049,15 +2062,15 @@ JAVA其实所包含的内容非常多，我平时对JAVA的了解还稍显浅薄
 
 &nbsp;</article></div>
 </main>
-
-<footer>Generated from local Z-Blog backup for GitHub Pages.</footer>
+<footer class="ref-footer"><div><strong>u3coding</strong><small>© 2014–2026 u3coding</small></div>
+<nav aria-label="页脚导航"><a href="/">首页</a><a href="/projects/">项目</a><a href="/articles/">文章</a><a href="/archive/">归档</a><a href="/about/">关于</a></nav><p><a href="https://github.com/u3shadow">GitHub</a><a href="/feed.xml">RSS</a><a href="#main-content" aria-label="返回正文顶部">↑</a></p></footer>
 <script>
   document.querySelectorAll("img").forEach((img) => {
     const replaceMissingImage = () => {
       const box = document.createElement("div");
       box.className = "image-missing";
       const src = img.currentSrc || img.src || img.getAttribute("src") || "";
-      box.innerHTML = `<strong>Image unavailable</strong><span>This image could not be loaded from the static backup.</span><br><a href="${src}" target="_blank" rel="noreferrer">Open original image URL</a>`;
+      box.innerHTML = `<strong>Image unavailable</strong><span>This image could not be loaded from the static backup.</span><br><a href="${src}" target="_blank" rel="noopener noreferrer">Open original image URL</a>`;
       img.replaceWith(box);
     };
     img.addEventListener("error", replaceMissingImage, { once: true });

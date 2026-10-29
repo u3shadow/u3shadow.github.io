@@ -5,7 +5,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="description" content="采取什么措施来进一步优化 主要有五种措施 1.获取更多训练样本 2.尝试使用更小规模的特称 3.尝试增加特征 4.尝试使用多项式特征 5.增加或者减小正则参数λ 评估假设 我们如何评估一个已经做出的假设是否合理呢？也许我们的假设在训练集合上面有较好的表现，但是对于其他的数据却表现得不好。 这时候我们需要使用一些方法来评估我们的假设是否合理。 首先，我们需要把...">
   <title>[W6]机器学习应用建议 - u3coding</title>
-  <link rel="canonical" href="https://u3.github.io/posts/2016/11/571-w6advice-for-applying-machine-learning/">
   <style>
 
     :root {
@@ -1925,12 +1924,26 @@
     }
 
   </style>
-  <link rel="stylesheet" href="/assets/site/editorial-portfolio.css?v=dark-1">
-</head>
-<body>
-<header><div class="bar"><a class="brand" href="/">u3coding</a><p class="site-bio">Android, AI, tooling, and engineering notes.</p><nav><a href="/">首页</a><a href="/projects/">项目</a><a href="/articles/">文章</a><a href="/archive/">归档</a><a href="/about/">关于</a></nav></div></header>
+  <link rel="stylesheet" href="/assets/site/editorial-portfolio.css?v=20261029-1">
+<!-- site-common -->
+<link rel="canonical" href="https://u3shadow.github.io/posts/2016/11/571-w6advice-for-applying-machine-learning/">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="u3coding"><meta property="og:title" content="[W6]机器学习应用建议 - u3coding">
+<meta property="og:description" content="采取什么措施来进一步优化 主要有五种措施 1.获取更多训练样本 2.尝试使用更小规模的特称 3.尝试增加特征 4.尝试使用多项式特征 5.增加或者减小正则参数λ 评估假设 我们如何评估一个已经做出的假设是否合理呢？也许我们的假设在训练集合上面有较好的表现，但是对于其他的数据却表现得不好。 这时候我们需要使用一些方法来评估我们的假设是否合理。 首先，我们需要把..."><meta property="og:url" content="https://u3shadow.github.io/posts/2016/11/571-w6advice-for-applying-machine-learning/">
+<meta property="og:image" content="https://u3shadow.github.io/assets/site/banner.png">
+<script>document.documentElement.classList.add('js');try{document.documentElement.dataset.theme=localStorage.getItem('u3-theme')==='light'?'light':'dark'}catch{document.documentElement.dataset.theme='dark'}</script>
+<link rel="stylesheet" href="/assets/site/site-theme.css?v=20261029-1">
+<script defer src="/assets/site/site.js?v=20261029-1"></script>
 
-<main><div class="single-wrap"><section class="single-head"><p class="eyebrow">未分类 · 文章 ID 571</p><h1 class="title">[W6]机器学习应用建议</h1><div class="title-rule"></div><div class="meta">发布于 2016-11-23 15:19 · 已迁移为静态页面</div></section><figure class="hero"><img src="/assets/images/a396c8eeb203.png" alt="[W6]机器学习应用建议"></figure><article><h2>采取什么措施来进一步优化</h2>
+<!-- /site-common -->
+</head>
+<body><a class="skip-link" href="#main-content">跳至正文</a><header><div class="bar"><a class="brand" href="/">u3coding</a>
+<nav class="primary-nav" id="primary-navigation" aria-label="主导航"><a href="/">首页</a><a href="/projects/">项目</a><a href="/articles/" class="active" aria-current="page">文章</a><a href="/archive/">归档</a><a href="/about/">关于</a></nav>
+<div class="header-tools"><a class="icon-button" href="/articles/#search" aria-label="搜索文章" title="搜索文章"><span class="icon icon-search" aria-hidden="true"></span></a>
+<button type="button" class="icon-button" data-theme-toggle aria-label="切换浅色主题" title="切换浅色主题"><span class="icon icon-sun" aria-hidden="true"></span></button>
+<button type="button" class="icon-button menu-toggle" data-menu-toggle aria-controls="primary-navigation" aria-expanded="false" aria-label="展开导航" title="导航菜单"><span class="icon icon-menu" aria-hidden="true"></span></button></div></div></header>
+
+<main id="main-content"><div class="single-wrap"><section class="single-head"><p class="eyebrow">未分类 · 文章 ID 571</p><h1 class="title">[W6]机器学习应用建议</h1><div class="title-rule"></div><div class="meta">发布于 2016-11-23 15:19 · 已迁移为静态页面</div></section><figure class="hero"><img src="/assets/images/a396c8eeb203.png" alt="[W6]机器学习应用建议"></figure><article><h2>采取什么措施来进一步优化</h2>
 
 主要有五种措施
 1.获取更多训练样本
@@ -1954,10 +1967,10 @@
 1.对于线性回归问题，按照如下公式
 
 <blockquote>
-  <a href="https://www.u3blog.xyz/zb_users/upload/2016/11/线性回归测试集合误差.png"><img loading="lazy"  src="/assets/images/a396c8eeb203.png" alt="%e7%ba%bf%e6%80%a7%e5%9b%9e%e5%bd%92%e6%b5%8b%e8%af%95%e9%9b%86%e5%90%88%e8%af%af%e5%b7%ae" class="alignnone size-full wp-image-572" /></a>
+  <a href="/assets/images/a396c8eeb203.png"><img loading="lazy"  src="/assets/images/a396c8eeb203.png" alt="%e7%ba%bf%e6%80%a7%e5%9b%9e%e5%bd%92%e6%b5%8b%e8%af%95%e9%9b%86%e5%90%88%e8%af%af%e5%b7%ae" class="alignnone size-full wp-image-572" /></a>
   2.对于分类问题，（非0即1）
-  <a href="https://www.u3blog.xyz/zb_users/upload/2016/11/分类问题误差计算.png"><img loading="lazy"  src="/assets/images/f039195313a9.png" alt="%e5%88%86%e7%b1%bb%e9%97%ae%e9%a2%98%e8%af%af%e5%b7%ae%e8%ae%a1%e7%ae%97" class="alignnone size-full wp-image-573" /></a>
-  <a href="https://www.u3blog.xyz/zb_users/upload/2016/11/分类误差均值.png"><img loading="lazy"  src="/assets/images/0f2813dc3654.png" alt="%e5%88%86%e7%b1%bb%e8%af%af%e5%b7%ae%e5%9d%87%e5%80%bc" class="alignnone size-full wp-image-574" /></a>
+  <a href="/assets/images/f039195313a9.png"><img loading="lazy"  src="/assets/images/f039195313a9.png" alt="%e5%88%86%e7%b1%bb%e9%97%ae%e9%a2%98%e8%af%af%e5%b7%ae%e8%ae%a1%e7%ae%97" class="alignnone size-full wp-image-573" /></a>
+  <a href="/assets/images/0f2813dc3654.png"><img loading="lazy"  src="/assets/images/0f2813dc3654.png" alt="%e5%88%86%e7%b1%bb%e8%af%af%e5%b7%ae%e5%9d%87%e5%80%bc" class="alignnone size-full wp-image-574" /></a>
   第二个公式结果给出了分类错误的概率
 </blockquote>
 
@@ -1983,7 +1996,7 @@
 如下图
 
 <blockquote>
-  <a href="https://www.u3blog.xyz/zb_users/upload/2016/11/高方差高偏差.png"><img loading="lazy"  src="/assets/images/b6b489013022.png" alt="%e9%ab%98%e6%96%b9%e5%b7%ae%e9%ab%98%e5%81%8f%e5%b7%ae" class="alignnone size-full wp-image-575" /></a>
+  <a href="/assets/images/b6b489013022.png"><img loading="lazy"  src="/assets/images/b6b489013022.png" alt="%e9%ab%98%e6%96%b9%e5%b7%ae%e9%ab%98%e5%81%8f%e5%b7%ae" class="alignnone size-full wp-image-575" /></a>
 </blockquote>
 
 <h3>正则化参数λ对偏差和方差的影响</h3>
@@ -1993,7 +2006,7 @@
 如下图
 
 <blockquote>
-  <a href="https://www.u3blog.xyz/zb_users/upload/2016/11/正则化参数的影响.png"><img loading="lazy"  src="/assets/images/bd9c86b67b67.png" alt="%e6%ad%a3%e5%88%99%e5%8c%96%e5%8f%82%e6%95%b0%e7%9a%84%e5%bd%b1%e5%93%8d" class="alignnone size-full wp-image-576" /></a>
+  <a href="/assets/images/bd9c86b67b67.png"><img loading="lazy"  src="/assets/images/bd9c86b67b67.png" alt="%e6%ad%a3%e5%88%99%e5%8c%96%e5%8f%82%e6%95%b0%e7%9a%84%e5%bd%b1%e5%93%8d" class="alignnone size-full wp-image-576" /></a>
 </blockquote>
 
 <h3>学习曲线</h3>
@@ -2007,7 +2020,7 @@
 当我们的算法高偏差时，增加样本数量不会对结果有明显的改善
 
 <blockquote>
-  <a href="https://www.u3blog.xyz/zb_users/upload/2016/11/高偏差学习曲线.png"><img loading="lazy"  src="/assets/images/ed248aed6bec.png" alt="%e9%ab%98%e5%81%8f%e5%b7%ae%e5%ad%a6%e4%b9%a0%e6%9b%b2%e7%ba%bf" class="alignnone size-full wp-image-577" /></a>
+  <a href="/assets/images/ed248aed6bec.png"><img loading="lazy"  src="/assets/images/ed248aed6bec.png" alt="%e9%ab%98%e5%81%8f%e5%b7%ae%e5%ad%a6%e4%b9%a0%e6%9b%b2%e7%ba%bf" class="alignnone size-full wp-image-577" /></a>
 </blockquote>
 
 <h4>高偏差</h4>
@@ -2017,7 +2030,7 @@
 高偏差时，增加测试样本可以提高算法学习精度
 
 <blockquote>
-  <a href="https://www.u3blog.xyz/zb_users/upload/2016/11/高方差学习曲线.png"><img loading="lazy"  src="/assets/images/45d7c4ff59bf.png" alt="%e9%ab%98%e6%96%b9%e5%b7%ae%e5%ad%a6%e4%b9%a0%e6%9b%b2%e7%ba%bf" class="alignnone size-full wp-image-578" /></a>
+  <a href="/assets/images/45d7c4ff59bf.png"><img loading="lazy"  src="/assets/images/45d7c4ff59bf.png" alt="%e9%ab%98%e6%96%b9%e5%b7%ae%e5%ad%a6%e4%b9%a0%e6%9b%b2%e7%ba%bf" class="alignnone size-full wp-image-578" /></a>
 </blockquote>
 
 <h2>使用哪些手法优化机器学习效率</h2>
@@ -2048,15 +2061,15 @@
 2.选择适合训练样本的模型（非常困难）
 3.通过正则化来避免过度耦合</article></div>
 </main>
-
-<footer>Generated from local Z-Blog backup for GitHub Pages.</footer>
+<footer class="ref-footer"><div><strong>u3coding</strong><small>© 2014–2026 u3coding</small></div>
+<nav aria-label="页脚导航"><a href="/">首页</a><a href="/projects/">项目</a><a href="/articles/">文章</a><a href="/archive/">归档</a><a href="/about/">关于</a></nav><p><a href="https://github.com/u3shadow">GitHub</a><a href="/feed.xml">RSS</a><a href="#main-content" aria-label="返回正文顶部">↑</a></p></footer>
 <script>
   document.querySelectorAll("img").forEach((img) => {
     const replaceMissingImage = () => {
       const box = document.createElement("div");
       box.className = "image-missing";
       const src = img.currentSrc || img.src || img.getAttribute("src") || "";
-      box.innerHTML = `<strong>Image unavailable</strong><span>This image could not be loaded from the static backup.</span><br><a href="${src}" target="_blank" rel="noreferrer">Open original image URL</a>`;
+      box.innerHTML = `<strong>Image unavailable</strong><span>This image could not be loaded from the static backup.</span><br><a href="${src}" target="_blank" rel="noopener noreferrer">Open original image URL</a>`;
       img.replaceWith(box);
     };
     img.addEventListener("error", replaceMissingImage, { once: true });

@@ -5,7 +5,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="description" content="ReomveButterKnife插件 这是一个用于移除代码中对ButterKnife使用的AS插件，接下来我们将从头开始讲讲AS插件开发和这个插件的开发过程 地址是 RemoveButterKnife 什么是AndroidStudio插件 相信能开始阅读这篇文章的朋友都是从事，或者有兴趣从事Android开发的，那么，我们现在最常用的开发工具无疑就是And...">
   <title>AndroidStudio插件开发——RemoveButterKnife从构思到实现 - u3coding</title>
-  <link rel="canonical" href="https://u3.github.io/posts/2016/06/452-androidstudio-plugin-removebutterknife-di/">
   <style>
 
     :root {
@@ -1925,16 +1924,30 @@
     }
 
   </style>
-  <link rel="stylesheet" href="/assets/site/editorial-portfolio.css?v=dark-1">
-</head>
-<body>
-<header><div class="bar"><a class="brand" href="/">u3coding</a><p class="site-bio">Android, AI, tooling, and engineering notes.</p><nav><a href="/">首页</a><a href="/projects/">项目</a><a href="/articles/">文章</a><a href="/archive/">归档</a><a href="/about/">关于</a></nav></div></header>
+  <link rel="stylesheet" href="/assets/site/editorial-portfolio.css?v=20261029-1">
+<!-- site-common -->
+<link rel="canonical" href="https://u3shadow.github.io/posts/2016/06/452-androidstudio-plugin-removebutterknife-di/">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="u3coding"><meta property="og:title" content="AndroidStudio插件开发——RemoveButterKnife从构思到实现 - u3coding">
+<meta property="og:description" content="ReomveButterKnife插件 这是一个用于移除代码中对ButterKnife使用的AS插件，接下来我们将从头开始讲讲AS插件开发和这个插件的开发过程 地址是 RemoveButterKnife 什么是AndroidStudio插件 相信能开始阅读这篇文章的朋友都是从事，或者有兴趣从事Android开发的，那么，我们现在最常用的开发工具无疑就是And..."><meta property="og:url" content="https://u3shadow.github.io/posts/2016/06/452-androidstudio-plugin-removebutterknife-di/">
+<meta property="og:image" content="https://u3shadow.github.io/assets/site/banner.png">
+<script>document.documentElement.classList.add('js');try{document.documentElement.dataset.theme=localStorage.getItem('u3-theme')==='light'?'light':'dark'}catch{document.documentElement.dataset.theme='dark'}</script>
+<link rel="stylesheet" href="/assets/site/site-theme.css?v=20261029-1">
+<script defer src="/assets/site/site.js?v=20261029-1"></script>
 
-<main><div class="single-wrap"><section class="single-head"><p class="eyebrow">未分类 · 文章 ID 452</p><h1 class="title">AndroidStudio插件开发——RemoveButterKnife从构思到实现</h1><div class="title-rule"></div><div class="meta">发布于 2016-06-24 16:21 · 已迁移为静态页面</div></section><figure class="hero"><img src="/assets/images/a8b5844a5f60.png" alt="AndroidStudio插件开发——RemoveButterKnife从构思到实现"></figure><article><h2>ReomveButterKnife插件</h2>
+<!-- /site-common -->
+</head>
+<body><a class="skip-link" href="#main-content">跳至正文</a><header><div class="bar"><a class="brand" href="/">u3coding</a>
+<nav class="primary-nav" id="primary-navigation" aria-label="主导航"><a href="/">首页</a><a href="/projects/">项目</a><a href="/articles/" class="active" aria-current="page">文章</a><a href="/archive/">归档</a><a href="/about/">关于</a></nav>
+<div class="header-tools"><a class="icon-button" href="/articles/#search" aria-label="搜索文章" title="搜索文章"><span class="icon icon-search" aria-hidden="true"></span></a>
+<button type="button" class="icon-button" data-theme-toggle aria-label="切换浅色主题" title="切换浅色主题"><span class="icon icon-sun" aria-hidden="true"></span></button>
+<button type="button" class="icon-button menu-toggle" data-menu-toggle aria-controls="primary-navigation" aria-expanded="false" aria-label="展开导航" title="导航菜单"><span class="icon icon-menu" aria-hidden="true"></span></button></div></div></header>
+
+<main id="main-content"><div class="single-wrap"><section class="single-head"><p class="eyebrow">未分类 · 文章 ID 452</p><h1 class="title">AndroidStudio插件开发——RemoveButterKnife从构思到实现</h1><div class="title-rule"></div><div class="meta">发布于 2016-06-24 16:21 · 已迁移为静态页面</div></section><figure class="hero"><img src="/assets/images/a8b5844a5f60.png" alt="AndroidStudio插件开发——RemoveButterKnife从构思到实现"></figure><article><h2>ReomveButterKnife插件</h2>
 
 这是一个用于移除代码中对ButterKnife使用的AS插件，接下来我们将从头开始讲讲AS插件开发和这个插件的开发过程
-地址是<a href="https://github.com/u3shadow/RemoveButterKnife" target="_blank">RemoveButterKnife</a>
-<a href="https://www.u3blog.xyz/zb_users/upload/2016/06/QQ截图20160624161742.png"><img loading="lazy"  src="/assets/images/a8b5844a5f60.png" alt="QQ截图20160624161742" class="alignnone size-full wp-image-469" /></a>
+地址是<a href="https://github.com/u3shadow/RemoveButterKnife" target="_blank" rel="noopener noreferrer">RemoveButterKnife</a>
+<a href="/assets/images/a8b5844a5f60.png"><img loading="lazy"  src="/assets/images/a8b5844a5f60.png" alt="QQ截图20160624161742" class="alignnone size-full wp-image-469" /></a>
 
 <h2>什么是AndroidStudio插件</h2>
 
@@ -1945,8 +1958,8 @@
 AndroidStudio虽然是Google公司推出的一款很方便的开发环境，但是在实际的使用中，还是有一些功能是我们需要而它没有的，比如对vim输入方式的支持，这时候，就需要我们在它上面安装各种各样的插件来获得这些额外的功能了。
 
 通常我们可以在AndroidStudio的右上角找到一个小小的放大镜，点击它，然后搜索plugin，就可以找到插件搜索的界面了，在这里，我们可以搜索到自己想要的插件，当然，这些插件得上传到插件库里才行，这个后面会讲到。
-<a href="https://www.u3blog.xyz/zb_users/upload/2016/06/step1.png"><img loading="lazy"  src="/assets/images/f4b67a30c4cd.png" alt="step1" class="alignnone size-full wp-image-453" /></a>
-<a href="https://www.u3blog.xyz/zb_users/upload/2016/06/step2.png"><img loading="lazy"  src="/assets/images/8847169d6592.png" alt="step2" class="alignnone size-full wp-image-454" /></a>
+<a href="/assets/images/f4b67a30c4cd.png"><img loading="lazy"  src="/assets/images/f4b67a30c4cd.png" alt="step1" class="alignnone size-full wp-image-453" /></a>
+<a href="/assets/images/8847169d6592.png"><img loading="lazy"  src="/assets/images/8847169d6592.png" alt="step2" class="alignnone size-full wp-image-454" /></a>
 
 <h2>AndroidStudio插件应该怎么用</h2>
 
@@ -1968,7 +1981,7 @@ AndroidStudio虽然是Google公司推出的一款很方便的开发环境，但�
 
 所以，这种有规律又重复简单的工作为什么不能用一个插件来实现呢？于是RemoveButterKnife的想法就出现在了笔者脑海中。
 
-<a href="https://www.u3blog.xyz/zb_users/upload/2016/06/1.gif"><img loading="lazy"  src="/assets/images/77ad67851a6f.gif" alt="1" class="alignnone size-full wp-image-450" /></a>
+<a href="/assets/images/77ad67851a6f.gif"><img loading="lazy"  src="/assets/images/77ad67851a6f.gif" alt="1" class="alignnone size-full wp-image-450" /></a>
 
 <h2>开发插件前的准备工作</h2>
 
@@ -1983,13 +1996,13 @@ AndroidStudio虽然是Google公司推出的一款很方便的开发环境，但�
 有了想法和工具，我们就可以开始编码了，但是，插件该怎么写呢？
 
 其实，插件就是一种项目类型，我们新建项目的时候就会发现，有plugin这个类型，我们就新建一个这个类型的项目，中途会选择idea sdk,如果没有我们就新建一个（点击new 然后选择你的idea安装目录就可以了）
-<a href="https://www.u3blog.xyz/zb_users/upload/2016/06/QQ截图20160624145004.png"><img loading="lazy"  src="/assets/images/597cd9fb1337.png" alt="plugin" class="alignnone size-full wp-image-457" /></a>
+<a href="/assets/images/597cd9fb1337.png"><img loading="lazy"  src="/assets/images/597cd9fb1337.png" alt="plugin" class="alignnone size-full wp-image-457" /></a>
 
 现在，我们有了插件项目了，我们点击src目录，这就是我们存放代码的地方，右键，新建一个Action
-<a href="https://www.u3blog.xyz/zb_users/upload/2016/06/QQ截图20160624145412.png"><img loading="lazy"  src="/assets/images/ed6216bd15e3.png" alt="QQ截图20160624145412" class="alignnone size-full wp-image-459" /></a>
+<a href="/assets/images/ed6216bd15e3.png"><img loading="lazy"  src="/assets/images/ed6216bd15e3.png" alt="QQ截图20160624145412" class="alignnone size-full wp-image-459" /></a>
 
 这里会填写一些信息
-<a href="https://www.u3blog.xyz/zb_users/upload/2016/06/QQ截图20160624145701.png"><img loading="lazy"  src="/assets/images/0fb6f56c0347.png" alt="QQ截图20160624145701" class="alignnone size-full wp-image-460" /></a>
+<a href="/assets/images/0fb6f56c0347.png"><img loading="lazy"  src="/assets/images/0fb6f56c0347.png" alt="QQ截图20160624145701" class="alignnone size-full wp-image-460" /></a>
 
 完成创建之后，我们的类代码是这样的
 
@@ -2025,10 +2038,10 @@ public class test extends AnAction {
 说完了功能，我们来看一个简单的对比例子，来说明到底是怎样的效果
 
 整容前：
-<a href="https://www.u3blog.xyz/zb_users/upload/2016/06/QQ截图20160624154939.png"><img loading="lazy"  src="/assets/images/d99c2fd11ba4.png" alt="QQ截图20160624154939" class="alignnone size-full wp-image-464" /></a>
+<a href="/assets/images/d99c2fd11ba4.png"><img loading="lazy"  src="/assets/images/d99c2fd11ba4.png" alt="QQ截图20160624154939" class="alignnone size-full wp-image-464" /></a>
 
 整容后：
-<a href="https://www.u3blog.xyz/zb_users/upload/2016/06/QQ截图20160624155124.png"><img loading="lazy"  src="/assets/images/915293fabc7c.png" alt="QQ截图20160624155124" class="alignnone size-full wp-image-465" /></a>
+<a href="/assets/images/915293fabc7c.png"><img loading="lazy"  src="/assets/images/915293fabc7c.png" alt="QQ截图20160624155124" class="alignnone size-full wp-image-465" /></a>
 
 <h2>具体实现思路</h2>
 
@@ -2055,27 +2068,27 @@ public class test extends AnAction {
 3.FindViewByIdWriter ————  用于生成findviewbyid代码
 
 具体的代码可以在github上面找到
-地址是<a href="https://github.com/u3shadow/RemoveButterKnife" target="_blank">RemoveButterKnife</a>
-<a href="https://www.u3blog.xyz/zb_users/upload/2016/06/QQ截图20160624161742.png"><img loading="lazy"  src="/assets/images/a8b5844a5f60.png" alt="QQ截图20160624161742" class="alignnone size-full wp-image-469" /></a>
+地址是<a href="https://github.com/u3shadow/RemoveButterKnife" target="_blank" rel="noopener noreferrer">RemoveButterKnife</a>
+<a href="/assets/images/a8b5844a5f60.png"><img loading="lazy"  src="/assets/images/a8b5844a5f60.png" alt="QQ截图20160624161742" class="alignnone size-full wp-image-469" /></a>
 
 在代码中，使用了一些idea提供的api来获取当前编辑文件的内容，并编辑，这些api都很简单，各位如果想查询的话可以到idea的支持页面上进行查找.
 
 <h2>把你的插件发布出去</h2>
 
 你可以把你的插件发布到仓库里面去，这样就能在IDE里面找到它了，方法很简单，登陆仓库地址然后注册账号，发布插件等待通过审核即可。
-<a href="https://plugins.jetbrains.com/?idea" target="_blank">仓库地址</a>
+<a href="https://plugins.jetbrains.com/?idea" target="_blank" rel="noopener noreferrer">仓库地址</a>
 最后，如果你觉得这篇文章还不错的话，请我喝杯咖啡吧:)
-<a href="https://www.u3blog.xyz/zb_users/upload/2016/07/1469583527097.jpg"><img loading="lazy"  src="/assets/images/fe3e3ca6f056.jpg" alt="1469583527097" class="alignnone size-medium wp-image-494" /></a></article></div>
+<a href="/assets/images/fe3e3ca6f056.jpg"><img loading="lazy"  src="/assets/images/fe3e3ca6f056.jpg" alt="1469583527097" class="alignnone size-medium wp-image-494" /></a></article></div>
 </main>
-
-<footer>Generated from local Z-Blog backup for GitHub Pages.</footer>
+<footer class="ref-footer"><div><strong>u3coding</strong><small>© 2014–2026 u3coding</small></div>
+<nav aria-label="页脚导航"><a href="/">首页</a><a href="/projects/">项目</a><a href="/articles/">文章</a><a href="/archive/">归档</a><a href="/about/">关于</a></nav><p><a href="https://github.com/u3shadow">GitHub</a><a href="/feed.xml">RSS</a><a href="#main-content" aria-label="返回正文顶部">↑</a></p></footer>
 <script>
   document.querySelectorAll("img").forEach((img) => {
     const replaceMissingImage = () => {
       const box = document.createElement("div");
       box.className = "image-missing";
       const src = img.currentSrc || img.src || img.getAttribute("src") || "";
-      box.innerHTML = `<strong>Image unavailable</strong><span>This image could not be loaded from the static backup.</span><br><a href="${src}" target="_blank" rel="noreferrer">Open original image URL</a>`;
+      box.innerHTML = `<strong>Image unavailable</strong><span>This image could not be loaded from the static backup.</span><br><a href="${src}" target="_blank" rel="noopener noreferrer">Open original image URL</a>`;
       img.replaceWith(box);
     };
     img.addEventListener("error", replaceMissingImage, { once: true });

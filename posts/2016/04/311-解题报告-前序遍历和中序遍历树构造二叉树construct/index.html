@@ -5,7 +5,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="description" content="题目地址 http://www.lintcode.com/zh-cn/problem/construct-binary-tree-from-preorder-and-inorder-traversal/ 题目大意 给出一棵二叉树的前序和中序遍历，恢复二叉树的树结构 思路 基于前序和中序遍历的思路，我们可以找到规律 在前序中找到一个点，并在中序中找到此点的位置...">
   <title>【解题报告】 前序遍历和中序遍历树构造二叉树Construct Binary Tree from Preorder and Inorder Traversal - u3coding</title>
-  <link rel="canonical" href="https://u3.github.io/posts/2016/04/311-解题报告-前序遍历和中序遍历树构造二叉树construct/">
   <style>
 
     :root {
@@ -1925,12 +1924,26 @@
     }
 
   </style>
-  <link rel="stylesheet" href="/assets/site/editorial-portfolio.css?v=dark-1">
-</head>
-<body>
-<header><div class="bar"><a class="brand" href="/">u3coding</a><p class="site-bio">Android, AI, tooling, and engineering notes.</p><nav><a href="/">首页</a><a href="/projects/">项目</a><a href="/articles/">文章</a><a href="/archive/">归档</a><a href="/about/">关于</a></nav></div></header>
+  <link rel="stylesheet" href="/assets/site/editorial-portfolio.css?v=20261029-1">
+<!-- site-common -->
+<link rel="canonical" href="https://u3shadow.github.io/posts/2016/04/311-解题报告-前序遍历和中序遍历树构造二叉树construct/">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="u3coding"><meta property="og:title" content="【解题报告】 前序遍历和中序遍历树构造二叉树Construct Binary Tree from Preorder and Inorder Traversal - u3coding">
+<meta property="og:description" content="题目地址 http://www.lintcode.com/zh-cn/problem/construct-binary-tree-from-preorder-and-inorder-traversal/ 题目大意 给出一棵二叉树的前序和中序遍历，恢复二叉树的树结构 思路 基于前序和中序遍历的思路，我们可以找到规律 在前序中找到一个点，并在中序中找到此点的位置..."><meta property="og:url" content="https://u3shadow.github.io/posts/2016/04/311-解题报告-前序遍历和中序遍历树构造二叉树construct/">
+<meta property="og:image" content="https://u3shadow.github.io/assets/site/banner.png">
+<script>document.documentElement.classList.add('js');try{document.documentElement.dataset.theme=localStorage.getItem('u3-theme')==='light'?'light':'dark'}catch{document.documentElement.dataset.theme='dark'}</script>
+<link rel="stylesheet" href="/assets/site/site-theme.css?v=20261029-1">
+<script defer src="/assets/site/site.js?v=20261029-1"></script>
 
-<main><div class="single-wrap"><section class="single-head"><p class="eyebrow">未分类 · 文章 ID 311</p><h1 class="title">【解题报告】 前序遍历和中序遍历树构造二叉树Construct Binary Tree from Preorder and Inorder Traversal</h1><div class="title-rule"></div><div class="meta">发布于 2016-04-10 12:39 · 已迁移为静态页面</div></section><article><h2>题目地址</h2>
+<!-- /site-common -->
+</head>
+<body><a class="skip-link" href="#main-content">跳至正文</a><header><div class="bar"><a class="brand" href="/">u3coding</a>
+<nav class="primary-nav" id="primary-navigation" aria-label="主导航"><a href="/">首页</a><a href="/projects/">项目</a><a href="/articles/" class="active" aria-current="page">文章</a><a href="/archive/">归档</a><a href="/about/">关于</a></nav>
+<div class="header-tools"><a class="icon-button" href="/articles/#search" aria-label="搜索文章" title="搜索文章"><span class="icon icon-search" aria-hidden="true"></span></a>
+<button type="button" class="icon-button" data-theme-toggle aria-label="切换浅色主题" title="切换浅色主题"><span class="icon icon-sun" aria-hidden="true"></span></button>
+<button type="button" class="icon-button menu-toggle" data-menu-toggle aria-controls="primary-navigation" aria-expanded="false" aria-label="展开导航" title="导航菜单"><span class="icon icon-menu" aria-hidden="true"></span></button></div></div></header>
+
+<main id="main-content"><div class="single-wrap"><section class="single-head"><p class="eyebrow">未分类 · 文章 ID 311</p><h1 class="title">【解题报告】 前序遍历和中序遍历树构造二叉树Construct Binary Tree from Preorder and Inorder Traversal</h1><div class="title-rule"></div><div class="meta">发布于 2016-04-10 12:39 · 已迁移为静态页面</div></section><article><h2>题目地址</h2>
 
 http://www.lintcode.com/zh-cn/problem/construct-binary-tree-from-preorder-and-inorder-traversal/
 
@@ -1991,15 +2004,15 @@ http://www.lintcode.com/zh-cn/problem/construct-binary-tree-from-preorder-and-in
 对于此类题目，很容易从数据上找到规律，但是代码实现的时候因为没有考虑递归的方法，造成了很大的麻烦
 使用了递归之后，我们只需要把注意力击中到某一次的过程就行了，此题就可以作为一个很好的例子，自己写一次之后对于递归的思想理解有很大的帮助。</article></div>
 </main>
-
-<footer>Generated from local Z-Blog backup for GitHub Pages.</footer>
+<footer class="ref-footer"><div><strong>u3coding</strong><small>© 2014–2026 u3coding</small></div>
+<nav aria-label="页脚导航"><a href="/">首页</a><a href="/projects/">项目</a><a href="/articles/">文章</a><a href="/archive/">归档</a><a href="/about/">关于</a></nav><p><a href="https://github.com/u3shadow">GitHub</a><a href="/feed.xml">RSS</a><a href="#main-content" aria-label="返回正文顶部">↑</a></p></footer>
 <script>
   document.querySelectorAll("img").forEach((img) => {
     const replaceMissingImage = () => {
       const box = document.createElement("div");
       box.className = "image-missing";
       const src = img.currentSrc || img.src || img.getAttribute("src") || "";
-      box.innerHTML = `<strong>Image unavailable</strong><span>This image could not be loaded from the static backup.</span><br><a href="${src}" target="_blank" rel="noreferrer">Open original image URL</a>`;
+      box.innerHTML = `<strong>Image unavailable</strong><span>This image could not be loaded from the static backup.</span><br><a href="${src}" target="_blank" rel="noopener noreferrer">Open original image URL</a>`;
       img.replaceWith(box);
     };
     img.addEventListener("error", replaceMissingImage, { once: true });

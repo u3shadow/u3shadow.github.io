@@ -5,7 +5,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="description" content="View和DecorView 当Activity创建完毕时，会将DecorView添加到Window中，同时创建ViewRootImp对象，并将ViewRootImp对象与DecorView建立关联 如下代码所示： root = new ViewRootImp(view.getContext(),display); root.setVIew(view,wpa...">
   <title>Android中View的初步认识以及MeasureSpac的理解 - u3coding</title>
-  <link rel="canonical" href="https://u3.github.io/posts/2016/03/235-android中view的初步认识以及measurespac的理解/">
   <style>
 
     :root {
@@ -1925,12 +1924,26 @@
     }
 
   </style>
-  <link rel="stylesheet" href="/assets/site/editorial-portfolio.css?v=dark-1">
-</head>
-<body>
-<header><div class="bar"><a class="brand" href="/">u3coding</a><p class="site-bio">Android, AI, tooling, and engineering notes.</p><nav><a href="/">首页</a><a href="/projects/">项目</a><a href="/articles/">文章</a><a href="/archive/">归档</a><a href="/about/">关于</a></nav></div></header>
+  <link rel="stylesheet" href="/assets/site/editorial-portfolio.css?v=20261029-1">
+<!-- site-common -->
+<link rel="canonical" href="https://u3shadow.github.io/posts/2016/03/235-android中view的初步认识以及measurespac的理解/">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="u3coding"><meta property="og:title" content="Android中View的初步认识以及MeasureSpac的理解 - u3coding">
+<meta property="og:description" content="View和DecorView 当Activity创建完毕时，会将DecorView添加到Window中，同时创建ViewRootImp对象，并将ViewRootImp对象与DecorView建立关联 如下代码所示： root = new ViewRootImp(view.getContext(),display); root.setVIew(view,wpa..."><meta property="og:url" content="https://u3shadow.github.io/posts/2016/03/235-android中view的初步认识以及measurespac的理解/">
+<meta property="og:image" content="https://u3shadow.github.io/assets/site/banner.png">
+<script>document.documentElement.classList.add('js');try{document.documentElement.dataset.theme=localStorage.getItem('u3-theme')==='light'?'light':'dark'}catch{document.documentElement.dataset.theme='dark'}</script>
+<link rel="stylesheet" href="/assets/site/site-theme.css?v=20261029-1">
+<script defer src="/assets/site/site.js?v=20261029-1"></script>
 
-<main><div class="single-wrap"><section class="single-head"><p class="eyebrow">未分类 · 文章 ID 235</p><h1 class="title">Android中View的初步认识以及MeasureSpac的理解</h1><div class="title-rule"></div><div class="meta">发布于 2016-03-05 11:58 · 已迁移为静态页面</div></section><figure class="hero"><img src="/assets/images/1aa64d432445.png" alt="Android中View的初步认识以及MeasureSpac的理解"></figure><article><h2>View和DecorView</h2>
+<!-- /site-common -->
+</head>
+<body><a class="skip-link" href="#main-content">跳至正文</a><header><div class="bar"><a class="brand" href="/">u3coding</a>
+<nav class="primary-nav" id="primary-navigation" aria-label="主导航"><a href="/">首页</a><a href="/projects/">项目</a><a href="/articles/" class="active" aria-current="page">文章</a><a href="/archive/">归档</a><a href="/about/">关于</a></nav>
+<div class="header-tools"><a class="icon-button" href="/articles/#search" aria-label="搜索文章" title="搜索文章"><span class="icon icon-search" aria-hidden="true"></span></a>
+<button type="button" class="icon-button" data-theme-toggle aria-label="切换浅色主题" title="切换浅色主题"><span class="icon icon-sun" aria-hidden="true"></span></button>
+<button type="button" class="icon-button menu-toggle" data-menu-toggle aria-controls="primary-navigation" aria-expanded="false" aria-label="展开导航" title="导航菜单"><span class="icon icon-menu" aria-hidden="true"></span></button></div></div></header>
+
+<main id="main-content"><div class="single-wrap"><section class="single-head"><p class="eyebrow">未分类 · 文章 ID 235</p><h1 class="title">Android中View的初步认识以及MeasureSpac的理解</h1><div class="title-rule"></div><div class="meta">发布于 2016-03-05 11:58 · 已迁移为静态页面</div></section><figure class="hero"><img src="/assets/images/1aa64d432445.png" alt="Android中View的初步认识以及MeasureSpac的理解"></figure><article><h2>View和DecorView</h2>
 
 当Activity创建完毕时，会将DecorView添加到Window中，同时创建ViewRootImp对象，并将ViewRootImp对象与DecorView建立关联
 
@@ -1940,19 +1953,19 @@
 root.setVIew(view,wparams,panelParentView);</pre>
 
 View的绘制是从ViewRoot的performTraversals方法开始的，经过measure,layout,draw三个流程才最终将一个view绘制出来，关于这三个流程的具体情况已经在
-<a href="http://144.34.248.28/2016/02/16/view%E5%B7%A5%E4%BD%9C%E6%B5%81%E7%A8%8B%E4%B9%8Bmeasure/" target="_blank">View工作流程之Measure</a>
-<a href="http://144.34.248.28/2016/02/16/view%E5%B7%A5%E4%BD%9C%E5%8E%9F%E7%90%86%E4%B9%8Blayout%E8%BF%87%E7%A8%8B%E5%92%8Cdraw%E8%BF%87%E7%A8%8B/" target="_blank">View工作原理之Layout过程和Draw过程</a>
+<a href="http://144.34.248.28/2016/02/16/view%E5%B7%A5%E4%BD%9C%E6%B5%81%E7%A8%8B%E4%B9%8Bmeasure/" target="_blank" rel="noopener noreferrer">View工作流程之Measure</a>
+<a href="http://144.34.248.28/2016/02/16/view%E5%B7%A5%E4%BD%9C%E5%8E%9F%E7%90%86%E4%B9%8Blayout%E8%BF%87%E7%A8%8B%E5%92%8Cdraw%E8%BF%87%E7%A8%8B/" target="_blank" rel="noopener noreferrer">View工作原理之Layout过程和Draw过程</a>
 这两篇读后感中介绍了。
 
 这三个流程大体的调用过程可以用一张图来总结，如下
-<a href="https://www.u3blog.xyz/zb_users/upload/2016/03/fllow1.png" rel="attachment wp-att-243"><img loading="lazy"  src="/assets/images/1aa64d432445.png" alt="fllow1" class="alignnone size-full wp-image-243" /></a>
+<a href="/assets/images/1aa64d432445.png" rel="attachment wp-att-243"><img loading="lazy"  src="/assets/images/1aa64d432445.png" alt="fllow1" class="alignnone size-full wp-image-243" /></a>
 
 <h2>DecorView的层级结构</h2>
 
 DecorView作为我们的顶级View,一般内部包含了一个LinearLayout,在这个Layout中，又由两部分组成，顶部的TitleView和剩余部分的ContentView
 
 如下图：
-<a href="https://www.u3blog.xyz/zb_users/upload/2016/03/fllow2.png" rel="attachment wp-att-244"><img loading="lazy"  src="/assets/images/36a66e64fbfc.png" alt="fllow2" class="alignnone size-full wp-image-244" /></a>
+<a href="/assets/images/36a66e64fbfc.png" rel="attachment wp-att-244"><img loading="lazy"  src="/assets/images/36a66e64fbfc.png" alt="fllow2" class="alignnone size-full wp-image-244" /></a>
 读到这里，想必大家终于明白了为什么在Activity中，设置内容布局的时候调用的函数是setContentView了，对，我们设置的其实就是这个ContentView的内容。
 
 <h2>关于MeasureSpace</h2>
@@ -1985,19 +1998,19 @@ MeasureSpec的生成是通过自身的LayoutParams和父容器的MeasureSpec共�
 具体的生成对应可以参考作者在书中给出的表格
 
 如下图：
-<a href="https://www.u3blog.xyz/zb_users/upload/2016/03/fllow3.png" rel="attachment wp-att-245"><img loading="lazy"  src="/assets/images/823679cf5b22.png" alt="fllow3" class="alignnone size-full wp-image-245" /></a>
+<a href="/assets/images/823679cf5b22.png" rel="attachment wp-att-245"><img loading="lazy"  src="/assets/images/823679cf5b22.png" alt="fllow3" class="alignnone size-full wp-image-245" /></a>
 
 至此，MeasureSpec就介绍完了，原本听起来高深莫测的东西，只要跟着这本书作者的思路一步步走下去，其实并不难懂。</article></div>
 </main>
-
-<footer>Generated from local Z-Blog backup for GitHub Pages.</footer>
+<footer class="ref-footer"><div><strong>u3coding</strong><small>© 2014–2026 u3coding</small></div>
+<nav aria-label="页脚导航"><a href="/">首页</a><a href="/projects/">项目</a><a href="/articles/">文章</a><a href="/archive/">归档</a><a href="/about/">关于</a></nav><p><a href="https://github.com/u3shadow">GitHub</a><a href="/feed.xml">RSS</a><a href="#main-content" aria-label="返回正文顶部">↑</a></p></footer>
 <script>
   document.querySelectorAll("img").forEach((img) => {
     const replaceMissingImage = () => {
       const box = document.createElement("div");
       box.className = "image-missing";
       const src = img.currentSrc || img.src || img.getAttribute("src") || "";
-      box.innerHTML = `<strong>Image unavailable</strong><span>This image could not be loaded from the static backup.</span><br><a href="${src}" target="_blank" rel="noreferrer">Open original image URL</a>`;
+      box.innerHTML = `<strong>Image unavailable</strong><span>This image could not be loaded from the static backup.</span><br><a href="${src}" target="_blank" rel="noopener noreferrer">Open original image URL</a>`;
       img.replaceWith(box);
     };
     img.addEventListener("error", replaceMissingImage, { once: true });

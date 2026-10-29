@@ -5,7 +5,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="description" content="ReomveButterKnife Plugin This is an Android Studio plugin to help remove use of ButterKnife, we will talk about how to dev it. GitHub address RemoveButterKnife What AndroidStudio P...">
   <title>AndroidStudio Plugin Dev——RemoveButterKnife design to implement[pw1] - u3coding</title>
-  <link rel="canonical" href="https://u3.github.io/posts/2016/06/475-androidstudio-plugin-dev-removebutterknife-design-to-implement/">
   <style>
 
     :root {
@@ -1925,16 +1924,30 @@
     }
 
   </style>
-  <link rel="stylesheet" href="/assets/site/editorial-portfolio.css?v=dark-1">
-</head>
-<body>
-<header><div class="bar"><a class="brand" href="/">u3coding</a><p class="site-bio">Android, AI, tooling, and engineering notes.</p><nav><a href="/">首页</a><a href="/projects/">项目</a><a href="/articles/">文章</a><a href="/archive/">归档</a><a href="/about/">关于</a></nav></div></header>
+  <link rel="stylesheet" href="/assets/site/editorial-portfolio.css?v=20261029-1">
+<!-- site-common -->
+<link rel="canonical" href="https://u3shadow.github.io/posts/2016/06/475-androidstudio-plugin-dev-removebutterknife-design-to-implement/">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="u3coding"><meta property="og:title" content="AndroidStudio Plugin Dev——RemoveButterKnife design to implement[pw1] - u3coding">
+<meta property="og:description" content="ReomveButterKnife Plugin This is an Android Studio plugin to help remove use of ButterKnife, we will talk about how to dev it. GitHub address RemoveButterKnife What AndroidStudio P..."><meta property="og:url" content="https://u3shadow.github.io/posts/2016/06/475-androidstudio-plugin-dev-removebutterknife-design-to-implement/">
+<meta property="og:image" content="https://u3shadow.github.io/assets/site/banner.png">
+<script>document.documentElement.classList.add('js');try{document.documentElement.dataset.theme=localStorage.getItem('u3-theme')==='light'?'light':'dark'}catch{document.documentElement.dataset.theme='dark'}</script>
+<link rel="stylesheet" href="/assets/site/site-theme.css?v=20261029-1">
+<script defer src="/assets/site/site.js?v=20261029-1"></script>
 
-<main><div class="single-wrap"><section class="single-head"><p class="eyebrow">未分类 · 文章 ID 475</p><h1 class="title">AndroidStudio Plugin Dev——RemoveButterKnife design to implement[pw1]</h1><div class="title-rule"></div><div class="meta">发布于 2016-06-26 17:08 · 已迁移为静态页面</div></section><figure class="hero"><img src="/assets/images/a8b5844a5f60.png" alt="AndroidStudio Plugin Dev——RemoveButterKnife design to implement[pw1]"></figure><article><h2>ReomveButterKnife Plugin</h2>
+<!-- /site-common -->
+</head>
+<body><a class="skip-link" href="#main-content">跳至正文</a><header><div class="bar"><a class="brand" href="/">u3coding</a>
+<nav class="primary-nav" id="primary-navigation" aria-label="主导航"><a href="/">首页</a><a href="/projects/">项目</a><a href="/articles/" class="active" aria-current="page">文章</a><a href="/archive/">归档</a><a href="/about/">关于</a></nav>
+<div class="header-tools"><a class="icon-button" href="/articles/#search" aria-label="搜索文章" title="搜索文章"><span class="icon icon-search" aria-hidden="true"></span></a>
+<button type="button" class="icon-button" data-theme-toggle aria-label="切换浅色主题" title="切换浅色主题"><span class="icon icon-sun" aria-hidden="true"></span></button>
+<button type="button" class="icon-button menu-toggle" data-menu-toggle aria-controls="primary-navigation" aria-expanded="false" aria-label="展开导航" title="导航菜单"><span class="icon icon-menu" aria-hidden="true"></span></button></div></div></header>
+
+<main id="main-content"><div class="single-wrap"><section class="single-head"><p class="eyebrow">未分类 · 文章 ID 475</p><h1 class="title">AndroidStudio Plugin Dev——RemoveButterKnife design to implement[pw1]</h1><div class="title-rule"></div><div class="meta">发布于 2016-06-26 17:08 · 已迁移为静态页面</div></section><figure class="hero"><img src="/assets/images/a8b5844a5f60.png" alt="AndroidStudio Plugin Dev——RemoveButterKnife design to implement[pw1]"></figure><article><h2>ReomveButterKnife Plugin</h2>
 
 This is an Android Studio plugin to help remove use of ButterKnife, we will talk about how to dev it.
-GitHub address<a href="https://github.com/u3shadow/RemoveButterKnife" target="_blank">RemoveButterKnife</a>
-<a href="https://www.u3blog.xyz/zb_users/upload/2016/06/QQ截图20160624161742.png"><img loading="lazy"  src="/assets/images/a8b5844a5f60.png" alt="QQ截图20160624161742" class="alignnone size-full wp-image-469" /></a>
+GitHub address<a href="https://github.com/u3shadow/RemoveButterKnife" target="_blank" rel="noopener noreferrer">RemoveButterKnife</a>
+<a href="/assets/images/a8b5844a5f60.png"><img loading="lazy"  src="/assets/images/a8b5844a5f60.png" alt="QQ截图20160624161742" class="alignnone size-full wp-image-469" /></a>
 
 <h2>What AndroidStudio Plugin is?</h2>
 
@@ -1945,8 +1958,8 @@ What AndroidStudio Plugin is?
 AndroidStudio is a Google recommend IDE for Android develop, but we also need some other function when use it, we can use plugin to add the function, such as make your AndroidStudio support vim by install a vim plugin.
 
 We can find a magnifier in AndroidStudio's top right, click,  and input plugin, click the result, you can search and install plugin in the pop window.
-<a href="https://www.u3blog.xyz/zb_users/upload/2016/06/step1.png"><img loading="lazy"  src="/assets/images/f4b67a30c4cd.png" alt="step1" class="alignnone size-full wp-image-453" /></a>
-<a href="https://www.u3blog.xyz/zb_users/upload/2016/06/step2.png"><img loading="lazy"  src="/assets/images/8847169d6592.png" alt="step2" class="alignnone size-full wp-image-454" /></a>
+<a href="/assets/images/f4b67a30c4cd.png"><img loading="lazy"  src="/assets/images/f4b67a30c4cd.png" alt="step1" class="alignnone size-full wp-image-453" /></a>
+<a href="/assets/images/8847169d6592.png"><img loading="lazy"  src="/assets/images/8847169d6592.png" alt="step2" class="alignnone size-full wp-image-454" /></a>
 
 <h2>How to use AndroidStudio plugin</h2>
 
@@ -1962,7 +1975,7 @@ You may hear about ButterKnife, use it and the plugin named android butterknife 
 
 So, why there can't be a plugin to help us do this boring task?
 
-<a href="https://www.u3blog.xyz/zb_users/upload/2016/06/1.gif"><img loading="lazy"  src="/assets/images/77ad67851a6f.gif" alt="1" class="alignnone size-full wp-image-450" /></a>
+<a href="/assets/images/77ad67851a6f.gif"><img loading="lazy"  src="/assets/images/77ad67851a6f.gif" alt="1" class="alignnone size-full wp-image-450" /></a>
 
 <h2>Tools need to dev a plugin</h2>
 
@@ -1975,13 +1988,13 @@ So, why there can't be a plugin to help us do this boring task?
 Now we can start coding!
 
 At first new a plugin project in your Idea.
-<a href="https://www.u3blog.xyz/zb_users/upload/2016/06/QQ截图20160624145004.png"><img loading="lazy"  src="/assets/images/597cd9fb1337.png" alt="plugin" class="alignnone size-full wp-image-457" /></a>
+<a href="/assets/images/597cd9fb1337.png"><img loading="lazy"  src="/assets/images/597cd9fb1337.png" alt="plugin" class="alignnone size-full wp-image-457" /></a>
 
 Now right click the src file, new a Action file.
-<a href="https://www.u3blog.xyz/zb_users/upload/2016/06/QQ截图20160624145412.png"><img loading="lazy"  src="/assets/images/ed6216bd15e3.png" alt="QQ截图20160624145412" class="alignnone size-full wp-image-459" /></a>
+<a href="/assets/images/ed6216bd15e3.png"><img loading="lazy"  src="/assets/images/ed6216bd15e3.png" alt="QQ截图20160624145412" class="alignnone size-full wp-image-459" /></a>
 
 Fill some info about your plugin
-<a href="https://www.u3blog.xyz/zb_users/upload/2016/06/QQ截图20160624145701.png"><img loading="lazy"  src="/assets/images/0fb6f56c0347.png" alt="QQ截图20160624145701" class="alignnone size-full wp-image-460" /></a>
+<a href="/assets/images/0fb6f56c0347.png"><img loading="lazy"  src="/assets/images/0fb6f56c0347.png" alt="QQ截图20160624145701" class="alignnone size-full wp-image-460" /></a>
 
 Now, we have this code.
 
@@ -2017,10 +2030,10 @@ Here is the RemoveButterKnife's mainly function
 Now, there is a sample of above function
 
 before：
-<a href="https://www.u3blog.xyz/zb_users/upload/2016/06/QQ截图20160624154939.png"><img loading="lazy"  src="/assets/images/d99c2fd11ba4.png" alt="QQ截图20160624154939" class="alignnone size-full wp-image-464" /></a>
+<a href="/assets/images/d99c2fd11ba4.png"><img loading="lazy"  src="/assets/images/d99c2fd11ba4.png" alt="QQ截图20160624154939" class="alignnone size-full wp-image-464" /></a>
 
 after：
-<a href="https://www.u3blog.xyz/zb_users/upload/2016/06/QQ截图20160624155124.png"><img loading="lazy"  src="/assets/images/915293fabc7c.png" alt="QQ截图20160624155124" class="alignnone size-full wp-image-465" /></a>
+<a href="/assets/images/915293fabc7c.png"><img loading="lazy"  src="/assets/images/915293fabc7c.png" alt="QQ截图20160624155124" class="alignnone size-full wp-image-465" /></a>
 
 <h2>The implement detail</h2>
 
@@ -2047,14 +2060,14 @@ To implement the function we have talk above, we use three class
 3.FindViewByIdWriter ————  Gen findviewby id code
 
 You can find the whole code on below GitHub link
-<a href="https://github.com/u3shadow/RemoveButterKnife" target="_blank">RemoveButterKnife</a>
-<a href="https://www.u3blog.xyz/zb_users/upload/2016/06/QQ截图20160624161742.png"><img loading="lazy"  src="/assets/images/a8b5844a5f60.png" alt="QQ截图20160624161742" class="alignnone size-full wp-image-469" /></a>
+<a href="https://github.com/u3shadow/RemoveButterKnife" target="_blank" rel="noopener noreferrer">RemoveButterKnife</a>
+<a href="/assets/images/a8b5844a5f60.png"><img loading="lazy"  src="/assets/images/a8b5844a5f60.png" alt="QQ截图20160624161742" class="alignnone size-full wp-image-469" /></a>
 
 In the code, i use some idea sdk api, you can search it on google to find out what it means.
 
 <h2>Publish your plugin to repositories</h2>
 
-<strong>You can publish your plugin to repositories by visit <a href="https://plugins.jetbrains.com/?idea" target="_blank">This Page</a> and register an account, then click add new plugin.</strong>
+<strong>You can publish your plugin to repositories by visit <a href="https://plugins.jetbrains.com/?idea" target="_blank" rel="noopener noreferrer">This Page</a> and register an account, then click add new plugin.</strong>
 
 <h2>If you think my blog is make your life better, how about buy me a cup of coffee?:)(1USD)</h2>
 
@@ -2063,18 +2076,18 @@ In the code, i use some idea sdk api, you can search it on google to find out wh
 <input type="hidden" name="encrypted" value="-----BEGIN PKCS7-----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-----END PKCS7-----
 ">
 <input type="image" src="https://www.paypalobjects.com/en_GB/i/btn/btn_paynow_SM.gif" border="0" name="submit" alt="PayPal – The safer, easier way to pay online!">
-<div class="image-missing"><strong>Image unavailable</strong><span>这张图片来自已经无法下载的外部链接，静态备份中没有原图。</span><br><a href="https://www.paypalobjects.com/zh_XC/i/scr/pixel.gif" target="_blank" rel="noreferrer">查看原始链接</a></div>
+<div class="image-missing"><strong>Image unavailable</strong><span>这张图片来自已经无法下载的外部链接，静态备份中没有原图。</span><br><a href="https://www.paypalobjects.com/zh_XC/i/scr/pixel.gif" target="_blank" rel="noopener noreferrer">查看原始链接</a></div>
 </form></article></div>
 </main>
-
-<footer>Generated from local Z-Blog backup for GitHub Pages.</footer>
+<footer class="ref-footer"><div><strong>u3coding</strong><small>© 2014–2026 u3coding</small></div>
+<nav aria-label="页脚导航"><a href="/">首页</a><a href="/projects/">项目</a><a href="/articles/">文章</a><a href="/archive/">归档</a><a href="/about/">关于</a></nav><p><a href="https://github.com/u3shadow">GitHub</a><a href="/feed.xml">RSS</a><a href="#main-content" aria-label="返回正文顶部">↑</a></p></footer>
 <script>
   document.querySelectorAll("img").forEach((img) => {
     const replaceMissingImage = () => {
       const box = document.createElement("div");
       box.className = "image-missing";
       const src = img.currentSrc || img.src || img.getAttribute("src") || "";
-      box.innerHTML = `<strong>Image unavailable</strong><span>This image could not be loaded from the static backup.</span><br><a href="${src}" target="_blank" rel="noreferrer">Open original image URL</a>`;
+      box.innerHTML = `<strong>Image unavailable</strong><span>This image could not be loaded from the static backup.</span><br><a href="${src}" target="_blank" rel="noopener noreferrer">Open original image URL</a>`;
       img.replaceWith(box);
     };
     img.addEventListener("error", replaceMissingImage, { once: true });

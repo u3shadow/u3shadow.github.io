@@ -5,7 +5,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="description" content="View and DecorView When Activity created，will add DecorView to window，and create ViewRootImp object at the same time，building associated with DecorView and ViewRootImp object. As s...">
   <title>About the DecorView and MeasureSpec in Android View - u3coding</title>
-  <link rel="canonical" href="https://u3.github.io/posts/2016/03/248-about-the-decorview-and-measurespec-in-android-view/">
   <style>
 
     :root {
@@ -1925,12 +1924,26 @@
     }
 
   </style>
-  <link rel="stylesheet" href="/assets/site/editorial-portfolio.css?v=dark-1">
-</head>
-<body>
-<header><div class="bar"><a class="brand" href="/">u3coding</a><p class="site-bio">Android, AI, tooling, and engineering notes.</p><nav><a href="/">首页</a><a href="/projects/">项目</a><a href="/articles/">文章</a><a href="/archive/">归档</a><a href="/about/">关于</a></nav></div></header>
+  <link rel="stylesheet" href="/assets/site/editorial-portfolio.css?v=20261029-1">
+<!-- site-common -->
+<link rel="canonical" href="https://u3shadow.github.io/posts/2016/03/248-about-the-decorview-and-measurespec-in-android-view/">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="u3coding"><meta property="og:title" content="About the DecorView and MeasureSpec in Android View - u3coding">
+<meta property="og:description" content="View and DecorView When Activity created，will add DecorView to window，and create ViewRootImp object at the same time，building associated with DecorView and ViewRootImp object. As s..."><meta property="og:url" content="https://u3shadow.github.io/posts/2016/03/248-about-the-decorview-and-measurespec-in-android-view/">
+<meta property="og:image" content="https://u3shadow.github.io/assets/site/banner.png">
+<script>document.documentElement.classList.add('js');try{document.documentElement.dataset.theme=localStorage.getItem('u3-theme')==='light'?'light':'dark'}catch{document.documentElement.dataset.theme='dark'}</script>
+<link rel="stylesheet" href="/assets/site/site-theme.css?v=20261029-1">
+<script defer src="/assets/site/site.js?v=20261029-1"></script>
 
-<main><div class="single-wrap"><section class="single-head"><p class="eyebrow">未分类 · 文章 ID 248</p><h1 class="title">About the DecorView and MeasureSpec in Android View</h1><div class="title-rule"></div><div class="meta">发布于 2016-03-05 17:01 · 已迁移为静态页面</div></section><figure class="hero"><img src="/assets/images/1aa64d432445.png" alt="About the DecorView and MeasureSpec in Android View"></figure><article><h2>View and DecorView</h2>
+<!-- /site-common -->
+</head>
+<body><a class="skip-link" href="#main-content">跳至正文</a><header><div class="bar"><a class="brand" href="/">u3coding</a>
+<nav class="primary-nav" id="primary-navigation" aria-label="主导航"><a href="/">首页</a><a href="/projects/">项目</a><a href="/articles/" class="active" aria-current="page">文章</a><a href="/archive/">归档</a><a href="/about/">关于</a></nav>
+<div class="header-tools"><a class="icon-button" href="/articles/#search" aria-label="搜索文章" title="搜索文章"><span class="icon icon-search" aria-hidden="true"></span></a>
+<button type="button" class="icon-button" data-theme-toggle aria-label="切换浅色主题" title="切换浅色主题"><span class="icon icon-sun" aria-hidden="true"></span></button>
+<button type="button" class="icon-button menu-toggle" data-menu-toggle aria-controls="primary-navigation" aria-expanded="false" aria-label="展开导航" title="导航菜单"><span class="icon icon-menu" aria-hidden="true"></span></button></div></div></header>
+
+<main id="main-content"><div class="single-wrap"><section class="single-head"><p class="eyebrow">未分类 · 文章 ID 248</p><h1 class="title">About the DecorView and MeasureSpec in Android View</h1><div class="title-rule"></div><div class="meta">发布于 2016-03-05 17:01 · 已迁移为静态页面</div></section><figure class="hero"><img src="/assets/images/1aa64d432445.png" alt="About the DecorView and MeasureSpec in Android View"></figure><article><h2>View and DecorView</h2>
 
 When Activity created，will add DecorView to window，and create ViewRootImp object at the same time，building associated with DecorView and ViewRootImp object.
 
@@ -1940,18 +1953,18 @@ As shown in the following code：
 root.setVIew(view,wparams,panelParentView);</pre>
 
 The draw of view is started from ViewRoot's performTraversals method，through measure,layout,draw three flows to draw a view，about these three flow you can see the below blog
-<a href="http://144.34.248.28/2016/03/05/view-work-progress-measure/" target="_blank">View:Measure</a>
-<a href="http://144.34.248.28/2016/03/05/view-work-progress-layout-and-draw/" target="_blank">View:Layout and Draw</a>
+<a href="http://144.34.248.28/2016/03/05/view-work-progress-measure/" target="_blank" rel="noopener noreferrer">View:Measure</a>
+<a href="http://144.34.248.28/2016/03/05/view-work-progress-layout-and-draw/" target="_blank" rel="noopener noreferrer">View:Layout and Draw</a>
 
 This three flow can summarize in below pic
-<a href="https://www.u3blog.xyz/zb_users/upload/2016/03/fllow1.png" rel="attachment wp-att-243"><img loading="lazy"  src="/assets/images/1aa64d432445.png" alt="fllow1" class="alignnone size-full wp-image-243" /></a>
+<a href="/assets/images/1aa64d432445.png" rel="attachment wp-att-243"><img loading="lazy"  src="/assets/images/1aa64d432445.png" alt="fllow1" class="alignnone size-full wp-image-243" /></a>
 
 <h2>DecorView's layout</h2>
 
 DecorView is our top View, general contains a general LinearLayout, this layout assemble from top TitleView and bottom ContentView two parts.
 
 As below pic：
-<a href="https://www.u3blog.xyz/zb_users/upload/2016/03/fllow2.png" rel="attachment wp-att-244"><img loading="lazy"  src="/assets/images/36a66e64fbfc.png" alt="fllow2" class="alignnone size-full wp-image-244" /></a>
+<a href="/assets/images/36a66e64fbfc.png" rel="attachment wp-att-244"><img loading="lazy"  src="/assets/images/36a66e64fbfc.png" alt="fllow2" class="alignnone size-full wp-image-244" /></a>
 Now，you can understand why in Activity，we call setContentView to set layout，yes，we actual is set the content of ContentView.
 
 <h2>About MeasureSpace</h2>
@@ -1984,17 +1997,17 @@ For normal View，when get it's SpecMesure，first will get mode and size from p
 
 Detail show in the below chart
 
-<a href="https://www.u3blog.xyz/zb_users/upload/2016/03/fllow3.png" rel="attachment wp-att-245"><img loading="lazy"  src="/assets/images/823679cf5b22.png" alt="fllow3" class="alignnone size-full wp-image-245" /></a></article></div>
+<a href="/assets/images/823679cf5b22.png" rel="attachment wp-att-245"><img loading="lazy"  src="/assets/images/823679cf5b22.png" alt="fllow3" class="alignnone size-full wp-image-245" /></a></article></div>
 </main>
-
-<footer>Generated from local Z-Blog backup for GitHub Pages.</footer>
+<footer class="ref-footer"><div><strong>u3coding</strong><small>© 2014–2026 u3coding</small></div>
+<nav aria-label="页脚导航"><a href="/">首页</a><a href="/projects/">项目</a><a href="/articles/">文章</a><a href="/archive/">归档</a><a href="/about/">关于</a></nav><p><a href="https://github.com/u3shadow">GitHub</a><a href="/feed.xml">RSS</a><a href="#main-content" aria-label="返回正文顶部">↑</a></p></footer>
 <script>
   document.querySelectorAll("img").forEach((img) => {
     const replaceMissingImage = () => {
       const box = document.createElement("div");
       box.className = "image-missing";
       const src = img.currentSrc || img.src || img.getAttribute("src") || "";
-      box.innerHTML = `<strong>Image unavailable</strong><span>This image could not be loaded from the static backup.</span><br><a href="${src}" target="_blank" rel="noreferrer">Open original image URL</a>`;
+      box.innerHTML = `<strong>Image unavailable</strong><span>This image could not be loaded from the static backup.</span><br><a href="${src}" target="_blank" rel="noopener noreferrer">Open original image URL</a>`;
       img.replaceWith(box);
     };
     img.addEventListener("error", replaceMissingImage, { once: true });

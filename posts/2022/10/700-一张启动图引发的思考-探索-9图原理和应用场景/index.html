@@ -5,7 +5,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="description" content="highlight: vs theme: juejin 引子 小u啊，我们应用启动的时候有一段白屏，不雅观，你给整个启动图上去，给，这里是资源图片 换好了 嗯，不错不错，咦，这个小米fold怎么显示了两个logo？ 啊？这。。。我来看看 是这样的，activity启动图和启动背景图标一起显示了，但是启动图片又不适配fold这种狭长的屏幕，而且下半部分由于没有...">
   <title>一张启动图引发的思考--探索.9图原理和应用场景 - u3coding</title>
-  <link rel="canonical" href="https://u3.github.io/posts/2022/10/700-一张启动图引发的思考-探索-9图原理和应用场景/">
   <style>
 
     :root {
@@ -1925,29 +1924,43 @@
     }
 
   </style>
-  <link rel="stylesheet" href="/assets/site/editorial-portfolio.css?v=dark-1">
-</head>
-<body>
-<header><div class="bar"><a class="brand" href="/">u3coding</a><p class="site-bio">Android, AI, tooling, and engineering notes.</p><nav><a href="/">首页</a><a href="/projects/">项目</a><a href="/articles/">文章</a><a href="/archive/">归档</a><a href="/about/">关于</a></nav></div></header>
+  <link rel="stylesheet" href="/assets/site/editorial-portfolio.css?v=20261029-1">
+<!-- site-common -->
+<link rel="canonical" href="https://u3shadow.github.io/posts/2022/10/700-一张启动图引发的思考-探索-9图原理和应用场景/">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="u3coding"><meta property="og:title" content="一张启动图引发的思考--探索.9图原理和应用场景 - u3coding">
+<meta property="og:description" content="highlight: vs theme: juejin 引子 小u啊，我们应用启动的时候有一段白屏，不雅观，你给整个启动图上去，给，这里是资源图片 换好了 嗯，不错不错，咦，这个小米fold怎么显示了两个logo？ 啊？这。。。我来看看 是这样的，activity启动图和启动背景图标一起显示了，但是启动图片又不适配fold这种狭长的屏幕，而且下半部分由于没有..."><meta property="og:url" content="https://u3shadow.github.io/posts/2022/10/700-一张启动图引发的思考-探索-9图原理和应用场景/">
+<meta property="og:image" content="https://u3shadow.github.io/assets/site/banner.png">
+<script>document.documentElement.classList.add('js');try{document.documentElement.dataset.theme=localStorage.getItem('u3-theme')==='light'?'light':'dark'}catch{document.documentElement.dataset.theme='dark'}</script>
+<link rel="stylesheet" href="/assets/site/site-theme.css?v=20261029-1">
+<script defer src="/assets/site/site.js?v=20261029-1"></script>
 
-<main><div class="single-wrap"><section class="single-head"><p class="eyebrow">技术文章 · 文章 ID 700</p><h1 class="title">一张启动图引发的思考--探索.9图原理和应用场景</h1><div class="title-rule"></div><div class="meta">发布于 2022-10-08 15:02 · 已迁移为静态页面</div></section><figure class="hero"><img src="/assets/images/d08f6f502a64.png" alt="一张启动图引发的思考--探索.9图原理和应用场景"></figure><article><h2 id="h2-u5F15u5B50">引子</h2><p>小u啊，我们应用启动的时候有一段白屏，不雅观，你给整个启动图上去，给，这里是资源图片</p>
+<!-- /site-common -->
+</head>
+<body><a class="skip-link" href="#main-content">跳至正文</a><header><div class="bar"><a class="brand" href="/">u3coding</a>
+<nav class="primary-nav" id="primary-navigation" aria-label="主导航"><a href="/">首页</a><a href="/projects/">项目</a><a href="/articles/" class="active" aria-current="page">文章</a><a href="/archive/">归档</a><a href="/about/">关于</a></nav>
+<div class="header-tools"><a class="icon-button" href="/articles/#search" aria-label="搜索文章" title="搜索文章"><span class="icon icon-search" aria-hidden="true"></span></a>
+<button type="button" class="icon-button" data-theme-toggle aria-label="切换浅色主题" title="切换浅色主题"><span class="icon icon-sun" aria-hidden="true"></span></button>
+<button type="button" class="icon-button menu-toggle" data-menu-toggle aria-controls="primary-navigation" aria-expanded="false" aria-label="展开导航" title="导航菜单"><span class="icon icon-menu" aria-hidden="true"></span></button></div></div></header>
+
+<main id="main-content"><div class="single-wrap"><section class="single-head"><p class="eyebrow">技术文章 · 文章 ID 700</p><h1 class="title">一张启动图引发的思考--探索.9图原理和应用场景</h1><div class="title-rule"></div><div class="meta">发布于 2022-10-08 15:02 · 已迁移为静态页面</div></section><figure class="hero"><img src="/assets/images/d08f6f502a64.png" alt="一张启动图引发的思考--探索.9图原理和应用场景"></figure><article><h2 id="h2-u5F15u5B50">引子</h2><p>小u啊，我们应用启动的时候有一段白屏，不雅观，你给整个启动图上去，给，这里是资源图片</p>
 <p>换好了</p>
 <p>嗯，不错不错，咦，这个小米fold怎么显示了两个logo？</p>
 <p>啊？这。。。我来看看</p>
 <p>是这样的，activity启动图和启动背景图标一起显示了，但是启动图片又不适配fold这种狭长的屏幕，而且下半部分由于没有背景，是透明的，所以就显示了两个图标，一个启动图标，一个启动图图片图标，请看示意图</p>
-<figure><img loading="lazy"  src="/assets/images/d08f6f502a64.png" alt=""></figure>
+<figure><img loading="lazy"  src="/assets/images/d08f6f502a64.png" alt="文章配图：一张启动图引发的思考--探索.9图原理和应用场景"></figure>
 <p>那怎么解决呢？</p>
 <p>有几个办法，1.让启动图拉伸，覆盖下部分区域，但是会有形变，不够优雅，2.给imageview设置一个白色背景，让它不透明，3.使用android studio的。9图片制作工具，让空白部分拉伸，内容不拉伸，非常优雅。</p>
-<figure><img loading="lazy"  src="/assets/images/554e1ee509a7.png" alt=""></figure>
+<figure><img loading="lazy"  src="/assets/images/554e1ee509a7.png" alt="文章配图：一张启动图引发的思考--探索.9图原理和应用场景"></figure>
 <p>好，那你先试试.9图片吧</p>
 <h2 id="h2--9-">.9简介</h2><p>我知道看这篇文章的朋友肯定对.9图或多或少有点了解，就简单介绍下就行<br>.9图可以通过设置来让图片某一部分拉伸 其他部分不拉伸 还可以控制图片里面显示内容的区域<br>这就是.9图的简介 够简了吧 如果想看更详细的说明可以移步谷歌官方的说明 大体上也是这意思</p>
 <p>这个是官方的文档<a href="https://developer.android.com/studio/write/draw9patch?hl=zh-cn">https://developer.android.com/studio/write/draw9patch?hl=zh-cn</a></p>
-<figure><img loading="lazy"  src="/assets/images/e5e020b71470.png" alt=""></figure>
-<figure><img loading="lazy"  src="/assets/images/58c070d71e5d.png" alt=""></figure>
-<figure><img loading="lazy"  src="/assets/images/30ac83071a0b.png" alt=""></figure>
+<figure><img loading="lazy"  src="/assets/images/e5e020b71470.png" alt="文章配图：一张启动图引发的思考--探索.9图原理和应用场景"></figure>
+<figure><img loading="lazy"  src="/assets/images/58c070d71e5d.png" alt="文章配图：一张启动图引发的思考--探索.9图原理和应用场景"></figure>
+<figure><img loading="lazy"  src="/assets/images/30ac83071a0b.png" alt="文章配图：一张启动图引发的思考--探索.9图原理和应用场景"></figure>
 <p>这是.9图在三种拉伸情况下的例子，纵向，横向，横纵双向。</p>
 <h2 id="h2--9-">.9图制作</h2><p>网上很多文章说最简单是用as内置工具来做 但是网上文章好多都是很早的 都是老版本工具 让我们来看看这工具现在啥样</p>
-<p><img loading="lazy"  src="/assets/images/79d50b97a1a6.png" alt=""><br>好像也不是很简单啊 这些东西做什么用的第一次看确实会很蒙，这里介绍下这个工具</p>
+<p><img loading="lazy"  src="/assets/images/79d50b97a1a6.png" alt="文章配图：一张启动图引发的思考--探索.9图原理和应用场景"><br>好像也不是很简单啊 这些东西做什么用的第一次看确实会很蒙，这里介绍下这个工具</p>
 <ul>
 <li><p><strong>Zoom</strong>：调整图形在绘制区域中的缩放级别。</p>
 </li><li><p><strong>Patch scale</strong>：调整图像在预览区域中的比例。</p>
@@ -1960,7 +1973,7 @@
 <h2 id="h2--9-">.9图原理</h2><p>上面的介绍都很大众化 那么为啥.9图这么神奇呢？它是什么原理呢，这个好像没什么人说过，这里也简单阐述下。</p>
 <p>主要是四条黑线 分为两组<br>左边和上面的黑线 负责判定图片哪个部分可以被拉伸<br>右边和下面的黑线 负责确定图片内部展示内容的区域 比如这个图是个聊天气泡 内容是一堆文字</p>
 <p>大概就是下面这个图的样子 分成了九个区域</p>
-<figure><img loading="lazy"  src="/assets/images/c46b74c01acd.png" alt=""></figure>
+<figure><img loading="lazy"  src="/assets/images/c46b74c01acd.png" alt="文章配图：一张启动图引发的思考--探索.9图原理和应用场景"></figure>
 <p>我们把他们编号成1-9，这几个区域对应情况如下</p>
 <ol>
 <li>1 3 7 9 号区域，不在两条黑线区域内，不会被拉伸</li><li>4 6 号区域，只在左侧黑线范围内，可以被上下拉伸</li><li>2 8 号区域，只在上面黑线区域内，会被左右拉伸</li><li>5号区域，同时在上和左区域内，会被上下左右拉伸</li></ol>
@@ -1986,9 +1999,9 @@
 <p>看到这个可以猜测，我们添加的黑色边框就是往辅助块里面加了内容，在展示的时候识别添加的信息，达到控制哪些地方伸缩的目的。</p>
 <p>让我们看看一张图片被弄成.9之后加了些什么内容。</p>
 <p>原图数据如下</p>
-<figure><img loading="lazy"  src="/assets/images/2cf0fe2b5437.png" alt=""></figure>
+<figure><img loading="lazy"  src="/assets/images/2cf0fe2b5437.png" alt="文章配图：一张启动图引发的思考--探索.9图原理和应用场景"></figure>
 <p>.9数据如下</p>
-<figure><img loading="lazy"  src="/assets/images/2f06f83ac4b2.png" alt=""></figure>
+<figure><img loading="lazy"  src="/assets/images/2f06f83ac4b2.png" alt="文章配图：一张启动图引发的思考--探索.9图原理和应用场景"></figure>
 <p>可以看到，变成.9图片之后，多了5个IDAT块，而且参数里面的长宽都增加了2像素，而且图片大小也增加了不少从80kb增加到了180kb，我们可以猜测到，这几个块里面记录的数据就是我们生成.9图时画的那几条线生成的了。</p>
 <h3 id="h3--">其次 这些信息在图片发生拉伸时怎么被识别和使用的</h3><p>这就涉及到android怎么加载一张图片的问题了，当然这些操作都是native层进行的，经过代码跟踪，我们发现有这样一个类 ** NinePatchPeeker.cpp**</p>
 <p>我们来看看这个类里面的readChunk方法干了些什么</p>
@@ -2177,26 +2190,26 @@ struct alignas(uintptr_t) Res_png_9patch
 <p>既然已经获得了这些额外的信息，那么绘制的时候，系统就可以根据这些信息判断怎么拉伸一张.9图了，绘制调用了<code>NinePatchDrawable</code>，最终也会走到native层去处理这些数据。</p>
 <p>到此为止，制作.9和解析.9的过程就分析完毕了，一张.9图背后居然这么复杂，还是挺让人意外的，果然是学无止境啊。</p>
 <h2 id="h2--9-">.9图应用以及一个小坑</h2><p>看完了怎么生成和它的原理 该我们去使用它了 回到开头 用我们新做的酷炫.9图解决问题吧！<br>代码张这样</p>
-<p><img loading="lazy"  src="/assets/images/bc8b77e7fc09.png" alt=""><br>效果张这样<br><img loading="lazy"  src="/assets/images/dec6d14eeab7.png" alt=""></p>
+<p><img loading="lazy"  src="/assets/images/bc8b77e7fc09.png" alt="文章配图：一张启动图引发的思考--探索.9图原理和应用场景"><br>效果张这样<br><img loading="lazy"  src="/assets/images/dec6d14eeab7.png" alt="文章配图：一张启动图引发的思考--探索.9图原理和应用场景"></p>
 <p>为什么我们的.9图没有按照预期的拉伸,而是把内容也给拉伸了？因为.9图的特性问题，<strong>它只支持拉伸</strong>，如果一个图片本身就比imageview大了，那就不会去拉伸，所以我们的.9图本身太大了，也就不存在拉伸的说法了，那肯定是无效的。<br>那我们再来尝试把图片尺寸改小，这下可以拉伸了吧，来看看效果。</p>
-<figure><img loading="lazy"  src="/assets/images/030b55c6b8f0.png" alt=""></figure>
+<figure><img loading="lazy"  src="/assets/images/030b55c6b8f0.png" alt="文章配图：一张启动图引发的思考--探索.9图原理和应用场景"></figure>
 <p>可以看到，下面图标被遮挡住了，<strong>但是内容也太小了吧</strong>，<strong>所以用.9图来做splash screen背景不是个好主意</strong>。</p>
 <p>那么，到底哪些场景可以用它呢？总结一下就是，一张图片，角落不能拉伸，其他部分可以随着内容的增多随便拉伸的情况，像这样。</p>
-<figure><img loading="lazy"  src="/assets/images/46add2d7d396.png" alt=""></figure>
+<figure><img loading="lazy"  src="/assets/images/46add2d7d396.png" alt="文章配图：一张启动图引发的思考--探索.9图原理和应用场景"></figure>
 <p>简单来说，就是聊天气泡一类的，如果一张图片的主体是内容要放缩的话，是不适合的，因为.9图只会拉伸特定部分，主体部分会维持原大小。</p>
 <p>比如我们上面做背景图这种情况。</p>
 <h2 id="h2-u603Bu7ED3">总结</h2><ol>
 <li>.9图并不适合作为全屏展示页面，要不太大了没有拉伸效果，要不内容太小了不美观</li><li>.9图适合做一些纯色拉伸不形变的背景，比如聊天气泡和按钮背景这种</li><li>在android中，.9图得放到sr/drawable目录才行，系统才会去生成对应数据块，才可以被解析，否则就要自己去生成</li><li>普通图片由于没有额外的数据，是不能达到.9图这样的效果的</li></ol></article></div>
 </main>
-
-<footer>Generated from local Z-Blog backup for GitHub Pages.</footer>
+<footer class="ref-footer"><div><strong>u3coding</strong><small>© 2014–2026 u3coding</small></div>
+<nav aria-label="页脚导航"><a href="/">首页</a><a href="/projects/">项目</a><a href="/articles/">文章</a><a href="/archive/">归档</a><a href="/about/">关于</a></nav><p><a href="https://github.com/u3shadow">GitHub</a><a href="/feed.xml">RSS</a><a href="#main-content" aria-label="返回正文顶部">↑</a></p></footer>
 <script>
   document.querySelectorAll("img").forEach((img) => {
     const replaceMissingImage = () => {
       const box = document.createElement("div");
       box.className = "image-missing";
       const src = img.currentSrc || img.src || img.getAttribute("src") || "";
-      box.innerHTML = `<strong>Image unavailable</strong><span>This image could not be loaded from the static backup.</span><br><a href="${src}" target="_blank" rel="noreferrer">Open original image URL</a>`;
+      box.innerHTML = `<strong>Image unavailable</strong><span>This image could not be loaded from the static backup.</span><br><a href="${src}" target="_blank" rel="noopener noreferrer">Open original image URL</a>`;
       img.replaceWith(box);
     };
     img.addEventListener("error", replaceMissingImage, { once: true });

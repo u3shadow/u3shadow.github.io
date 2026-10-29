@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://u3shadow.github.io/sitemap.xml

@@ -1,0 +1,60 @@
+[
+  {
+    "id": "shaverai", "name": "ShaverAI", "subtitle": "AI 驱动的 Wi-Fi 场景规则工具",
+    "description": "将音量、亮度、蓝牙等场景配置从表单升级为自然语言，生成结构化规则并在 Wi-Fi 环境变化时执行。",
+    "background": "解决重复填写场景配置、聊天与规则上下文混用，以及规则重启后丢失的问题。",
+    "role": "个人工程原型；文章记录了输入分流、上下文拆分、RuleEngine 与 Room 持久化的设计和实现。",
+    "design": "普通聊天与规则生成分流；独立的环境触发执行链路；规则生成和存储解耦。",
+    "tags": ["Android", "Kotlin", "Room", "JSON 规则"],
+    "sourceIds": [711], "repository": "https://github.com/u3shadow/ShaverAI",
+    "url": "/projects/shaverai/", "kind": "个人项目", "symbol": "S"
+  },
+  {
+    "id": "butter", "name": "RemoveButterKnife", "subtitle": "Android Studio 代码迁移插件",
+    "description": "移除 Java 代码中的 ButterKnife 用法，生成 View 查找与点击事件代码，减少旧项目迁移中的重复操作。",
+    "background": "将旧项目中的注解绑定迁移为普通 Java 代码。",
+    "role": "个人插件开发；原文包含从构思、PSI 代码处理到重构与扩展的实现过程。",
+    "design": "使用 IntelliJ PSI 识别和修改代码结构，处理不同组件中的代码插入位置。未据此宣称支持 Kotlin 源码迁移。",
+    "tags": ["Java", "IntelliJ PSI", "IDE 插件"],
+    "sourceIds": [691, 692, 693], "repository": "https://github.com/u3shadow/RemoveButterKnife",
+    "kind": "个人项目", "symbol": "R"
+  },
+  {
+    "id": "wifi", "name": "RemoteADB", "subtitle": "ROOT 设备无线 ADB 调试工具",
+    "description": "在已 ROOT 的 Android 测试机上设置 ADB TCP 端口并重启 adbd，减少每次启动无线调试时连接 USB 的操作。",
+    "background": "测试机重启后需要重新连接 USB 才能启用无线调试。",
+    "role": "个人工具开发；记录手机端执行命令和权限排查过程。",
+    "design": "在设备端执行设置端口和重启服务的命令；原文明确仅适用于 ROOT 设备，不是 Wi-Fi 漫游或信号测试平台。",
+    "tags": ["Android", "ADB", "ROOT"],
+    "sourceIds": [697], "repository": "https://github.com/u3shadow/RemoteADB",
+    "kind": "个人工具", "symbol": "A"
+  },
+  {
+    "id": "tracing", "name": "用户操作路径追踪", "subtitle": "AspectJ 埋点工程实践",
+    "description": "通过 AspectJ 收集点击事件、控件信息与用户操作路径，将结果输出到本地日志，辅助问题分析。",
+    "background": "定位用户如何进入问题页面，需要补充页面和控件的操作记录。",
+    "role": "工程实践与示例代码；文章展示切面拦截、DataBinding 场景处理和日志输出。",
+    "design": "区分常规点击和生成类中的事件，提取页面及控件标识。未宣称提供完整线上监控平台。",
+    "tags": ["Android", "AspectJ", "日志"],
+    "sourceIds": [698], "repository": "https://github.com/u3shadow/AspectTest",
+    "kind": "工程实践", "symbol": "T"
+  },
+  {
+    "id": "logging", "name": "Android 本地日志", "subtitle": "Logger 日志记录实践",
+    "description": "基于 Logger 探索 App 本地日志记录，围绕日志输出与问题定位整理实现经验。",
+    "background": "为 App 维护和问题排查提供可读取的本地日志。",
+    "role": "工程实践文章；使用开源 Logger 库，不将依赖库本身作为个人作品。",
+    "design": "聚焦本地日志记录，不宣称为崩溃日志平台或具备线上告警能力。",
+    "tags": ["Android", "Logger", "工程实践"],
+    "sourceIds": [701], "repository": null, "kind": "工程实践", "symbol": "L"
+  },
+  {
+    "id": "testing", "name": "MVVM 分层测试", "subtitle": "Model 与 ViewModel 测试实践",
+    "description": "围绕 MVVM 架构中的 Model 和 ViewModel 编写测试，记录可测试性设计与验证方法。",
+    "background": "将业务逻辑从界面交互中分离，使其能够独立测试。",
+    "role": "技术实践文章；不将文章示例描述成独立发布的工具链产品。",
+    "design": "以原文章的测试对象和代码为依据，不扩展为尚未验证的完整测试平台。",
+    "tags": ["Android", "MVVM", "测试"],
+    "sourceIds": [694], "repository": null, "kind": "工程实践", "symbol": "M"
+  }
+]

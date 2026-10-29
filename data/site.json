@@ -1,0 +1,11 @@
+{
+  "name": "u3coding",
+  "url": "https://u3shadow.github.io",
+  "description": "高级 Android 工程师的技术作品集，记录 Android、AI Agent、架构设计与工程实践。",
+  "github": "https://github.com/u3shadow",
+  "email": null,
+  "emailStatus": "pending-confirmation",
+  "featuredPostIds": [711, 701, 698, 691],
+  "featuredImages": {"701": "/assets/images/4377c663bd68.png"},
+  "knownMissingAssets": ["/assets/images/0d23d41c2651.gif"]
+}

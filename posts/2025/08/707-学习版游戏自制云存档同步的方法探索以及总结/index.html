@@ -5,7 +5,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="description" content="作为一名资深足球游戏玩家，最近重燃对《实况足球2021》的热情，搞了个带大补的版本，确实爽，却在多设备存档同步问题上掉进了坑。通过两天&quot;痛并快乐着&quot;的折腾，最终找到完美解决方案，现整理给喝油们参考。 ■ 硬件环境 ROG Ally掌机（外出便携）+ MSI gp76笔记本（家用主力）构成了我的双屏足球战场。这两个Win11平台都装载了打了大补的PES2021...">
   <title>学习版游戏自制云存档同步的方法探索以及总结 - u3coding</title>
-  <link rel="canonical" href="https://u3.github.io/posts/2025/08/707-学习版游戏自制云存档同步的方法探索以及总结/">
   <style>
 
     :root {
@@ -1925,15 +1924,29 @@
     }
 
   </style>
-  <link rel="stylesheet" href="/assets/site/editorial-portfolio.css?v=dark-1">
-</head>
-<body>
-<header><div class="bar"><a class="brand" href="/">u3coding</a><p class="site-bio">Android, AI, tooling, and engineering notes.</p><nav><a href="/">首页</a><a href="/projects/">项目</a><a href="/articles/">文章</a><a href="/archive/">归档</a><a href="/about/">关于</a></nav></div></header>
+  <link rel="stylesheet" href="/assets/site/editorial-portfolio.css?v=20261029-1">
+<!-- site-common -->
+<link rel="canonical" href="https://u3shadow.github.io/posts/2025/08/707-学习版游戏自制云存档同步的方法探索以及总结/">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="u3coding"><meta property="og:title" content="学习版游戏自制云存档同步的方法探索以及总结 - u3coding">
+<meta property="og:description" content="作为一名资深足球游戏玩家，最近重燃对《实况足球2021》的热情，搞了个带大补的版本，确实爽，却在多设备存档同步问题上掉进了坑。通过两天&quot;痛并快乐着&quot;的折腾，最终找到完美解决方案，现整理给喝油们参考。 ■ 硬件环境 ROG Ally掌机（外出便携）+ MSI gp76笔记本（家用主力）构成了我的双屏足球战场。这两个Win11平台都装载了打了大补的PES2021..."><meta property="og:url" content="https://u3shadow.github.io/posts/2025/08/707-学习版游戏自制云存档同步的方法探索以及总结/">
+<meta property="og:image" content="https://u3shadow.github.io/assets/site/banner.png">
+<script>document.documentElement.classList.add('js');try{document.documentElement.dataset.theme=localStorage.getItem('u3-theme')==='light'?'light':'dark'}catch{document.documentElement.dataset.theme='dark'}</script>
+<link rel="stylesheet" href="/assets/site/site-theme.css?v=20261029-1">
+<script defer src="/assets/site/site.js?v=20261029-1"></script>
 
-<main><div class="single-wrap"><section class="single-head"><p class="eyebrow">技术文章 · 文章 ID 707</p><h1 class="title">学习版游戏自制云存档同步的方法探索以及总结</h1><div class="title-rule"></div><div class="meta">发布于 2025-08-19 16:38 · 已迁移为静态页面</div></section><figure class="hero"><img src="/assets/images/c01a4b735e7c.jpeg" alt="学习版游戏自制云存档同步的方法探索以及总结"></figure><article><p>作为一名资深足球游戏玩家，最近重燃对《实况足球2021》的热情，搞了个带大补的版本，确实爽，却在多设备存档同步问题上掉进了坑。通过两天“痛并快乐着”的折腾，最终找到完美解决方案，现整理给喝油们参考。</p>
+<!-- /site-common -->
+</head>
+<body><a class="skip-link" href="#main-content">跳至正文</a><header><div class="bar"><a class="brand" href="/">u3coding</a>
+<nav class="primary-nav" id="primary-navigation" aria-label="主导航"><a href="/">首页</a><a href="/projects/">项目</a><a href="/articles/" class="active" aria-current="page">文章</a><a href="/archive/">归档</a><a href="/about/">关于</a></nav>
+<div class="header-tools"><a class="icon-button" href="/articles/#search" aria-label="搜索文章" title="搜索文章"><span class="icon icon-search" aria-hidden="true"></span></a>
+<button type="button" class="icon-button" data-theme-toggle aria-label="切换浅色主题" title="切换浅色主题"><span class="icon icon-sun" aria-hidden="true"></span></button>
+<button type="button" class="icon-button menu-toggle" data-menu-toggle aria-controls="primary-navigation" aria-expanded="false" aria-label="展开导航" title="导航菜单"><span class="icon icon-menu" aria-hidden="true"></span></button></div></div></header>
+
+<main id="main-content"><div class="single-wrap"><section class="single-head"><p class="eyebrow">技术文章 · 文章 ID 707</p><h1 class="title">学习版游戏自制云存档同步的方法探索以及总结</h1><div class="title-rule"></div><div class="meta">发布于 2025-08-19 16:38 · 已迁移为静态页面</div></section><figure class="hero"><img src="/assets/images/c01a4b735e7c.jpeg" alt="学习版游戏自制云存档同步的方法探索以及总结"></figure><article><p>作为一名资深足球游戏玩家，最近重燃对《实况足球2021》的热情，搞了个带大补的版本，确实爽，却在多设备存档同步问题上掉进了坑。通过两天“痛并快乐着”的折腾，最终找到完美解决方案，现整理给喝油们参考。</p>
 <h2>硬件环境</h2>
 <p>ROG Ally掌机（外出便携）+ MSI gp76笔记本（家用主力）构成了我的双屏足球战场。这两个Win11平台都装载了打了大补的PES2021赛季更新版。</p>
-<figure><img loading="lazy"  src="/assets/images/c01a4b735e7c.jpeg" alt=""><figcaption>我的爱机们</figcaption></figure><h2>痛点溯源</h2>
+<figure><img loading="lazy"  src="/assets/images/c01a4b735e7c.jpeg" alt="文章配图：学习版游戏自制云存档同步的方法探索以及总结"><figcaption>我的爱机们</figcaption></figure><h2>痛点溯源</h2>
 <p>游戏存档默认存储在C:\Users\用户名\Documents\KONAMI\eFootball PES 2021 SEASON UPDATE\数字ID\文件夹。由于学习版缺乏云存档功能，导致：</p>
 <ol>
 <li><p>双设备存档各自为战</p>
@@ -1943,7 +1956,7 @@
 <h2>试错全记录（前5个踩坑方案）</h2>
 <p>方案0 - 正版授权（沉没成本）</p>
 <p>各平台密钥均价$800+，瞬间击穿钱包防御。</p>
-<figure><img loading="lazy"  src="/assets/images/26ddb55952a7.jpeg" alt=""><figcaption>太贵了</figcaption></figure><h2>方案1 - 手工搬运（原始主义）</h2>
+<figure><img loading="lazy"  src="/assets/images/26ddb55952a7.jpeg" alt="文章配图：学习版游戏自制云存档同步的方法探索以及总结"><figcaption>太贵了</figcaption></figure><h2>方案1 - 手工搬运（原始主义）</h2>
 <p>直接复制save000001.bin等系列文件。耗时费力不说，曾在机场手滑覆盖2小时比赛记录，血泪教训。</p>
 <p>方案2 - 黑盒云盘（伪云方案）</p>
 <p>宣称自动同步，实测：</p>
@@ -1956,7 +1969,7 @@
 <p>专业存档管理器的PUA套路：</p>
 <p>免费版可本地备份</p>
 <p>云同步需月付，感觉有点不靠谱，暂不考虑</p>
-<figure><img loading="lazy"  src="/assets/images/110016391e83.png" alt=""><figcaption>云存档要给钱</figcaption></figure><h2>方案4 - GitHub私仓（极客陷阱）</h2>
+<figure><img loading="lazy"  src="/assets/images/110016391e83.png" alt="文章配图：学习版游戏自制云存档同步的方法探索以及总结"><figcaption>云存档要给钱</figcaption></figure><h2>方案4 - GitHub私仓（极客陷阱）</h2>
 <p>.git仓库看似优雅却暗藏杀机：</p>
 <ul>
 <li><p>需手动pull/push操作</p>
@@ -1965,10 +1978,10 @@
 </li></ul>
 <h2>破局方案：百度网盘+符号链接</h2>
 <p>最终选择百度网盘超级会员方案，实现原理：</p>
-<figure><img loading="lazy"  src="/assets/images/3e6ad121ef8c.png" alt=""><figcaption>百度网盘带的同步功能</figcaption></figure><h2>系统架构</h2>
+<figure><img loading="lazy"  src="/assets/images/3e6ad121ef8c.png" alt="文章配图：学习版游戏自制云存档同步的方法探索以及总结"><figcaption>百度网盘带的同步功能</figcaption></figure><h2>系统架构</h2>
 <p>本地存档 → 符号链接 → 百度同步目录 → 云端实时同步</p>
 <h2>关于符号连接</h2>
-<figure><img loading="lazy"  src="/assets/images/e0721313292d.jpeg" alt=""><figcaption>ai是这样说的</figcaption></figure><h2>实施步骤（Win系统通用）</h2>
+<figure><img loading="lazy"  src="/assets/images/e0721313292d.jpeg" alt="文章配图：学习版游戏自制云存档同步的方法探索以及总结"><figcaption>ai是这样说的</figcaption></figure><h2>实施步骤（Win系统通用）</h2>
 <ol>
 <li>定位存档路径：</li></ol>
 <pre><code>C:\Users\用户名\Documents\KONAMI\eFootball PES 2021 SEASON UPDATE</code></pre>
@@ -1994,19 +2007,19 @@
 <li><p>ROG Ally到笔记本端延迟&lt;20秒</p>
 </li><li><p>修改时间戳完全同步</p>
 </li></ul>
-<p><img loading="lazy"  src="/assets/images/769be8790017.jpeg" alt=""><br>电脑上的存档进度<br><img loading="lazy"  src="/assets/images/4b96da52f85b.jpeg" alt=""><br>ally 同步过来啦</p>
+<p><img loading="lazy"  src="/assets/images/769be8790017.jpeg" alt="文章配图：学习版游戏自制云存档同步的方法探索以及总结"><br>电脑上的存档进度<br><img loading="lazy"  src="/assets/images/4b96da52f85b.jpeg" alt="文章配图：学习版游戏自制云存档同步的方法探索以及总结"><br>ally 同步过来啦</p>
 <p>经过测试，累计完成34场跨设备联赛对战，存档同步成功率达 90%，有时候百度云会下载失败，多点两下就好了。此方案不仅适用于实况足球，同样可拓展到FIFA、FM等需多设备存档同步的体育类游戏。</p>
 <p>后记：这次折腾最值得的投资不是网盘会员，而是掌握mklink这个命令。当软链接贯通物理路径和云存储的瞬间，颇有种开任意门连接数字世界的奇妙快感。</p></article></div>
 </main>
-
-<footer>Generated from local Z-Blog backup for GitHub Pages.</footer>
+<footer class="ref-footer"><div><strong>u3coding</strong><small>© 2014–2026 u3coding</small></div>
+<nav aria-label="页脚导航"><a href="/">首页</a><a href="/projects/">项目</a><a href="/articles/">文章</a><a href="/archive/">归档</a><a href="/about/">关于</a></nav><p><a href="https://github.com/u3shadow">GitHub</a><a href="/feed.xml">RSS</a><a href="#main-content" aria-label="返回正文顶部">↑</a></p></footer>
 <script>
   document.querySelectorAll("img").forEach((img) => {
     const replaceMissingImage = () => {
       const box = document.createElement("div");
       box.className = "image-missing";
       const src = img.currentSrc || img.src || img.getAttribute("src") || "";
-      box.innerHTML = `<strong>Image unavailable</strong><span>This image could not be loaded from the static backup.</span><br><a href="${src}" target="_blank" rel="noreferrer">Open original image URL</a>`;
+      box.innerHTML = `<strong>Image unavailable</strong><span>This image could not be loaded from the static backup.</span><br><a href="${src}" target="_blank" rel="noopener noreferrer">Open original image URL</a>`;
       img.replaceWith(box);
     };
     img.addEventListener("error", replaceMissingImage, { once: true });

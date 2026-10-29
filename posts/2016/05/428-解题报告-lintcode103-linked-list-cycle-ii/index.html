@@ -5,7 +5,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="description" content="题意 给出一个链表，可能会有环（从某一点开始，经过一段之后又回到这个点），找出这个环的开始点 使用O(n)的复杂度解决 解答 我们可以设置两个指针，一个每次前进一步，一个每次前进两步 那么，如果有环，这两个指针必定在环里某一个点相遇，这时候 假设环外到环开始点的路程为a 假设慢指针在环内走了b 环剩下的部分距离为c 那么，我们可以得到 (a+(b+c)+b)...">
   <title>【解题报告】【lintcode103】Linked List Cycle II - u3coding</title>
-  <link rel="canonical" href="https://u3.github.io/posts/2016/05/428-解题报告-lintcode103-linked-list-cycle-ii/">
   <style>
 
     :root {
@@ -1925,12 +1924,26 @@
     }
 
   </style>
-  <link rel="stylesheet" href="/assets/site/editorial-portfolio.css?v=dark-1">
-</head>
-<body>
-<header><div class="bar"><a class="brand" href="/">u3coding</a><p class="site-bio">Android, AI, tooling, and engineering notes.</p><nav><a href="/">首页</a><a href="/projects/">项目</a><a href="/articles/">文章</a><a href="/archive/">归档</a><a href="/about/">关于</a></nav></div></header>
+  <link rel="stylesheet" href="/assets/site/editorial-portfolio.css?v=20261029-1">
+<!-- site-common -->
+<link rel="canonical" href="https://u3shadow.github.io/posts/2016/05/428-解题报告-lintcode103-linked-list-cycle-ii/">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="u3coding"><meta property="og:title" content="【解题报告】【lintcode103】Linked List Cycle II - u3coding">
+<meta property="og:description" content="题意 给出一个链表，可能会有环（从某一点开始，经过一段之后又回到这个点），找出这个环的开始点 使用O(n)的复杂度解决 解答 我们可以设置两个指针，一个每次前进一步，一个每次前进两步 那么，如果有环，这两个指针必定在环里某一个点相遇，这时候 假设环外到环开始点的路程为a 假设慢指针在环内走了b 环剩下的部分距离为c 那么，我们可以得到 (a+(b+c)+b)..."><meta property="og:url" content="https://u3shadow.github.io/posts/2016/05/428-解题报告-lintcode103-linked-list-cycle-ii/">
+<meta property="og:image" content="https://u3shadow.github.io/assets/site/banner.png">
+<script>document.documentElement.classList.add('js');try{document.documentElement.dataset.theme=localStorage.getItem('u3-theme')==='light'?'light':'dark'}catch{document.documentElement.dataset.theme='dark'}</script>
+<link rel="stylesheet" href="/assets/site/site-theme.css?v=20261029-1">
+<script defer src="/assets/site/site.js?v=20261029-1"></script>
 
-<main><div class="single-wrap"><section class="single-head"><p class="eyebrow">未分类 · 文章 ID 428</p><h1 class="title">【解题报告】【lintcode103】Linked List Cycle II</h1><div class="title-rule"></div><div class="meta">发布于 2016-05-20 14:03 · 已迁移为静态页面</div></section><figure class="hero"><img src="/assets/images/c948068c4e1f.png" alt="【解题报告】【lintcode103】Linked List Cycle II"></figure><article><h2>题意</h2>
+<!-- /site-common -->
+</head>
+<body><a class="skip-link" href="#main-content">跳至正文</a><header><div class="bar"><a class="brand" href="/">u3coding</a>
+<nav class="primary-nav" id="primary-navigation" aria-label="主导航"><a href="/">首页</a><a href="/projects/">项目</a><a href="/articles/" class="active" aria-current="page">文章</a><a href="/archive/">归档</a><a href="/about/">关于</a></nav>
+<div class="header-tools"><a class="icon-button" href="/articles/#search" aria-label="搜索文章" title="搜索文章"><span class="icon icon-search" aria-hidden="true"></span></a>
+<button type="button" class="icon-button" data-theme-toggle aria-label="切换浅色主题" title="切换浅色主题"><span class="icon icon-sun" aria-hidden="true"></span></button>
+<button type="button" class="icon-button menu-toggle" data-menu-toggle aria-controls="primary-navigation" aria-expanded="false" aria-label="展开导航" title="导航菜单"><span class="icon icon-menu" aria-hidden="true"></span></button></div></div></header>
+
+<main id="main-content"><div class="single-wrap"><section class="single-head"><p class="eyebrow">未分类 · 文章 ID 428</p><h1 class="title">【解题报告】【lintcode103】Linked List Cycle II</h1><div class="title-rule"></div><div class="meta">发布于 2016-05-20 14:03 · 已迁移为静态页面</div></section><figure class="hero"><img src="/assets/images/c948068c4e1f.png" alt="【解题报告】【lintcode103】Linked List Cycle II"></figure><article><h2>题意</h2>
 
 给出一个链表，可能会有环（从某一点开始，经过一段之后又回到这个点），找出这个环的开始点
 使用O(n)的复杂度解决
@@ -1949,7 +1962,7 @@
 a = c
 所以，从相遇点开始，把慢指针放到链表开头，然后和快指针一起以1的速度移动，再次相遇的地方就是环的开始点了
 如下图
-<a href="https://www.u3blog.xyz/zb_users/upload/2016/05/QQ截图20160520140221.png"><img loading="lazy"  src="/assets/images/c948068c4e1f.png" alt="QQ截图20160520140221" class="alignnone size-full wp-image-429" /></a>
+<a href="/assets/images/c948068c4e1f.png"><img loading="lazy"  src="/assets/images/c948068c4e1f.png" alt="QQ截图20160520140221" class="alignnone size-full wp-image-429" /></a>
 
 <h2>代码</h2>
 
@@ -1985,15 +1998,15 @@ a = c
     }
 }</pre></article></div>
 </main>
-
-<footer>Generated from local Z-Blog backup for GitHub Pages.</footer>
+<footer class="ref-footer"><div><strong>u3coding</strong><small>© 2014–2026 u3coding</small></div>
+<nav aria-label="页脚导航"><a href="/">首页</a><a href="/projects/">项目</a><a href="/articles/">文章</a><a href="/archive/">归档</a><a href="/about/">关于</a></nav><p><a href="https://github.com/u3shadow">GitHub</a><a href="/feed.xml">RSS</a><a href="#main-content" aria-label="返回正文顶部">↑</a></p></footer>
 <script>
   document.querySelectorAll("img").forEach((img) => {
     const replaceMissingImage = () => {
       const box = document.createElement("div");
       box.className = "image-missing";
       const src = img.currentSrc || img.src || img.getAttribute("src") || "";
-      box.innerHTML = `<strong>Image unavailable</strong><span>This image could not be loaded from the static backup.</span><br><a href="${src}" target="_blank" rel="noreferrer">Open original image URL</a>`;
+      box.innerHTML = `<strong>Image unavailable</strong><span>This image could not be loaded from the static backup.</span><br><a href="${src}" target="_blank" rel="noopener noreferrer">Open original image URL</a>`;
       img.replaceWith(box);
     };
     img.addEventListener("error", replaceMissingImage, { once: true });

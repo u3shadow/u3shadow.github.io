@@ -5,7 +5,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="description" content="题意 给出两个树，求树二是否为树一的子树 判断是否为子树的条件是从某一结点切断，剩下的部分与树二相同 例子 此时，t2是t1的子树 解法 首先，拿到t2的root，在t1中查找值相同的节点，存入数组，因为可能不止一个起点 然后再从这些节点出发，对比t2，来求是否为子树 代码 public class Solution { List&lt;TreeNode&gt; roo...">
   <title>【解题报告】lintcode245子树 - u3coding</title>
-  <link rel="canonical" href="https://u3.github.io/posts/2016/05/385-解题报告-lintcode245子树/">
   <style>
 
     :root {
@@ -1925,17 +1924,31 @@
     }
 
   </style>
-  <link rel="stylesheet" href="/assets/site/editorial-portfolio.css?v=dark-1">
-</head>
-<body>
-<header><div class="bar"><a class="brand" href="/">u3coding</a><p class="site-bio">Android, AI, tooling, and engineering notes.</p><nav><a href="/">首页</a><a href="/projects/">项目</a><a href="/articles/">文章</a><a href="/archive/">归档</a><a href="/about/">关于</a></nav></div></header>
+  <link rel="stylesheet" href="/assets/site/editorial-portfolio.css?v=20261029-1">
+<!-- site-common -->
+<link rel="canonical" href="https://u3shadow.github.io/posts/2016/05/385-解题报告-lintcode245子树/">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="u3coding"><meta property="og:title" content="【解题报告】lintcode245子树 - u3coding">
+<meta property="og:description" content="题意 给出两个树，求树二是否为树一的子树 判断是否为子树的条件是从某一结点切断，剩下的部分与树二相同 例子 此时，t2是t1的子树 解法 首先，拿到t2的root，在t1中查找值相同的节点，存入数组，因为可能不止一个起点 然后再从这些节点出发，对比t2，来求是否为子树 代码 public class Solution { List roo..."><meta property="og:url" content="https://u3shadow.github.io/posts/2016/05/385-解题报告-lintcode245子树/">
+<meta property="og:image" content="https://u3shadow.github.io/assets/site/banner.png">
+<script>document.documentElement.classList.add('js');try{document.documentElement.dataset.theme=localStorage.getItem('u3-theme')==='light'?'light':'dark'}catch{document.documentElement.dataset.theme='dark'}</script>
+<link rel="stylesheet" href="/assets/site/site-theme.css?v=20261029-1">
+<script defer src="/assets/site/site.js?v=20261029-1"></script>
 
-<main><div class="single-wrap"><section class="single-head"><p class="eyebrow">未分类 · 文章 ID 385</p><h1 class="title">【解题报告】lintcode245子树</h1><div class="title-rule"></div><div class="meta">发布于 2016-05-13 10:54 · 已迁移为静态页面</div></section><figure class="hero"><img src="/assets/images/4b7298920032.png" alt="【解题报告】lintcode245子树"></figure><article><h2>题意</h2>
+<!-- /site-common -->
+</head>
+<body><a class="skip-link" href="#main-content">跳至正文</a><header><div class="bar"><a class="brand" href="/">u3coding</a>
+<nav class="primary-nav" id="primary-navigation" aria-label="主导航"><a href="/">首页</a><a href="/projects/">项目</a><a href="/articles/" class="active" aria-current="page">文章</a><a href="/archive/">归档</a><a href="/about/">关于</a></nav>
+<div class="header-tools"><a class="icon-button" href="/articles/#search" aria-label="搜索文章" title="搜索文章"><span class="icon icon-search" aria-hidden="true"></span></a>
+<button type="button" class="icon-button" data-theme-toggle aria-label="切换浅色主题" title="切换浅色主题"><span class="icon icon-sun" aria-hidden="true"></span></button>
+<button type="button" class="icon-button menu-toggle" data-menu-toggle aria-controls="primary-navigation" aria-expanded="false" aria-label="展开导航" title="导航菜单"><span class="icon icon-menu" aria-hidden="true"></span></button></div></div></header>
+
+<main id="main-content"><div class="single-wrap"><section class="single-head"><p class="eyebrow">未分类 · 文章 ID 385</p><h1 class="title">【解题报告】lintcode245子树</h1><div class="title-rule"></div><div class="meta">发布于 2016-05-13 10:54 · 已迁移为静态页面</div></section><figure class="hero"><img src="/assets/images/4b7298920032.png" alt="【解题报告】lintcode245子树"></figure><article><h2>题意</h2>
 
 给出两个树，求树二是否为树一的子树
 判断是否为子树的条件是从某一结点切断，剩下的部分与树二相同
 例子
-<a href="https://www.u3blog.xyz/zb_users/upload/2016/05/QQ截图20160513105417.png"><img loading="lazy"  src="/assets/images/4b7298920032.png" alt="QQ截图20160513105417" class="alignnone size-full wp-image-390" /></a>
+<a href="/assets/images/4b7298920032.png"><img loading="lazy"  src="/assets/images/4b7298920032.png" alt="QQ截图20160513105417" class="alignnone size-full wp-image-390" /></a>
 此时，t2是t1的子树
 
 <h2>解法</h2>
@@ -1990,15 +2003,15 @@
 
 }   </pre></article></div>
 </main>
-
-<footer>Generated from local Z-Blog backup for GitHub Pages.</footer>
+<footer class="ref-footer"><div><strong>u3coding</strong><small>© 2014–2026 u3coding</small></div>
+<nav aria-label="页脚导航"><a href="/">首页</a><a href="/projects/">项目</a><a href="/articles/">文章</a><a href="/archive/">归档</a><a href="/about/">关于</a></nav><p><a href="https://github.com/u3shadow">GitHub</a><a href="/feed.xml">RSS</a><a href="#main-content" aria-label="返回正文顶部">↑</a></p></footer>
 <script>
   document.querySelectorAll("img").forEach((img) => {
     const replaceMissingImage = () => {
       const box = document.createElement("div");
       box.className = "image-missing";
       const src = img.currentSrc || img.src || img.getAttribute("src") || "";
-      box.innerHTML = `<strong>Image unavailable</strong><span>This image could not be loaded from the static backup.</span><br><a href="${src}" target="_blank" rel="noreferrer">Open original image URL</a>`;
+      box.innerHTML = `<strong>Image unavailable</strong><span>This image could not be loaded from the static backup.</span><br><a href="${src}" target="_blank" rel="noopener noreferrer">Open original image URL</a>`;
       img.replaceWith(box);
     };
     img.addEventListener("error", replaceMissingImage, { once: true });

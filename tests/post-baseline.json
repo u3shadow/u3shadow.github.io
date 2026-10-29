@@ -1,0 +1,1292 @@
+{
+  "711": {
+    "url": "/posts/2026/04/711-从手动配置到自然语言生成规则-一个-android-ai-工具的重构实录/",
+    "title": "从手动配置到自然语言生成规则：一个 Android AI 工具的重构实录",
+    "publishedAt": "2026-04-22T13:43:00+08:00",
+    "bodyHash": "4c7361e335f08c7639a998d72d7319ddfc5441a377d55747868c835c919e2479"
+  },
+  "707": {
+    "url": "/posts/2025/08/707-学习版游戏自制云存档同步的方法探索以及总结/",
+    "title": "学习版游戏自制云存档同步的方法探索以及总结",
+    "publishedAt": "2025-08-19T16:38:00+08:00",
+    "bodyHash": "b093b87d245402be925358a13b904a5e6d0a73e6e5943bdae708099e271d403e"
+  },
+  "706": {
+    "url": "/posts/2024/08/706-鸿蒙next中web组件和navigation的一个bug以及处理方案/",
+    "title": "鸿蒙next中web组件和navigation的一个bug以及处理方案",
+    "publishedAt": "2024-08-30T16:10:00+08:00",
+    "bodyHash": "bce7fce00844613c69a9b40cf8ddacf0f40b648b1f05430f0e3b6be145dcae03"
+  },
+  "705": {
+    "url": "/posts/2024/02/705-chatgpt是怎么帮我写ios代码的/",
+    "title": "ChatGPT是怎么帮我写ios代码的",
+    "publishedAt": "2024-02-02T16:28:00+08:00",
+    "bodyHash": "3ed3172f8d6408592e882dbcd9cf9036a4de0078c64fb1a45bfbbcd4cc45eef1"
+  },
+  "702": {
+    "url": "/posts/2023/04/702-android项目cicd流程总结-使用jenkins/",
+    "title": "Android项目cicd流程总结（使用jenkins）",
+    "publishedAt": "2023-04-21T16:59:00+08:00",
+    "bodyHash": "670f38366d6948d5c73a9dea11f8e05174bdc94dc40e5de68993e30fe824ab5d"
+  },
+  "701": {
+    "url": "/posts/2022/10/701-android使用logger开发app本地日志记录功能/",
+    "title": "Android使用Logger开发App本地日志记录功能",
+    "publishedAt": "2022-10-12T19:51:00+08:00",
+    "bodyHash": "c054c950de2796ca16f6a877d2df814ca6351453679a0dedb36f47ee92fc2e48"
+  },
+  "700": {
+    "url": "/posts/2022/10/700-一张启动图引发的思考-探索-9图原理和应用场景/",
+    "title": "一张启动图引发的思考--探索.9图原理和应用场景",
+    "publishedAt": "2022-10-08T15:02:00+08:00",
+    "bodyHash": "680bf2777f60c160ea930a7e50adc71c1918d53a35e4eb6aed5892020d43732e"
+  },
+  "699": {
+    "url": "/posts/2022/10/699-跟我一起玩paging3/",
+    "title": "跟我一起玩Paging3",
+    "publishedAt": "2022-10-08T15:02:00+08:00",
+    "bodyHash": "e17d0a9f8963450ea807486579c217bbac693d2dfd9c0a7af8f4470298f84e98"
+  },
+  "698": {
+    "url": "/posts/2022/10/698-android中使用aspectj进行用户操作路径跟踪与日志搜集/",
+    "title": "Android中使用ASPECTJ进行用户操作路径跟踪与日志搜集",
+    "publishedAt": "2022-10-08T15:01:00+08:00",
+    "bodyHash": "4b802b462465a758e1b6c3f1aecab37acb37ebee72acdcde596ac11627262804"
+  },
+  "697": {
+    "url": "/posts/2022/10/697-彻底摆脱数据线-远程adb调试小工具开发过程记录/",
+    "title": "彻底摆脱数据线——远程ADB调试小工具开发过程记录",
+    "publishedAt": "2022-10-08T14:59:00+08:00",
+    "bodyHash": "02caf171d6ce82403767b71d0a0ad7fcdda67ffdd6ac790f12c216ad4f3cd15a"
+  },
+  "696": {
+    "url": "/posts/2022/10/696-自己实现一个android网络图片加载器/",
+    "title": "自己实现一个Android网络图片加载器",
+    "publishedAt": "2022-10-08T14:59:00+08:00",
+    "bodyHash": "44f60494558723d7da61574e5f0a4f887556e729a1817e6b5a3d39789088f646"
+  },
+  "695": {
+    "url": "/posts/2022/10/695-使用databinding为recyclerview使用同一个viewholder加载不同item/",
+    "title": "使用Databinding为Recyclerview使用同一个ViewHolder加载不同Item",
+    "publishedAt": "2022-10-08T14:59:00+08:00",
+    "bodyHash": "800bca02646b17d17d74b165915ec63b18fd9f0109b59c6d8dfcbe6a45e07606"
+  },
+  "694": {
+    "url": "/posts/2022/10/694-android测试体系-在mvvm架构中如何测试model层与viewmodel层/",
+    "title": "Android测试体系-在MVVM架构中如何测试Model层与ViewModel层",
+    "publishedAt": "2022-10-08T14:58:00+08:00",
+    "bodyHash": "676fccd6d8b616e7a1fb6d7e47b056b293eff381c35cde483b96354a2017c1a9"
+  },
+  "693": {
+    "url": "/posts/2022/10/693-项目的升级-给removebutterknife插件增加新功能/",
+    "title": "项目的升级-给RemoveButterKnife插件增加新功能",
+    "publishedAt": "2022-10-08T14:57:00+08:00",
+    "bodyHash": "aed45e313b9f93355fb75aa233c0fb0f837f7714aedac1ef631756a01f79a8c2"
+  },
+  "692": {
+    "url": "/posts/2022/10/692-项目的改造-removebutterknife插件代码的重构/",
+    "title": "项目的改造——RemoveButterKnife插件代码的重构",
+    "publishedAt": "2022-10-08T14:57:00+08:00",
+    "bodyHash": "fa70b57cd25d0830a169c2beb0973d8208932118dbcff62feee1d2d48b13f856"
+  },
+  "691": {
+    "url": "/posts/2022/10/691-androidstudio插件开发-removebutterknife从构思到实现/",
+    "title": "AndroidStudio插件开发——RemoveButterKnife从构思到实现",
+    "publishedAt": "2022-10-08T14:56:00+08:00",
+    "bodyHash": "d052ae656f30fbb7f7b605ef677b9e682080f4a70fe33e29cc5752e2681cca68"
+  },
+  "683": {
+    "url": "/posts/2017/08/683-e5bc80e6ba90e695b0e68daee5ba93postgresqle5ae89e8a385e58db8e8bdbde680bbe7bb93/",
+    "title": "开源数据库Postgresql安装/卸载总结",
+    "publishedAt": "2017-08-27T18:24:00+08:00",
+    "bodyHash": "a15c97dbe3213372be226f30c20e4c2953b7a4f025a6c36defbd9361c0485675"
+  },
+  "680": {
+    "url": "/posts/2017/08/680-python中关于模块之间互相调用的总结/",
+    "title": "Python中关于模块之间互相调用的总结",
+    "publishedAt": "2017-08-27T18:11:00+08:00",
+    "bodyHash": "b9523b175cff01aac7434929decf159f0c0e12b692701b5a3205dca2a8918f00"
+  },
+  "674": {
+    "url": "/posts/2017/06/674-kotlin学习小节/",
+    "title": "Kotlin学习小节",
+    "publishedAt": "2017-06-08T15:48:00+08:00",
+    "bodyHash": "fb3b100b84d3521689928a41739cd5ede6cbb9c0e186defed6aa08145ac0542d"
+  },
+  "664": {
+    "url": "/posts/2017/04/664-android自定义view的实现方式总结/",
+    "title": "Android自定义View的实现方式总结",
+    "publishedAt": "2017-04-25T16:48:00+08:00",
+    "bodyHash": "34b7fd00c5735cd8b38590754f549e9bb5e546c8eaa872984c7b5cbe84526879"
+  },
+  "655": {
+    "url": "/posts/2017/04/655-android性能优化-电池使用优化/",
+    "title": "Android性能优化——电池使用优化",
+    "publishedAt": "2017-04-25T10:31:00+08:00",
+    "bodyHash": "c91f1c737f74efdde2e40ed233316d58bedb922b07f154593d5f903bfbca7a98"
+  },
+  "650": {
+    "url": "/posts/2017/03/650-android性能优化-内存优化/",
+    "title": "Android性能优化——内存优化",
+    "publishedAt": "2017-03-31T11:28:00+08:00",
+    "bodyHash": "2443e12a108a0a2aff9a0e155563acabb0bebf17178a169b82205a4116d195ff"
+  },
+  "646": {
+    "url": "/posts/2017/03/646-android性能优化-图像绘制与布局/",
+    "title": "Android性能优化——图像绘制与布局",
+    "publishedAt": "2017-03-24T15:31:00+08:00",
+    "bodyHash": "57597b3f774e6afe7f652faf17f0a29b430dd9a1c72fdafe31d1000e7e9eef09"
+  },
+  "623": {
+    "url": "/posts/2016/12/623-w10learning-with-large-datasets/",
+    "title": "[W10]大数据学习",
+    "publishedAt": "2016-12-12T14:54:00+08:00",
+    "bodyHash": "2935e1a1d4d87e1b05a6ac8ff12bcb214e472bc04f4362c0e3522f1eacc0399f"
+  },
+  "606": {
+    "url": "/posts/2016/12/606-w9anomaly-detection/",
+    "title": "[W9]异常检测",
+    "publishedAt": "2016-12-06T15:34:00+08:00",
+    "bodyHash": "2a4ab75c9fe476c38419b4c29abbb6392eefc0378ac64cca06116b3c17b9af9d"
+  },
+  "599": {
+    "url": "/posts/2016/12/599-w8-mlclustering/",
+    "title": "[W8]聚集",
+    "publishedAt": "2016-12-02T14:56:00+08:00",
+    "bodyHash": "d29a7874eecc941fc0d787eb0e75a4ad408601ef2d62d0f7859b50037727a8e5"
+  },
+  "587": {
+    "url": "/posts/2016/11/587-w7optimization-objective/",
+    "title": "[W7]优化目标",
+    "publishedAt": "2016-11-29T15:49:00+08:00",
+    "bodyHash": "38e3756a091971e67b1ecc60fa9e0947c20bc1131e7d48a0ec42b8ceeb7479e8"
+  },
+  "571": {
+    "url": "/posts/2016/11/571-w6advice-for-applying-machine-learning/",
+    "title": "[W6]机器学习应用建议",
+    "publishedAt": "2016-11-23T15:19:00+08:00",
+    "bodyHash": "76a6178643c8965f91a7f6f3ceff00b2f44874d6ab90b315451fdb01cbc3e38e"
+  },
+  "557": {
+    "url": "/posts/2016/11/557-w5神经网络的学习/",
+    "title": "[W5]神经网络的学习",
+    "publishedAt": "2016-11-22T15:24:00+08:00",
+    "bodyHash": "beabdcbc9e520dd9a15ab58420502beccc24b1c2bea2417c1aa524cd1ae48d5b"
+  },
+  "550": {
+    "url": "/posts/2016/11/550-w4-neural-network-representation/",
+    "title": "[W4]神经网络的表示",
+    "publishedAt": "2016-11-21T11:02:00+08:00",
+    "bodyHash": "d9081e6a14e1dd104a3a3c60bcc39e152af9cece4404adffd2de4e15901478b3"
+  },
+  "537": {
+    "url": "/posts/2016/11/537-w3-logic-regression-and-regularized/",
+    "title": "[W3]逻辑回归以及正则化",
+    "publishedAt": "2016-11-18T17:34:00+08:00",
+    "bodyHash": "9687d1e2b1a58d06b86ef59a71afa21b0ccb74b2bde185dc1867966734076e16"
+  },
+  "523": {
+    "url": "/posts/2016/11/523-w2-multiple-linear-reg/",
+    "title": "[W2]多参数线性回归相关问题",
+    "publishedAt": "2016-11-17T09:42:00+08:00",
+    "bodyHash": "c0b6cb806fd6e14d99d55b8cd052222ea492c3497014eeb91ce3df45c0bd796e"
+  },
+  "512": {
+    "url": "/posts/2016/11/512-w1base-about-ml/",
+    "title": "[W1]机器学习的概念以及最简单的算法",
+    "publishedAt": "2016-11-15T16:15:00+08:00",
+    "bodyHash": "680911e489a5940bfb00e31989bb4850201248831722a316474f87bd2b1d213c"
+  },
+  "509": {
+    "url": "/posts/2016/11/509-factory-and-abstract-factory/",
+    "title": "工厂模式和抽象工厂概述以及二者的区别",
+    "publishedAt": "2016-11-10T16:30:00+08:00",
+    "bodyHash": "2ca27e591eff1cb911ed6a7c9d97bf99abd175e2992c76244e322d55d0ed5f6d"
+  },
+  "475": {
+    "url": "/posts/2016/06/475-androidstudio-plugin-dev-removebutterknife-design-to-implement/",
+    "title": "AndroidStudio Plugin Dev——RemoveButterKnife design to implement[pw1]",
+    "publishedAt": "2016-06-26T17:08:00+08:00",
+    "bodyHash": "c44ed5f91b6b3606e8a363365d31e18c101be2afdf409ac9073955e9d41f7646"
+  },
+  "452": {
+    "url": "/posts/2016/06/452-androidstudio-plugin-removebutterknife-di/",
+    "title": "AndroidStudio插件开发——RemoveButterKnife从构思到实现",
+    "publishedAt": "2016-06-24T16:21:00+08:00",
+    "bodyHash": "6f33df5ba1b3e2e349e0b51b1417db87f14c6bf747d1073fa0f119476570e2b1"
+  },
+  "446": {
+    "url": "/posts/2016/06/446-解题报告-lintcode28-search-a-2d-matrix/",
+    "title": "【解题报告】【lintcode28】Search a 2D Matrix",
+    "publishedAt": "2016-06-06T16:27:00+08:00",
+    "bodyHash": "8ceeaf07f69b3a79a771d6c8c39aa80d7374f2839862ef34647d7d8e5a66ece4"
+  },
+  "433": {
+    "url": "/posts/2016/06/433-解题报告-lintcode111-climbing-stairs/",
+    "title": "【解题报告】【lintcode111】Climbing Stairs",
+    "publishedAt": "2016-06-02T16:12:00+08:00",
+    "bodyHash": "e132e646283aeda3bc3b56499307cca02878d00fb47213671e7903c37bce4039"
+  },
+  "428": {
+    "url": "/posts/2016/05/428-解题报告-lintcode103-linked-list-cycle-ii/",
+    "title": "【解题报告】【lintcode103】Linked List Cycle II",
+    "publishedAt": "2016-05-20T14:03:00+08:00",
+    "bodyHash": "a96a505515384c4adbb210bc52a431d8d926e84b29715d0b2d3d4a2d52f198e8"
+  },
+  "426": {
+    "url": "/posts/2016/05/426-解题报告-lintcode362-sliding-window-maximum/",
+    "title": "【解题报告】【lintcode362】Sliding Window Maximum",
+    "publishedAt": "2016-05-19T15:39:00+08:00",
+    "bodyHash": "8bb0a314c49a6c304c52fdef0158db58ac2ff82d67ef580c77b3378b32807cb3"
+  },
+  "424": {
+    "url": "/posts/2016/05/424-解题报告-lintcode81-data-stream-median/",
+    "title": "【解题报告】【lintcode81】Data Stream Median",
+    "publishedAt": "2016-05-19T11:05:00+08:00",
+    "bodyHash": "2ce8c7e9c9e050266bdc0df8806d64ba22fa4fe77885ac6fb19e11365373944b"
+  },
+  "421": {
+    "url": "/posts/2016/05/421-解题报告-lintcode192-wildcard-matching/",
+    "title": "【解题报告】【lintcode192】Wildcard Matching",
+    "publishedAt": "2016-05-18T11:06:00+08:00",
+    "bodyHash": "dd36057af7724f04675e28c9eadd07704978934f6f1c7b2155b02f9ee2b6abc3"
+  },
+  "418": {
+    "url": "/posts/2016/05/418-解题报告-lintcode54-string-to-integer-ii/",
+    "title": "【解题报告】【lintcode54】String to Integer II",
+    "publishedAt": "2016-05-18T10:33:00+08:00",
+    "bodyHash": "999308ce5968341a301daacf16ff6176ec42609bc9dbaa02da805fb998e90580"
+  },
+  "416": {
+    "url": "/posts/2016/05/416-解题报告-lintcode88-lowest-common-ancestor/",
+    "title": "【解题报告】【lintcode88】Lowest Common Ancestor",
+    "publishedAt": "2016-05-17T15:03:00+08:00",
+    "bodyHash": "e3585ce9db79a92e37b9a3abb28f5c2afc2ebaa85c6045e72b0d441a882a7873"
+  },
+  "414": {
+    "url": "/posts/2016/05/414-解题报告-lintcode1-a-b-problem/",
+    "title": "【解题报告】【lintcode1】A + B Problem",
+    "publishedAt": "2016-05-17T11:40:00+08:00",
+    "bodyHash": "2abe9dbde825f484f2d4c8063247b0a6f3631deae8088e41348df0143b6f1081"
+  },
+  "412": {
+    "url": "/posts/2016/05/412-解题报告-lintcode61-search-for-a-range/",
+    "title": "【解题报告】【lintcode61】 Search for a Range",
+    "publishedAt": "2016-05-17T10:29:00+08:00",
+    "bodyHash": "125aa129050b8d817cbe18790d742683d4f4c3064fce7a4d1c5a50fc4eb6a1ac"
+  },
+  "408": {
+    "url": "/posts/2016/05/408-解题报告-lintcode82落单的数/",
+    "title": "【解题报告】lintcode82落单的数",
+    "publishedAt": "2016-05-16T14:51:00+08:00",
+    "bodyHash": "9841dc5435bf6379a28c708813745c5a9f8df5a5fe8643bd6a3f7b55f4b87a99"
+  },
+  "406": {
+    "url": "/posts/2016/05/406-解题报告-lintcode4求第n个丑数/",
+    "title": "【解题报告】lintcode4求第n个丑数",
+    "publishedAt": "2016-05-16T14:26:00+08:00",
+    "bodyHash": "fd6518214f3fc19e5cff9e59f2bc9d38ea762d19c49b8a676db25cc3e0789b36"
+  },
+  "404": {
+    "url": "/posts/2016/05/404-解题报告-lintcode3统计数字/",
+    "title": "【解题报告】lintcode3统计数字",
+    "publishedAt": "2016-05-16T14:12:00+08:00",
+    "bodyHash": "e2d475cf9b2e7e3228ccee79cfa687865b06551acf5a79070ff5efcabf59b2bd"
+  },
+  "402": {
+    "url": "/posts/2016/05/402-解题报告-lintcode5寻找第k大数/",
+    "title": "【解题报告】lintcode5寻找第k大数",
+    "publishedAt": "2016-05-16T11:18:00+08:00",
+    "bodyHash": "683b5eaece395a88dd1a99b686612407230acf7130e9f1b5ad015774841876bc"
+  },
+  "400": {
+    "url": "/posts/2016/05/400-lintcode46/",
+    "title": "【解题报告】lintcode46主元素",
+    "publishedAt": "2016-05-16T10:47:00+08:00",
+    "bodyHash": "27c00cba49e70017d542e8380d1a474f227a051253daf80cf9d592e8638d7fdf"
+  },
+  "397": {
+    "url": "/posts/2016/05/397-lintcode374/",
+    "title": "【解题报告】lintcode374螺旋矩阵",
+    "publishedAt": "2016-05-14T12:12:00+08:00",
+    "bodyHash": "fa1691094522466532beee555aba7506f56c4dcbf457565049756b23e557b89c"
+  },
+  "392": {
+    "url": "/posts/2016/05/392-解题报告-lintcode105复制带随机指针的链表/",
+    "title": "【解题报告】lintcode105复制带随机指针的链表",
+    "publishedAt": "2016-05-13T11:30:00+08:00",
+    "bodyHash": "5e2686ea0d9a75c02b3a704c34d921682a9c738022c54df232d3a705da43da15"
+  },
+  "385": {
+    "url": "/posts/2016/05/385-解题报告-lintcode245子树/",
+    "title": "【解题报告】lintcode245子树",
+    "publishedAt": "2016-05-13T10:54:00+08:00",
+    "bodyHash": "f7a82f0c9003721331b2baddaf79768a41f1d9640b042cc9c705e84563257741"
+  },
+  "382": {
+    "url": "/posts/2016/05/382-解题报告-lintcode365求二进制中有多少个1/",
+    "title": "【解题报告】lintcode365求二进制中有多少个1",
+    "publishedAt": "2016-05-13T10:30:00+08:00",
+    "bodyHash": "7a9e70813b355463af5cc01bbd89f26de860a040b7bdfee93cb4f2e94d5666f7"
+  },
+  "368": {
+    "url": "/posts/2016/05/368-how-to-remove-level3-search-hijack-from-your-chrome/",
+    "title": "How to remove level3 search hijack from your chrome",
+    "publishedAt": "2016-05-06T15:09:00+08:00",
+    "bodyHash": "737e89e597e0973a4f8dbe7e03fc24d3122d35a5b8a68d9672b3ece0e6b4de8d"
+  },
+  "336": {
+    "url": "/posts/2016/04/336-android中的ipc机制/",
+    "title": "Android中的IPC机制",
+    "publishedAt": "2016-04-20T21:57:00+08:00",
+    "bodyHash": "460af8d6dc898f1a8445eb278ec03418d80476cc503bf2e7031394a73d893db8"
+  },
+  "342": {
+    "url": "/posts/2016/04/342-所谓武功-不过是招式和经验-读-重构-有感/",
+    "title": "所谓武功，不过是招式和经验——读《重构》有感",
+    "publishedAt": "2016-04-19T18:03:00+08:00",
+    "bodyHash": "f56347a46d468020d13f03b9873ef2846bae3cf14c4f0884ec376a5a2da528c7"
+  },
+  "327": {
+    "url": "/posts/2016/04/327-android中的window和windowmanager/",
+    "title": "Android中的Window和Windowmanager",
+    "publishedAt": "2016-04-16T14:29:00+08:00",
+    "bodyHash": "39136beb0470edeb537a0d48d554ff1106e155b6df333ae1add54c736b1aebbe"
+  },
+  "323": {
+    "url": "/posts/2016/04/323-android中drawable概述/",
+    "title": "Android中Drawable概述",
+    "publishedAt": "2016-04-13T21:25:00+08:00",
+    "bodyHash": "fd926d97c1fa85265fb0b3c127d92c4fdbdeee54150edbc2278113b230c41286"
+  },
+  "317": {
+    "url": "/posts/2016/04/317-android之remoteviews的理解/",
+    "title": "Android之RemoteViews的理解",
+    "publishedAt": "2016-04-10T17:46:00+08:00",
+    "bodyHash": "bcd6a61ef4140377cf20afa28992dea0b112ebf9a7fe92eb7744818e8ec879f8"
+  },
+  "313": {
+    "url": "/posts/2016/04/313-解题报告-快速幂-fast-power/",
+    "title": "【解题报告】快速幂 Fast Power",
+    "publishedAt": "2016-04-10T16:43:00+08:00",
+    "bodyHash": "f96bc546f2f79d423db4622f68444ffdf1640393760348368b12a24360635840"
+  },
+  "311": {
+    "url": "/posts/2016/04/311-解题报告-前序遍历和中序遍历树构造二叉树construct/",
+    "title": "【解题报告】 前序遍历和中序遍历树构造二叉树Construct Binary Tree from Preorder and Inorder Traversal",
+    "publishedAt": "2016-04-10T12:39:00+08:00",
+    "bodyHash": "b0982e926946778ceb408cfa35399762260b783d45bfe7c6a6da4ebd29abf59d"
+  },
+  "308": {
+    "url": "/posts/2016/04/308-解题报告-斐波拉切数列fibonacci/",
+    "title": "【解题报告】斐波拉切数列Fibonacci",
+    "publishedAt": "2016-04-10T12:08:00+08:00",
+    "bodyHash": "62e33d92ae86c21c7501e86ce70f16bfab6139c41bbe885fa9c86295c625f382"
+  },
+  "304": {
+    "url": "/posts/2016/04/304-custom-view-how-to-design-and-implement-a-circularity-progress-bar/",
+    "title": "Custom View——How to design and implement a circularity progress bar",
+    "publishedAt": "2016-04-07T17:00:00+08:00",
+    "bodyHash": "0445d5c10dad3de21cab16016a40f196322399b079bb292b32f501a444b4e6ef"
+  },
+  "302": {
+    "url": "/posts/2016/03/302-android中多进程以及ipc的基础概念/",
+    "title": "Android中多进程以及IPC的基础概念",
+    "publishedAt": "2016-03-28T14:55:00+08:00",
+    "bodyHash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  "293": {
+    "url": "/posts/2016/03/293-自定义view实践-环形进度条的设计与实现分析/",
+    "title": "自定义View实践——环形进度条的设计与实现分析",
+    "publishedAt": "2016-03-22T17:34:00+08:00",
+    "bodyHash": "752fe78eb6f4dc3eab128e30ce03298a4a067ccaa2b139642f850998c1ca9294"
+  },
+  "287": {
+    "url": "/posts/2016/03/287-views-sliding-conflict-and-solution-in-android/",
+    "title": "View's sliding conflict and solution in Android",
+    "publishedAt": "2016-03-15T16:20:00+08:00",
+    "bodyHash": "feb229706ace045223c94f0e9203831241d16d35a9616ea7a4e9de39033ee286"
+  },
+  "285": {
+    "url": "/posts/2016/03/285-activity-life-cycle-and-launch-mode/",
+    "title": "Activity life cycle and launch mode",
+    "publishedAt": "2016-03-15T09:38:00+08:00",
+    "bodyHash": "a3bc64cf78f5a4d72daefed670a34add192a819b4a9d1d32d55e79e7f93acb16"
+  },
+  "280": {
+    "url": "/posts/2016/03/280-activity生命周期与启动模式/",
+    "title": "Activity生命周期与启动模式",
+    "publishedAt": "2016-03-14T20:38:00+08:00",
+    "bodyHash": "29bff1e6a39f1f3bc1a5262f99b9d701776e58e6bde333834a5cdbb43739435b"
+  },
+  "276": {
+    "url": "/posts/2016/03/276-android中view的滑动冲突及其解决方式/",
+    "title": "Android中View的滑动冲突及其解决方式",
+    "publishedAt": "2016-03-10T21:21:00+08:00",
+    "bodyHash": "96c4228fb99c298779fb01df2c64f3e5ca5a6144492eea3831a5e10086da5316"
+  },
+  "272": {
+    "url": "/posts/2016/03/272-android-view-event-dispatch/",
+    "title": "Android View Event dispatch",
+    "publishedAt": "2016-03-10T11:49:00+08:00",
+    "bodyHash": "95d75c25b9a8633395a79d99f62eb3e2aac6b2445f88ea2683d566dfd6600f36"
+  },
+  "268": {
+    "url": "/posts/2016/03/268-view的事件分发机制/",
+    "title": "View的事件分发机制",
+    "publishedAt": "2016-03-09T21:52:00+08:00",
+    "bodyHash": "af45043a20a7545247eefdf3886f2d0809a88ddba2245ec4bb147bee4eb42888"
+  },
+  "263": {
+    "url": "/posts/2016/03/263-basic-knowledges-about-android-view/",
+    "title": "Basic knowledges about Android View",
+    "publishedAt": "2016-03-09T20:36:00+08:00",
+    "bodyHash": "9b0a5098cf302e3597e537a428d0b32c078241b17660f67f2640b14be386ec1e"
+  },
+  "258": {
+    "url": "/posts/2016/03/258-关于android中的基础知识/",
+    "title": "关于Android中View的基础知识",
+    "publishedAt": "2016-03-08T21:30:00+08:00",
+    "bodyHash": "61b71f6eabd5075a883d7c159c8cf8613217040d3ad000395334d893ba3a5a4a"
+  },
+  "253": {
+    "url": "/posts/2016/03/253-view-work-progress-measure/",
+    "title": "View work progress :Measure",
+    "publishedAt": "2016-03-05T17:53:00+08:00",
+    "bodyHash": "3d9869d745b4d45a136c57ac9a3dbe7fb07226ff3d067c7f728f2a432f96828a"
+  },
+  "251": {
+    "url": "/posts/2016/03/251-view-work-progress-layout-and-draw/",
+    "title": "View work progress Layout and Draw",
+    "publishedAt": "2016-03-05T17:25:00+08:00",
+    "bodyHash": "812d350308442e88bfa3025fee8e8ab1955d75390964622d6d5a7c40022b7078"
+  },
+  "248": {
+    "url": "/posts/2016/03/248-about-the-decorview-and-measurespec-in-android-view/",
+    "title": "About the DecorView and MeasureSpec in Android View",
+    "publishedAt": "2016-03-05T17:01:00+08:00",
+    "bodyHash": "f3995172a39b92874823d57f5d9a91a61470eeda689a24427106c668be75e7b1"
+  },
+  "235": {
+    "url": "/posts/2016/03/235-android中view的初步认识以及measurespac的理解/",
+    "title": "Android中View的初步认识以及MeasureSpac的理解",
+    "publishedAt": "2016-03-05T11:58:00+08:00",
+    "bodyHash": "c4a0eabf1d5eaa5dd1d0b8b33dbe39a91f10c348500394e1bd045f1ace8f41ab"
+  },
+  "216": {
+    "url": "/posts/2016/02/216-how-to-post-to-different-page-on-a-blog-base-on-lnmp-and-wordpress/",
+    "title": "How to post to different page on a blog base on LNMP and wordpress",
+    "publishedAt": "2016-02-24T15:23:00+08:00",
+    "bodyHash": "2bd574205553614819813dd1f8bfa87f50ba636b40998111329ad371c0f78406"
+  },
+  "211": {
+    "url": "/posts/2016/02/211-关于基于lnmp与wordpress的博客创建分类页面的过程/",
+    "title": "关于基于LNMP与wordpress的博客创建分类页面的过程",
+    "publishedAt": "2016-02-23T15:14:00+08:00",
+    "bodyHash": "5efd6ccf93a3946af5ab9b3681915b8baafbef3e526b0c54b0b725e417b54970"
+  },
+  "198": {
+    "url": "/posts/2016/02/198-view工作原理之layout过程和draw过程/",
+    "title": "View工作原理之Layout过程和Draw过程",
+    "publishedAt": "2016-02-16T21:00:00+08:00",
+    "bodyHash": "7127d2452501b86c5470c48b0706c76e279a694180e2b33fdb683205e68c9bc3"
+  },
+  "168": {
+    "url": "/posts/2016/02/168-view工作流程之measure/",
+    "title": "View工作流程之Measure",
+    "publishedAt": "2016-02-16T11:29:00+08:00",
+    "bodyHash": "946743a0a91bdb787bfed46841303182c28c656fc0d8b4dd340d686e73dadb2b"
+  },
+  "18": {
+    "url": "/posts/2016/01/18-this-is-my-first-english-blog/",
+    "title": "This is my first english blog",
+    "publishedAt": "2016-01-29T16:48:00+08:00",
+    "bodyHash": "b94d27b9934d3e08a52e52d7da7dabfac484efe37a5380ee9088f7ace2efcde9"
+  },
+  "9": {
+    "url": "/posts/2016/01/9-android-studio-无法正确引入包内存在的类/",
+    "title": "Android Studio 无法正确引入包内存在的类",
+    "publishedAt": "2016-01-29T09:55:00+08:00",
+    "bodyHash": "3725bcd80b6b354f24ea338d20fa02d9121181a15bf6b567b0fa6ed8780bf62e"
+  },
+  "21": {
+    "url": "/posts/2015/12/21-读编程珠玑有感-细节处见技术/",
+    "title": "《读编程珠玑有感》——细节处见技术",
+    "publishedAt": "2015-12-28T09:56:00+08:00",
+    "bodyHash": "3c36200feb3a0bf3fcf2cb5c3dbf982eec24799af35a9d98069df83bd305052b"
+  },
+  "22": {
+    "url": "/posts/2015/12/22-headfirst设计模式-观后感-专业并不一定是深奥和/",
+    "title": "《Head First 设计模式》观后感——专业并不一定是深奥和枯燥",
+    "publishedAt": "2015-12-25T07:34:00+08:00",
+    "bodyHash": "51d171a84a69c4e6c73021b3a604a6f5b8255edb8414757eb87364ed7dcb3545"
+  },
+  "23": {
+    "url": "/posts/2015/12/23-程序员的职业修养观后感-这是一个态度问题/",
+    "title": "程序员的职业修养观后感——这是一个态度问题(psw:u3)",
+    "publishedAt": "2015-12-24T07:38:00+08:00",
+    "bodyHash": "b761329773b8c316e7e9ad31aed32e60948628c8cb6fa99ad09ba3cfba4636a8"
+  },
+  "24": {
+    "url": "/posts/2015/12/24-代码整洁之道读后感-代码是程序员的情书/",
+    "title": "代码整洁之道读后感——代码是程序员的情书",
+    "publishedAt": "2015-12-23T12:20:00+08:00",
+    "bodyHash": "797c4a4eaa01d5c9710dbba7f4d4af7bd4d40bc3395db81fd164fc0bae68e653"
+  },
+  "25": {
+    "url": "/posts/2015/12/25-thinkinjava读后感/",
+    "title": "Think In Java 读后感",
+    "publishedAt": "2015-12-22T03:40:00+08:00",
+    "bodyHash": "48a667007f759357e021a36ac691235d9c6cc137a7b845cdd33deae22e60d303"
+  },
+  "26": {
+    "url": "/posts/2015/12/26-自定义信息丰富的androidlog/",
+    "title": "自定义信息丰富的Android Log",
+    "publishedAt": "2015-12-02T07:01:00+08:00",
+    "bodyHash": "9d562bbc251da2cc811a9fb895467d4770d90a956373f5b8f6cd622575846385"
+  },
+  "27": {
+    "url": "/posts/2015/11/27-androidstudio无法正确引入包内存在的类/",
+    "title": "Android Studio 无法正确引入包内存在的类",
+    "publishedAt": "2015-11-12T07:02:00+08:00",
+    "bodyHash": "3725bcd80b6b354f24ea338d20fa02d9121181a15bf6b567b0fa6ed8780bf62e"
+  },
+  "28": {
+    "url": "/posts/2015/11/28-launcher启动应用重启的bug解决/",
+    "title": "launcher启动应用重启的BUG解决",
+    "publishedAt": "2015-11-12T06:52:00+08:00",
+    "bodyHash": "15b4a4f47b0e04fe1d27f9e63edc9ac2191312e8e47bb379ac08eb81ff720721"
+  },
+  "29": {
+    "url": "/posts/2015/11/29-一个word小技巧/",
+    "title": "一个word小技巧",
+    "publishedAt": "2015-11-02T02:01:00+08:00",
+    "bodyHash": "7dcd061d22734423ba6c11b168dd31e6d0a10f9a9203577c64629a760c50bb6d"
+  },
+  "30": {
+    "url": "/posts/2015/11/30-android自定义组件之带有悬浮header的listview/",
+    "title": "Android 自定义组件之 带有悬浮header的listview",
+    "publishedAt": "2015-11-02T01:55:00+08:00",
+    "bodyHash": "cd1e3381415f34035776c1079ad2fd51fddd3c4c3cdf25fc86ef952c8140e54b"
+  },
+  "31": {
+    "url": "/posts/2015/10/31-git常用命令以及作用-备忘/",
+    "title": "GIT常用命令以及作用【备忘】",
+    "publishedAt": "2015-10-06T01:15:00+08:00",
+    "bodyHash": "817fd22e2a3748b158bdc267038fd54c1a3db601d6434109df69640fc1208fb3"
+  },
+  "32": {
+    "url": "/posts/2015/08/32-如何将eclipse中的开源项目使用到androidstudio中/",
+    "title": "如何将Eclipse中的开源项目使用到Android Studio中",
+    "publishedAt": "2015-08-18T08:33:00+08:00",
+    "bodyHash": "9e8614b3124667c82579a7f77ae03e20238b1aa8ad29ebd051c291b8643235d8"
+  },
+  "33": {
+    "url": "/posts/2015/08/33-2015读书目录/",
+    "title": "2015读书目录",
+    "publishedAt": "2015-08-04T06:12:00+08:00",
+    "bodyHash": "504822589d067d0158cddb82bb3475a7f3dec3080c2623cfbcaa46c4d2e71b15"
+  },
+  "34": {
+    "url": "/posts/2015/07/34-android4-0锁屏程序开发-设置锁屏页面篇/",
+    "title": "Android4.0+锁屏程序开发——设置锁屏页面篇",
+    "publishedAt": "2015-07-11T16:01:00+08:00",
+    "bodyHash": "fc8956b43048a44ce43211b5e0ba2c8b6f5194a6c052d6c877baefe1a4d10fda"
+  },
+  "35": {
+    "url": "/posts/2015/07/35-android4-0锁屏程序开发-按键屏蔽篇/",
+    "title": "Android4.0+锁屏程序开发——按键屏蔽篇",
+    "publishedAt": "2015-07-11T15:42:00+08:00",
+    "bodyHash": "d6d9ab7af094bbe335573e4beb111fa476bcd7bb17f0303c8b20964ba7dba27a"
+  },
+  "36": {
+    "url": "/posts/2015/07/36-光速使用开源框架系列-数据库框架ormlite/",
+    "title": "【光速使用开源框架系列】数据库框架OrmLite",
+    "publishedAt": "2015-07-10T13:58:00+08:00",
+    "bodyHash": "a53a2b8e4178efa18c39051c019aab5059e520a579dbbad86fd2bbd66dabed86"
+  },
+  "37": {
+    "url": "/posts/2015/07/37-光速使用开源框架系列-图片加载框架imageloader/",
+    "title": "【光速使用开源框架系列】图片加载框架ImageLoader",
+    "publishedAt": "2015-07-09T12:51:00+08:00",
+    "bodyHash": "2dbf880d8e0461466b3f954c1dd2abd5a495b744a610c85867d0ceaf03026f0e"
+  },
+  "38": {
+    "url": "/posts/2015/05/38-android输入法部分遮挡ui的问题-与edittext框相切/",
+    "title": "Android输入法部分遮挡UI的问题（与EditText框相切）",
+    "publishedAt": "2015-05-07T10:20:00+08:00",
+    "bodyHash": "3d000f85101d9c0bc4acaad8f741543f9f5bba5cc59197df8bbaca527d00b31d"
+  },
+  "39": {
+    "url": "/posts/2015/04/39-关于android使用instrumentation做功能测试的时候遇到的一个问题/",
+    "title": "关于Android使用Instrumentation做功能测试的时候遇到的一个问题",
+    "publishedAt": "2015-04-12T05:57:00+08:00",
+    "bodyHash": "d1f168520f5b805a51b193206d19644dce7e1420ddbb5e414eccdc9cbfb5b04b"
+  },
+  "40": {
+    "url": "/posts/2015/04/40-junit的用法简要总结/",
+    "title": "JUNIT的用法简要总结",
+    "publishedAt": "2015-04-07T08:12:00+08:00",
+    "bodyHash": "f49c2c302687d1e2649a904f481cca094f74a99662ef5124441ddb0040b93d41"
+  },
+  "41": {
+    "url": "/posts/2015/04/41-java如何从cmd运行并使用text文件作为输入源的总结/",
+    "title": "java如何从cmd运行并使用text文件作为输入源的总结",
+    "publishedAt": "2015-04-04T00:28:00+08:00",
+    "bodyHash": "a95147641ec4dd0fc25e2e789853a43c2ad5ecb75f9ec7e83a60cb898f805ebb"
+  },
+  "42": {
+    "url": "/posts/2015/03/42-在发送intent启动activity之前判断是否有activity接收/",
+    "title": "在发送intent启动activity之前判断是否有activity接收",
+    "publishedAt": "2015-03-31T08:27:00+08:00",
+    "bodyHash": "5e78f44df20f63fc46b661c4d45c0db3ffd85ee0b5c6e91edf4fc2c81b07a208"
+  },
+  "43": {
+    "url": "/posts/2015/03/43-contentvalue的探究-结构-用途/",
+    "title": "contentvalue的探究（结构，用途）",
+    "publishedAt": "2015-03-30T15:20:00+08:00",
+    "bodyHash": "b782105dbbac8eda547c63765d81ea1e3a8465b93a578988bcb43e619b5c3683"
+  },
+  "44": {
+    "url": "/posts/2015/03/44-javainput-output流层次关系图/",
+    "title": "JAVA input/output 流层次关系图",
+    "publishedAt": "2015-03-30T14:47:00+08:00",
+    "bodyHash": "7257ab783499debae630f5a8925d82d74c3dc3b137af37a00f422f5dff787fcf"
+  },
+  "45": {
+    "url": "/posts/2015/03/45-activity状态保存的bundl对象存放位置的思考/",
+    "title": "activity状态保存的bundl对象存放位置的思考",
+    "publishedAt": "2015-03-30T14:16:00+08:00",
+    "bodyHash": "88ed6167da807471d9cda76beeaf05c4938cfe6651eb97b6bdf0617a1b80c6f0"
+  },
+  "46": {
+    "url": "/posts/2015/03/46-java中的垃圾回收机制以及其在android开发中的作用/",
+    "title": "JAVA中的垃圾回收机制以及其在android开发中的作用",
+    "publishedAt": "2015-03-30T14:01:00+08:00",
+    "bodyHash": "152081004b850fae3af37a6cbbf56d57245cf5aade82052b9f44a8c7f409c3a3"
+  },
+  "47": {
+    "url": "/posts/2015/03/47-android官方手册学习笔记/",
+    "title": "android官方手册学习笔记",
+    "publishedAt": "2015-03-30T13:21:00+08:00",
+    "bodyHash": "3da10f52d97e28d8a160183ebbccf4034ca60847957080582d57c755008f06f7"
+  },
+  "48": {
+    "url": "/posts/2015/03/48-java中的三种引用-强引用-软引用-弱引用/",
+    "title": "java 中的三种引用，强引用，软引用，弱引用",
+    "publishedAt": "2015-03-25T14:59:00+08:00",
+    "bodyHash": "5946401a4f1aa7115e35900dfb3c01fa792ffa3846fc8d020220cc7498bbee2b"
+  },
+  "49": {
+    "url": "/posts/2015/03/49-数据库开源框架ormlite/",
+    "title": "数据库开源框架ormlite",
+    "publishedAt": "2015-03-25T03:51:00+08:00",
+    "bodyHash": "7c56ed1fce40f7634b1cc6446cd97e2f3147b14dfa1b922d51fb8da35f1610a9"
+  },
+  "50": {
+    "url": "/posts/2015/03/50-siciyuan开源项目观光指南/",
+    "title": "siciyuan开源项目观光指南",
+    "publishedAt": "2015-03-24T15:37:00+08:00",
+    "bodyHash": "efcb1573a079517f11210a832dc62bccad08ca986b7965a69faa697ffb5a0726"
+  },
+  "51": {
+    "url": "/posts/2015/03/51-如何使用google等一系列搜索引擎/",
+    "title": "如何使用google等一系列搜索引擎？",
+    "publishedAt": "2015-03-24T15:27:00+08:00",
+    "bodyHash": "525dc5313acfdf39c1cecb487c1d1d6a069b38087a3d576453abbbcffe690f97"
+  },
+  "52": {
+    "url": "/posts/2015/03/52-开源项目weiciyuan运行前gradle调试过程记录/",
+    "title": "开源项目weiciyuan运行前gradle调试过程记录",
+    "publishedAt": "2015-03-23T14:13:00+08:00",
+    "bodyHash": "3c3cc68a27c1761bc5ac51417bc1614adb0e2f5072c7a7ecd2ffccdf9bbf4594"
+  },
+  "53": {
+    "url": "/posts/2015/03/53-onretainnonconfigurationinstance方法状态保存/",
+    "title": "onRetainNonConfigurationInstance方法状态保存",
+    "publishedAt": "2015-03-23T08:44:00+08:00",
+    "bodyHash": "437a954657a981367026c7756a4f31aedb89ffb14718ec1e12153456accd35b9"
+  },
+  "54": {
+    "url": "/posts/2015/03/54-关于stickybroadcast/",
+    "title": "关于stickybroadcast",
+    "publishedAt": "2015-03-23T08:24:00+08:00",
+    "bodyHash": "fc6ddb303bdcb636b3c8d3e79e36d1ab9a436604e3e0386dc18deb08820bc032"
+  },
+  "55": {
+    "url": "/posts/2015/03/55-关于bundle对象的思考/",
+    "title": "关于Bundle对象的思考",
+    "publishedAt": "2015-03-23T08:09:00+08:00",
+    "bodyHash": "2d499399eba752ae5b01d338d05b3c05a3b7c0da2f7d52a9e64e2654085a8f45"
+  },
+  "56": {
+    "url": "/posts/2015/03/56-android中finish和system-exit方法退出的区别/",
+    "title": "android中finish和system.exit方法退出的区别",
+    "publishedAt": "2015-03-23T08:04:00+08:00",
+    "bodyHash": "893e93ac5ae50fa05f08dfd0b98ab58cae65971c7209879d26f9dd1dd904824d"
+  },
+  "57": {
+    "url": "/posts/2015/03/57-关于raw和assest文件夹的差异/",
+    "title": "关于RAW 和 ASSEST文件夹的差异",
+    "publishedAt": "2015-03-23T07:42:00+08:00",
+    "bodyHash": "c4a500126298a7dca0e57bf65f4b3b759fb0600ea190efc503081785b22f2e8a"
+  },
+  "58": {
+    "url": "/posts/2015/03/58-图片缓存核心类lrucache/",
+    "title": "图片缓存核心类LruCache",
+    "publishedAt": "2015-03-22T01:29:00+08:00",
+    "bodyHash": "535e49274353fe82266cdf7a3a4f30cd71a2410c3f0e5e3ceff437b02a41ccb6"
+  },
+  "59": {
+    "url": "/posts/2015/03/59-android常用开源库集合-持续更新/",
+    "title": "Android常用开源库集合【持续更新】",
+    "publishedAt": "2015-03-22T01:20:00+08:00",
+    "bodyHash": "e857af39ef4981e1f4b6143ef5049b55c44ef89f31b92361bf0a1ebcef0e4d87"
+  },
+  "60": {
+    "url": "/posts/2015/03/60-android手势-gesture/",
+    "title": "android手势（gesture）",
+    "publishedAt": "2015-03-19T23:52:00+08:00",
+    "bodyHash": "597d8f8ff70e0797bf15f3d264bd505a0250aefa3d5985e720a97a4c76204db9"
+  },
+  "61": {
+    "url": "/posts/2015/03/61-android中音频播放的两种方法/",
+    "title": "android中音频播放的两种方法",
+    "publishedAt": "2015-03-19T23:49:00+08:00",
+    "bodyHash": "49d88fbcfb8d216b395afccd237932b4c9eebe7268de4ea7793c61df6fea8307"
+  },
+  "62": {
+    "url": "/posts/2015/03/62-常用设计模式的类图/",
+    "title": "常用设计模式的类图",
+    "publishedAt": "2015-03-19T22:41:00+08:00",
+    "bodyHash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  "63": {
+    "url": "/posts/2015/03/63-整理-使用aidl跨进程传递复杂对象的实践例子/",
+    "title": "【整理】使用AIDL跨进程传递复杂对象的实践例子",
+    "publishedAt": "2015-03-12T09:08:00+08:00",
+    "bodyHash": "e02c1044b32511ffc079c509f5c65cfdef37997304a7f5cde492de86e2d6208d"
+  },
+  "64": {
+    "url": "/posts/2015/03/64-关于fragment生命周期的两张图片/",
+    "title": "关于fragment生命周期的两张图片",
+    "publishedAt": "2015-03-10T15:38:00+08:00",
+    "bodyHash": "f4dfc5fa24f0fe082cb9a4dae283711de30e7e7ffbb5cad37decaa891b93d9b2"
+  },
+  "65": {
+    "url": "/posts/2015/03/65-loader的简单使用过程分析/",
+    "title": "loader的简单使用过程分析",
+    "publishedAt": "2015-03-10T15:09:00+08:00",
+    "bodyHash": "985160e4b91712adbcd3276742b12c7ddd0e200d24d4f179dbd282b547167f29"
+  },
+  "66": {
+    "url": "/posts/2015/03/66-loader的意义和内部机制浅析/",
+    "title": "loader的意义和内部机制浅析",
+    "publishedAt": "2015-03-10T06:08:00+08:00",
+    "bodyHash": "377b63d5472db647f6688443628a92694b82d970a662d6eeae379bff529c44dc"
+  },
+  "67": {
+    "url": "/posts/2015/03/67-v4v7v13支持包的区别/",
+    "title": "V4 V7 V13支持包的区别",
+    "publishedAt": "2015-03-10T04:16:00+08:00",
+    "bodyHash": "b402bf0e0c28ead72c22d0266f09c0cd8632c82394ac4ddfe637b61a5a86803f"
+  },
+  "68": {
+    "url": "/posts/2015/03/68-一个小技巧-如何让图片逐渐消失/",
+    "title": "一个小技巧——如何让图片逐渐消失",
+    "publishedAt": "2015-03-09T14:59:00+08:00",
+    "bodyHash": "6e60cff2d8beb1ef3d250faf25d5e0435e41e0628d77d86aeaf3c51ebc7b0acc"
+  },
+  "69": {
+    "url": "/posts/2015/03/69-actionbaractivity的使用注意事项/",
+    "title": "ActionBarActivity的使用注意事项",
+    "publishedAt": "2015-03-09T14:24:00+08:00",
+    "bodyHash": "0fe76310a96ff1876a999bd3b1def38d4722ce9c4d162c1452309c2a31acb391"
+  },
+  "71": {
+    "url": "/posts/2015/03/71-actionbar中添加searchview并监听期伸缩-打开的方法/",
+    "title": "actionbar中添加searchview并监听期伸缩/打开的方法",
+    "publishedAt": "2015-03-08T16:27:00+08:00",
+    "bodyHash": "b88ba916633c239cd41c826358fcdf5f02e3a8f59ea21eeb912ae1a2d20cc2b1"
+  },
+  "72": {
+    "url": "/posts/2015/03/72-requestlayout-invalidate和postinvalidate的异同/",
+    "title": "requestLayout, invalidate和postInvalidate的异同",
+    "publishedAt": "2015-03-07T08:16:00+08:00",
+    "bodyHash": "374bfa7c6c78ef3f17e4fd972aa751f8056b44d214adda182c7e56417ccad563"
+  },
+  "73": {
+    "url": "/posts/2015/03/73-如何关闭打开了多个activity的activity/",
+    "title": "如何关闭打开了多个activity的activity",
+    "publishedAt": "2015-03-07T07:24:00+08:00",
+    "bodyHash": "e3d9ba99e25e8ac6dac921e173cc03f29a64a5bd71c1107b338a15ff203714fe"
+  },
+  "74": {
+    "url": "/posts/2015/03/74-关于handler的再次讨论/",
+    "title": "关于handler的再次讨论",
+    "publishedAt": "2015-03-07T06:15:00+08:00",
+    "bodyHash": "7ca17469e8532d737668b42c127aa7a551260fe517c4ea31f64ecbd54e856811"
+  },
+  "75": {
+    "url": "/posts/2015/03/75-android中pull解析xml文件的简单使用/",
+    "title": "Android中pull解析XML文件的简单使用",
+    "publishedAt": "2015-03-06T02:16:00+08:00",
+    "bodyHash": "297a2e6ec7b4cad3c46586865d18ae096f7377fccb8c9b6d195dbce17bcac5ea"
+  },
+  "76": {
+    "url": "/posts/2015/03/76-使用广播退出打开了多个activity的程序/",
+    "title": "使用广播退出打开了多个activity的程序",
+    "publishedAt": "2015-03-05T15:14:00+08:00",
+    "bodyHash": "584efc1be5d4d37fe04867bc69574386c68912d546f71b01dc562344e6a287e9"
+  },
+  "77": {
+    "url": "/posts/2015/03/77-actionbaractivity和普通的activity的区别/",
+    "title": "ActionbarActivity和普通的Activity的区别",
+    "publishedAt": "2015-03-04T12:10:00+08:00",
+    "bodyHash": "51269b1b381f25780310ccfb6374bedd9b26b9593a170fd9d222f41398888a33"
+  },
+  "78": {
+    "url": "/posts/2015/03/78-serializable和parcelable的实现和比较/",
+    "title": "Serializable 和 parcelable的实现和比较",
+    "publishedAt": "2015-03-02T13:54:00+08:00",
+    "bodyHash": "d9ed76eca498475514054c87ac66a06d2145a79ab2594608762f66a66e69bc54"
+  },
+  "79": {
+    "url": "/posts/2015/03/79-androidtween动画和frame动画总结/",
+    "title": "android tween动画和Frame动画总结",
+    "publishedAt": "2015-03-02T12:48:00+08:00",
+    "bodyHash": "ac3f8a9059cd820329ddc91981a72ec7ce8abb29c0ac8ca476b70f9e047c9f96"
+  },
+  "80": {
+    "url": "/posts/2015/03/80-给activity切换过程添加动画效果/",
+    "title": "给Activity切换过程添加动画效果",
+    "publishedAt": "2015-03-02T12:41:00+08:00",
+    "bodyHash": "d3a5a89dc0e4c89aabd19f074aadf266f2f76431bf2dc03ca9a43882396b94e9"
+  },
+  "81": {
+    "url": "/posts/2015/03/81-java反射机制学习随笔/",
+    "title": "JAVA反射机制学习随笔",
+    "publishedAt": "2015-03-02T11:53:00+08:00",
+    "bodyHash": "eb333a902453f552ccc010a87c35b08943aab0c84e4943ee7de5a7390f01b946"
+  },
+  "82": {
+    "url": "/posts/2015/03/82-java中几个修饰符的作用以及一些相关话题/",
+    "title": "JAVA中几个修饰符的作用以及一些相关话题",
+    "publishedAt": "2015-03-01T16:32:00+08:00",
+    "bodyHash": "81ae41a01d7e7107d902dbc533f7685389e4241bba1ab379758164ea3ee98837"
+  },
+  "83": {
+    "url": "/posts/2015/03/83-android自定义控件之事件/",
+    "title": "android 自定义控件之事件",
+    "publishedAt": "2015-03-01T16:27:00+08:00",
+    "bodyHash": "ad7d028de908ffbda02cd319b970150f918f7b5400f17935723a8343530e6cb3"
+  },
+  "84": {
+    "url": "/posts/2015/02/84-如果自定义一个可以点击之后展开-收缩的菜单组-b/",
+    "title": "如果自定义一个可以点击之后展开/收缩的菜单组件",
+    "publishedAt": "2015-02-28T13:53:00+08:00",
+    "bodyHash": "349f8a3d1edfa66e4eb8f7f3ee724e7ccd275b3a2dd1015e0bddcfd05f5a86cc"
+  },
+  "85": {
+    "url": "/posts/2015/02/85-如何让dialog点击确定按钮之后由于数据不合法不关闭/",
+    "title": "如何让DIALOG点击确定按钮之后由于数据不合法不关闭",
+    "publishedAt": "2015-02-28T13:41:00+08:00",
+    "bodyHash": "c6d522c173da6165411a30e2f8f518390943f2a3734951faac55b757b43c4a0b"
+  },
+  "86": {
+    "url": "/posts/2015/02/86-注册广播的两种方法和区别/",
+    "title": "注册广播的两种方法和区别",
+    "publishedAt": "2015-02-27T11:53:00+08:00",
+    "bodyHash": "d93a3901321f41362fd48d33df0451fdd374b1f520ed52b0c3b50c25edd825c8"
+  },
+  "87": {
+    "url": "/posts/2015/02/87-关于handler和异步任务/",
+    "title": "关于handler和异步任务",
+    "publishedAt": "2015-02-26T18:16:00+08:00",
+    "bodyHash": "f3cdb51143d9efd05c9b8a7900acf5d831e2b796691eab40b99ce746388ad702"
+  },
+  "88": {
+    "url": "/posts/2015/02/88-sqliteopenhelper创建database的过程/",
+    "title": "SQLiteopenhelper创建database的过程",
+    "publishedAt": "2015-02-26T17:18:00+08:00",
+    "bodyHash": "d1762808ccc40d8fad767b7bd6dba7377a3e793dabd702968aefbcfc9035fa56"
+  },
+  "89": {
+    "url": "/posts/2015/02/89-contentprovider的创建和使用流程概述/",
+    "title": "Contentprovider的创建和使用流程概述",
+    "publishedAt": "2015-02-26T13:25:00+08:00",
+    "bodyHash": "96d3a32e47a688ec76df9082b6df9bc5c7bd67e42c05971659f00a04b22d27a4"
+  },
+  "90": {
+    "url": "/posts/2015/02/90-java中string类的split方法/",
+    "title": "JAVA中string类的split方法",
+    "publishedAt": "2015-02-26T12:42:00+08:00",
+    "bodyHash": "21981702e33e6c55c5a746c317bb85c91e1888f730c5a85758a21e27347a1e7a"
+  },
+  "91": {
+    "url": "/posts/2015/02/91-activity的四种加载模式介绍/",
+    "title": "activity的四种加载模式介绍",
+    "publishedAt": "2015-02-26T11:15:00+08:00",
+    "bodyHash": "a665c0456e8e19711b7da930d10a104b8396e619072dc241824ddffa3a63a6b1"
+  },
+  "92": {
+    "url": "/posts/2015/02/92-关于taskaffinity属性的作用/",
+    "title": "关于taskaffinity属性的作用",
+    "publishedAt": "2015-02-26T11:11:00+08:00",
+    "bodyHash": "fb994b2d0b59ccc4321b6bffe642652ba2a714897497fd9a0a86fa7b2677e54b"
+  },
+  "93": {
+    "url": "/posts/2015/02/93-android中context的具体作用和意义/",
+    "title": "android 中context的具体作用和意义",
+    "publishedAt": "2015-02-26T10:37:00+08:00",
+    "bodyHash": "f8777540788095fbf0063526e585342a68a07ccaebe2e833752adffe2d42f9b4"
+  },
+  "94": {
+    "url": "/posts/2015/02/94-startactivityforresult使用/",
+    "title": "startactivityforresult使用",
+    "publishedAt": "2015-02-25T09:29:00+08:00",
+    "bodyHash": "9fa74f43a3b4f54b36e6a44599e6437f0d63bc2c108a52dc9a84f3efb9f54416"
+  },
+  "95": {
+    "url": "/posts/2015/02/95-android获取sharedpreference的三种方法的区别/",
+    "title": "android 获取sharedpreference的三种方法的区别",
+    "publishedAt": "2015-02-25T07:29:00+08:00",
+    "bodyHash": "bc9d0e834c87292be38de4122cbd85271a88918fcfdbcf3e8b4f02f227102be6"
+  },
+  "96": {
+    "url": "/posts/2015/02/96-关于contentprovider的几个问题/",
+    "title": "关于contentprovider的几个问题",
+    "publishedAt": "2015-02-25T06:56:00+08:00",
+    "bodyHash": "3f57a30633adee6086a1123c6ae0fd5ddeecd15d78e0904f1d5b09062a28e5be"
+  },
+  "97": {
+    "url": "/posts/2015/02/97-关于service和线程的区别/",
+    "title": "关于service和线程的区别",
+    "publishedAt": "2015-02-24T12:32:00+08:00",
+    "bodyHash": "482aea0bae79203839248a7e4d6dc7286fe1128b3f3265eb64d82ec5b329bd8c"
+  },
+  "98": {
+    "url": "/posts/2015/02/98-androidtaskstack/",
+    "title": "android task stack",
+    "publishedAt": "2015-02-23T14:26:00+08:00",
+    "bodyHash": "cc8144f6913dc28cc1943f44a239aada4e6bb503b6deed57918a285b65f1847b"
+  },
+  "99": {
+    "url": "/posts/2015/02/99-android中sqlite查询date类型字段出现有返回但是为错误值的情/",
+    "title": "Android中SQLite查询date类型字段出现有返回但是为错误值的情况",
+    "publishedAt": "2015-02-23T12:41:00+08:00",
+    "bodyHash": "b71c0cdc33d71386e90925a97255fe24cfaa7ced30b95a182fc0485c0cc5aaa2"
+  },
+  "100": {
+    "url": "/posts/2015/02/100-关于android中出现failedtoreadrow0-column-1错误/",
+    "title": "关于android中出现failed to read row 0,column -1错误",
+    "publishedAt": "2015-02-23T06:39:00+08:00",
+    "bodyHash": "e466ad5c8d661dc0241247b1a3f1da3bc58d9f5f4090ec197b4a2c85b9902d20"
+  },
+  "101": {
+    "url": "/posts/2015/02/101-android禁止程序自动旋转的配置/",
+    "title": "Android禁止程序自动旋转的配置",
+    "publishedAt": "2015-02-20T15:04:00+08:00",
+    "bodyHash": "ee09938af4a5cfd4446dbca9a758b20d8fbe9d32191aa2535c45b5ae7b7e4bcb"
+  },
+  "102": {
+    "url": "/posts/2015/02/102-关于fill-parente和match-parent布局属性/",
+    "title": "关于FILL_PARENTE和match_parent布局属性",
+    "publishedAt": "2015-02-19T04:43:00+08:00",
+    "bodyHash": "82c13e8b428671ee0275667f9a852928d73a581f1b10a53d825b97fc903c302a"
+  },
+  "103": {
+    "url": "/posts/2015/02/103-在java中-string-stringbuffer-stringbuilder的区别/",
+    "title": "在JAVA中，String,Stringbuffer,StringBuilder 的区别",
+    "publishedAt": "2015-02-18T12:56:00+08:00",
+    "bodyHash": "a81435a70fbca47f9b79bcc6653888f94a3b002e15b6d9c7e98736ce37bf6ba3"
+  },
+  "104": {
+    "url": "/posts/2015/02/104-关于android中-菜单按钮点击事件首次执行之后再次执/",
+    "title": "关于android中，菜单按钮点击事件首次执行之后再次执行需要双击按钮的问题",
+    "publishedAt": "2015-02-11T05:57:00+08:00",
+    "bodyHash": "45c3aed8bad4afe5f5818b4914297de4fbaa2d9ad27b4fcde64079b3671ae579"
+  },
+  "105": {
+    "url": "/posts/2015/02/105-关于androidstudio中使用class-forname-方法动态获取类实例报noclassfound异常/",
+    "title": "关于android studio中使用class.forname()方法动态获取类实例报NO CLASS FOUND异常的几种处理方法",
+    "publishedAt": "2015-02-10T06:13:00+08:00",
+    "bodyHash": "c94f8b88e4c14438b30ab85ed1641cf4d16d31f88640e4f07fe06c162b8d0de2"
+  },
+  "106": {
+    "url": "/posts/2015/02/106-android-关于自己实现adapter后gridview中item无法被选中的解决方/",
+    "title": "【android】关于自己实现adapter后gridview中item无法被选中的解决方法",
+    "publishedAt": "2015-02-07T15:34:00+08:00",
+    "bodyHash": "520f8f5af9b2a72d895ea80072f5fa59e5d4603f72d348b5f65fc76acf547863"
+  },
+  "107": {
+    "url": "/posts/2015/02/107-关于tortoisegit设置代理服务器会自动取消的问题解决方法/",
+    "title": "关于TortoiseGit设置代理服务器会自动取消的问题解决方法",
+    "publishedAt": "2015-02-06T05:22:00+08:00",
+    "bodyHash": "8f4cc1a04b9f7fece11bdc8e53a2484328c2b55072fd33d4f3c46d69fc63d89d"
+  },
+  "108": {
+    "url": "/posts/2015/02/108-项目规划/",
+    "title": "项目规划",
+    "publishedAt": "2015-02-04T14:49:00+08:00",
+    "bodyHash": "33a2c635099963d65b1100ff9dae36783f6d4f7f660d0b8c728c869716c7af40"
+  },
+  "109": {
+    "url": "/posts/2015/02/109-onbind中几个flag参数的意义/",
+    "title": "onbind中几个flag参数的意义",
+    "publishedAt": "2015-02-03T14:19:00+08:00",
+    "bodyHash": "790c4789bc4232d4db2ad0dd06819bb1c7cca922927417c113e59344e6a9ac7d"
+  },
+  "110": {
+    "url": "/posts/2015/02/110-android远程服务-aidl-实现步骤/",
+    "title": "Android远程服务（AIDL）实现步骤",
+    "publishedAt": "2015-02-03T14:05:00+08:00",
+    "bodyHash": "24bfc6852b9c2b951ea3c16202246cb8e3407932b72d3f3d7f4fcb29e23e2153"
+  },
+  "111": {
+    "url": "/posts/2015/02/111-android中的文件读写总结/",
+    "title": "Android中的文件读写总结",
+    "publishedAt": "2015-02-03T13:53:00+08:00",
+    "bodyHash": "a2f87d9cb5a9de5d93251944606bfc652c87bbfe7b411d25317ea3053948923c"
+  },
+  "112": {
+    "url": "/posts/2015/02/112-fragment界面交互实操-步骤/",
+    "title": "fragment界面交互实操(步骤)",
+    "publishedAt": "2015-02-03T13:49:00+08:00",
+    "bodyHash": "09ebb127d249df557b178ea56118ee144b88b102a1d4d20ce5ec0109b9459660"
+  },
+  "113": {
+    "url": "/posts/2015/02/113-service使用handler与activity沟通的两种方法/",
+    "title": "service使用handler与Activity沟通的两种方法",
+    "publishedAt": "2015-02-03T13:36:00+08:00",
+    "bodyHash": "3f308f506913a2aeb0a5e5d9bb6f88b7edaa099aef6325c78bf3154e2a2d8880"
+  },
+  "114": {
+    "url": "/posts/2015/02/114-foregroundservice的用处和用法/",
+    "title": "foregroundservice的用处和用法",
+    "publishedAt": "2015-02-02T14:03:00+08:00",
+    "bodyHash": "82d4522bc0f9296f4284adb086c5d996c42c4bcc869d475b9860bd0fd93f06c1"
+  },
+  "115": {
+    "url": "/posts/2015/02/115-关于startservice的几个启动返回值的意义/",
+    "title": "关于startservice的几个启动返回值的意义",
+    "publishedAt": "2015-02-02T13:17:00+08:00",
+    "bodyHash": "b4783c48154407b1dfa9005544d40a9156f8e4cd07aa9aa6118c2ff3df3a0f16"
+  },
+  "116": {
+    "url": "/posts/2015/02/116-关于android中两种service的编写简单总结/",
+    "title": "关于android中两种service的编写简单总结",
+    "publishedAt": "2015-02-02T13:09:00+08:00",
+    "bodyHash": "fe1d1e3e81911fbde46b36b0c661700f8cce85b94d21d467b1f5e537562dcc41"
+  },
+  "117": {
+    "url": "/posts/2015/02/117-tolearnlist/",
+    "title": "To learn list",
+    "publishedAt": "2015-02-01T14:00:00+08:00",
+    "bodyHash": "2be68b57a32b5c593cb6092e5e4755c79925aeb04c58c333daafb8779983a04f"
+  },
+  "118": {
+    "url": "/posts/2015/02/118-android中如何在系统启动的时候启动自己的service/",
+    "title": "android中如何在系统启动的时候启动自己的service",
+    "publishedAt": "2015-02-01T13:02:00+08:00",
+    "bodyHash": "92d0f8fb58758fa6248d919e2d178af64963cdbed2a8f2ff7e14a84b93d41851"
+  },
+  "119": {
+    "url": "/posts/2015/02/119-service的生命周期以及两种service的差异/",
+    "title": "service的生命周期以及两种service的差异",
+    "publishedAt": "2015-02-01T10:56:00+08:00",
+    "bodyHash": "60cd637d5845cefa0705bab17da18dd5d713870dd6718062e948ee2e40a5809b"
+  },
+  "120": {
+    "url": "/posts/2015/02/120-intent的简单概述/",
+    "title": "Intent的简单概述",
+    "publishedAt": "2015-02-01T10:13:00+08:00",
+    "bodyHash": "f2282702b8e1a9dda59754dd0588b97c0336bad69d29feae4bf6caa0c506e7ce"
+  },
+  "121": {
+    "url": "/posts/2015/02/121-关于startactivity初始化activity的过程以及activity和window以及view的关系/",
+    "title": "关于startactivity初始化activity的过程以及activity和window以及view的关系",
+    "publishedAt": "2015-02-01T09:10:00+08:00",
+    "bodyHash": "6f08c04c3ae82fc75d23450435bdc6df7016205996c7fd6a33b5f8a484b23f6f"
+  },
+  "122": {
+    "url": "/posts/2015/02/122-androidactivity生命周期的一张经典图片/",
+    "title": "android activity生命周期的一张经典图片",
+    "publishedAt": "2015-02-01T08:55:00+08:00",
+    "bodyHash": "6bcd8d187fd62202d99efdf711b0a3a3a44428f9d2d9ee028e70aabd11b83426"
+  },
+  "123": {
+    "url": "/posts/2015/02/123-关于android进程的启动和消亡/",
+    "title": "关于Android进程的启动和消亡",
+    "publishedAt": "2015-02-01T08:36:00+08:00",
+    "bodyHash": "b8149ee9a8db1153b4a618fe1f6722037d1e999cf3a5d6651e9a29c40d7ef78f"
+  },
+  "124": {
+    "url": "/posts/2015/02/124-android的系统结构简述/",
+    "title": "Android的系统结构简述",
+    "publishedAt": "2015-02-01T08:08:00+08:00",
+    "bodyHash": "d974df1d4c32f61936cc65cb47bdb52ec54411d9dcf9c0362b7ac38fc59b7f7d"
+  },
+  "125": {
+    "url": "/posts/2015/01/125-gituri/",
+    "title": "GIT URI",
+    "publishedAt": "2015-01-31T19:11:00+08:00",
+    "bodyHash": "95134d804f060faf05bab462a73f18213024c735e6bac3e8000df65ca16386e6"
+  },
+  "126": {
+    "url": "/posts/2015/01/126-关于java中的回调接口传值机制/",
+    "title": "关于JAVA中的回调接口传值机制",
+    "publishedAt": "2015-01-29T14:37:00+08:00",
+    "bodyHash": "d3f41c47e9e3080aba38460ce5900d58f69dcfd968e33deaf0a56e9a56ea77f1"
+  },
+  "127": {
+    "url": "/posts/2015/01/127-android开发中资源文件和资源id是如何映射的/",
+    "title": "ANDROID开发中资源文件和资源ID是如何映射的",
+    "publishedAt": "2015-01-29T08:48:00+08:00",
+    "bodyHash": "d6b7b955515afbca6bfa3924632bcf66723721a70a4e4798fa216c5090be755c"
+  },
+  "128": {
+    "url": "/posts/2015/01/128-关于ui性能优化/",
+    "title": "关于UI性能优化",
+    "publishedAt": "2015-01-28T16:20:00+08:00",
+    "bodyHash": "687d42f9501d55791453a2a7b03d731df1a2e97a1750dfc888130fc9d3ace8f7"
+  },
+  "129": {
+    "url": "/posts/2015/01/129-关于android的一些博文收集/",
+    "title": "关于android的一些博文收集",
+    "publishedAt": "2015-01-28T06:56:00+08:00",
+    "bodyHash": "5f3ac577e5787eee70644e0b61ded36017410ea28bf58d168737ae176ab51092"
+  },
+  "130": {
+    "url": "/posts/2015/01/130-关于synchronized关键字锁住对象的嵌套问题/",
+    "title": "关于Synchronized关键字锁住对象的嵌套问题",
+    "publishedAt": "2015-01-26T08:56:00+08:00",
+    "bodyHash": "364e0868b56c0e9927130b8d5d8266c735aa63f17de816966417f55936d0adc9"
+  },
+  "131": {
+    "url": "/posts/2015/01/131-eclipse个人觉得有用的快捷键/",
+    "title": "eclipse个人觉得有用的快捷键",
+    "publishedAt": "2015-01-26T03:21:00+08:00",
+    "bodyHash": "ec1cdcb97fa0eb4cff4fc3f46b0c4ba305151c0776d830ac02d42beab3696982"
+  },
+  "132": {
+    "url": "/posts/2015/01/132-关于android数据库查询出现-idcolumndonotexist的处理/",
+    "title": "关于android 数据库查询出现 _id column do not exist 的处理",
+    "publishedAt": "2015-01-25T12:30:00+08:00",
+    "bodyHash": "5d077a0424ce1ea50807f58985a8b9201b8a90a1afcf6269afaf638d51a1e8ec"
+  },
+  "133": {
+    "url": "/posts/2015/01/133-转-经典网文-追mm与设计模式/",
+    "title": "【转】经典网文：追MM与设计模式",
+    "publishedAt": "2015-01-20T04:59:00+08:00",
+    "bodyHash": "a70b9c5484adb9733f4425db31cba9dcd09bc000be987b38b43841672acd088d"
+  },
+  "134": {
+    "url": "/posts/2015/01/134-java相关资料/",
+    "title": "JAVA相关资料",
+    "publishedAt": "2015-01-16T04:29:00+08:00",
+    "bodyHash": "9ad30cb8b4877003c3a28d2a0f26a060aa837f96b291a364ab3ced2cc403ecfa"
+  },
+  "135": {
+    "url": "/posts/2015/01/135-面试题/",
+    "title": "面试题",
+    "publishedAt": "2015-01-16T02:28:00+08:00",
+    "bodyHash": "61b2c3a426d77199bc9993f8b46f307235d57c93cd9c309d8b84c5b1c4b1aac5"
+  },
+  "136": {
+    "url": "/posts/2015/01/136-问题-expandable数据集的定义的正确方法-tabactivity弃用替-a/",
+    "title": "【问题】Expandable数据集的定义的正确方法，TabActivity弃用替代，Gallery替代,imageswitcher",
+    "publishedAt": "2015-01-13T12:52:00+08:00",
+    "bodyHash": "846b44f85b1b24658039734d78ec97f110a71c9e4e1badd44bba1ba998647ce5"
+  },
+  "137": {
+    "url": "/posts/2015/01/137-设计模式-代理模式和装饰模式之间的区别/",
+    "title": "【设计模式】代理模式和装饰模式之间的区别",
+    "publishedAt": "2015-01-13T05:03:00+08:00",
+    "bodyHash": "be5c8f224b387c9f554f053f69bfff2d3a5ffe72b31e3893dab81fac9f1d50f8"
+  },
+  "138": {
+    "url": "/posts/2015/01/138-计划-写一个统计鼠标点击次数-滑动距离-键盘-e/",
+    "title": "计划：写一个统计鼠标点击次数，滑动距离，键盘按键次数的软件",
+    "publishedAt": "2015-01-12T05:18:00+08:00",
+    "bodyHash": "07fb4aa73e003ffd7f6f1251e0e19fd3b17a985c448cf38c5c3537257591dd23"
+  },
+  "139": {
+    "url": "/posts/2015/01/139-java类-变量的赋值一个小细节-以及static标注变量的意/",
+    "title": "JAVA类，变量的赋值一个小细节，以及static标注变量的意义",
+    "publishedAt": "2015-01-12T04:57:00+08:00",
+    "bodyHash": "829540d16c29cd1feeb5bb414406a4faadcdda314bc78ff534357b23080685be"
+  },
+  "140": {
+    "url": "/posts/2015/01/140-一个自动修改本地ip地址的bat/",
+    "title": "一个自动修改本地IP地址的BAT",
+    "publishedAt": "2015-01-11T12:52:00+08:00",
+    "bodyHash": "98c518eec9a611b4a89527b0dd540753f79bfcdf76891ab8def2ce9f5a311227"
+  },
+  "141": {
+    "url": "/posts/2015/01/141-spinner通过xml形式绑定数据时无法从string-xml中读取数组/",
+    "title": "Spinner 通过XML形式绑定数据时 无法从String.xml中读取数组",
+    "publishedAt": "2015-01-10T13:40:00+08:00",
+    "bodyHash": "52381899532a1d0bfcd02211853fa9cf93994c125020cc0da24319eafd6a89db"
+  },
+  "142": {
+    "url": "/posts/2015/01/142-关于android项目中-突然就r类找不到已存在的资源文件/",
+    "title": "关于Android项目中，突然就R类找不到已存在的资源文件的解决方法",
+    "publishedAt": "2015-01-10T12:57:00+08:00",
+    "bodyHash": "c6a96b450e923e41575cb5df4f97a248092f2b8a5360284ebd2cd0f77ed0b075"
+  },
+  "143": {
+    "url": "/posts/2015/01/143-todolist/",
+    "title": "To do list",
+    "publishedAt": "2015-01-08T03:45:00+08:00",
+    "bodyHash": "96fb83808ce376cbc81a2489c786b28ba52d70b76836fa16837ce1c9e0a49b2d"
+  },
+  "144": {
+    "url": "/posts/2014/12/144-nekogames/",
+    "title": "NEKOGAMES",
+    "publishedAt": "2014-12-30T03:33:00+08:00",
+    "bodyHash": "5f1bfd7dc605aa6129556cef1746b92fadf509fc9ddecebd1391106b58f7c0a6"
+  },
+  "145": {
+    "url": "/posts/2014/12/145-dexdump无法正常反编译问题/",
+    "title": "Dexdump 无法正常反编译问题",
+    "publishedAt": "2014-12-26T15:03:00+08:00",
+    "bodyHash": "264fe50c6fb253cffd2f1abb9265b7371583a3e3b250b50827a1b9a79849944a"
+  },
+  "146": {
+    "url": "/posts/2014/12/146-androidlint-xxxisnottranslatedinxxx的解决方法/",
+    "title": "[Android Lint] xxx is not translated in xxx 的解决方法",
+    "publishedAt": "2014-12-26T14:15:00+08:00",
+    "bodyHash": "5a4a958a8043b2c3a2a16c06fe2d5a5232c08a3275b81235119aa23cc88a7d7c"
+  },
+  "147": {
+    "url": "/posts/2014/10/147-关于android阻塞的解决方法/",
+    "title": "关于Android阻塞的解决方法",
+    "publishedAt": "2014-10-29T15:09:00+08:00",
+    "bodyHash": "a4868d49d6ace29985b8fffd393a92fa186ca673b3e05d0383eaf1d8ad97b74f"
+  },
+  "148": {
+    "url": "/posts/2014/10/148-wm学习之-火山/",
+    "title": "WM学习之——火山",
+    "publishedAt": "2014-10-26T08:42:00+08:00",
+    "bodyHash": "f4e7243262bba318841f2cfd52ac6815635a66fa996e64ff9672b02cb2fca906"
+  },
+  "149": {
+    "url": "/posts/2014/10/149-问题-关于安卓项目设置/",
+    "title": "问题：关于安卓项目设置",
+    "publishedAt": "2014-10-21T14:16:00+08:00",
+    "bodyHash": "49eecff231e21aea3562a490b1d8c4d9b6da53963a7f59aa3a45815e8f375262"
+  },
+  "150": {
+    "url": "/posts/2014/10/150-关于scanf接受的一些总结/",
+    "title": "关于SCANF接受的一些总结",
+    "publishedAt": "2014-10-13T13:57:00+08:00",
+    "bodyHash": "d649d25929a613166ba848703af3ef18d0a3e8ab991945ee751a530e94580377"
+  },
+  "151": {
+    "url": "/posts/2014/10/151-关于scanf与gets-c语言/",
+    "title": "关于SCANF 与 GETS（C语言）",
+    "publishedAt": "2014-10-13T12:52:00+08:00",
+    "bodyHash": "aa3d7736818a713551d88c6b17c72a6e54f03e66da1b44c69d97aa7e343e3695"
+  }
+}

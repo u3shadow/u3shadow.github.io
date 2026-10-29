@@ -5,7 +5,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="description" content="异常检测动机 当我们有新的数据样本的时候，我们希望通过一个模型p(x)以及一个门槛值ϵ来判定这个样本是否是异常的。 高斯分布 高斯分布是一种可以被描述为 的类钟型线。 具体公式是 其中几个参数的计算如下 普遍公式 只有公式部分不同，其余部分均与高斯分布相同 异常检测vs监督学习 何时使用异常检测 正样本较少，负样本多，正样本不够训练，且种类太多 何时使用监督...">
   <title>[W9]异常检测 - u3coding</title>
-  <link rel="canonical" href="https://u3.github.io/posts/2016/12/606-w9anomaly-detection/">
   <style>
 
     :root {
@@ -1925,34 +1924,48 @@
     }
 
   </style>
-  <link rel="stylesheet" href="/assets/site/editorial-portfolio.css?v=dark-1">
-</head>
-<body>
-<header><div class="bar"><a class="brand" href="/">u3coding</a><p class="site-bio">Android, AI, tooling, and engineering notes.</p><nav><a href="/">首页</a><a href="/projects/">项目</a><a href="/articles/">文章</a><a href="/archive/">归档</a><a href="/about/">关于</a></nav></div></header>
+  <link rel="stylesheet" href="/assets/site/editorial-portfolio.css?v=20261029-1">
+<!-- site-common -->
+<link rel="canonical" href="https://u3shadow.github.io/posts/2016/12/606-w9anomaly-detection/">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="u3coding"><meta property="og:title" content="[W9]异常检测 - u3coding">
+<meta property="og:description" content="异常检测动机 当我们有新的数据样本的时候，我们希望通过一个模型p(x)以及一个门槛值ϵ来判定这个样本是否是异常的。 高斯分布 高斯分布是一种可以被描述为 的类钟型线。 具体公式是 其中几个参数的计算如下 普遍公式 只有公式部分不同，其余部分均与高斯分布相同 异常检测vs监督学习 何时使用异常检测 正样本较少，负样本多，正样本不够训练，且种类太多 何时使用监督..."><meta property="og:url" content="https://u3shadow.github.io/posts/2016/12/606-w9anomaly-detection/">
+<meta property="og:image" content="https://u3shadow.github.io/assets/site/banner.png">
+<script>document.documentElement.classList.add('js');try{document.documentElement.dataset.theme=localStorage.getItem('u3-theme')==='light'?'light':'dark'}catch{document.documentElement.dataset.theme='dark'}</script>
+<link rel="stylesheet" href="/assets/site/site-theme.css?v=20261029-1">
+<script defer src="/assets/site/site.js?v=20261029-1"></script>
 
-<main><div class="single-wrap"><section class="single-head"><p class="eyebrow">未分类 · 文章 ID 606</p><h1 class="title">[W9]异常检测</h1><div class="title-rule"></div><div class="meta">发布于 2016-12-06 15:34 · 已迁移为静态页面</div></section><figure class="hero"><img src="/assets/images/2e689d4b514c.png" alt="[W9]异常检测"></figure><article><h2>异常检测动机</h2>
+<!-- /site-common -->
+</head>
+<body><a class="skip-link" href="#main-content">跳至正文</a><header><div class="bar"><a class="brand" href="/">u3coding</a>
+<nav class="primary-nav" id="primary-navigation" aria-label="主导航"><a href="/">首页</a><a href="/projects/">项目</a><a href="/articles/" class="active" aria-current="page">文章</a><a href="/archive/">归档</a><a href="/about/">关于</a></nav>
+<div class="header-tools"><a class="icon-button" href="/articles/#search" aria-label="搜索文章" title="搜索文章"><span class="icon icon-search" aria-hidden="true"></span></a>
+<button type="button" class="icon-button" data-theme-toggle aria-label="切换浅色主题" title="切换浅色主题"><span class="icon icon-sun" aria-hidden="true"></span></button>
+<button type="button" class="icon-button menu-toggle" data-menu-toggle aria-controls="primary-navigation" aria-expanded="false" aria-label="展开导航" title="导航菜单"><span class="icon icon-menu" aria-hidden="true"></span></button></div></div></header>
+
+<main id="main-content"><div class="single-wrap"><section class="single-head"><p class="eyebrow">未分类 · 文章 ID 606</p><h1 class="title">[W9]异常检测</h1><div class="title-rule"></div><div class="meta">发布于 2016-12-06 15:34 · 已迁移为静态页面</div></section><figure class="hero"><img src="/assets/images/2e689d4b514c.png" alt="[W9]异常检测"></figure><article><h2>异常检测动机</h2>
 
 当我们有新的数据样本的时候，我们希望通过一个模型p(x)以及一个门槛值ϵ来判定这个样本是否是异常的。
 
 <h2>高斯分布</h2>
 
-高斯分布是一种可以被描述为<a href="https://www.u3blog.xyz/zb_users/upload/2016/12/高斯分布公式.png"><img loading="lazy"  src="/assets/images/2e689d4b514c.png" alt="%e9%ab%98%e6%96%af%e5%88%86%e5%b8%83%e5%85%ac%e5%bc%8f" class="alignnone size-full wp-image-607" /></a>的类钟型线。
+高斯分布是一种可以被描述为<a href="/assets/images/2e689d4b514c.png"><img loading="lazy"  src="/assets/images/2e689d4b514c.png" alt="%e9%ab%98%e6%96%af%e5%88%86%e5%b8%83%e5%85%ac%e5%bc%8f" class="alignnone size-full wp-image-607" /></a>的类钟型线。
 具体公式是
 
 <blockquote>
-  <a href="https://www.u3blog.xyz/zb_users/upload/2016/12/高斯分布模型.png"><img loading="lazy"  src="/assets/images/39b5a924799c.png" alt="%e9%ab%98%e6%96%af%e5%88%86%e5%b8%83%e6%a8%a1%e5%9e%8b" class="alignnone size-full wp-image-608" /></a>
+  <a href="/assets/images/39b5a924799c.png"><img loading="lazy"  src="/assets/images/39b5a924799c.png" alt="%e9%ab%98%e6%96%af%e5%88%86%e5%b8%83%e6%a8%a1%e5%9e%8b" class="alignnone size-full wp-image-608" /></a>
   其中几个参数的计算如下
-  <a href="https://www.u3blog.xyz/zb_users/upload/2016/12/u计算.png"><img loading="lazy"  src="/assets/images/a26b2012905a.png" alt="u%e8%ae%a1%e7%ae%97" class="alignnone size-full wp-image-609" /></a>
+  <a href="/assets/images/a26b2012905a.png"><img loading="lazy"  src="/assets/images/a26b2012905a.png" alt="u%e8%ae%a1%e7%ae%97" class="alignnone size-full wp-image-609" /></a>
 </blockquote>
 
-<a href="https://www.u3blog.xyz/zb_users/upload/2016/12/第二参数计算.png"><img loading="lazy"  src="/assets/images/758b5485cd5f.png" alt="%e7%ac%ac%e4%ba%8c%e5%8f%82%e6%95%b0%e8%ae%a1%e7%ae%97" class="alignnone size-full wp-image-610" /></a>
+<a href="/assets/images/758b5485cd5f.png"><img loading="lazy"  src="/assets/images/758b5485cd5f.png" alt="%e7%ac%ac%e4%ba%8c%e5%8f%82%e6%95%b0%e8%ae%a1%e7%ae%97" class="alignnone size-full wp-image-610" /></a>
 
 <h3>普遍公式</h3>
 
 只有公式部分不同，其余部分均与高斯分布相同
 
 <blockquote>
-  <a href="https://www.u3blog.xyz/zb_users/upload/2016/12/普遍公式.png"><img loading="lazy"  src="/assets/images/f50d6200cece.png" alt="%e6%99%ae%e9%81%8d%e5%85%ac%e5%bc%8f" class="alignnone size-full wp-image-612" /></a>
+  <a href="/assets/images/f50d6200cece.png"><img loading="lazy"  src="/assets/images/f50d6200cece.png" alt="%e6%99%ae%e9%81%8d%e5%85%ac%e5%bc%8f" class="alignnone size-full wp-image-612" /></a>
 </blockquote>
 
 <h2>异常检测vs监督学习</h2>
@@ -1978,11 +1991,11 @@ x(i) 对于电影i的特征向量
 预测用户j对电影i的评分公式
 
 <blockquote>
-  <a href="https://www.u3blog.xyz/zb_users/upload/2016/12/预测评分.png"><img loading="lazy"  src="/assets/images/712d3d3eb1c7.png" alt="" class="alignnone size-full wp-image-615" /></a>
+  <a href="/assets/images/712d3d3eb1c7.png"><img loading="lazy"  src="/assets/images/712d3d3eb1c7.png" class="alignnone size-full wp-image-615" / alt="文章配图：[W9]异常检测"></a>
   如何学习θ(j)?公式类似线性回归，如下
-  <a href="https://www.u3blog.xyz/zb_users/upload/2016/12/内容预测学习公式.png"><img loading="lazy"  src="/assets/images/e9587fd94e3f.png" alt="" class="alignnone size-full wp-image-616" /></a>
+  <a href="/assets/images/e9587fd94e3f.png"><img loading="lazy"  src="/assets/images/e9587fd94e3f.png" class="alignnone size-full wp-image-616" / alt="文章配图：[W9]异常检测"></a>
   一次性学习全部的公式
-  <a href="https://www.u3blog.xyz/zb_users/upload/2016/12/一对多.png"><img loading="lazy"  src="/assets/images/1cea52ee48ec.png" alt="" class="alignnone size-full wp-image-617" /></a>
+  <a href="/assets/images/1cea52ee48ec.png"><img loading="lazy"  src="/assets/images/1cea52ee48ec.png" class="alignnone size-full wp-image-617" / alt="文章配图：[W9]异常检测"></a>
 </blockquote>
 
 <h3>协同筛选</h3>
@@ -1991,7 +2004,7 @@ x(i) 对于电影i的特征向量
 那么我们可以让用户告诉我们他们对每种类型有多少的喜爱，然后我们就能使用这些数据进行学习，公式如下
 
 <blockquote>
-  <a href="https://www.u3blog.xyz/zb_users/upload/2016/12/协同筛选.png"><img loading="lazy"  src="/assets/images/23ce92c48cea.png" alt="" class="alignnone size-full wp-image-619" /></a>
+  <a href="/assets/images/23ce92c48cea.png"><img loading="lazy"  src="/assets/images/23ce92c48cea.png" class="alignnone size-full wp-image-619" / alt="文章配图：[W9]异常检测"></a>
 </blockquote>
 
 <h3>协同筛选算法步骤</h3>
@@ -1999,22 +2012,22 @@ x(i) 对于电影i的特征向量
 首先是代价函数公式，如下
 
 <blockquote>
-  <a href="https://www.u3blog.xyz/zb_users/upload/2016/12/协同筛选代价函数.png"><img loading="lazy"  src="/assets/images/2993272f2873.png" alt="" class="alignnone size-full wp-image-620" /></a>
+  <a href="/assets/images/2993272f2873.png"><img loading="lazy"  src="/assets/images/2993272f2873.png" class="alignnone size-full wp-image-620" / alt="文章配图：[W9]异常检测"></a>
   具体步骤：
   1.初始化x(i)到x(nm)以及θ(1)到θ(nu)为很小的随机值，这一步是为了让每个x都不相同
   2.最小化J(x(i),...,x(nm),θ(1),...,θ(nu))通过梯度下降或者高级算法均可
   3.通过θTx预测用户评分
 </blockquote></article></div>
 </main>
-
-<footer>Generated from local Z-Blog backup for GitHub Pages.</footer>
+<footer class="ref-footer"><div><strong>u3coding</strong><small>© 2014–2026 u3coding</small></div>
+<nav aria-label="页脚导航"><a href="/">首页</a><a href="/projects/">项目</a><a href="/articles/">文章</a><a href="/archive/">归档</a><a href="/about/">关于</a></nav><p><a href="https://github.com/u3shadow">GitHub</a><a href="/feed.xml">RSS</a><a href="#main-content" aria-label="返回正文顶部">↑</a></p></footer>
 <script>
   document.querySelectorAll("img").forEach((img) => {
     const replaceMissingImage = () => {
       const box = document.createElement("div");
       box.className = "image-missing";
       const src = img.currentSrc || img.src || img.getAttribute("src") || "";
-      box.innerHTML = `<strong>Image unavailable</strong><span>This image could not be loaded from the static backup.</span><br><a href="${src}" target="_blank" rel="noreferrer">Open original image URL</a>`;
+      box.innerHTML = `<strong>Image unavailable</strong><span>This image could not be loaded from the static backup.</span><br><a href="${src}" target="_blank" rel="noopener noreferrer">Open original image URL</a>`;
       img.replaceWith(box);
     };
     img.addEventListener("error", replaceMissingImage, { once: true });

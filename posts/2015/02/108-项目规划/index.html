@@ -5,7 +5,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="description" content="阶段一：分析需求，提出显示需求，隐式需求 阶段二： 搭建程序主题框架，界面拆分为三部分，头部，中部，尾部 ID规则：前缀为类型缩写 主体部分： 1.布局为相对布局 TOP部分： 1.使用ACTIONBAR，图标 ，名称，常用功能，浮动菜单 2.使用布局文件，相对布局，文本框控件显示名称（定义的string文件资源），在布局的左侧，设置一个整体的背景，给文本控...">
   <title>项目规划 - u3coding</title>
-  <link rel="canonical" href="https://u3.github.io/posts/2015/02/108-项目规划/">
   <style>
 
     :root {
@@ -1925,12 +1924,26 @@
     }
 
   </style>
-  <link rel="stylesheet" href="/assets/site/editorial-portfolio.css?v=dark-1">
-</head>
-<body>
-<header><div class="bar"><a class="brand" href="/">u3coding</a><p class="site-bio">Android, AI, tooling, and engineering notes.</p><nav><a href="/">首页</a><a href="/projects/">项目</a><a href="/articles/">文章</a><a href="/archive/">归档</a><a href="/about/">关于</a></nav></div></header>
+  <link rel="stylesheet" href="/assets/site/editorial-portfolio.css?v=20261029-1">
+<!-- site-common -->
+<link rel="canonical" href="https://u3shadow.github.io/posts/2015/02/108-项目规划/">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="u3coding"><meta property="og:title" content="项目规划 - u3coding">
+<meta property="og:description" content="阶段一：分析需求，提出显示需求，隐式需求 阶段二： 搭建程序主题框架，界面拆分为三部分，头部，中部，尾部 ID规则：前缀为类型缩写 主体部分： 1.布局为相对布局 TOP部分： 1.使用ACTIONBAR，图标 ，名称，常用功能，浮动菜单 2.使用布局文件，相对布局，文本框控件显示名称（定义的string文件资源），在布局的左侧，设置一个整体的背景，给文本控..."><meta property="og:url" content="https://u3shadow.github.io/posts/2015/02/108-项目规划/">
+<meta property="og:image" content="https://u3shadow.github.io/assets/site/banner.png">
+<script>document.documentElement.classList.add('js');try{document.documentElement.dataset.theme=localStorage.getItem('u3-theme')==='light'?'light':'dark'}catch{document.documentElement.dataset.theme='dark'}</script>
+<link rel="stylesheet" href="/assets/site/site-theme.css?v=20261029-1">
+<script defer src="/assets/site/site.js?v=20261029-1"></script>
 
-<main><div class="single-wrap"><section class="single-head"><p class="eyebrow">未分类 · 文章 ID 108</p><h1 class="title">项目规划</h1><div class="title-rule"></div><div class="meta">发布于 2015-02-04 14:49 · 已迁移为静态页面</div></section><figure class="hero"><img src="/assets/images/93d3125b4afc.png" alt="项目规划"></figure><article><p>阶段一：分析需求，提出显示需求，隐式需求</p>
+<!-- /site-common -->
+</head>
+<body><a class="skip-link" href="#main-content">跳至正文</a><header><div class="bar"><a class="brand" href="/">u3coding</a>
+<nav class="primary-nav" id="primary-navigation" aria-label="主导航"><a href="/">首页</a><a href="/projects/">项目</a><a href="/articles/" class="active" aria-current="page">文章</a><a href="/archive/">归档</a><a href="/about/">关于</a></nav>
+<div class="header-tools"><a class="icon-button" href="/articles/#search" aria-label="搜索文章" title="搜索文章"><span class="icon icon-search" aria-hidden="true"></span></a>
+<button type="button" class="icon-button" data-theme-toggle aria-label="切换浅色主题" title="切换浅色主题"><span class="icon icon-sun" aria-hidden="true"></span></button>
+<button type="button" class="icon-button menu-toggle" data-menu-toggle aria-controls="primary-navigation" aria-expanded="false" aria-label="展开导航" title="导航菜单"><span class="icon icon-menu" aria-hidden="true"></span></button></div></div></header>
+
+<main id="main-content"><div class="single-wrap"><section class="single-head"><p class="eyebrow">未分类 · 文章 ID 108</p><h1 class="title">项目规划</h1><div class="title-rule"></div><div class="meta">发布于 2015-02-04 14:49 · 已迁移为静态页面</div></section><figure class="hero"><img src="/assets/images/93d3125b4afc.png" alt="项目规划"></figure><article><p>阶段一：分析需求，提出显示需求，隐式需求</p>
 <p>阶段二：</p>
 <p>搭建程序主题框架，界面拆分为三部分，头部，中部，尾部</p>
 <p>ID规则：前缀为类型缩写</p>
@@ -2023,7 +2036,7 @@
 <p>　　getdatabase()返回database对象</p>
 <p>　　begaintransanction(),setransectionsuccessful(),endtransection()方法</p>
 <p>　　getcount方法，string[]　＝　gettablenameandpk();(gettableandpk为抽象方法，在子类中实现的回调方法)</p>
-<p>　　执行SQL语句，<img loading="lazy"  src="/assets/images/93d3125b4afc.png" alt="" /></p>
+<p>　　执行SQL语句，<img loading="lazy"  src="/assets/images/93d3125b4afc.png" / alt="文章配图：项目规划"></p>
 <p>　　（从数据库中按条件选择）</p>
 <p>　　返回为cursor类型</p>
 <p>　　execsql方法参数为string,返回为getdatabase().rawquery(参数语句，null)</p>
@@ -2095,15 +2108,15 @@
 <p>封装layoutinflator</p>
 <p>新建警告框，添加或者修改，判断输入是否重复，判断是否合法，是否为点击保存，完毕之后刷新，关闭菜单</p></article></div>
 </main>
-
-<footer>Generated from local Z-Blog backup for GitHub Pages.</footer>
+<footer class="ref-footer"><div><strong>u3coding</strong><small>© 2014–2026 u3coding</small></div>
+<nav aria-label="页脚导航"><a href="/">首页</a><a href="/projects/">项目</a><a href="/articles/">文章</a><a href="/archive/">归档</a><a href="/about/">关于</a></nav><p><a href="https://github.com/u3shadow">GitHub</a><a href="/feed.xml">RSS</a><a href="#main-content" aria-label="返回正文顶部">↑</a></p></footer>
 <script>
   document.querySelectorAll("img").forEach((img) => {
     const replaceMissingImage = () => {
       const box = document.createElement("div");
       box.className = "image-missing";
       const src = img.currentSrc || img.src || img.getAttribute("src") || "";
-      box.innerHTML = `<strong>Image unavailable</strong><span>This image could not be loaded from the static backup.</span><br><a href="${src}" target="_blank" rel="noreferrer">Open original image URL</a>`;
+      box.innerHTML = `<strong>Image unavailable</strong><span>This image could not be loaded from the static backup.</span><br><a href="${src}" target="_blank" rel="noopener noreferrer">Open original image URL</a>`;
       img.replaceWith(box);
     };
     img.addEventListener("error", replaceMissingImage, { once: true });

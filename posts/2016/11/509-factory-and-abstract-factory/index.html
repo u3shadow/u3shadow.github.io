@@ -5,7 +5,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="description" content="工厂模式 什么是工厂模式 顾名思义，工厂模式就是一种生产产品的模式，我们这里的产品就是各种各样的对象 工厂模式的类图 如图所示： 1.我们有一个抽象类，工厂，两个具体实现，NYstore和Bstore，实现了抽象工厂的几个方法 2.我们有一种产品，pizza，并且对于它我们有很多实现，分为ny系和b系，不过他们都是pizza 当我们需要pizza的时候，我们...">
   <title>工厂模式和抽象工厂概述以及二者的区别 - u3coding</title>
-  <link rel="canonical" href="https://u3.github.io/posts/2016/11/509-factory-and-abstract-factory/">
   <style>
 
     :root {
@@ -1925,12 +1924,26 @@
     }
 
   </style>
-  <link rel="stylesheet" href="/assets/site/editorial-portfolio.css?v=dark-1">
-</head>
-<body>
-<header><div class="bar"><a class="brand" href="/">u3coding</a><p class="site-bio">Android, AI, tooling, and engineering notes.</p><nav><a href="/">首页</a><a href="/projects/">项目</a><a href="/articles/">文章</a><a href="/archive/">归档</a><a href="/about/">关于</a></nav></div></header>
+  <link rel="stylesheet" href="/assets/site/editorial-portfolio.css?v=20261029-1">
+<!-- site-common -->
+<link rel="canonical" href="https://u3shadow.github.io/posts/2016/11/509-factory-and-abstract-factory/">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="u3coding"><meta property="og:title" content="工厂模式和抽象工厂概述以及二者的区别 - u3coding">
+<meta property="og:description" content="工厂模式 什么是工厂模式 顾名思义，工厂模式就是一种生产产品的模式，我们这里的产品就是各种各样的对象 工厂模式的类图 如图所示： 1.我们有一个抽象类，工厂，两个具体实现，NYstore和Bstore，实现了抽象工厂的几个方法 2.我们有一种产品，pizza，并且对于它我们有很多实现，分为ny系和b系，不过他们都是pizza 当我们需要pizza的时候，我们..."><meta property="og:url" content="https://u3shadow.github.io/posts/2016/11/509-factory-and-abstract-factory/">
+<meta property="og:image" content="https://u3shadow.github.io/assets/site/banner.png">
+<script>document.documentElement.classList.add('js');try{document.documentElement.dataset.theme=localStorage.getItem('u3-theme')==='light'?'light':'dark'}catch{document.documentElement.dataset.theme='dark'}</script>
+<link rel="stylesheet" href="/assets/site/site-theme.css?v=20261029-1">
+<script defer src="/assets/site/site.js?v=20261029-1"></script>
 
-<main><div class="single-wrap"><section class="single-head"><p class="eyebrow">未分类 · 文章 ID 509</p><h1 class="title">工厂模式和抽象工厂概述以及二者的区别</h1><div class="title-rule"></div><div class="meta">发布于 2016-11-10 16:30 · 已迁移为静态页面</div></section><figure class="hero"><img src="/assets/images/11ba9db19a76.png" alt="工厂模式和抽象工厂概述以及二者的区别"></figure><article><h1>工厂模式</h1>
+<!-- /site-common -->
+</head>
+<body><a class="skip-link" href="#main-content">跳至正文</a><header><div class="bar"><a class="brand" href="/">u3coding</a>
+<nav class="primary-nav" id="primary-navigation" aria-label="主导航"><a href="/">首页</a><a href="/projects/">项目</a><a href="/articles/" class="active" aria-current="page">文章</a><a href="/archive/">归档</a><a href="/about/">关于</a></nav>
+<div class="header-tools"><a class="icon-button" href="/articles/#search" aria-label="搜索文章" title="搜索文章"><span class="icon icon-search" aria-hidden="true"></span></a>
+<button type="button" class="icon-button" data-theme-toggle aria-label="切换浅色主题" title="切换浅色主题"><span class="icon icon-sun" aria-hidden="true"></span></button>
+<button type="button" class="icon-button menu-toggle" data-menu-toggle aria-controls="primary-navigation" aria-expanded="false" aria-label="展开导航" title="导航菜单"><span class="icon icon-menu" aria-hidden="true"></span></button></div></div></header>
+
+<main id="main-content"><div class="single-wrap"><section class="single-head"><p class="eyebrow">未分类 · 文章 ID 509</p><h1 class="title">工厂模式和抽象工厂概述以及二者的区别</h1><div class="title-rule"></div><div class="meta">发布于 2016-11-10 16:30 · 已迁移为静态页面</div></section><figure class="hero"><img src="/assets/images/11ba9db19a76.png" alt="工厂模式和抽象工厂概述以及二者的区别"></figure><article><h2>工厂模式</h2>
 
 <h2>什么是工厂模式</h2>
 
@@ -1938,7 +1951,7 @@
 
 <h2>工厂模式的类图</h2>
 
-<img loading="lazy"  src="/assets/images/11ba9db19a76.png" alt="" />
+<img loading="lazy"  src="/assets/images/11ba9db19a76.png" / alt="文章配图：工厂模式和抽象工厂概述以及二者的区别">
 如图所示：
 1.我们有一个抽象类，工厂，两个具体实现，NYstore和Bstore，实现了抽象工厂的几个方法
 2.我们有一种产品，pizza，并且对于它我们有很多实现，分为ny系和b系，不过他们都是pizza
@@ -1956,7 +1969,7 @@
     }
 }</pre>
 
-<h1>抽象工厂</h1>
+<h2>抽象工厂</h2>
 
 <h2>什么是抽象工厂</h2>
 
@@ -1964,7 +1977,7 @@
 
 <h2>抽象工厂的类图</h2>
 
-<img loading="lazy"  src="/assets/images/dbe67e81ca9a.png" alt="" />
+<img loading="lazy"  src="/assets/images/dbe67e81ca9a.png" / alt="文章配图：工厂模式和抽象工厂概述以及二者的区别">
 1.如图所示，我们的thingfactory定义了几个创建方法，可以让我们生产特定的套餐，里面包含thing1，thing2,thing3，可以是啤酒，薯条，鸡腿
 2.然后我们的两个具体类来实现了生产这个套餐的过程，左边的啤酒，薯条，鸡腿又分成了两派
 3.我们的具体工厂是怎么生产啤酒，薯条，鸡腿呢？我们的北京商店有可能提供，北京特产咖啡味啤酒，北京特产红酒味啤酒，当然要用我们上面说的工厂方法！
@@ -2025,7 +2038,7 @@
     }
 }</pre>
 
-<h1>抽象工厂和工厂的同异</h1>
+<h2>抽象工厂和工厂的同异</h2>
 
 <h2>相同点</h2>
 
@@ -2040,15 +2053,15 @@
 3.1当需要新增一种产品的时候，在工厂方法中，我们只需要增加一种产品实例，并在具体工厂中加入生产这种实例的判断条件就可以了。
 3.2在抽象工厂中新增一个元素（比如在现有套餐中加送一块鸡腿），我们需要改工厂接口，新增这个鸡腿的接口，并修改这个接口的实现，新增这个方法并实现，在这个实现里来创建这个赠送的鸡腿</article></div>
 </main>
-
-<footer>Generated from local Z-Blog backup for GitHub Pages.</footer>
+<footer class="ref-footer"><div><strong>u3coding</strong><small>© 2014–2026 u3coding</small></div>
+<nav aria-label="页脚导航"><a href="/">首页</a><a href="/projects/">项目</a><a href="/articles/">文章</a><a href="/archive/">归档</a><a href="/about/">关于</a></nav><p><a href="https://github.com/u3shadow">GitHub</a><a href="/feed.xml">RSS</a><a href="#main-content" aria-label="返回正文顶部">↑</a></p></footer>
 <script>
   document.querySelectorAll("img").forEach((img) => {
     const replaceMissingImage = () => {
       const box = document.createElement("div");
       box.className = "image-missing";
       const src = img.currentSrc || img.src || img.getAttribute("src") || "";
-      box.innerHTML = `<strong>Image unavailable</strong><span>This image could not be loaded from the static backup.</span><br><a href="${src}" target="_blank" rel="noreferrer">Open original image URL</a>`;
+      box.innerHTML = `<strong>Image unavailable</strong><span>This image could not be loaded from the static backup.</span><br><a href="${src}" target="_blank" rel="noopener noreferrer">Open original image URL</a>`;
       img.replaceWith(box);
     };
     img.addEventListener("error", replaceMissingImage, { once: true });

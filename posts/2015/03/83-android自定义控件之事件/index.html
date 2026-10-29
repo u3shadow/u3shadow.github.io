@@ -5,7 +5,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="description" content="首先，继承需要扩展的VIEW，然后在里面添加一个自己的事件方法，例如， oniconclick(myinterface pinterface){ minterface = pinterface; } 其中，myinterface是一个自定义的接口，里面有自定义方法，如onclick等,minterface是一个自定义接口的实例，将获得的实例传给该实例 其次，...">
   <title>android 自定义控件之事件 - u3coding</title>
-  <link rel="canonical" href="https://u3.github.io/posts/2015/03/83-android自定义控件之事件/">
   <style>
 
     :root {
@@ -1925,12 +1924,26 @@
     }
 
   </style>
-  <link rel="stylesheet" href="/assets/site/editorial-portfolio.css?v=dark-1">
-</head>
-<body>
-<header><div class="bar"><a class="brand" href="/">u3coding</a><p class="site-bio">Android, AI, tooling, and engineering notes.</p><nav><a href="/">首页</a><a href="/projects/">项目</a><a href="/articles/">文章</a><a href="/archive/">归档</a><a href="/about/">关于</a></nav></div></header>
+  <link rel="stylesheet" href="/assets/site/editorial-portfolio.css?v=20261029-1">
+<!-- site-common -->
+<link rel="canonical" href="https://u3shadow.github.io/posts/2015/03/83-android自定义控件之事件/">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="u3coding"><meta property="og:title" content="android 自定义控件之事件 - u3coding">
+<meta property="og:description" content="首先，继承需要扩展的VIEW，然后在里面添加一个自己的事件方法，例如， oniconclick(myinterface pinterface){ minterface = pinterface; } 其中，myinterface是一个自定义的接口，里面有自定义方法，如onclick等,minterface是一个自定义接口的实例，将获得的实例传给该实例 其次，..."><meta property="og:url" content="https://u3shadow.github.io/posts/2015/03/83-android自定义控件之事件/">
+<meta property="og:image" content="https://u3shadow.github.io/assets/site/banner.png">
+<script>document.documentElement.classList.add('js');try{document.documentElement.dataset.theme=localStorage.getItem('u3-theme')==='light'?'light':'dark'}catch{document.documentElement.dataset.theme='dark'}</script>
+<link rel="stylesheet" href="/assets/site/site-theme.css?v=20261029-1">
+<script defer src="/assets/site/site.js?v=20261029-1"></script>
 
-<main><div class="single-wrap"><section class="single-head"><p class="eyebrow">未分类 · 文章 ID 83</p><h1 class="title">android 自定义控件之事件</h1><div class="title-rule"></div><div class="meta">发布于 2015-03-01 16:27 · 已迁移为静态页面</div></section><article><p>首先，继承需要扩展的VIEW，然后在里面添加一个自己的事件方法，例如，</p>
+<!-- /site-common -->
+</head>
+<body><a class="skip-link" href="#main-content">跳至正文</a><header><div class="bar"><a class="brand" href="/">u3coding</a>
+<nav class="primary-nav" id="primary-navigation" aria-label="主导航"><a href="/">首页</a><a href="/projects/">项目</a><a href="/articles/" class="active" aria-current="page">文章</a><a href="/archive/">归档</a><a href="/about/">关于</a></nav>
+<div class="header-tools"><a class="icon-button" href="/articles/#search" aria-label="搜索文章" title="搜索文章"><span class="icon icon-search" aria-hidden="true"></span></a>
+<button type="button" class="icon-button" data-theme-toggle aria-label="切换浅色主题" title="切换浅色主题"><span class="icon icon-sun" aria-hidden="true"></span></button>
+<button type="button" class="icon-button menu-toggle" data-menu-toggle aria-controls="primary-navigation" aria-expanded="false" aria-label="展开导航" title="导航菜单"><span class="icon icon-menu" aria-hidden="true"></span></button></div></div></header>
+
+<main id="main-content"><div class="single-wrap"><section class="single-head"><p class="eyebrow">未分类 · 文章 ID 83</p><h1 class="title">android 自定义控件之事件</h1><div class="title-rule"></div><div class="meta">发布于 2015-03-01 16:27 · 已迁移为静态页面</div></section><article><p>首先，继承需要扩展的VIEW，然后在里面添加一个自己的事件方法，例如，</p>
 <p>oniconclick(myinterface pinterface){</p>
 <p>minterface = pinterface;</p>
 <p>}</p>
@@ -1944,15 +1957,15 @@
 <p>&nbsp;</p>
 <p>在使用自定义控件的时候，需要完整的包名+类名，如果是内部内需要用$符号</p></article></div>
 </main>
-
-<footer>Generated from local Z-Blog backup for GitHub Pages.</footer>
+<footer class="ref-footer"><div><strong>u3coding</strong><small>© 2014–2026 u3coding</small></div>
+<nav aria-label="页脚导航"><a href="/">首页</a><a href="/projects/">项目</a><a href="/articles/">文章</a><a href="/archive/">归档</a><a href="/about/">关于</a></nav><p><a href="https://github.com/u3shadow">GitHub</a><a href="/feed.xml">RSS</a><a href="#main-content" aria-label="返回正文顶部">↑</a></p></footer>
 <script>
   document.querySelectorAll("img").forEach((img) => {
     const replaceMissingImage = () => {
       const box = document.createElement("div");
       box.className = "image-missing";
       const src = img.currentSrc || img.src || img.getAttribute("src") || "";
-      box.innerHTML = `<strong>Image unavailable</strong><span>This image could not be loaded from the static backup.</span><br><a href="${src}" target="_blank" rel="noreferrer">Open original image URL</a>`;
+      box.innerHTML = `<strong>Image unavailable</strong><span>This image could not be loaded from the static backup.</span><br><a href="${src}" target="_blank" rel="noopener noreferrer">Open original image URL</a>`;
       img.replaceWith(box);
     };
     img.addEventListener("error", replaceMissingImage, { once: true });

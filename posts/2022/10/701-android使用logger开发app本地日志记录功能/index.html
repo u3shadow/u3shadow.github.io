@@ -5,7 +5,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="description" content="前言 记录日志是一个App常用的功能，很多软件都会有，它能帮助开发者快速确定问题位置，可以说是App维护的基础。 项目现状 之前我们的项目没有记录日志到本地的功能，每次排查问题都非常的费劲，需要本地能复现才能解决问题，但是有些问题并不是我们本地能复现的，比如客户环境在内网，无法访问，或者只有特定手机出现问题，这时候我们就束手无策了。 开发目的 为了更好的手机...">
   <title>Android使用Logger开发App本地日志记录功能 - u3coding</title>
-  <link rel="canonical" href="https://u3.github.io/posts/2022/10/701-android使用logger开发app本地日志记录功能/">
   <style>
 
     :root {
@@ -1925,27 +1924,41 @@
     }
 
   </style>
-  <link rel="stylesheet" href="/assets/site/editorial-portfolio.css?v=dark-1">
-</head>
-<body>
-<header><div class="bar"><a class="brand" href="/">u3coding</a><p class="site-bio">Android, AI, tooling, and engineering notes.</p><nav><a href="/">首页</a><a href="/projects/">项目</a><a href="/articles/">文章</a><a href="/archive/">归档</a><a href="/about/">关于</a></nav></div></header>
+  <link rel="stylesheet" href="/assets/site/editorial-portfolio.css?v=20261029-1">
+<!-- site-common -->
+<link rel="canonical" href="https://u3shadow.github.io/posts/2022/10/701-android使用logger开发app本地日志记录功能/">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="u3coding"><meta property="og:title" content="Android使用Logger开发App本地日志记录功能 - u3coding">
+<meta property="og:description" content="前言 记录日志是一个App常用的功能，很多软件都会有，它能帮助开发者快速确定问题位置，可以说是App维护的基础。 项目现状 之前我们的项目没有记录日志到本地的功能，每次排查问题都非常的费劲，需要本地能复现才能解决问题，但是有些问题并不是我们本地能复现的，比如客户环境在内网，无法访问，或者只有特定手机出现问题，这时候我们就束手无策了。 开发目的 为了更好的手机..."><meta property="og:url" content="https://u3shadow.github.io/posts/2022/10/701-android使用logger开发app本地日志记录功能/">
+<meta property="og:image" content="https://u3shadow.github.io/assets/site/banner.png">
+<script>document.documentElement.classList.add('js');try{document.documentElement.dataset.theme=localStorage.getItem('u3-theme')==='light'?'light':'dark'}catch{document.documentElement.dataset.theme='dark'}</script>
+<link rel="stylesheet" href="/assets/site/site-theme.css?v=20261029-1">
+<script defer src="/assets/site/site.js?v=20261029-1"></script>
 
-<main><div class="single-wrap"><section class="single-head"><p class="eyebrow">技术文章 · 文章 ID 701</p><h1 class="title">Android使用Logger开发App本地日志记录功能</h1><div class="title-rule"></div><div class="meta">发布于 2022-10-12 19:51 · 已迁移为静态页面</div></section><figure class="hero"><img src="/assets/images/a18379293e98.png" alt="Android使用Logger开发App本地日志记录功能"></figure><article><h2 id="h2-u524Du8A00">前言</h2><p>记录日志是一个App常用的功能，很多软件都会有，它能帮助开发者快速确定问题位置，可以说是App维护的基础。</p>
+<!-- /site-common -->
+</head>
+<body><a class="skip-link" href="#main-content">跳至正文</a><header><div class="bar"><a class="brand" href="/">u3coding</a>
+<nav class="primary-nav" id="primary-navigation" aria-label="主导航"><a href="/">首页</a><a href="/projects/">项目</a><a href="/articles/" class="active" aria-current="page">文章</a><a href="/archive/">归档</a><a href="/about/">关于</a></nav>
+<div class="header-tools"><a class="icon-button" href="/articles/#search" aria-label="搜索文章" title="搜索文章"><span class="icon icon-search" aria-hidden="true"></span></a>
+<button type="button" class="icon-button" data-theme-toggle aria-label="切换浅色主题" title="切换浅色主题"><span class="icon icon-sun" aria-hidden="true"></span></button>
+<button type="button" class="icon-button menu-toggle" data-menu-toggle aria-controls="primary-navigation" aria-expanded="false" aria-label="展开导航" title="导航菜单"><span class="icon icon-menu" aria-hidden="true"></span></button></div></div></header>
+
+<main id="main-content"><div class="single-wrap"><section class="single-head"><p class="eyebrow">技术文章 · 文章 ID 701</p><h1 class="title">Android使用Logger开发App本地日志记录功能</h1><div class="title-rule"></div><div class="meta">发布于 2022-10-12 19:51 · 已迁移为静态页面</div></section><figure class="hero"><img src="/assets/images/a18379293e98.png" alt="Android使用Logger开发App本地日志记录功能"></figure><article><h2 id="h2-u524Du8A00">前言</h2><p>记录日志是一个App常用的功能，很多软件都会有，它能帮助开发者快速确定问题位置，可以说是App维护的基础。</p>
 <h2 id="h2-u9879u76EEu73B0u72B6">项目现状</h2><p>之前我们的项目没有记录日志到本地的功能，每次排查问题都非常的费劲，需要本地能复现才能解决问题，但是有些问题并不是我们本地能复现的，比如客户环境在内网，无法访问，或者只有特定手机出现问题，这时候我们就束手无策了。</p>
 <h2 id="h2-u5F00u53D1u76EEu7684">开发目的</h2><p>为了更好的手机问题信息，并且让用户简单的去获取日志，发给开发者，我们急需记录日志到本地的功能，并且提供开关给客户，让客户方便的进行操作。</p>
 <h2 id="h2-u63A2u7D22u8FC7u7A0B">探索过程</h2><p>经过搜索对比，最终选取了Logger日志库作为开发的基础，这个库比较知名，出了问题也有很多资料，而且使用简单，功能全面，甚至提供了基础的记录日志到本地的能力，应该能满足我们的需求。</p>
 <p>这个库的地址是<a href="https://github.com/orhanobut/logger">https://github.com/orhanobut/logger</a></p>
 <p>但是这个库有一些小问题需要我们通过开发去补全。</p>
 <ul>
-<li>记录的目录需要改变，默认的目录都在同一个，不然有其他的app使用了Logger记录日志功能，就会混在一起<br>默认的情况是这样的<br><img loading="lazy"  src="/assets/images/a18379293e98.png" alt=""><br>需要变成这样</li></ul>
-<figure><img loading="lazy"  src="/assets/images/9323a8104a53.png" alt=""></figure>
+<li>记录的目录需要改变，默认的目录都在同一个，不然有其他的app使用了Logger记录日志功能，就会混在一起<br>默认的情况是这样的<br><img loading="lazy"  src="/assets/images/a18379293e98.png" alt="文章配图：Android使用Logger开发App本地日志记录功能"><br>需要变成这样</li></ul>
+<figure><img loading="lazy"  src="/assets/images/9323a8104a53.png" alt="文章配图：Android使用Logger开发App本地日志记录功能"></figure>
 <ul>
 <li>记录的文件名字需要改变，标记日期，否则用户不知道哪个日志是最新的，不好发过来<br>莫默认情况是这样的，我们想加上日志标识，让用户看得懂</li></ul>
-<p><img loading="lazy"  src="/assets/images/635f5792d3a0.png" alt=""><br>变成这个样子</p>
-<figure><img loading="lazy"  src="/assets/images/8d41cc17d936.png" alt=""></figure>
+<p><img loading="lazy"  src="/assets/images/635f5792d3a0.png" alt="文章配图：Android使用Logger开发App本地日志记录功能"><br>变成这个样子</p>
+<figure><img loading="lazy"  src="/assets/images/8d41cc17d936.png" alt="文章配图：Android使用Logger开发App本地日志记录功能"></figure>
 <ul>
-<li>需要有一个开关来控制是否开启记录，并且在一定时间之后自动停止记录，并删除超期的日志文件，这一步主要是为了app的安全性，否则通过日志会泄露一些重要的信息<br>比如这样<br><img loading="lazy"  src="/assets/images/3421d8085e90.png" alt=""></li><li>为了单独分析网络请求情况，我们还需要把网络请求信息单独放到一个文件里面，也就是一个logger同时往两个文件输出日志<br><img loading="lazy"  src="/assets/images/bdd215e53b59.png" alt=""><h2 id="h2-u5177u4F53u6B65u9AA4">具体步骤</h2></li><li>集成logger，并按照官方文档实现记录日志到本地功能<br>  这一步很简单，照着官方文档做就行了</li><li>修改logger的TextDiskLogStrategy和TextFormatStrategy文件，实现日志的分文件、路径存放<br>  这一步需要把logger的源码进行一些改造，具体来说分为两个部分<br>  1.TextDiskLogStrategy – 继承FormatStrategy，在内部可以通过log方法给日志信息加一些附加信息，比如时间戳或者换行，并且定义一个handlerthread并获取handler，方便子线程使用它来往文件里写日志</li></ul>
-<p><img loading="lazy"  src="/assets/images/4377c663bd68.png" alt=""><br>    2.TextFormatStrategy–继承自LogStrategy，使用handler进行日志的写入工作，通过what类型的不同，写入到不同的目录<br>通过tag不同，发送不同的message<br><img loading="lazy"  src="/assets/images/91732e917f5b.png" alt=""><br>内部还有个处理的handler，用来接收并真正执行日志文件的写入，根据不同类型写入不同文件，并且对日志使用加密算法加密，保证客户不能直接读取文件内容，确保安全性。至于如何加密，就可以根据实际情况使用不同的算法进行操作。</p>
+<li>需要有一个开关来控制是否开启记录，并且在一定时间之后自动停止记录，并删除超期的日志文件，这一步主要是为了app的安全性，否则通过日志会泄露一些重要的信息<br>比如这样<br><img loading="lazy"  src="/assets/images/3421d8085e90.png" alt="文章配图：Android使用Logger开发App本地日志记录功能"></li><li>为了单独分析网络请求情况，我们还需要把网络请求信息单独放到一个文件里面，也就是一个logger同时往两个文件输出日志<br><img loading="lazy"  src="/assets/images/bdd215e53b59.png" alt="文章配图：Android使用Logger开发App本地日志记录功能"><h2 id="h2-u5177u4F53u6B65u9AA4">具体步骤</h2></li><li>集成logger，并按照官方文档实现记录日志到本地功能<br>  这一步很简单，照着官方文档做就行了</li><li>修改logger的TextDiskLogStrategy和TextFormatStrategy文件，实现日志的分文件、路径存放<br>  这一步需要把logger的源码进行一些改造，具体来说分为两个部分<br>  1.TextDiskLogStrategy – 继承FormatStrategy，在内部可以通过log方法给日志信息加一些附加信息，比如时间戳或者换行，并且定义一个handlerthread并获取handler，方便子线程使用它来往文件里写日志</li></ul>
+<p><img loading="lazy"  src="/assets/images/4377c663bd68.png" alt="文章配图：Android使用Logger开发App本地日志记录功能"><br>    2.TextFormatStrategy–继承自LogStrategy，使用handler进行日志的写入工作，通过what类型的不同，写入到不同的目录<br>通过tag不同，发送不同的message<br><img loading="lazy"  src="/assets/images/91732e917f5b.png" alt="文章配图：Android使用Logger开发App本地日志记录功能"><br>内部还有个处理的handler，用来接收并真正执行日志文件的写入，根据不同类型写入不同文件，并且对日志使用加密算法加密，保证客户不能直接读取文件内容，确保安全性。至于如何加密，就可以根据实际情况使用不同的算法进行操作。</p>
 <ul>
 <li>写一个工具类，通过开关来控制是否进行日志的输出操作，并定时关闭开关</li></ul>
 <ol>
@@ -1958,15 +1971,15 @@
 <p>但是要考虑到安全性和易用性，做起来还是有很多的工作，写代码的过程往往就是简单功能，复杂实现</p>
 <p>为了堵住所有可能的口子，往往需要对一个功能有更全面的思考，开始思考这些问题，也是编程经验提升的一种象征。</p></article></div>
 </main>
-
-<footer>Generated from local Z-Blog backup for GitHub Pages.</footer>
+<footer class="ref-footer"><div><strong>u3coding</strong><small>© 2014–2026 u3coding</small></div>
+<nav aria-label="页脚导航"><a href="/">首页</a><a href="/projects/">项目</a><a href="/articles/">文章</a><a href="/archive/">归档</a><a href="/about/">关于</a></nav><p><a href="https://github.com/u3shadow">GitHub</a><a href="/feed.xml">RSS</a><a href="#main-content" aria-label="返回正文顶部">↑</a></p></footer>
 <script>
   document.querySelectorAll("img").forEach((img) => {
     const replaceMissingImage = () => {
       const box = document.createElement("div");
       box.className = "image-missing";
       const src = img.currentSrc || img.src || img.getAttribute("src") || "";
-      box.innerHTML = `<strong>Image unavailable</strong><span>This image could not be loaded from the static backup.</span><br><a href="${src}" target="_blank" rel="noreferrer">Open original image URL</a>`;
+      box.innerHTML = `<strong>Image unavailable</strong><span>This image could not be loaded from the static backup.</span><br><a href="${src}" target="_blank" rel="noopener noreferrer">Open original image URL</a>`;
       img.replaceWith(box);
     };
     img.addEventListener("error", replaceMissingImage, { once: true });
